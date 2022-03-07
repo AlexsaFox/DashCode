@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O_O</title>
+
+    <style>
+        .flashing_msg {
+            padding: 10px;
+            width: calc(100vw - 36px);
+            background-color: #ffa5a3;
+            color: #5e2322;
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %} 
+            {% for message in messages %}
+                <p class="flashing_msg">{{ message }}</p>
+            {% endfor %}
+        {% endif %} 
+    {% endwith %}
+
+    <li><a href="{{ url_for('webapp.index.index_view') }}">Home</a></li>
+    <li><a href="{{ url_for('webapp.index.secret_view') }}">Secret page</a> <b><i>[authorized only]</b></i></li>
+    {% if session['username'] %} 
+        <li><a href="{{ url_for('webapp.auth.logout_handle') }}">Log out</a></li>
+    {% else %}
+        <li><a href="{{ url_for('webapp.auth.register_view') }}">Register</a></li>
+        <li><a href="{{ url_for('webapp.auth.login_view') }}">Log in</a></li>
+    {% endif %}
+    <hr>
+    
+    {% if session['username'] %}
+        <h2>You're logged in as {{session['username']}}</h2>
+        <hr>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

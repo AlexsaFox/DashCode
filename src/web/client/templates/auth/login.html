@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+<h1>Log in as existing user</h1>
+
+<form method="POST" action="{{ url_for('webapp.auth.login_handle') }}">
+    {{ form.csrf_token }}
+    <table>
+        <tr>
+            <td><i>{{form.username_or_email.label}}:</i></td> 
+            <td>{{form.username_or_email}}</td>
+        </tr>
+        <tr>
+            <td><i>{{form.password.label}}:</i></td> 
+            <td>{{form.password}}</td>
+        </tr>
+    </table>
+    {{ form.submit_login }}
+</form>
+{% endblock %}
