@@ -10,8 +10,8 @@ from config import active_configuration
 from app import db, bcrypt
 
 
-class API_TOKEN_VALIDATION_ERROR(Enum):
-    DECODING_ERROR = 0
+class API_TOKEN_ERROR(Enum):
+    VALIDATION_ERROR = 0
     EXPIRED = 1
     BAD_STRUCTURE = 2
     NOT_FOUND = 3
@@ -76,25 +76,25 @@ class User(db.Model):
         return f'<User {self.username}>'
 
     @classmethod
-    def from_api_token(cls, token: str) -> User | API_TOKEN_VALIDATION_ERROR:
+    def from_api_token(cls, token: str) -> User | API_TOKEN_ERROR:
         try:
             decoded = jwt.decode(token, active_configuration.SECRET_KEY, 'HS256')
         except jwt.DecodeError:
-            return API_TOKEN_VALIDATION_ERROR.DECODING_ERROR
+            return API_TOKEN_ERROR.VALIDATION_ERROR
         
         key = decoded.get('key')
         expiration_date = decoded.get('exp')
 
         # This shouldn't happen
         if key is None or expiration_date is None:
-            return API_TOKEN_VALIDATION_ERROR.BAD_STRUCTURE
+            return API_TOKEN_ERROR.BAD_STRUCTURE
 
         current_date = datetime.datetime.now().timestamp()
         if current_date > expiration_date:
-            return API_TOKEN_VALIDATION_ERROR.EXPIRED
+            return API_TOKEN_ERROR.EXPIRED
 
         user = User.query.filter_by(_api_key=key).first()
         if user is None:
-            return API_TOKEN_VALIDATION_ERROR.NOT_FOUND
+            return API_TOKEN_ERROR.NOT_FOUND
         else:
             return user

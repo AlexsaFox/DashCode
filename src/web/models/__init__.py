@@ -1,5 +1,5 @@
 from app import db
-from .user import User
+from .user import User, API_TOKEN_ERROR
 
 
 def db_add(data: db.Model):
