@@ -1,5 +1,5 @@
 import os
-
+import datetime
 
 base_dir = os.getcwd()
 
@@ -7,6 +7,8 @@ base_dir = os.getcwd()
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'ladadadada')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=30)
+    API_TOKEN_LIFETIME = datetime.timedelta(days=30)
 
 
 def build_production_db_uri():

@@ -1,4 +1,3 @@
-import email
 from functools import wraps
 from flask import Blueprint, redirect, render_template, url_for, flash, session
 from client.forms import RegistrationForm, LoginForm, flash_errors

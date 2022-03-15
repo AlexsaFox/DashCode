@@ -25,8 +25,8 @@
     {% endwith %}
 
     <li><a href="{{ url_for('webapp.index.index_view') }}">Home</a></li>
-    <li><a href="{{ url_for('webapp.index.secret_view') }}">Secret page</a> <b><i>[authorized only]</b></i></li>
     {% if session['username'] %} 
+        <li><a href="{{ url_for('webapp.index.api_token_view') }}">API token</a></li>
         <li><a href="{{ url_for('webapp.auth.logout_handle') }}">Log out</a></li>
     {% else %}
         <li><a href="{{ url_for('webapp.auth.register_view') }}">Register</a></li>
