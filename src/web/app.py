@@ -30,5 +30,5 @@ def register_blueprints(app: Flask):
     from client.views import webapp_bp
     from api import api_bp
 
-    app.register_blueprint(webapp_bp)
-    app.register_blueprint(api_bp)
+    app.register_blueprint(webapp_bp, url_prefix='/')
+    app.register_blueprint(api_bp, url_prefix='/api')

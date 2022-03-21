@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from models import User, db_add
 
 
-auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+auth_bp = Blueprint('auth', __name__)
 
 
 def authorization_required(func):

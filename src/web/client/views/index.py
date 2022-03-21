@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for
 from .auth import authorization_required
 
-index_bp = Blueprint('index', __name__, '/')
+index_bp = Blueprint('index', __name__)
 
 
 @index_bp.get('/')
