@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from .auth import api_token_required
 from .responses import success
@@ -13,8 +13,8 @@ def health_check():
 
 @misc_bp.post('/whoami')
 @api_token_required
-def whoami(context):
+def whoami():
     resp = success({
-        'username': context['user'].username
+        'username': request.environ['user'].username
     })
     return resp, 200

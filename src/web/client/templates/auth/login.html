@@ -3,6 +3,7 @@
 {% block content %} 
 <h1>Log in as existing user</h1>
 
+{% with form = request.environ['form'] %}
 <form method="POST" action="{{ url_for('webapp.auth.login_handle') }}">
     {{ form.csrf_token }}
     <table>
@@ -17,4 +18,5 @@
     </table>
     {{ form.submit_login }}
 </form>
+{% endwith %}
 {% endblock %}

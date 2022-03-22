@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your settings</h1>
+<hr>
+<h2>Account settings</h2>
+{% with form = request.environ['account_settings_form'] %}
+<form method="POST" action="{{ url_for('webapp.user.settings.account_settings_handle') }}">
+    <table>
+        {{ form.csrf_token }}
+        <table>
+            <tr>
+                <td><i>{{form.email.label}}:</i></td> 
+                <td>{{form.email}}</td>
+            </tr>
+            <tr>
+                <td><i>{{form.password.label}}:</i></td> 
+                <td>{{form.password}}</td>
+            </tr>
+            <tr>
+                <td><i>{{form.confirm_password.label}}:</i></td> 
+                <td>{{form.confirm_password}}</td>
+                <td><i>This must be checked on frontend</i></td>
+            </tr>
+            <tr>
+                <td><i>{{form.current_password.label}}:</i></td> 
+                <td>{{form.current_password}}</td>
+            </tr>
+        </table>
+        {{ form.submit_account_settings }}
+    </table>
+</form>
+{% endwith %}
+<hr>
+<h2>Account settings</h2>
+{% with form = request.environ['user_settings_form'] %}
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('webapp.user.settings.user_settings_handle') }}">
+    <table>
+        {{ form.csrf_token }}
+        <table>
+            <tr>
+                <td><i>{{form.profile_picture.label}}:</i></td> 
+                <td><input id="profile_picture" name="profile_picture" type="file" accept="image/*"></td>
+            </tr>
+            <tr>
+                <td><i>{{form.profile_color.label}}:</i></td> 
+                <td>{{form.profile_color}}</td>
+                <td><i>In format of "#rrggbb" (with #). If invalid, this will not change anything</i></td>
+            </tr>
+            <tr>
+                <td><i>{{form.username.label}}:</i></td> 
+                <td>{{form.username}}</td>
+            </tr>
+        </table>
+        {{ form.submit_user_settings }}
+    </table>
+</form>
+{% endwith %}
+{% endblock %}

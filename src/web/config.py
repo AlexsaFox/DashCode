@@ -6,9 +6,14 @@ base_dir = os.getcwd()
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'ladadadada')
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=30)
     API_TOKEN_LIFETIME = datetime.timedelta(days=30)
+    
+    UPLOAD_FOLDER = os.path.join(base_dir, 'uploads')
+    DEFAULT_USER_PICTURE_FILENAME = 'default.jpeg'
 
 
 def build_production_db_uri():
@@ -35,4 +40,4 @@ mapping = {
     'development': DevelopmentConfig,
 }
 active_configuration_type = os.getenv('FLASK_ENV', 'development')
-active_configuration = mapping[active_configuration_type]
+active_configuration: Config = mapping[active_configuration_type]

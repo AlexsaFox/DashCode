@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Blueprint, redirect, render_template, url_for, flash, session
+from flask import Blueprint, redirect, render_template, url_for, flash, session, request
 from client.forms import RegistrationForm, LoginForm, flash_errors
 from sqlalchemy.exc import IntegrityError
 
@@ -12,31 +12,25 @@ auth_bp = Blueprint('auth', __name__)
 def authorization_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        username = session.get('username')
-        if username is None:
+        if request.environ['user'] is None:
             return redirect(url_for('webapp.auth.login_view'))
 
-        context = {
-            'user': User.query.filter_by(username=username).first()
-        }
-        if context['user'] is None:
-            return redirect(url_for('webapp.auth.login_view'))
-
-        return func(context, *args, **kwargs)
+        return func(*args, **kwargs)
     return wrapper
 
 
 @auth_bp.get('/register')
 def register_view():
-    return render_template('auth/register.html', form=RegistrationForm())
+    request.environ['form'] = RegistrationForm()
+    return render_template('auth/register.html')
 
 
 @auth_bp.post('/register')
 def register_handle():
-    form = RegistrationForm()
+    request.environ['form'] = form = RegistrationForm()
     if not form.validate():
         flash_errors(form)
-        return render_template('auth/register.html', form=form)
+        return render_template('auth/register.html')
 
     try:
         user = User(
@@ -47,7 +41,7 @@ def register_handle():
         db_add(user)
     except IntegrityError:
         flash('This user already exists')
-        return render_template('auth/register.html', form=form)
+        return render_template('auth/register.html')
 
     session['username'] = user.username
     return redirect(url_for('webapp.index.index_view'))
@@ -55,15 +49,16 @@ def register_handle():
 
 @auth_bp.get('/login')
 def login_view():
-    return render_template('auth/login.html', form=LoginForm())
+    request.environ['form'] = LoginForm()
+    return render_template('auth/login.html')
 
 
 @auth_bp.post('/login')
 def login_handle():
-    form = LoginForm()
+    request.environ['form'] = form = LoginForm()
     if not form.validate():
         flash_errors(form)
-        return render_template('auth/login.html', form=form)
+        return render_template('auth/login.html')
 
     user: User = (
         User.query.filter_by(username=form.data['username_or_email']).first() or 

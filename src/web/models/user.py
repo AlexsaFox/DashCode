@@ -1,13 +1,21 @@
 from __future__ import annotations
 
+import re
 import jwt
 import datetime
 from enum import Enum
 from secrets import choice
 from string import ascii_letters
+from typing import TYPE_CHECKING
 
-from config import active_configuration
 from app import db, bcrypt
+from config import active_configuration
+
+if TYPE_CHECKING:
+    from werkzeug.datastructures import FileStorage
+
+
+_COLOR_REGEXP = re.compile(r'#[a-fA-F0-9]{6}')
 
 
 class API_TOKEN_ERROR(Enum):
@@ -17,11 +25,14 @@ class API_TOKEN_ERROR(Enum):
     NOT_FOUND = 3
 
 
+def gen_random_string(size: int, alphabet: str) -> str:
+    return ''.join([choice(alphabet) for _ in range(size)])
+
 def _get_api_token() -> str:
-    size = 32
-    alphabet = ascii_letters
-    rand_chars = [choice(alphabet) for _ in range(size)]
-    return ''.join(rand_chars)
+    return gen_random_string(32, ascii_letters)
+
+def _gen_filename() -> str:
+    return gen_random_string(32, ascii_letters)
 
 def _get_token_expiration_date() -> int:
     current_date = datetime.datetime.now()
@@ -42,6 +53,11 @@ class User(db.Model):
                                          name='api_key_expiration_date', 
                                          nullable=False, 
                                          default=_get_token_expiration_date)
+    profile_color = db.Column(db.String(7), nullable=False, default='#ffffff')
+    _profile_picture_filename = db.Column(db.String(40), 
+                                          name="profile_picture_filename",
+                                          nullable=False,
+                                          default=active_configuration.DEFAULT_USER_PICTURE_FILENAME)
 
     @property
     def password(self):
@@ -98,3 +114,41 @@ class User(db.Model):
             return API_TOKEN_ERROR.NOT_FOUND
         else:
             return user
+
+    def _update_username(self, new_username: str):
+        self.username = new_username
+
+    def _update_email(self, new_email: str):
+        self.email = new_email
+
+    def _update_password(self, new_password: str):
+        self.password = new_password
+
+    def _update_profile_color(self, new_profile_color: str):
+        if _COLOR_REGEXP.fullmatch(new_profile_color):
+            self.profile_color = new_profile_color
+
+    def update_info(self, 
+            username: str | None = None, 
+            email: str | None = None, 
+            password: str | None = None, 
+            profile_color: str | None = None,
+            profile_picture: FileStorage | None = None, 
+        ):
+        if username:
+            self._update_username(username)
+
+        if email:
+            self._update_email(email)
+
+        if password:
+            self._update_password(password)
+
+        if profile_color:
+            self._update_profile_color(profile_color)
+
+        # TODO 
+        if profile_picture:
+           ...
+
+        db.session.commit()

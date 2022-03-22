@@ -31,9 +31,7 @@ def api_token_required(func):
                 return error('user not found'), UNAUTHORIZED
 
             case User():
-                context = {
-                    'user': user_or_error
-                }
-                return func(context=context, *args, **kwargs)
+                request.environ['user'] = user_or_error
+                return func(*args, **kwargs)
 
     return wrapper

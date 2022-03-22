@@ -2,6 +2,7 @@ from flask import flash
 from flask_wtf import FlaskForm
 
 from .auth import RegistrationForm, LoginForm
+from .settings import AccountSettingsForm, UserSettingsForm
 
 
 def flash_errors(form: FlaskForm):

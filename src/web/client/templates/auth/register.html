@@ -3,7 +3,7 @@
 {% block content %} 
 <h1>Register new user</h1>
 
-<!-- password and confirm_password fields should be checked on frontend !!! -->
+{% with form = request.environ['form'] %}
 <form method="POST" action="{{ url_for('webapp.auth.register_handle') }}">
     {{ form.csrf_token }}
     <table>
@@ -22,8 +22,10 @@
         <tr>
             <td><i>{{form.confirm_password.label}}:</i></td> 
             <td>{{form.confirm_password}}</td>
+            <td><i>This must be checked on frontend</i></td>
         </tr>
     </table>
     {{ form.submit_registration }}
 </form>
+{% endwith %}
 {% endblock %}
