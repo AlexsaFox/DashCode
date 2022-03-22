@@ -32,7 +32,7 @@
 </form>
 {% endwith %}
 <hr>
-<h2>Account settings</h2>
+<h2>User settings</h2>
 {% with form = request.environ['user_settings_form'] %}
 <form method="POST" enctype="multipart/form-data" action="{{ url_for('webapp.user.settings.user_settings_handle') }}">
     <table>
@@ -56,4 +56,16 @@
     </table>
 </form>
 {% endwith %}
+<hr>
+<h2>API token</h2>
+{% with user = request.environ['user'] %}
+<p><b>token:</b> {{user.api_token}}</p>
+<p><b>expiration datetime:</b> {{user.api_token_expiration_datetime.strftime('%Y-%m-%d at %H:%M:%S')}}</p>
+<p style="color: red;">Keep this in secret!!</p>
+<br>
+<form action="{{ url_for('webapp.user.settings.regenerate_api_token') }}" method="post">
+    <button type="submit">Generate new token</button>
+</form>
+{% endwith %}
+
 {% endblock %}

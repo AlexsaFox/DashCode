@@ -30,7 +30,6 @@ def add_forms_to_context(func):
 @authorization_required
 @add_forms_to_context
 def settings_view():
-    print(request.environ.get('kek'))
     user = request.environ['user']
 
     account_settings_form = request.environ['account_settings_form']
@@ -85,4 +84,10 @@ def user_settings_handle():
         session['username'] = request.environ['user'].username
 
     return redirect(url_for('webapp.user.settings.settings_view'))
-    
+
+
+@settings_bp.post('/settings/regenerate-api-token')
+@authorization_required
+def regenerate_api_token():
+    request.environ['user'].regenerate_api_token()
+    return redirect(url_for('webapp.user.settings.settings_view'))
