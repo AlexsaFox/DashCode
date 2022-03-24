@@ -14,6 +14,11 @@ class Config:
     
     UPLOAD_FOLDER = os.path.join(base_dir, 'uploads')
     DEFAULT_USER_PICTURE_FILENAME = 'default.jpeg'
+    ALLOWED_FILE_EXTENSIONS = {
+        'apng', 'avif', 'gif', 'jpg', 'jpeg', 'jfif', 
+        'pjpeg', 'pjp', 'png', 'svg', 'webp'
+    }
+    MAX_CONTENT_LENGTH = 16 * 1000 * 1000   # 16 MB
 
 
 def build_production_db_uri():

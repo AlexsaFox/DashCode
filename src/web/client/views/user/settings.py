@@ -72,11 +72,13 @@ def user_settings_handle():
         flash_errors(form)
         return render_template('user_pages/settings.html')
 
-    request.environ['user'].update_info(
+    errors = request.environ['user'].update_info(
         username=form.username.data,
         profile_color=form.profile_color.data,
         profile_picture=form.profile_picture.data,
     )
+    for err in errors:
+        flash(err)
 
     # If username was updated, we need to update session
     # so user doesn't get kicked out
