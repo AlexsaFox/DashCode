@@ -5,11 +5,11 @@ from logging.config import fileConfig
 
 from flask import current_app
 
-from alembic import request.environ
+from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-config = request.environ.config
+config = context.config
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -35,36 +35,36 @@ target_metadata = current_app.extensions['migrate'].db.metadata
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
 
-    This configures the request.environ with just a URL
+    This configures the context with just a URL
     and not an Engine, though an Engine is acceptable
     here as well.  By skipping the Engine creation
     we don't even need a DBAPI to be available.
 
-    Calls to request.environ.execute() here emit the given string to the
+    Calls to context.execute() here emit the given string to the
     script output.
 
     """
     url = config.get_main_option("sqlalchemy.url")
-    request.environ.configure(
+    context.configure(
         url=url, target_metadata=target_metadata, literal_binds=True
     )
 
-    with request.environ.begin_transaction():
-        request.environ.run_migrations()
+    with context.begin_transaction():
+        context.run_migrations()
 
 
 def run_migrations_online():
     """Run migrations in 'online' mode.
 
     In this scenario we need to create an Engine
-    and associate a connection with the request.environ.
+    and associate a connection with the context.
 
     """
 
     # this callback is used to prevent an auto-migration from being generated
     # when there are no changes to the schema
     # reference: http://alembic.zzzcomputing.com/en/latest/cookbook.html
-    def process_revision_directives(request.environ, revision, directives):
+    def process_revision_directives(context, revision, directives):
         if getattr(config.cmd_opts, 'autogenerate', False):
             script = directives[0]
             if script.upgrade_ops.is_empty():
@@ -74,18 +74,18 @@ def run_migrations_online():
     connectable = current_app.extensions['migrate'].db.get_engine()
 
     with connectable.connect() as connection:
-        request.environ.configure(
+        context.configure(
             connection=connection,
             target_metadata=target_metadata,
             process_revision_directives=process_revision_directives,
             **current_app.extensions['migrate'].configure_args
         )
 
-        with request.environ.begin_transaction():
-            request.environ.run_migrations()
+        with context.begin_transaction():
+            context.run_migrations()
 
 
-if request.environ.is_offline_mode():
+if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
