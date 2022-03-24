@@ -14,6 +14,5 @@ def profile_view(username):
     if owner is None:
         request.environ['error_msg'] = f"User {username} doesn't exist :("
         return render_template('errors/404.html'), 404
-
     request.environ['owner'] = owner
     return render_template('user_pages/profile.html')

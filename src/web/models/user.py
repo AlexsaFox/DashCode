@@ -27,16 +27,16 @@ class API_TOKEN_ERROR(Enum):
     NOT_FOUND = 3
 
 
-def generate_random_string(size: int, alphabet: str) -> str:
+def _generate_random_string(size: int, alphabet: str) -> str:
     return ''.join([choice(alphabet) for _ in range(size)])
 
 
 def _generate_api_token() -> str:
-    return generate_random_string(32, ascii_letters)
+    return _generate_random_string(32, ascii_letters)
 
 
 def _generate_filename() -> str:
-    return generate_random_string(32, ascii_letters)
+    return _generate_random_string(32, ascii_letters)
 
 
 def _get_token_expiration_date() -> int:
@@ -138,16 +138,21 @@ class User(db.Model):
 
     @property
     def api_token_expiration_datetime(self) -> datetime.datetime:
-        """ Exact time on which user token will become unavaliable """
+        """ Exact time on which user token will become unusable and
+        must be regenerated.
+        """
         return datetime.datetime.fromtimestamp(self._api_key_expiration_date)
 
     @property
     def password(self):
+        """ There's no way to retrieve user password, therefore this
+        shouldn't be called.
+        """
         raise AttributeError('password: write-only field')
 
     @password.setter
     def password(self, passwd: str) -> None:
-        """ Hashes string and stores it as user password """
+        """ Hashes string and stores it as user password. """
         self._password_hash = bcrypt.generate_password_hash(passwd).decode('utf-8')
 
     @property
@@ -156,18 +161,18 @@ class User(db.Model):
             filename=self._profile_picture_filename)
 
     def check_password(self, passwd: str) -> bool:
-        """ Checks if provided string matches user password """   
+        """ Checks if provided string matches user password. """   
         return bcrypt.check_password_hash(self._password_hash, passwd)
 
     def regenerate_api_token(self) -> None:
-        """ Regenerates API token for this user """
+        """ Regenerates API token for this user. """
         self._api_key = _generate_api_token()
         self._api_key_expiration_date = _get_token_expiration_date()
         db.session.commit()
 
     def update_info(self, *args, **kwargs ) -> list[str]:
         """ Updates information about user and saves changes to
-        database. All arguments must be passed with keywords. If
+        database. All arguments MUST be passed with keywords. If
         argument is None or empty value (for example, empty string),
         changes to that field will not be applied. If any errors occur
         while updating information (for example, if invalid value is
@@ -175,11 +180,11 @@ class User(db.Model):
         changes will be applied. 
 
         Args:
-            username (str | None, optional): New username
-            email (str | None, optional): New email
-            password (str | None, optional): New password
-            profile_color (str | None, optional): New profile color
-            profile_picture (FileStorage | None, optional): New profile picture
+            username (str | None, optional): New username.
+            email (str | None, optional): New email.
+            password (str | None, optional): New password.
+            profile_color (str | None, optional): New profile color.
+            profile_picture (FileStorage | None, optional): New profile picture.
 
         Raises:
             ValueError: no matching property update handler was found
@@ -200,7 +205,7 @@ class User(db.Model):
                     property_changer =  getattr(self, property_changer_name)
                 except AttributeError:
                     raise ValueError(
-                        f'No handler for updating "{property}" is defined.'
+                        f'no handler for updating "{property}" is defined'
                     )
 
                 try:
@@ -233,7 +238,7 @@ class User(db.Model):
         filename = new_profile_picture.filename
         if not _allowed_file(filename):
             raise InvalidUserPropertyError(
-                'This file extension is not allowed. You can upload only'
+                'This file extension is not allowed. You can upload only '
                 + ', '.join(active_configuration.ALLOWED_FILE_EXTENSIONS)
                 + ' files'
             )

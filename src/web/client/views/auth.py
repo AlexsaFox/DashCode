@@ -10,6 +10,7 @@ auth_bp = Blueprint('auth', __name__)
 
 
 def authorization_required(func):
+    """ If user is not logged in, redirects them to login page """
     @wraps(func)
     def wrapper(*args, **kwargs):
         if request.environ['user'] is None:

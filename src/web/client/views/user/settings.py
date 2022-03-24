@@ -1,7 +1,6 @@
 from functools import wraps
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session
 
-from config import active_configuration
 from client.forms import flash_errors, AccountSettingsForm, UserSettingsForm
 from client.views.auth import authorization_required
 
@@ -9,15 +8,7 @@ from client.views.auth import authorization_required
 settings_bp = Blueprint('settings', __name__)
 
 
-def allowed_file(filename: str) -> bool:
-    if '.' not in filename:
-        return False
-
-    extension = filename.split['.'][-1]
-    return extension in active_configuration.ALLOWED_UPLOAD_EXTENSIONS
-
-
-def add_forms_to_context(func):
+def _add_forms_to_context(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         request.environ['user_settings_form'] = UserSettingsForm()
@@ -28,7 +19,7 @@ def add_forms_to_context(func):
 
 @settings_bp.get('/')
 @authorization_required
-@add_forms_to_context
+@_add_forms_to_context
 def settings_view():
     user = request.environ['user']
 
@@ -44,13 +35,14 @@ def settings_view():
 
 @settings_bp.post('/account')
 @authorization_required
-@add_forms_to_context
+@_add_forms_to_context
 def account_settings_handle():
     form  = request.environ['account_settings_form']
     if not form.validate():
         flash_errors(form)
         return render_template('user_pages/settings.html')
 
+    # If password is incorrect, do not change anything
     if not request.environ['user'].check_password(form.data.get('current_password')):
         flash('Password is not correct, email/password changes were not applied')
         return render_template('user_pages/settings.html')
@@ -65,7 +57,7 @@ def account_settings_handle():
 
 @settings_bp.post('/user')
 @authorization_required
-@add_forms_to_context
+@_add_forms_to_context
 def user_settings_handle():
     form  = request.environ['user_settings_form']
     if not form.validate():
