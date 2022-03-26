@@ -748,7 +748,7 @@ a{
     text-align: left;
     font-size: 100%;
 }
-.space_for_notes .header{
+.space_for_notes .header_for_public{
     color:white;
     font-size:120%;
     font-family: 'ClearSans-Regular';
@@ -865,7 +865,7 @@ a{
     color: #2B3B5F;
 }
 .popup .edit{
-    background: url(img/pencil-regular-24.png);
+    background: url(../img/pencil-regular-24.png);
     font-size: 100%;
     border: none;
     position: absolute;
@@ -878,7 +878,7 @@ a{
     cursor: pointer;
 }
 .popup .edit:hover {
-    background: url(img/pencil-change_color.png);
+    background: url(../img/pencil-change_color.png);
     background-repeat: no-repeat;
     background-position: 100%;
 }

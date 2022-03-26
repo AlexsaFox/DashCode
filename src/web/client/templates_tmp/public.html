@@ -19,7 +19,7 @@
             </form>
         </div>
          <div class="space_for_notes">
-            <p class="header">New public notes</p>
+            <p class="header_for_public">New public notes</p>
              <hr class="line_for_header"/>
             <div class="main_body_for_note"><button>
                 <a class="button_for_pop_up" href="#popup3">
@@ -131,7 +131,7 @@
         </div>
         <div class="block">
 
-                <div class="avatar"><img src="205d9582975737a8b02fb1e5bbc02fd5.jpg" class="avatar" alt="Avatar" ></div>
+                <div class="avatar"><img src="img/205d9582975737a8b02fb1e5bbc02fd5.jpg" class="avatar" alt="Avatar" ></div>
              <form>
                 <div class="text"><span>Anonim</span></div>
              </form>
@@ -169,33 +169,6 @@
                 </form>
             </div>
         </div>
-        <script>
-        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-            lineNumbers: true,
-            lineWrapping:true,
-            autofocus:true
-        });
-
-            editor.setCursor(2,2);     // это значит поместить курсор на 3 строку (отсчёт от 0), символ 3
-
-            var pos=editor.posFromIndex(3);  //получить координаты 3-ей позиции (строку и символ)
-            editor.setCursor(pos.line,pos.ch);       
-
-            let saveScreenTop = 0;
-$(window).on('hashchange', () => {
-    if (document.location.hash.includes("popup")) {
-        $("body").css("overflow", "hidden");
-        saveScreenTop = $(document).scrollTop();
-    } else {
-        $("body").css("overflow", "auto");
-        $(document).scrollTop(saveScreenTop);
-    }
-});
-
-$(document).ready(() => {
-    window.location.hash = "";
-});
-        </script>
         
     </body>
 </html>

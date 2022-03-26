@@ -208,33 +208,6 @@
                     </form>
                 </div>
             </div>
-        <script>
-        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-            lineNumbers: true,
-            lineWrapping:true,
-            autofocus:true
-        });
-
-            editor.setCursor(2,2);     // это значит поместить курсор на 3 строку (отсчёт от 0), символ 3
-
-            var pos=editor.posFromIndex(3);  //получить координаты 3-ей позиции (строку и символ)
-            editor.setCursor(pos.line,pos.ch);       
-
-            let saveScreenTop = 0;
-$(window).on('hashchange', () => {
-    if (document.location.hash.includes("popup")) {
-        $("body").css("overflow", "hidden");
-        saveScreenTop = $(document).scrollTop();
-    } else {
-        $("body").css("overflow", "auto");
-        $(document).scrollTop(saveScreenTop);
-    }
-});
-
-$(document).ready(() => {
-    window.location.hash = "";
-});
-        </script>
         
     </body>
 </html>
