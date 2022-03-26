@@ -83,6 +83,7 @@ font-family: ClearSans-Regular;
 }
 
 .dl-menuwrapper li a {
+	font-family: 'ClearSans-Regular';
 	display: block;
 	position: relative;
 	padding: 15px 20px;
@@ -107,7 +108,7 @@ font-family: ClearSans-Regular;
 	position: absolute;
 	top: 0;
 	line-height: 50px;
-	font-family: 'icomoon';
+	font-family: 'ClearSans-Regular';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
 	content: "\e000";

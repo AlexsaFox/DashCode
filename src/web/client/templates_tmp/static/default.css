@@ -45,7 +45,7 @@ body, html { font-size: 100%; 	padding: 0; margin: 0;}
 }
 
 body {
-	font-family: 'Lato', Calibri, Arial, sans-serif;
+	font-family: 'ClearSans-Regular', Calibri, Arial, sans-serif;
 	color: #b1aea6;
 	background: #fffcf5;
 	min-height: 800px;
@@ -217,7 +217,7 @@ a{
 }
 .block{
     color:white;
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     display: inline-block;
     position: fixed;
     width: 20%;
@@ -314,7 +314,7 @@ a{
     color:white;
 }
 .search button:before {
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     font-size: 16px;
     color: #F9F0DA;
 }
@@ -325,7 +325,7 @@ a{
 }
 
 .display_with_button button{
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     background-color: #223153;
     color:white;
     text-decoration: none;
@@ -374,7 +374,7 @@ a{
 
 }
 .main_body_for_note span{
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     color:white;
     text-decoration: none;
     font-size:85%;
@@ -385,20 +385,20 @@ a{
 }
 
 .note{
-    font-family: 'Altone-Light';
+    font-family: 'ClearSans-Regular';
     background-color: #5B6B98;
     border-radius: 8px 8px 0px 0px;
     padding: 2%;
     height: 140px;
 }
 .note span{
-    font-family: 'Altone-Light';
+    font-family: 'ClearSans-Regular';
     color:white;
     font-size:80%;
     padding: 3%;
 }
 .link{
-    font-family: 'Altone-Light';
+    font-family: 'ClearSans-Regular';
     background-color: #465586;
     border-radius: 0px 0px 8px 8px;
     padding: 2%;
@@ -408,7 +408,7 @@ a{
 .link span{
     font-size:70%;
     padding: 3%;
-    font-family: 'Altone-Light';
+    font-family: 'ClearSans-Regular';
     color:white;
 
     text-align: center;
@@ -456,7 +456,7 @@ a{
 }
 .popup .header_for_pop_up{
     display: flex;
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     color:white;
     background-color: rgba(255, 255, 255, 0.1);
     text-align:left;
@@ -469,7 +469,7 @@ a{
 }
 .popup .header_for_pop_up_acc{
     display: flex;
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     color:white;
     background-color: #617299;
     text-align:right;
@@ -495,7 +495,7 @@ a{
 }
 .popup .content {
     text-align: left;
-    font-family: 'Altone-SemiBold';
+    font-family: 'ClearSans-Regular';
     color:white;
     padding: 0px 3%;
     max-height: 40%;
@@ -505,7 +505,7 @@ a{
 }
 .comment{
     font-size:110%;
-    font-family: 'Altone-Light';
+    font-family: 'ClearSans-Regular';
     background-color: #617299;
     border:none;
     color:white;
