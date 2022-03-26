@@ -44,20 +44,30 @@ dynamicInputs.forEach((item) => {
     });
 });
 function fnOC(){
-    document.content_with_edit.comment.readOnly = false;
-    document.content_with_edit.code.readOnly = false;
-    document.content_with_edit.textarea_for_tegs.readOnly = false;
-    document.content_with_edit.textarea_for_link.readOnly  = false;
+    let elem1=document.querySelector('#comment');
+    elem1.readOnly=false;
+    let elem2=document.querySelector('#code');
+    elem2.readOnly=false;
+    let elem3=document.querySelector('#textarea_for_tegs');
+    elem3.readOnly=false;
+    let elem4=document.querySelector('#textarea_for_link');
+    elem4.readOnly=false;
     let elem = document.querySelector('#input_for_title');
     elem.disabled = false;
     document.getElementById('save').style.visibility="visible";
 }
 function fnSave(){
-    document.content_with_edit.comment.readOnly = true;
-    document.content_with_editcontent_with_edit.code.readOnly = true;
-    document.content_with_edit.textarea_for_tegs.readOnly = true;
-    document.content_with_edit.textarea_for_link.readOnly  = true;
-    document.content_with_edit.textarea_for_title.readOnly  = true;
-    document.gestElementById('save').style.visibility="hidden";
+    let elem1=document.querySelector('#comment');
+    elem1.readOnly=true;
+    let elem2=document.querySelector('#code');
+    elem2.readOnly=true;
+    let elem3=document.querySelector('#textarea_for_tegs');
+    elem3.readOnly=true;
+    let elem4=document.querySelector('#textarea_for_link');
+    elem4.readOnly=true;
+    let elem = document.querySelector('#input_for_title');
+    elem.disabled = true;
+    document.getElementById('save').style.visibility="visible";
+    document.getElementById('save').style.visibility="hidden";
     
 }
