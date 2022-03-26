@@ -1,6 +1,6 @@
 from app import db
 from .user import User, API_TOKEN_ERROR
-
+from .note import Note
 
 def db_add(data: db.Model):
     """ Adds entry to database """

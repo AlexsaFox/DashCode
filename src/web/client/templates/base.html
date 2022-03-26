@@ -36,6 +36,7 @@
     {% if user %} 
         <li><a href="{{ url_for('webapp.user.settings.settings_view') }}">Settings</a></li>
         <li><a href="{{ url_for('webapp.user.profile.profile_view', username=session['username']) }}">Profile</a></li>
+        <li><a href="{{ url_for('webapp.note.notes_show') }}">Notes</a></li>
         <li><a href="{{ url_for('webapp.auth.logout_handle') }}">Log out</a></li>
     {% else %}
         <li><a href="{{ url_for('webapp.auth.register_view') }}">Register</a></li>

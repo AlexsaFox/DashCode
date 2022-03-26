@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+<h1>Hi there! There is your notes!</h1>
+<a href="{{ url_for('webapp.note.notes_create') }}">Create Note</a></li>
+<hr>
+{% with notes = request.environ['user_notes'] %}
+    {% for note in notes %}
+        <p>Title: {{note.title}}</p>
+        <p>Link for solving: {{note.link}}</p>
+        {% if note.is_private == True %}
+            <p>Status: private </p>
+        {% else %}
+            <p>Status: public</p> 
+        {% endif %}
+        {% with id = note.id %}
+        <a href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">More</a>
+        <a href="{{url_for('webapp.note.notes_edit_handler', note_id=id)}}">Edit</a>
+        {% with form = request.environ['note_remove_form'] %}
+        <form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
+            {{ form.csrf_token }}
+            {{ form.submit }}
+        </form>
+        {% endwith %}
+        {% endwith %}
+        <hr>
+    {%endfor%}
+{% endwith %}
+{% endblock %}
