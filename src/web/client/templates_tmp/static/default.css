@@ -454,19 +454,6 @@ a{
     position: relative;
     padding-top: 20px;
 }
-.popup .header_for_pop_up{
-    display: flex;
-    font-family: 'ClearSans-Regular';
-    color:white;
-    background-color: rgba(255, 255, 255, 0.1);
-    text-align:left;
-
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 20px;
-    margin: 0px 60px 20px 20px;
-    color: #F1F7ED;
-}
 .popup .header_for_pop_up_acc{
     display: flex;
     font-family: 'ClearSans-Regular';
@@ -479,19 +466,6 @@ a{
     font-size: 20px;
     margin: 0px 60px 20px 20px;
     color: #F1F7ED;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  transition: all 200ms;
-  font-size: 190%;
-  font-weight: bold;
-  text-decoration: none;
-  color: #F1F7ED;
-}
-.popup .close:hover {
-  color: #79AF96;
 }
 .popup .content {
     text-align: left;

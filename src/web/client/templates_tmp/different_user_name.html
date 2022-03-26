@@ -154,60 +154,34 @@
             </div>
         </div>
         <div id="popup3" class="overlay">
-                <div class="popup">
-                    <div class="header_for_pop_up">
-                    <input class="input_for_title" placeholder="+ add">
-                    <a class="close" href="#">&times;</a>
-                        </div>
-                    <div class="content">
-                        <form>
-                        <textarea name="comment" class="comment" cols="80" rows="11">Для работы с наборами данных Python предоставляет такие встроенные типы как списки, кортежи и словари. 
+            <div class="popup">
+                <form name="content_with_edit">
+                <div class="header_for_pop_up">
+                    <input id="input_for_title" name="input_for_title" class="input_for_title" placeholder="+ add" disabled>
+                <a class="close" href="#">&times;</a>
+                    </div>
+                <div class="content">
+                    
+                    <textarea name="comment" class="comment" cols="80" rows="11" placeholder="text" readonly>Для работы с наборами данных Python предоставляет такие встроенные типы как списки, кортежи и словари. 
 
 Список (list) представляет тип данных, который хранит набор или последовательность элементов. Во многих языках программирования есть аналогичная структура данных, которая называется массив. 
 
 Создание списка 
 Для создания списка применяются квадратные скобки [], внутри которых через запятую перечисляются элементы списка. Например, определим список чисел:</textarea>  
-                        <textarea id="code" name="code" class="code"></textarea>
-                        <input class="input_for_tegs" placeholder="#text">
-                        <input class="input_for_link" placeholder="htts://">
-                            <input type="submit" value="Save" class="save">
-                            
-                        </form>
-                    </div>
-                    <form>
-                    <hr class="line"/>
-                        <div class="info_about_writer">
-                        <span class="text_under_line">user: Paulina</span>
-                        <span class="text_under_line">last modified: 21/01/2022</span>
-                            </div>
-                    </form>
+                    <textarea name="code" class="code" cols="90" rows="1" placeholder="some code" readonly>code</textarea>
+                    <textarea name="textarea_for_tegs" class="textarea_for_tegs" placeholder="#text"  cols="90" rows="1" readonly></textarea>
+                    <textarea name="textarea_for_link" class="textarea_for_link" placeholder="htts://" cols="90" rows="1" readonly></textarea>
+                        
+                    
                 </div>
-            </div>
-        <div id="popup1" class="overlay">
-                <div class="popup">
-                    <div class="header_for_pop_up">
-                   <input class="input_for_title" placeholder="+ add">
-                    <a class="close" href="#">&times;</a>
+                <hr class="line"/>
+                    <div class="info_about_writer">
+                    <span class="text_under_line">user: Paulina</span>
+                    <span class="text_under_line">last modified: 21/01/2022</span>
                         </div>
-                    <div class="content">
-                        <form>
-                        <textarea name="comment" class="comment" cols="80" rows="11"> text</textarea>  
-                        <textarea name="code" class="code" cols="90" rows="1">code</textarea>
-                        <input class="input_for_tegs" placeholder="#text">
-                        <input class="input_for_link" placeholder="htts://">
-                                  <input type="submit" value="Save" class="save">
-                        </form>
-                    </div>
-                    <form>
-                    <hr class="line"/>
-                        <div class="info_about_writer">
-                        <span class="text_under_line">user: Paulina</span>
-                        <span class="text_under_line">last modified: 21/01/2022</span>
-                            </div>
-                  
-                    </form>
-                </div>
+                </form>
             </div>
+        </div>
         
     </body>
 </html>
