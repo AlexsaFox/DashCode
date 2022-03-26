@@ -14,7 +14,7 @@ class Note(db.Model):
                    default=_get_note_uuid)
     title = db.Column(db.String(65),nullable=False)
     context = db.Column(db.Text(),nullable=False)
-    link = db.Column(db.Text(),nullable=False)
+    link = db.Column(db.Text())
     owner = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
     is_private = db.Column(db.Boolean(),nullable=False,default=True)
     
