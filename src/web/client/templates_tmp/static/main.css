@@ -1,0 +1,601 @@
+@font-face {
+    font-family: 'ClearSans-Bold';
+    src: url("fonts/ClearSans-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ClearSans-Light";
+    src: url("fonts/ClearSans-Light.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ClearSans-Regular";
+    src: url("fonts/ClearSans-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "ClearSans-Medium";
+    src: url("fonts/ClearSans-Medium.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1A2641;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #303D67;
+    border-radius: 10px;
+}
+
+:root {
+    --primary-color: #18FFE3;
+}
+
+.base_pages {
+    margin: 0px;
+    background-image: url('img/mohammad-rahmani-8qEB0fTe9Vw-unsplash.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.header {
+    position: relative;
+    top: 0%;
+    width: 100%;
+    height: 10%;
+    background-color: #111A2D;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    align-items: center;
+}
+
+.header .buttons a {
+    text-decoration: none;
+    color: white;
+}
+
+.header h1 {
+    font-family: "ClearSans-Bold";
+    font-size: 32px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding: 1%;
+    color: white;
+}
+
+.header .buttons {
+    width: 20%;
+    padding: 3%;
+    display: flex;
+    justify-content: space-evenly;
+    align-self: center;
+}
+
+.header .buttons .button_log_in {
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    font-family: "ClearSans-Bold";
+    font-size: 22px;
+    color: white;
+}
+
+.header .buttons .button_sign_up {
+    padding: 3% 10%;
+    border: 0px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    font-family: "ClearSans-Bold";
+    font-size: 22px;
+    color: #223153;
+}
+
+.header .buttons .button_sign_up a {
+    color: #223153;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center_block {
+    position: absolute;
+    top: 30%;
+    width: 70%;
+    display: flex;
+    align-items: flex-start;
+    align-self: center;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+.center_block h1 {
+    font-family: "ClearSans-Bold";
+    color: white;
+}
+
+.center_block .block_of_text {
+    color: white;
+    font-family: "ClearSans-Bold";
+    font-size: 20px;
+    margin: 0%;
+    width: 90%;
+}
+
+.right_block {
+    width: auto;
+}
+
+.block_with_registr {
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    padding: 3%;
+    padding-top: 5%;
+    width: 380px;
+}
+
+.block_with_registr h2 {
+    color: white;
+    font-family: 'ClearSans-Bold';
+    margin: 2%;
+    font-size: 20px;
+}
+
+.block_with_registr p {
+    color: white;
+    font-family: 'ClearSans-Bold';
+    margin: 2%;
+    width: auto;
+}
+
+.block_with_registr .input {
+    border: 0px;
+    background-color: #303D67;
+    border-radius: 10px;
+    width: 99%;
+    height: 35px;
+    color: white;
+    border-color: #1A2641;
+}
+
+.block_with_registr .input:focus {
+    outline: none;
+}
+
+.block_with_registr .button {
+    margin: 2%;
+    width: 360px;
+    height: 40px;
+    border: 0px;
+    border-radius: 10px;
+    font-family: 'ClearSans-Bold';
+    font-size: 24px;
+    color: #223153;
+    background-color: var(--primary-color);
+}
+
+.block_with_registr .stroke {
+    width: 99%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.block_with_registr .stroke .check {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 200px;
+}
+
+.block_with_registr .stroke .text {
+    height: auto;
+    margin: 0%;
+    font-family: 'ClearSans-Light';
+    font-size: 16px;
+}
+
+.block_with_registr .stroke .forgot {
+    height: auto;
+    margin: 0%;
+    font-family: 'ClearSans-Light';
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+
+/* Customize the label (the container) */
+
+.block_with_registr .stroke .container {
+    display: block;
+    position: relative;
+    margin: 2% 2% 2% 2%;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default checkbox */
+
+.block_with_registr .stroke .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.block_with_registr .stroke .container .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    background-color: #1A2641;
+    border-radius: 5px;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.block_with_registr .stroke .container:hover input~.checkmark {
+    background-color: #223153;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.block_with_registr .stroke .container input:checked~.checkmark {
+    background-color: var(--primary-color);
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.block_with_registr .stroke .container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.block_with_registr .stroke .container input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.block_with_registr .stroke .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 10px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.bottom_line {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.bottom_line p {
+    color: white;
+    font-family: 'ClearSans-Light';
+    margin: 2%;
+    width: auto;
+}
+
+.bottom_line a {
+    color: var(--primary-color);
+    font-family: 'ClearSans-Light';
+    margin: 2%;
+    width: auto;
+    text-decoration: none;
+}
+
+.page_settings {
+    background-color: #1A2641;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+    color: white;
+    width: auto;
+}
+
+.left_part {
+    width: 70%;
+}
+
+.left_part .tabcontent {
+    display: none;
+    background-color: #223153;
+    border-radius: 15px;
+    padding: 3%;
+}
+
+.profile h2 {
+    font-family: 'ClearSans-Bold';
+    color: white;
+    margin: 0%;
+}
+
+.left_part .tabcontent h1 {
+    font-family: 'ClearSans-Bold';
+    margin: 0%;
+    font-size: 28px;
+    margin-bottom: 2%;
+}
+
+.tabcontent .account_preveiw {
+    border-radius: 15px;
+    background-color: #303D67;
+    padding-bottom: 2%;
+    margin: 0% 5%;
+}
+
+.account_preveiw .profile_color {
+    background-color: var(--primary-color);
+    height: 90px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.account_preveiw .stroke {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    margin: -2% 2% 0% 3%;
+}
+
+.stroke .profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 35%;
+}
+
+.account_preveiw .edit_profile {
+    background-color: var(--primary-color);
+    width: 30%;
+    height: 35px;
+    border: 0px;
+    border-radius: 5px;
+    color: #223153;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+}
+
+.tabcontent .avatar {
+    position: relative;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    margin-left: 2%;
+    margin-right: 3%;
+}
+
+.tabcontent .avatar img {
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    object-fit: cover;
+}
+
+.information {
+    border-radius: 15px;
+    background-color: #465586;
+    margin: 3%;
+    padding: 2% 4% 2% 2%;
+}
+
+.information .stroke {
+    display: flex;
+    justify-content: space-between;
+    margin: 1% 0%;
+}
+
+.information .edit {
+    border-radius: 5px;
+    background-color: #223153;
+    border: 0px;
+    padding: 1% 2%;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 20px;
+}
+
+.stroke .left h2 {
+    font-family: 'ClearSans-Medium';
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0%;
+    font-weight: 500;
+}
+
+.stroke .left h3 {
+    font-family: 'ClearSans-Regular';
+    font-size: 20px;
+    color: rgba(255, 255, 255);
+    margin: 0%;
+    font-weight: 300;
+}
+
+
+/*
+нижняя строчка с настройками по смене пароля и удалению аккуанта
+*/
+
+.base_settings {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tabcontent hr {
+    margin-top: 5%;
+    border: 0px;
+    border-top: 3px solid #465586;
+}
+
+.vertical {
+    border-left: 3px solid #465586;
+    height: 150px;
+    width: 1px;
+}
+
+.base_settings .password h2 {
+    font-family: 'ClearSans-Bold';
+    font-size: 20px;
+    text-align: left;
+}
+
+.base_settings .password {
+    font-family: 'ClearSans-Bold';
+    font-size: 22px;
+    text-align: left;
+    width: 20%;
+}
+
+.password .change_password {
+    border: 0px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    font-family: 'ClearSans-Light';
+    font-size: 20px;
+    padding: 5% 10%;
+}
+
+.base_settings .account_removal h3 {
+    font-family: 'ClearSans-Medium';
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 100;
+}
+
+.base_settings .account_removal p {
+    font-family: 'ClearSans-Regular';
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.account_removal .disable_account {
+    border: 3px solid #FA3B3B;
+    border-radius: 5px;
+    background-color: #FA3B3B;
+    color: white;
+    padding: 1% 2%;
+    font-family: 'ClearSans-Regular';
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.account_removal .delete_account {
+    border: 3px solid #FA3B3B;
+    border-radius: 5px;
+    background-color: #223153;
+    color: #FA3B3B;
+    padding: 1% 2%;
+    font-family: 'ClearSans-Regular';
+    font-size: 20px;
+    font-weight: 200;
+    margin: 2%;
+}
+
+
+/* настройки user profile */
+
+.first_block h3 {
+    font-family: 'ClearSans-Medium';
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 100;
+    width: 600px;
+}
+
+.tabcontent .stroke {
+    display: flex;
+    align-items: center;
+}
+
+.first_block .account_preveiw .stroke .profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 60%;
+}
+
+
+/* Правая часть страницы с кнопками навигации */
+
+.page_settings .right_part {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'ClearSans-Bold';
+    font-size: 18px;
+    position: fixed;
+    right: 2%;
+    top: 1%;
+}
+
+.right_part .standart_button {
+    border: 0px;
+    border-radius: 10px;
+    height: 50px;
+    margin-bottom: 5%;
+    padding: 2% 2% 2% 4%;
+    display: flex;
+    align-items: center;
+    gap: 4%;
+    background-color: #223153;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.right_part .standart_button i {
+    margin: 1%;
+    height: auto;
+    width: auto;
+}
