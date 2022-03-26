@@ -38,6 +38,17 @@ class Config:
     # error is raised by Flask. Currently set to 16MB
     MAX_CONTENT_LENGTH = 16 * 1000 * 1000
 
+    # Path for serving static files
+    STATIC_URL_PATH = '/static'
+
+    # Folder on system containing static files
+    STATIC_FOLDER = os.path.join(base_dir, 'client', 'static')
+
+    # .scss files that must be compiled
+    # Is relative to STATIC_FOLDER
+    # Using ../assets (not static folder), so these files are not exposed
+    ASSETS_SCSS_FILES = ['../assets/scss/*.scss']
+
 
 def build_production_db_uri():
     """ Builds uri for production database using environment variables. """

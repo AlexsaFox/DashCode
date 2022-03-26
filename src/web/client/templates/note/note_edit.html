@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+
+{% block content %} 
+{% with form = request.environ['form'] %}
+<h1>Editing Note: {{form.title.data}}</h1>
+{% with id = request.environ['note_id'] %}
+<form method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
+{% endwith %}
+    {{ form.csrf_token }}
+    <table>
+        <tr>
+            <td><i>{{form.title.label}}:</i></td> 
+            <td>{{form.title}}</td>
+        </tr>
+        <tr>
+            <td><i>{{form.context.label}}:</i></td> 
+            <td>{{form.context}}</td>
+        </tr>
+        <tr>
+            <td><i>{{form.link.label}}:</i></td> 
+            <td>{{form.link}}</td>
+        </tr>
+        <tr>
+            <td><i>{{form.privacy.label}}:</i></td> 
+            <td>{{form.privacy}}</td>
+        </tr>
+    </table>
+    {{ form.submit }}
+</form>
+{% endwith %}
+{% endblock %}

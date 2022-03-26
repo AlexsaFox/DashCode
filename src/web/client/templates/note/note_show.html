@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+{% with note = request.environ['note'] %}
+<h1>Note: {{note.title}}</h1>
+<hr>
+<p>{{note.context}}</p>
+<a href="{{note.link}}">{{note.link}}</a>
+<p>
+<a href="{{ url_for('webapp.note.notes_show') }}"> Go back </a>
+{% with id = note.id %}
+<a href="{{ url_for('webapp.note.notes_edit',note_id=id) }}"> Edit</a>
+{% endwith %}
+{% endwith %}
+{% endblock %}

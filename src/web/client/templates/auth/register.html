@@ -1,31 +1,45 @@
 {% extends 'base.html' %} 
 
 {% block content %} 
-<h1>Register new user</h1>
-
-{% with form = request.environ['form'] %}
-<form method="POST" action="{{ url_for('webapp.auth.register_handle') }}">
-    {{ form.csrf_token }}
-    <table>
-        <tr>
-            <td><i>{{form.username.label}}:</i></td> 
-            <td>{{form.username}}</td>
-        </tr>
-        <tr>
-            <td><i>{{form.email.label}}:</i></td> 
-            <td>{{form.email}}</td>
-        </tr>
-        <tr>
-            <td><i>{{form.password.label}}:</i></td> 
-            <td>{{form.password}}</td>
-        </tr>
-        <tr>
-            <td><i>{{form.confirm_password.label}}:</i></td> 
-            <td>{{form.confirm_password}}</td>
-            <td><i>This must be checked on frontend</i></td>
-        </tr>
-    </table>
-    {{ form.submit_registration }}
-</form>
-{% endwith %}
+<div class="auth_pages">
+    <div class="center_block">
+        <div>
+            <h1>DashCode</h1>
+            <div class="block_of_text">
+                <span>
+                    Block for text text text text text 
+                    text text text text text text text
+                    text text text text text text text
+                    text text text text text text text
+                    text text text text text text text
+                    text text text text text text text
+                    text text text text text text text
+                    text text text text
+                </span>
+            </div>
+        </div>
+        <div class="right_block">
+            <div class="block_with_registr">
+                {% with form = request.environ['form'] %}
+                <form method="POST" action="{{ url_for('webapp.auth.register_handle') }}">
+                    {{ form.csrf_token }}
+                    <h2>{{form.username.label}}</h2>
+                    {{form.username(class_="input")}}
+                    <h2>{{form.email.label}}</h2>
+                    {{form.email(class_="input")}}
+                    <h2>{{form.password.label}}</h2>
+                    {{form.password(class_="input")}}
+                    <h2>{{form.confirm_password.label}}</h2>
+                    {{form.confirm_password(class_="input")}}
+                    {{ form.submit_registration(class_="button") }}
+                </form>
+                {% endwith %}
+            </div>
+            <div class="bottom_line">
+                <span>Already have login and password?</span>
+                <a href="{{ url_for('webapp.auth.login_view') }}">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

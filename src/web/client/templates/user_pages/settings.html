@@ -1,71 +1,150 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Your settings</h1>
-<hr>
-<h2>Account settings</h2>
-{% with form = request.environ['account_settings_form'] %}
-<form method="POST" action="{{ url_for('webapp.user.settings.account_settings_handle') }}">
-    <table>
-        {{ form.csrf_token }}
-        <table>
-            <tr>
-                <td><i>{{form.email.label}}:</i></td> 
-                <td>{{form.email}}</td>
-            </tr>
-            <tr>
-                <td><i>{{form.password.label}}:</i></td> 
-                <td>{{form.password}}</td>
-            </tr>
-            <tr>
-                <td><i>{{form.confirm_password.label}}:</i></td> 
-                <td>{{form.confirm_password}}</td>
-                <td><i>This must be checked on frontend</i></td>
-            </tr>
-            <tr>
-                <td><i>{{form.current_password.label}}:</i></td> 
-                <td>{{form.current_password}}</td>
-            </tr>
-        </table>
-        {{ form.submit_account_settings }}
-    </table>
-</form>
-{% endwith %}
-<hr>
-<h2>User settings</h2>
-{% with form = request.environ['user_settings_form'] %}
-<form method="POST" enctype="multipart/form-data" action="{{ url_for('webapp.user.settings.user_settings_handle') }}">
-    <table>
-        {{ form.csrf_token }}
-        <table>
-            <tr>
-                <td><i>{{form.profile_picture.label}}:</i></td> 
-                <td><input id="profile_picture" name="profile_picture" type="file" accept="image/*"></td>
-            </tr>
-            <tr>
-                <td><i>{{form.profile_color.label}}:</i></td> 
-                <td>{{form.profile_color}}</td>
-                <td><i>In format of "#rrggbb" (with #). If invalid, this will not change anything</i></td>
-            </tr>
-            <tr>
-                <td><i>{{form.username.label}}:</i></td> 
-                <td>{{form.username}}</td>
-            </tr>
-        </table>
-        {{ form.submit_user_settings }}
-    </table>
-</form>
-{% endwith %}
-<hr>
-<h2>API token</h2>
-{% with user = request.environ['user'] %}
-<p><b>token:</b> {{user.api_token}}</p>
-<p><b>expiration datetime:</b> {{user.api_token_expiration_datetime.strftime('%Y-%m-%d at %H:%M:%S')}}</p>
-<p style="color: red;">Keep this in secret!!</p>
-<br>
-<form action="{{ url_for('webapp.user.settings.regenerate_api_token') }}" method="post">
-    <button type="submit">Generate new token</button>
-</form>
-{% endwith %}
+<div class="page_settings">
+    <div class="left_part">
+        {% with form = request.environ['account_settings_form'] %}
+        <form method="POST" action="{{ url_for('webapp.user.settings.account_settings_handle') }}">
+            {{ form.csrf_token }}
+            <div id="MyAccount" class="tabcontent">
+                <h1>My Account</h1>
+                <hr>
+                <h3>BASE SETTINGS</h3>
+                <div class="account_preveiw">
+                    <div class="profile_color"></div>
+                    <div class="stroke">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img src="{{request.environ['user'].profile_picture_url}}">
+                            </div>
+                            <h2>{{request.environ['user'].username}}</h2>
+                        </div>
+                        <button type="button" class="edit_profile" onclick="openSettings(event, 'UserProfile')">Edit User Profile</button>
+                    </div>
+                    <div class="information">
+                        <div class="stroke">
+                            <div class="left">
+                                <h2>EMAIL</h2>
+                                {{form.email(class_="input", disabled=True, id="input_email")}}
+                            </div>
+                            <button type="button" class="edit" onclick="editEmail(event, 'input_email')">Edit</button>
+                        </div>
+                        <button type="button" id="button_change_password" class="change_password" onclick="editPassword(event)">Change password</button>
+                        
+                        <div class="stroke password" id="new_password_container"> 
+                            <div class="left">
+                                <h2>NEW PASSWORD</h2>
+                                {{form.password(class_="input")}}
+                            </div>
+                        </div>
+                        <div class="stroke password" id="confirm_password_container">
+                            <div class="left">
+                                <h2>CONFIRM PASSWORD</h2>
+                                {{form.confirm_password(class_="input")}}
+                            </div>
+                        </div>
 
+                        <div class="stroke password" id="current_password_container">
+                            <div class="left">
+                                <h2>CURRENT PASSWORD</h2>
+                                {{form.current_password(class_="input")}}
+                            </div>
+                        </div>
+                        {{ form.submit_account_settings(class_="edit account", id="edit_account_settings")}}
+                    </div>
+                </div>
+                <hr/>
+                <div class="base_settings">
+                    <div class="account_removal">
+                        <h3>ACCOUNT REMOVAL</h3>
+                        <span>Disabling your account means you can recover it at any time after this action.</span>
+                        <div class="stroke">
+                            <button class="disable_account">Disable Account</button>
+                            <button class="delete_account">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {% endwith %}
+        {% with form = request.environ['user_settings_form'] %}
+        <form method="POST" enctype="multipart/form-data" action="{{ url_for('webapp.user.settings.user_settings_handle') }}">
+            {{ form.csrf_token }}
+            <div id="UserProfile" class="tabcontent">
+                <h1>User Profile</h1>
+                <hr>
+                <div class="user_stroke">
+                    <div class="first_block">
+                        <h3>PREVIEW</h3>
+                        <div class="account_preveiw">
+                            <div class="profile_color"></div>
+                            <div class="stroke_s">
+                                <div class="profile">
+                                    <div class="avatar_s">
+                                        <img src="{{request.environ['user'].profile_picture_url}}">
+                                    </div>
+                                    
+                                </div>
+                                
+                                <!-- <button class="edit_profile">Edit avatar</button> -->
+                                <input id="profile_picture" name="profile_picture" type="file" accept="image/*" class="edit_profile_image">
+                            </div>
+                            <div class="stroke username">
+                                <div class="edit_username">
+                                    <div class="left">
+                                        <h2>USERNAME</h2>
+                                        {{form.username(class_="input username", disabled=True, id="input_username")}}
+                                    </div>
+                                    
+                                </div>
+                                <button type="button" class="edit username" onclick="editUsername(event, 'input_username')">Edit</button>
+                                {{ form.submit_user_settings(class_="edit name", id="edit_username") }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <hr/>
+                    <div class="first_block profile_color">
+                        <h3>CHANGE PROFILE COLOR</h3>
+                        <h4>In format of "#rrggbb" (with #).</h4>
+                        {{form.profile_color(class_="input")}}
+                        {{ form.submit_user_settings(class_="edit") }}
+                    </div>
+                    
+            </div>
+        </form>
+        {% endwith %}
+        {% with user = request.environ['user'] %}
+        <div id="APItoken" class="tabcontent">
+            <h1>API token</h1>
+            <hr>
+            <div class="API_base">
+                <div class="left">
+                    <h3>TOKEN</h3>
+                    <textarea class="token" readonly>{{user.api_token}}</textarea>
+                    
+                </div>
+                <div class="right">
+                    <h3>EXPIRATION DATETIME:</h3>
+                    <span> {{user.api_token_expiration_datetime.strftime('%Y-%m-%d at %H:%M:%S')}}</span>
+                    <form action="{{ url_for('webapp.user.settings.regenerate_api_token') }}" method="post">
+                        <button type="submit" class="generate_token">Generate new token</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endwith %}
+    </div>
+    <div class="right_part">
+        <h1>User Settings</h1>
+        <button class="standart_button" id="defaultOpen" onclick="openSettings(event, 'MyAccount')"><i class="fi fi-sr-user"></i>My Account</button>
+        <button class="standart_button" onclick="openSettings(event, 'UserProfile')"><i class="fi fi-rr-pencil"></i>User Profile</button>
+        <button class="standart_button" onclick="openSettings(event, 'APItoken')"><i class="fi fi-rr-key"></i>API token</button>
+        <button onclick="location.href='{{ url_for('webapp.index.index_view') }}'" class="standart_button"><i class="fi fi-rr-sign-out"></i>Back</button>
+    </div>
+</div>
+<script>
+    window.onload = () => {document.getElementById("defaultOpen").click();}
+</script>
 {% endblock %}

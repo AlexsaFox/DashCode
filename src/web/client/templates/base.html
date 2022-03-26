@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% assets "css_all" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/component.css') }}"> -->
+    {% endassets %}
+    <!-- Icons AlexsaFox -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <!-- Script AlexsaFox and Paulina -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.dlmenu.js') }}"></script>
     <title>O_O</title>
-
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style>
+        {% with user = request.environ['user'] %}
+            {% if user %}
+                :root {
+                    --primary-color: {{user.profile_color}};
+                }
+            {% endif %}
+        {% endwith %}
         .flashing_msg {
             padding: 10px;
             width: calc(100vw - 36px);
@@ -24,26 +43,11 @@
             {% endfor %}
         {% endif %} 
     {% endwith %}
-
-    {% if user %}
-        <p style="background-color: {{user.profile_color}};">You're logged in as {{user.username}}</p>
-    {% else %}
-        <p>You're not logged in</p>
-    {% endif %}
-    <hr>
-
-    <li><a href="{{ url_for('webapp.index.index_view') }}">Home</a></li>
-    {% if user %} 
-        <li><a href="{{ url_for('webapp.user.settings.settings_view') }}">Settings</a></li>
-        <li><a href="{{ url_for('webapp.user.profile.profile_view', username=session['username']) }}">Profile</a></li>
-        <li><a href="{{ url_for('webapp.auth.logout_handle') }}">Log out</a></li>
-    {% else %}
-        <li><a href="{{ url_for('webapp.auth.register_view') }}">Register</a></li>
-        <li><a href="{{ url_for('webapp.auth.login_view') }}">Log in</a></li>
-    {% endif %}
-    <hr>
-
+    
+    <main>
     {% block content %}{% endblock %}
+    </main>
 </body>
+
 {% endwith %}
 </html>

@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 
 from .auth import RegistrationForm, LoginForm
 from .settings import AccountSettingsForm, UserSettingsForm
-
+from .note import NoteCreateForm, NoteRemoveForm, NoteEditForm
 
 def flash_errors(form: FlaskForm):
     """ Flashes all form errors """
