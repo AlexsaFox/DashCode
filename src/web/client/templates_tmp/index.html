@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>main</title>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="static/main.css">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+      
+        <div class="search">
+            <form>
+                <button type="submit"><i class='bx bx-search-alt-2' ></i></button>
+                <input type="text" placeholder="search...">
+                
+            </form>
+        </div>
+        
+         <div class="space_for_notes">
+    
+            <div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div>
+              <div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div><div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div><div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div><div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div><div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div><div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div><div class="main_body_for_note"><button>
+                <a class="button_for_pop_up" href="#popup3">
+                <form>
+                    <span>Python</span>
+                <div class="note">
+                    <span>Some text</span>
+                </div>
+                <div class="link">
+                        <span>StackOverFlow</span>
+                </div>
+                </form>
+                </a>
+                </button>
+            </div>
+             
+        </div>
+        <div class="block">
+
+                <div class="avatar"><img src="img/205d9582975737a8b02fb1e5bbc02fd5.jpg" class="avatar" alt="Avatar" ></div>
+             <form>
+                <div class="text"><span>Anonim</span></div>
+             </form>
+            <div class="display_with_button">
+                <a  href="#popup1"><button><i class='bx bx-plus' ></i>Add notes</button></a>
+                <a href="public.html"><button><i class='bx bx-right-arrow-alt' ></i> Social media</button></a>
+                <a href="subscritions.html"><button><i class='bx bxs-user'></i> Subscritions</button></a>
+                <a><button class="b_my_notes"><i class='bx bxs-right-arrow' ></i> My notes</button></a>
+                
+            </div>
+        </div>
+        <div id="popup3" class="overlay">
+                <div class="popup">
+                    <form name="content_with_edit">
+                    <div class="header_for_pop_up">
+                        <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled>
+                        <input id="edit" type='button' class="edit" onClick='fnOC();'/>
+
+                    <a class="close" href="#check">&times;</a>
+                        </div>
+                    <div class="content">
+                        
+                        <textarea name="comment" class="comment" cols="80" rows="11" placeholder="text" readonly>Для работы с наборами данных Python предоставляет такие встроенные типы как списки, кортежи и словари. 
+
+Список (list) представляет тип данных, который хранит набор или последовательность элементов. Во многих языках программирования есть аналогичная структура данных, которая называется массив. 
+
+Создание списка 
+Для создания списка применяются квадратные скобки [], внутри которых через запятую перечисляются элементы списка. Например, определим список чисел:</textarea>  
+                        <textarea name="code" class="code" cols="90" rows="1" placeholder="some code" readonly>code</textarea>
+                        <textarea name="textarea_for_tegs" class="textarea_for_tegs" placeholder="#text"  cols="90" rows="1" readonly></textarea>
+                        <textarea id="textarea_for_link" name="textarea_for_link" class="textarea_for_link" placeholder="htts://" cols="90" rows="1" readonly></textarea>
+                            <input type="submit" value="Save" class="save" onClick='fnSave();' id="save" style="visibility: hidden;">
+                            
+                        
+                    </div>
+                    <hr class="line"/>
+                        <div class="info_about_writer">
+                        <span class="text_under_line">user: Paulina</span>
+                        <span class="text_under_line">last modified: 21/01/2022</span>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div id="check" class="overlay">
+                <div class="popup_check">
+                    <form name="content_with_edit">
+                    <div class="header_for_pop_up">
+                        <a class="close" href="#">&times;</a>
+                        </div>
+                    <div class="content">
+                        <span>Do you want to save your changes?</span>
+                        <div class="buttons_for_check">
+                        <a href="#"><input type="button" value="Save"></a>
+                        <a href="#"><input type="button" value="Unsave"></a>
+                        <a href="#popup3"><input type="button" value="Cancel"></a
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <div id="popup1" class="overlay">
+                <div class="popup">
+                    <form name="content">
+                    <div class="header_for_view_or_add_pop_up">
+                        <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled>
+                    <a class="close" href="#">&times;</a>
+                        </div>
+                    <div class="content">
+                        
+                        <textarea name="comment" class="comment" cols="80" rows="11" placeholder="text" ></textarea>  
+                        <textarea name="code" class="code" cols="90" rows="1"  placeholder="some code"></textarea>
+                        <textarea name="textarea_for_tegs" class="textarea_for_tegs" placeholder="#text"  cols="90" rows="1"  ></textarea>
+                        <textarea name="textarea_for_link" class="textarea_for_link" placeholder="htts://" cols="90" rows="1"  ></textarea>
+                            <input type="submit" value="Save" class="save" onClick='fnSave();'>
+                            
+                        
+                    </div>
+                    </form>
+                </div>
+            </div>
+        
+        
+    </body>
+</html>

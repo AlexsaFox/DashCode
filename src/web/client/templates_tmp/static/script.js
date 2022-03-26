@@ -43,3 +43,21 @@ dynamicInputs.forEach((item) => {
         });
     });
 });
+function fnOC(){
+    document.content_with_edit.comment.readOnly = false;
+    document.content_with_edit.code.readOnly = false;
+    document.content_with_edit.textarea_for_tegs.readOnly = false;
+    document.content_with_edit.textarea_for_link.readOnly  = false;
+    let elem = document.querySelector('#input_for_title');
+    elem.disabled = false;
+    document.getElementById('save').style.visibility="visible";
+}
+function fnSave(){
+    document.content_with_edit.comment.readOnly = true;
+    document.content_with_editcontent_with_edit.code.readOnly = true;
+    document.content_with_edit.textarea_for_tegs.readOnly = true;
+    document.content_with_edit.textarea_for_link.readOnly  = true;
+    document.content_with_edit.textarea_for_title.readOnly  = true;
+    document.gestElementById('save').style.visibility="hidden";
+    
+}
