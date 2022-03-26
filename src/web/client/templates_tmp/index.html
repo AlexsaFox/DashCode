@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>main</title>
+        <script src="script.js"></script>
         <link rel="stylesheet" href="static/main.css">
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
         <script src="static/modernizr.custom.js"></script>
@@ -259,14 +260,14 @@
                         </div>
                     <div class="content">
                         
-                        <textarea id="comment" class="comment" cols="80" rows="11" placeholder="text" readonly>Для работы с наборами данных Python предоставляет такие встроенные типы как списки, кортежи и словари. 
+                        <textarea name="comment" class="comment" cols="80" rows="11" placeholder="text" readonly>Для работы с наборами данных Python предоставляет такие встроенные типы как списки, кортежи и словари. 
 
 Список (list) представляет тип данных, который хранит набор или последовательность элементов. Во многих языках программирования есть аналогичная структура данных, которая называется массив. 
 
 Создание списка 
 Для создания списка применяются квадратные скобки [], внутри которых через запятую перечисляются элементы списка. Например, определим список чисел:</textarea>  
-                        <textarea id="code" class="code" cols="90" rows="1" placeholder="some code" readonly>code</textarea>
-                        <textarea id="textarea_for_tegs" class="textarea_for_tegs" placeholder="#text"  cols="90" rows="1" readonly></textarea>
+                        <textarea name="code" class="code" cols="90" rows="1" placeholder="some code" readonly>code</textarea>
+                        <textarea name="textarea_for_tegs" class="textarea_for_tegs" placeholder="#text"  cols="90" rows="1" readonly></textarea>
                         <textarea id="textarea_for_link" name="textarea_for_link" class="textarea_for_link" placeholder="htts://" cols="90" rows="1" readonly></textarea>
                             <input type="submit" value="Save" class="save" onClick='fnSave();' id="save" style="visibility: hidden;">
                             
@@ -317,7 +318,6 @@
                     </form>
                 </div>
             </div>
-            <script src="static/script.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script src="static/jquery.dlmenu.js"></script>
             <script>

@@ -25,7 +25,9 @@
 
 .dl-menuwrapper {
 	width: 100%;
-	max-width: 300px;
+	
+	top: 0%;
+	left: 0%;
 	float: left;
 	position: relative;
 	-webkit-perspective: 1000px;
@@ -40,7 +42,7 @@
 
 .dl-menuwrapper button {
 
-	background: #ccc;
+	background: #4F5F94;
 	border: none;
 	width: 100%;
 	height: 75%;
@@ -54,7 +56,7 @@
 .dl-menuwrapper button:hover,
 .dl-menuwrapper button.dl-active,
 .dl-menuwrapper ul {
-	background: #aaa;
+	background: #4F5F94;
 }
 
 .dl-menuwrapper button:after {
@@ -154,6 +156,7 @@ font-family: ClearSans-Regular;
 
 /* Hide the inner submenus */
 .dl-menuwrapper li .dl-submenu {
+	border-radius: 15px;
 	display: none;
 }
 
