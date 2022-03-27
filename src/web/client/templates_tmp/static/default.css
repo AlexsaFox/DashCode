@@ -323,27 +323,6 @@ a{
     font-size: 140%;
 
 }
-
-.display_with_button button{
-    font-family: 'ClearSans-Regular';
-    background-color: #223153;
-    color:white;
-    text-decoration: none;
-    border: 1px solid #223153;
-    margin: 0px 2% 4% 3%;
-    height: 75%;
-    width:100%;
-    padding: 2% 4%;
-    border-radius: 10px;
-    text-align: left;
-    font-size: 100%;
-}
-
-.b_my_notes:focus{
-    background-color: #18FFE3;
-
-
-}
 .display_with_button{
     display: inline-block;
     width:100%;
@@ -414,21 +393,6 @@ a{
     text-align: center;
 
 }
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
 
 .overlay_for_account {
   position: fixed;
