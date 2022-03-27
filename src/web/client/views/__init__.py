@@ -11,7 +11,12 @@ from .note import note_bp
 
 template_dir = os.path.abspath('client/templates')
 
-webapp_bp = Blueprint('webapp', __name__, template_folder=template_dir)
+webapp_bp = Blueprint(
+    'webapp', __name__, 
+    template_folder=template_dir,
+)
+
+
 webapp_bp.register_blueprint(index_bp, url_prefix='/')
 webapp_bp.register_blueprint(auth_bp, url_prefix='/auth')
 webapp_bp.register_blueprint(user_web_bp, url_prefix='/user')

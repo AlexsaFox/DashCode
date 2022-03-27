@@ -12,7 +12,11 @@ migrate = Migrate()
 def create_app() -> Flask:
     from config import active_configuration
     
-    app = Flask(__name__.split('.')[0])
+    app = Flask(
+        __name__.split('.')[0],
+        static_folder=active_configuration.STATIC_FOLDER,
+        static_url_path=active_configuration.STATIC_URL_PATH
+    )
     app.config.from_object(active_configuration)
     register_extensions(app)
     register_blueprints(app)
