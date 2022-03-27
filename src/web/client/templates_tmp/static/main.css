@@ -1007,6 +1007,9 @@ textarea:focus {
 .save:target{
     visibility:visible;
 }
+.input_for_title:focus {
+    outline: none;
+}
 .profile_of_another_person{
     padding-top: 1%;
     color:white;
