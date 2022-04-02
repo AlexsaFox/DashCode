@@ -1,55 +1,45 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>DASH CODE</title>
-<link rel="stylesheet" href="static/main.css">
-</head>
-
-<body class="base_pages">
-    <main>
-        <div class="center_block">
-            <div>
-                <h1>DashCode</h1>
-                <div class="block_of_text">
-                    <p>
-                        Block for text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
-                        text text
-                    </p>
-                </div>
-            </div>
-            <div class="right_block">
-                <div class="block_with_registr">
-                    <form>
-                        <h2>Username or email</h2>
-                        <input type="email" class="input">
-                        <h2>Password</h2>
-                        <input type="password" class="input">
-                        <div class="stroke">
-                            <div class="check">
-                                <label class="container">
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <p class="text">Remember me</p>
-                            </div>
-                            <a class="forgot">Forgot your password</a>
-                        </div>
-                        <button class="button">Log In</button>
-                    </form>
-                </div>
-                <div class="bottom_line">
-                    <p>Don't have an account yet?</p>
-                    <a href="sign_up.html">Register now</a>
-                </div>
-            </div>
-
-
+{% block content %}
+<div class="center_block">
+    <div>
+        <h1>DashCode</h1>
+        <div class="block_of_text">
+            <span>
+                Block for text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text
+            </span>
         </div>
-    </main>
+    </div>
+    <div class="right_block">
+        <div class="block_with_registr">
+            {% with form = request.environ['form'] %}
+            <form method="POST" action="{{ url_for('webapp.auth.login_handle') }}">
+                {{ form.csrf_token}}
+                <h2>{{form.username_or_email.label}}</h2>
+                {{form.username_or_email(class_="input")}}
+                <h2>{{form.password.label}}</h2>
+                {{form.password(class_="input")}}
+                <div class="stroke">
+                    <div class="check">
+                        <label class="container">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <span class="text_remember_me">Remember me</span>
+                    </div>
+                    <a class="forgot">Forgot your password</a>
+                </div>
+                {{ form.submit_login(class_="button") }}
+            </form>
+        </div>
+        <div class="bottom_line">
+            <span>Don't have an account yet?</span>>
+            <a href="{{ url_for('webapp.auth.register_view') }}">Register now</a>
+        </div>
+    </div>
 
 
-</body>
+</div>
 
-</html>
+{% endblock %}
