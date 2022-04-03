@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request
-from client.forms import NoteRemoveForm
+from flask import Blueprint, render_template, request, request_tearing_down
+from client.forms import NoteRemoveForm,NoteCreateForm
 from models import Note
 index_bp = Blueprint('index', __name__)
 
@@ -10,4 +10,6 @@ def index_view():
         user_notes = Note.query.filter_by(owner=request.environ['user'].id).all()
         request.environ['user_notes'] = reversed(user_notes)
         request.environ['note_remove_form'] = NoteRemoveForm()
+    request.environ['note_create_form'] = NoteCreateForm()
+    
     return render_template('index.html')
