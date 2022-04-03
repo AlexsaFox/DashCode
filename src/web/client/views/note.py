@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for, flash, session, request
+from flask import Blueprint, redirect, render_template, url_for, flash, request
 from .auth import authorization_required
 from models import Note, db_add, db_remove, db_save_changes
 from client.forms import NoteCreateForm, NoteEditForm, NoteRemoveForm,flash_errors

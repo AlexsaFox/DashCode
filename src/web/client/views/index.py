@@ -6,10 +6,10 @@ index_bp = Blueprint('index', __name__)
 
 @index_bp.get('/')
 def index_view():
-    if request.environ['user'] is not None:
+    if request.environ['user'] is None:
+        return render_template('index.html')
+    else:
         user_notes = Note.query.filter_by(owner=request.environ['user'].id).all()
         request.environ['user_notes'] = reversed(user_notes)
         request.environ['note_remove_form'] = NoteRemoveForm()
-    request.environ['note_create_form'] = NoteCreateForm()
-    
-    return render_template('index.html')
+        return render_template('home.html')
