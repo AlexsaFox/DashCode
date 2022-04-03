@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>main</title>
-        <link rel="stylesheet" href="static/main.css">
-        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
-      
-        <div class="search">
-            <form>
-                <button type="submit"><i class='bx bx-search-alt-2' ></i></button>
-                <input type="text" placeholder="search...">
-                
-            </form>
-        </div>
-        
+{% extends 'base.html' %} 
+    {% block content %}     
          <div class="space_for_notes">
             <p class="header">New notes</p>
              <hr class="line_for_header"/>
@@ -34,145 +18,7 @@
                 </a>
                 </button>
             </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-            <div class="main_body_for_note"><button>
-                <a class="button_for_pop_up" href="#popup3">
-                <form>
-                    <div class="title"><span>Python</span></div>
-                    <div  class="notes_author"><i><span>@Paulina</span></i></div>
-                <div class="note">
-                    <span>Some text</span>
-                </div>
-                <div class="link">
-                        <span>StackOverFlow</span>
-                </div>
-                </form>
-                </a>
-                </button>
-            </div>
-             
-        </div>
-        <div class="block">
-
-                <div class="avatar"><img src="205d9582975737a8b02fb1e5bbc02fd5.jpg" class="avatar" alt="Avatar" ></div>
-             <form>
-                <div class="text"><span>Anonim</span></div>
-             </form>
-            <div class="display_with_button">
-                <a href="home.html"><button>Back to profile</button>
-                <span class="title_for_subscrition">Subscritions</span>
-                <hr>
-                <a href="different_user_name.html"><button>@Paulina</button>
-                <a href="different_user_name.html"><button>@Alexsafox</button>
-                <a href="different_user_name.html"><button>@Ryan</button>
-                    
-            </div>
-        </div>
-        <div id="popup3" class="overlay">
+            <div id="popup3" class="overlay">
                 <div class="popup">
                     <form name="content_with_edit">
                     <div class="header_for_pop_up">
@@ -204,7 +50,20 @@
                     </form>
                 </div>
             </div>
-        
-        
-    </body>
-</html>
+        </div>
+        <div class="block">
+            {% with user = request.environ['user']%}
+                <div class="avatar"><img src="{{owner.profile_picture_url}}" class="avatar" alt="Avatar" ></div>
+                <div class="text"><span>{{user.username}}</span></div>
+            {% endwith %}
+            <div class="display_with_button">
+                <a href="home.html"><button>Back to profile</button>
+                <span class="title_for_subscrition">Subscritions</span>
+                <hr>
+                <a href="different_user_name.html"><button>@Paulina</button>
+                <a href="different_user_name.html"><button>@Alexsafox</button>
+                <a href="different_user_name.html"><button>@Ryan</button>
+                    
+            </div>
+        </div>
+{% endblock %}
