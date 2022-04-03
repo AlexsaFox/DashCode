@@ -1,6 +1,133 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+    {% block content %}
+    <div class="space_for_notes">
+        {% with notes = request.environ['user_notes'] %}
+            {% for note in notes %}
+            <div class="main_body_for_note">
+                <button>
+                <a class="button_for_pop_up" href="#popup3">
+                    <span>{{note.title}}</span>
+                    {% if note.is_private == True %}
+                    <div  class="public_private"><span><i class='bx bxs-lock-alt' ></i></span></div>
+                    {% else %}
+                        <div  class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div>
+                    {% endif %}
+                <div class="note">
+                    <span>{{note.context}}</span>
+                </div>
+                <div class="link">
+                        <span>{{note.link}}</span>
+                </div>
+                </a>
+            </button>
+                {% with form = request.environ['note_create_form'] %}
+                <div id="popup3" class="overlay">
+                    <div class="popup">
+                        <form name="content_with_edit" method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
+                            {{ form.csrf_token }}
+                            <div class="header_for_pop_up">
+                            <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->
+                            {{form.title(class_="input_for_title",placeholder="+ add")}}
+    
+                        <a class="close" href="#check">&times;</a>
+                            </div>
+                        <div class="content">
+                          {{form.context(class_="comment",placeholder="text",cols="80", rows="11")}}
+                        {{form.link(class_="textarea_for_link",placeholder="htts://",cols="90", rows="1")}}
+                            {{form.submit(class_="save",value="Save")}}
+                           
+                            
+                        </div>
+                        <hr class="line"/>
+                            <div class="info_about_writer">
+                            <span class="text_under_line">user:{{note.owner.username}}</span>
+                            <span class="text_under_line">{{form.title.data}}</span>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="check" class="overlay">
+                    <div class="popup_check">
+                        <div class="header_for_pop_up">
+                            <a class="close" href="#">&times;</a>
+                            </div>
+                        <div class="content">
+                            <span>Do you want to save your changes?</span>
+                            <div class="buttons_for_check">
+                            <form method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
+                                {{ form.csrf_token }}
+                                <a href="#">{{ form.submit(value=Save)}}</a>
+                            </form>
+                            <form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
+                                {{ form.csrf_token }}
+                                <a href="#">{{ form.submit(value="Unsave") }}</a>
+                            </form>
+                            <a href="#popup3"><input type="button" value="Cancel"></a>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+                {% endwith %}
+           </div>
+           {%endfor%}  
+           {% endwith %}
+        </div>
+        <div class="block">
+            {% with user = request.environ['user']%}
+                <div class="avatar"><img src="{{user.profile_picture_url}}" class="avatar" alt="Avatar" ></div>
+                <div class="text"><span>{{user.username}}</span></div>
+            {% endwith %}
+                <div class="display_with_button">
+                <a  href="#popup"><button><i class='bx bx-plus' ></i>Add notes</button></a>
+                <a><button><i class='bx bx-right-arrow-alt' ></i> Social media</button></a>
+                <a><button><i class='bx bxs-user'></i> Subscritions</button></a>
+                <div class="display_with_button">
+    
+                        <div id="dl-menu" class="dl-menuwrapper">
+                            <button class="dl-trigger"><i class='bx bx-right-arrow-alt' ></i>My notes</button>
+                            <ul class="dl-menu">
+                                <li>
+                                    <a href="#">Python</a>
+                                    <ul class="dl-submenu">
+                                        <li>
+                                            <a href="#">For</a>
+                                            <ul class="dl-submenu">
+                                                {% for note in notes %}
+                                                <li><a href="#">{{note.title}}</a></li>
+                                                {%endfor%}
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /dl-menuwrapper -->
+    
+                    
+                </div>
+                
+            </div>
+        </div>
 
-{% block content %}
-<h1>You are in your workspace</h1>
-<p>Congrats</p>
-{% endblock %}
+        {% with form = request.environ['note_create_form'] %}   
+        <div  id="popup" class="overlay">
+                <div class="popup">
+                    <form name="content" method="POST" action="{{ url_for('webapp.note.notes_create') }}">
+                    {{ form.csrf_token }}
+                    <div class="header_for_view_or_add_pop_up">
+                        {{form.title(class_="input_for_title",placeholder="+ add")}}
+                    <a class="close" href="#">&times;</a>
+                        </div>
+                    <div class="content">
+                        {{form.context(class_="comment",placeholder="text",cols="80", rows="11")}}
+                        {{form.link(class_="textarea_for_link",placeholder="htts://",cols="90", rows="1")}}
+                        {{form.submit(class_="save",value="Save")}}
+                            
+                        
+                    </div>
+                    </form>
+                </div>
+            </div>         
+    {% endwith %}
+    {% endblock %}

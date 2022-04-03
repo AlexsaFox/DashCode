@@ -19,35 +19,21 @@
                         <span>{{note.link}}</span>
                 </div>
                 </a>
-                {% with form = request.environ['form'],owner = request.environ['owner'],id = request.environ['note_id'] %}
+                {% with form = request.environ['note_create_form'],owner = request.environ['owner'],id = request.environ['note_id'] %}
                 <div id="popup3" class="overlay">
                     <div class="popup">
                         <form name="content_with_edit" method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
                             {{ form.csrf_token }}
                             <div class="header_for_pop_up">
                             <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->
-                            {{form.title(class_="input_for_title",placeholder="+ add",disabled)}}
-                    
-                            <input id="edit" type='button' class="edit" onClick='fnOC();'/>
+                            {{form.title(class_="input_for_title",placeholder="+ add")}}
     
                         <a class="close" href="#check">&times;</a>
                             </div>
                         <div class="content">
-                            
-                            <!-- <textarea name="comment" class="comment" cols="80" rows="11" placeholder="text" readonly>Для работы с наборами данных Python предоставляет такие встроенные типы как списки, кортежи и словари.  -->
-    
-                            <!-- Список (list) представляет тип данных, который хранит набор или последовательность элементов. Во многих языках программирования есть аналогичная структура данных, которая называется массив. 
-    
-                            Создание списка 
-                            Для создания списка применяются квадратные скобки [], внутри которых через запятую перечисляются элементы списка. Например, определим список чисел:</textarea>   -->
-                            <!-- <textarea name="code" class="code" cols="90" rows="1" placeholder="some code" readonly>code</textarea> -->
-                            <!-- <textarea id="textarea_for_tegs" name="textarea_for_tegs" class="textarea_for_tegs" placeholder="#text"  cols="90" rows="1" readonly></textarea> -->
-                            <!-- <textarea id="textarea_for_link" name="textarea_for_link" class="textarea_for_link" placeholder="htts://" cols="90" rows="1" readonly></textarea> -->
-                                <!-- <input type="submit" value="Save" class="save" onClick='fnSave();' id="save" style="visibility: hidden;"> -->
-                        {{form.context(class_="comment",placeholder="text",cols="80", rows="11", readonly)}}
-                        {{form.link(class_="textarea_for_link",placeholder="htts://"",cols="90", rows="1",readonly)}}
-                        <!-- <textarea name="comment" class="comment" cols="80" rows="11" placeholder="text" ></textarea>   -->
-                        {{form.submit(class_="save",value="Save", onClick='fnSave();',style="visibility: hidden;")}}
+                          {{form.context(class_="comment",placeholder="text",cols="80", rows="11")}}
+                        {{form.link(class_="textarea_for_link",placeholder="htts://"",cols="90", rows="1")}}
+                            {{form.submit(class_="save",value="Save")}}
                            
                             
                         </div>
@@ -59,6 +45,7 @@
                         </form>
                     </div>
                 </div>
+                {% endwith %}
                 <div id="check" class="overlay">
                     <div class="popup_check">
                         <div class="header_for_pop_up">
@@ -82,7 +69,6 @@
                 </div>
                 </button>
            </div>
-           {% endwith %}
            {%endfor%}  
            {% endwith %}
         </div>
@@ -123,7 +109,7 @@
             </div>
         </div>
         
-        {% with form = request.environ['form'] %}   
+        {% with form = request.environ['user_notes'] %}   
         <div  id="popup" class="overlay">
                 <div class="popup">
                     <form name="content" method="POST" action="{{ url_for('webapp.note.notes_create') }}">
