@@ -44,30 +44,34 @@ dynamicInputs.forEach((item) => {
     });
 });
 function fnOC(){
-    let elem1=document.querySelector('#comment');
+    let elem1=document.querySelector(".comment");
     elem1.readOnly=false;
-    let elem2=document.querySelector('#code');
+    let elem2=document.querySelector(".code");
     elem2.readOnly=false;
-    let elem3=document.querySelector('#textarea_for_tegs');
+    let elem3=document.querySelector(".textarea_for_tegs");
     elem3.readOnly=false;
-    let elem4=document.querySelector('#textarea_for_link');
+    let elem4=document.querySelector(".textarea_for_link");
     elem4.readOnly=false;
-    let elem = document.querySelector('#input_for_title');
+    let elem = document.querySelector(".input_for_title");
     elem.disabled = false;
     document.getElementById('save').style.visibility="visible";
 }
 function fnSave(){
-    let elem1=document.querySelector('#comment');
+    let elem1=document.querySelector(".comment");
     elem1.readOnly=true;
-    let elem2=document.querySelector('#code');
+    let elem2=document.querySelector(".code");
     elem2.readOnly=true;
-    let elem3=document.querySelector('#textarea_for_tegs');
+    let elem3=document.querySelector(".textarea_for_tegs");
     elem3.readOnly=true;
-    let elem4=document.querySelector('#textarea_for_link');
+    let elem4=document.querySelector(".textarea_for_link");
     elem4.readOnly=true;
-    let elem = document.querySelector('#input_for_title');
+    let elem = document.querySelector(".input_for_title");
     elem.disabled = true;
-    document.getElementById('save').style.visibility="visible";
-    document.getElementById('save').style.visibility="hidden";
+    document.querySelector(".save").style.visibility="hidden";
     
 }
+$(function() {
+    $( '#dl-menu' ).dlmenu({
+        animationClasses : { classin : 'dl-animate-in-5', classout : 'dl-animate-out-5' }
+    });
+});
