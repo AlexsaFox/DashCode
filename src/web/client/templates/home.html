@@ -41,7 +41,7 @@
                         <div class="buttons_in_the_bottom"><a href="#popup_watch">{{form.submit(class_="save",value="Save")}}</a></div>
                             <div class="buttons_in_the_bottom"><form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
                                 {{ form.csrf_token }}
-                                {{ form.submit(class_="button_delite", value="Delite") }}
+                                {{ form.submit(class_="button_delite", value="Delete") }}
                             </form></div>
                             
                         </div>
@@ -75,7 +75,7 @@
                             <div class="buttons_in_the_bottom"><a href="#popup3"><input type="submit" class="save" value="Edit"></a></div>
                                 <div class="buttons_in_the_bottom"><form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
                                 {{ form.csrf_token }}
-                                {{ form.submit(class_="button_delite", value="Delite") }}
+                                {{ form.submit(class_="button_delite", value="Delete") }}
                             </form></div>
                            
                             
