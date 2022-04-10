@@ -73,9 +73,11 @@
                           <a href="{{note.link}}"><textarea class="textarea_for_link" readonly>{{note.link}}</textarea></a>
                         <!-- (class_="textarea_for_link",placeholder="htts://",cols="90", rows="1") -->
                             <div class="buttons_in_the_bottom"><a href="#popup3"><input type="submit" class="save" value="Edit"></a></div>
+                                {% with id = note.id %}
                                 <div class="buttons_in_the_bottom"><form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
                                 {{ form.csrf_token }}
                                 {{ form.submit(class_="button_delite", value="Delete") }}
+                                {% endwith %}
                             </form></div>
                            
                             
