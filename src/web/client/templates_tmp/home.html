@@ -56,7 +56,7 @@
                             <div class="buttons_for_check">
                             <form method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
                                 {{ form.csrf_token }}
-                                <a href="#">{{ form.submit(value=Save)}}</a>
+                                <a href="#">{{ form.submit(value="Save")}}</a>
                             </form>
                             <form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
                                 {{ form.csrf_token }}

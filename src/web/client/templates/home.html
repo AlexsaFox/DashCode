@@ -5,14 +5,14 @@
             {% for note in notes %}
             <div class="main_body_for_note">
                 <button>
-                <a class="button_for_pop_up" href="#popup3">
+                <a class="button_for_pop_up" href="#popup_watch">
                     <span>{{note.title}}</span>
                     {% if note.is_private == True %}
                     <div  class="public_private"><span><i class='bx bxs-lock-alt' ></i></span></div>
                     {% else %}
                         <div  class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div>
                     {% endif %}
-                <div class="note">
+                    <div class="note">
                     <span>{{note.context}}</span>
                 </div>
                 <div class="link">
@@ -26,16 +26,23 @@
                         <form name="content_with_edit" method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
                             {{ form.csrf_token }}
                             <div class="header_for_pop_up">
-                            <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->
+                            <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->                
                             {{form.title(class_="input_for_title",placeholder="+ add")}}
-    
-                        <a class="close" href="#check">&times;</a>
+                            {% if note.is_private == True %}
+                            <div  class="button_status"><span><i class='bx bxs-lock-alt' ></i></span></div>
+                            {% else %}
+                                <div  class="button_status"><span><i class='bx bx-lock-open-alt'></i></span></div>
+                            {% endif %}
+                            <a class="close" href="#check">&times;</a>
                             </div>
                         <div class="content">
                           {{form.context(class_="comment",placeholder="text",cols="80", rows="11")}}
                         {{form.link(class_="textarea_for_link",placeholder="htts://",cols="90", rows="1")}}
-                            {{form.submit(class_="save",value="Save")}}
-                           
+                        <div class="buttons_in_the_bottom"><a href="#popup_watch">{{form.submit(class_="save",value="Save")}}</a></div>
+                            <div class="buttons_in_the_bottom"><form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
+                                {{ form.csrf_token }}
+                                {{ form.submit(class_="button_delite", value="Delite") }}
+                            </form></div>
                             
                         </div>
                         <hr class="line"/>
@@ -46,7 +53,40 @@
                         </form>
                     </div>
                 </div>
-                
+                <div id="popup_watch" class="overlay">
+                    <div class="popup">
+                            <div class="header_for_pop_up">
+                            <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->
+                            <input value="{{note.title}}" class="input_for_title">
+                            {% if note.is_private == True %}
+                                <div  class="button_status"><span><i class='bx bxs-lock-alt' ></i></span></div>
+                            {% else %}
+                                <div  class="button_status"><span><i class='bx bx-lock-open-alt'></i></span></div>
+                            {% endif %}
+                            
+                            <!-- (class_="input_for_title",placeholder="+ add") -->
+                        <a class="close" href="#check">&times;</a>
+                            </div>
+                        <div class="content">
+                          <textarea class="comment" readonly>{{note.context}}</textarea>
+                          <!-- (class_="comment",placeholder="text",cols="80", rows="11") -->
+                          <a href="{{note.link}}"><textarea class="textarea_for_link" readonly>{{note.link}}</textarea></a>
+                        <!-- (class_="textarea_for_link",placeholder="htts://",cols="90", rows="1") -->
+                            <div class="buttons_in_the_bottom"><a href="#popup3"><input type="submit" class="save" value="Edit"></a></div>
+                                <div class="buttons_in_the_bottom"><form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
+                                {{ form.csrf_token }}
+                                {{ form.submit(class_="button_delite", value="Delite") }}
+                            </form></div>
+                           
+                            
+                        </div>
+                        <hr class="line"/>
+                            <div class="info_about_writer">
+                            <span class="text_under_line">user:{{note.owner.username}}</span>
+                            <span class="text_under_line">{{form.title.data}}</span>
+                                </div>
+                    </div>
+                </div>
                 <div id="check" class="overlay">
                     <div class="popup_check">
                         <div class="header_for_pop_up">
@@ -55,16 +95,19 @@
                         <div class="content">
                             <span>Do you want to save your changes?</span>
                             <div class="buttons_for_check">
-                            <form method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
+                            <div class="each_button_for_popup_check"><form method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
                                 {{ form.csrf_token }}
-                                <a href="#">{{ form.submit(value=Save)}}</a>
+                                <a href="#">{{ form.submit(value="Save")}}</a>
                             </form>
+                        </div>
+                        <div class="each_button_for_popup_check">
                             <form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
                                 {{ form.csrf_token }}
                                 <a href="#">{{ form.submit(value="Unsave") }}</a>
                             </form>
-                            <a href="#popup3"><input type="button" value="Cancel"></a>
                             </div>
+                            <div class="each_button_for_popup_check"><a href="#popup_watch"><input type="button" value="Cancel"></a>
+                            </div></div>
                             </div>
                     </div>
                 </div>

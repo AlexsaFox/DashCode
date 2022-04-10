@@ -764,7 +764,6 @@ a{
     display: inline-block;
     background-color: #223153;
     width: 200px;
-    height: 200px;
     margin-right: 3%;
     margin-bottom: 3%;
     border-radius: 15px;
@@ -793,11 +792,7 @@ a{
 .notes_author span{
     color:#18FFE3;
 }
-.public_private{
-    margin-left: 55%;
-    font-size: 100%;
-    display: inline-block;
-}
+
 .note{
     font-family: 'ClearSans-Light';
     background-color: #5B6B98;
@@ -967,6 +962,10 @@ a{
     border:none;
     resize: none;
 }
+.popup .note_title_text{
+    font-family: 'ClearSans-Light';
+    color:white;
+} 
 .block_with_registr .input_for_title:focus {
     outline: none;
 }
