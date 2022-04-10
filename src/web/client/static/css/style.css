@@ -109,7 +109,7 @@
     color: #223153;
 }
 
-main {
+.auth_pages {
     display: flex;
     align-items: center;
     justify-content: center;
