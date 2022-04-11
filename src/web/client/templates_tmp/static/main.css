@@ -109,11 +109,13 @@
     color: #223153;
 }
 
-main {
+/* page content */
+
+/* main {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
 .center_block {
     position: absolute;
@@ -335,7 +337,7 @@ main {
     justify-content: space-between;
     padding: 2%;
     color: white;
-    width: auto;
+    width: 100%;
 }
 
 .left_part {
@@ -461,6 +463,7 @@ main {
     margin: 0%;
     font-weight: 300;
 }
+
 
 
 /*

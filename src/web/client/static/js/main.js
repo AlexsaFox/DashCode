@@ -19,30 +19,42 @@ function openSettings(evt, settings) {
     evt.currentTarget.className += " active";
 }
 
+function editPassword(evt) {
+    
+
+    document.getElementById('new_password_container').style.display = "flex";
+    document.getElementById('confirm_password_container').style.display = "flex";
+
+    editAccount();
+}
+
+function editEmail(evt, input_type) {
+
+    document.getElementById(input_type).disabled = false;
+
+    evt.target.style.display = "none";
+
+    editAccount();
+}
+
+function editAccount() {
+    document.getElementById('button_change_password').style.display = "none";
+    document.getElementById('current_password_container').style.display = "flex";
+    document.getElementById('edit_account_settings').style.display = "flex";
+}
+
+function editUsername(evt, input_type) {
+    document.getElementById(input_type).disabled = false;
+
+    evt.target.style.display = "none";
+
+    document.getElementById('edit_username').style.display = "flex";
+}
 
 // обновление цвета
 
 
-
-
-const dynamicInputs = document.querySelectorAll('input.input-color-picker');
-
-const handleThemeUpdate = (cssVars) => {
-    const root = document.querySelector(':root');
-    const keys = Object.keys(cssVars);
-    keys.forEach(key => {
-        root.style.setProperty(key, cssVars[key]);
-    });
-}
-
-
-dynamicInputs.forEach((item) => {
-    item.addEventListener('input', (e) => {
-        handleThemeUpdate({
-            [`--primary-color`]: e.target.value
-        });
-    });
-});
+//
 function fnOC(){
     let elem1=document.querySelector('#comment');
     elem1.readOnly=false;

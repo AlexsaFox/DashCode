@@ -39,8 +39,10 @@
     border-radius: 10px;
 }
 
-:root {
-    --primary-color: #18FFE3;
+
+
+a, p{
+    font-family: 'ClearSans-Regular';
 }
 
 .base_pages {
@@ -369,6 +371,88 @@
     font-size: 28px;
     margin-bottom: 2%;
 }
+.left_part .tabcontent h3 {
+    font-family: 'ClearSans-Medium';
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 100;
+}
+
+.tabcontent .input{
+    background-color: #303D67;
+    border: 0px;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+    border: 2px #303D67;
+    margin-top: 2%;
+}
+
+.tabcontent .input:disabled{
+    background-color: #465586;
+    border: 0px;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+}
+
+.tabcontent .input:focus{
+    background-color: #303D67;
+    border: 0px;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+    outline: 2px solid rgba(39, 55, 91);
+}
+
+.tabcontent .input:-webkit-autofill {
+    -webkit-box-shadow: inset 0 0 0 50px #223153; /* цвет вашего фона */
+    -webkit-text-fill-color: white; /* цвет текста */
+}
+
+/* styles for input username */
+
+.tabcontent .input.username{
+    background-color: #223153;
+    border: 0px;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+    border: 2px #303D67;
+    margin-top: 2%;
+    width: auto;
+}
+
+.tabcontent .input.username:disabled{
+    background-color: #303D67;
+    border: 0px;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+}
+
+.tabcontent .input.username:focus{
+    background-color: #223153;
+    border: 0px;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+    outline: 2px solid rgba(39, 55, 91);
+}
+
+.edit.username{
+    border-radius: 5px;
+    background-color: #223153;
+    border: 0px;
+    padding: 1% 2%;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 20px;
+    width: 15%;
+}
+
+#edit_email{
+    display: none;
+}
 
 .tabcontent .account_preveiw {
     border-radius: 15px;
@@ -388,19 +472,35 @@
     align-items: center;
     justify-content: space-between;
     height: auto;
-    margin: -2% 2% 0% 3%;
+    margin: -4% 2% 3% 3%;
+}
+
+.account_preveiw .stroke.username {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    margin: 3% 2% 3% 4%;
 }
 
 .stroke .profile {
     display: flex;
     align-items: center;
-    justify-content: space-around;
     width: 35%;
+}
+
+.stroke_s {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8%;
+    width: auto;
+    margin: -3% 0% 2% 4%;
 }
 
 .account_preveiw .edit_profile {
     background-color: var(--primary-color);
-    width: 30%;
+    width: 50%;
     height: 35px;
     border: 0px;
     border-radius: 5px;
@@ -409,17 +509,40 @@
     font-size: 18px;
 }
 
-.tabcontent .avatar {
+.account_preveiw .edit_profile_image::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.account_preveiw .edit_profile_image::before {
+    content: 'Select new avatar';
+    display: inline-block;
+    background-color: var(--primary-color);
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 200;
+    font-size: 10pt;
+    color: #223153;
+    width: auto;
+  }
+
+.first_block .account_preveiw{
+    margin-right: 10%;
+}
+
+.tabcontent .avatar_s {
     position: relative;
     overflow: hidden;
     width: 80px;
     height: 80px;
     display: inline-block;
-    margin-left: 2%;
-    margin-right: 3%;
 }
 
-.tabcontent .avatar img {
+.tabcontent .avatar_s img {
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -454,6 +577,10 @@
     font-size: 20px;
 }
 
+.edit.account{
+    display:none;
+}
+
 .stroke .left h2 {
     font-family: 'ClearSans-Medium';
     font-size: 15px;
@@ -470,6 +597,19 @@
     font-weight: 300;
 }
 
+.stroke.password{
+    display: none;
+}  
+
+.change_password {
+    border: 0px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    font-family: 'ClearSans-Light';
+    font-size: 18px;
+    padding: 1% 3%;
+    margin-top: 3%;
+}
 
 /*
 нижняя строчка с настройками по смене пароля и удалению аккуанта
@@ -498,21 +638,7 @@
     text-align: left;
 }
 
-.base_settings .password {
-    font-family: 'ClearSans-Bold';
-    font-size: 22px;
-    text-align: left;
-    width: 20%;
-}
 
-.password .change_password {
-    border: 0px;
-    border-radius: 5px;
-    background-color: var(--primary-color);
-    font-family: 'ClearSans-Light';
-    font-size: 20px;
-    padding: 5% 10%;
-}
 
 .base_settings .account_removal h3 {
     font-family: 'ClearSans-Medium';
@@ -520,7 +646,7 @@
     font-weight: 100;
 }
 
-.base_settings .account_removal p {
+.base_settings .account_removal span {
     font-family: 'ClearSans-Regular';
     color: rgba(255, 255, 255, 0.6);
     font-weight: 100;
@@ -560,7 +686,27 @@
     width: 600px;
 }
 
-.tabcontent .stroke {
+.first_block h4 {
+    font-family: 'ClearSans-Regular';
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 100;
+    width: 600px;
+    font-size: 20px;
+}
+
+.first_block.profile_color .input{
+    background-color: #465586;
+    border: 0px;
+    padding: 1%;
+    border-radius: 5px;
+    color: white;
+}
+
+.first_block.profile_color input:focus{
+    outline: none;
+}
+
+.tabcontent .top_stroke {
     display: flex;
     align-items: center;
 }
@@ -572,6 +718,102 @@
     width: 60%;
 }
 
+.tabcontent .user_stroke{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.user_stroke hr{
+    margin-top: 5%;
+    border: 0px;
+    border-top: 3px solid #465586;
+}
+
+.edit_username{
+    display: flex;
+}
+
+.edit.name{
+    display: none;
+    border-radius: 5px;
+    background-color: #223153;
+    border: 0px;
+    padding: 1% 2%;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 20px;
+}
+
+.tabcontent .first_block.profile_color .edit {
+    border-radius: 5px;
+    background-color: #303D67;
+    border: 0px;
+    padding: 1% 2%;
+    color: white;
+    font-family: 'ClearSans-Light';
+    font-size: 20px;
+    margin-left: 3%;
+}
+
+/* Styles for API token */
+
+.tabcontent .API_base{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2%;
+}
+
+.API_base .left{
+    width: 45%;
+    display: block;
+    height: auto;
+}
+
+
+
+.API_base .left .token{
+    width: 50%;
+    border: 0px;
+    display: block;
+    background-color: #303D67;
+    color: white;
+    border-radius: 10px;
+    font-family: 'ClearSans-Medium';
+    font-size: 18px;
+    padding: 3%;
+    resize: none;
+    width: 100%;
+    height: 175px;
+}
+.API_base .left .token:focus{
+    outline: none;
+}
+
+.API_base .right{
+    width: 45%;
+    display: block;
+    height: auto;
+}
+
+.API_base .right span{
+    color: white;
+    font-family: 'ClearSans-Medium';
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.API_base .right .generate_token{
+    background-color: #465586;
+    bottom: 0px;
+    margin-top: 15%;
+    width: 80%;
+    height: 60px;
+    border-radius: 10px;
+    color: white;
+    font-family: 'ClearSans-Medium';
+    font-size: 18px;
+}
 
 /* Правая часть страницы с кнопками навигации */
 
