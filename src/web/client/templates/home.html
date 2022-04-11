@@ -6,7 +6,7 @@
             <div class="main_body_for_note">
                 <button>
                 <a class="button_for_pop_up" href="#popup_watch">
-                    <span>{{note.title}}</span>
+                    <div class="title_for_main_note"><span>{{note.title}}</span></div>
                     {% if note.is_private == True %}
                     <div  class="public_private"><span><i class='bx bxs-lock-alt' ></i></span></div>
                     {% else %}
@@ -20,37 +20,32 @@
                 </div>
                 </a>
             </button>
-                {% with form = request.environ['note_create_form'] %}
+                {% with form = request.environ['note_edit_form'] %}
                 <div id="popup3" class="overlay">
                     <div class="popup">
+                        {% with id = note.id %}
                         <form name="content_with_edit" method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
                             {{ form.csrf_token }}
                             <div class="header_for_pop_up">
                             <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->                
                             {{form.title(class_="input_for_title",placeholder="+ add")}}
-                            {% if note.is_private == True %}
-                            <div  class="button_status"><span><i class='bx bxs-lock-alt' ></i></span></div>
-                            {% else %}
-                                <div  class="button_status"><span><i class='bx bx-lock-open-alt'></i></span></div>
-                            {% endif %}
+                            {{form.privacy(class_="privacy_selection")}}
                             <a class="close" href="#check">&times;</a>
                             </div>
                         <div class="content">
                           {{form.context(class_="comment",placeholder="text",cols="80", rows="11")}}
                         {{form.link(class_="textarea_for_link",placeholder="htts://",cols="90", rows="1")}}
                         <div class="buttons_in_the_bottom"><a href="#popup_watch">{{form.submit(class_="save",value="Save")}}</a></div>
-                            <div class="buttons_in_the_bottom"><form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
-                                {{ form.csrf_token }}
-                                {{ form.submit(class_="button_delite", value="Delete") }}
-                            </form></div>
                             
                         </div>
+                        </form>
+                        {% endwith %}
                         <hr class="line"/>
                             <div class="info_about_writer">
                             <span class="text_under_line">user:{{note.owner.username}}</span>
                             <span class="text_under_line">{{form.title.data}}</span>
                                 </div>
-                        </form>
+                        
                     </div>
                 </div>
                 <div id="popup_watch" class="overlay">
@@ -97,16 +92,8 @@
                         <div class="content">
                             <span>Do you want to save your changes?</span>
                             <div class="buttons_for_check">
-                            <div class="each_button_for_popup_check"><form method="POST" action="{{ url_for('webapp.note.notes_edit_handler',note_id=id) }}">
-                                {{ form.csrf_token }}
-                                <a href="#">{{ form.submit(value="Save")}}</a>
-                            </form>
-                        </div>
                         <div class="each_button_for_popup_check">
-                            <form method="post" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
-                                {{ form.csrf_token }}
-                                <a href="#">{{ form.submit(value="Unsave") }}</a>
-                            </form>
+                            <a href="#"><input type="button" value="Unsave"></a>
                             </div>
                             <div class="each_button_for_popup_check"><a href="#popup_watch"><input type="button" value="Cancel"></a>
                             </div></div>

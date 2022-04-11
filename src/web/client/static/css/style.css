@@ -1031,6 +1031,11 @@ a{
     height: inherit;
 
 }
+.title_for_main_note{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+}
 .title{
     display: inline-block;   
 }
@@ -1048,6 +1053,8 @@ a{
     border-radius: 8px 8px 0px 0px;
     padding: 2%;
     height: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .note span{
     font-family: 'ClearSans-Light';
@@ -1061,7 +1068,8 @@ a{
     border-radius: 0px 0px 8px 8px;
     padding: 2%;
     text-align: center;
-    
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .link span{
     font-size:70%;
@@ -1210,6 +1218,15 @@ a{
     width: 80%;
     border:none;
     resize: none;
+    
+}
+.privacy_selection{
+    font-family: 'ClearSans-Light';
+    background-color: rgba(43, 59, 95, 0.75);
+    color: white;
+    border-radius: 10px;
+    font-size: 80%;
+    border: none;
 }
 .public_private{
     font-size: 100%;
@@ -1232,6 +1249,7 @@ a{
     text-decoration: none;
     vertical-align:top;
     margin-top: 20px;
+    cursor: pointer;
 }
 .buttons_in_the_bottom{
     display: inline-block;
