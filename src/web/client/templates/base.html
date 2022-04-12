@@ -18,11 +18,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style>
         {% with user = request.environ['user'] %}
-        {% if user %}
-        :root {
-            --primary-color: {{user.profile_color}};
-        }
-        {% endif %}
+            {% if user %}
+                :root {
+                    --primary-color: {{user.profile_color}};
+                }
+            {% endif %}
         {% endwith %}
         .flashing_msg {
             padding: 10px;
