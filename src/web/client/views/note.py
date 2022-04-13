@@ -43,7 +43,6 @@ def notes_create_handle():
         owner_id=user.id
     )
     db_add(note)
-    print(note.user.username)
     return redirect(url_for('webapp.note.notes_show'))
 
 @note_bp.get('/edit/<note_id>')
