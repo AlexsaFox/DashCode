@@ -13,3 +13,4 @@ def index_view():
         request.environ['note_create_form'] = NoteCreateForm()
         request.environ['note_edit_form'] = NoteEditForm()
         return render_template('home.html')
+    return render_template('index.html')
