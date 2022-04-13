@@ -12,7 +12,7 @@ def get_note_by_id(note_id: str) -> Note:
 @authorization_required
 def notes_show():
     # User.query.filter_by(username=form.data['username_or_email']).first() or
-    user_notes = Note.query.filter_by(owner=request.environ['user'].id).all()
+    user_notes = Note.query.filter_by(user=request.environ['user']).all()
     request.environ['user_notes'] = reversed(user_notes)
     request.environ['note_remove_form'] = NoteRemoveForm()
     return render_template("note/index.html")
@@ -40,9 +40,10 @@ def notes_create_handle():
         title=form.data['title'],
         context=form.data['context'],
         link=form.data['link'],
-        owner=user.id
+        owner_id=user.id
     )
     db_add(note)
+    print(note.user.username)
     return redirect(url_for('webapp.note.notes_show'))
 
 @note_bp.get('/edit/<note_id>')

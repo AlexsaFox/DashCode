@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
-migrate = Migrate()
+migrate = Migrate(render_as_batch=True)
 
 
 def create_app() -> Flask:

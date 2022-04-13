@@ -78,6 +78,7 @@ class User(db.Model):
                                           name="profile_picture_filename",
                                           nullable=False,
                                           default=active_configuration.DEFAULT_USER_PICTURE_FILENAME)
+    notes = db.relationship('Note', backref='user', lazy=True)
 
     def __repr__(self):
         return f'<User {self.username}>'
