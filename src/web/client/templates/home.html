@@ -42,8 +42,8 @@
                         {% endwith %}
                         <hr class="line"/>
                             <div class="info_about_writer">
-                            <span class="text_under_line">user:{{note.user.username}}</span>
-                            <span class="text_under_line">{{form.title.data}}</span>
+                            <span class="text_under_line">User: {{note.user.username}}</span>
+                            <span class="text_under_line">Was created: {{note.creation_date.strftime('%Y-%m-%d at %H:%M:%S')}}</span>
                                 </div>
                         
                     </div>
@@ -80,7 +80,7 @@
                         <hr class="line"/>
                             <div class="info_about_writer">
                             <span class="text_under_line">user:{{note.user.username}}</span>
-                            <span class="text_under_line">{{form.title.data}}</span>
+                            <span class="text_under_line">Was created: {{note.creation_date.strftime('%Y-%m-%d at %H:%M:%S')}}</span>
                                 </div>
                     </div>
                 </div>
