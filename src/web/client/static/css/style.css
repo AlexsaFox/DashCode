@@ -39,7 +39,9 @@
     border-radius: 10px;
 }
 
-
+body{
+    margin: 0px;
+}
 
 a, p{
     font-family: 'ClearSans-Regular';
@@ -47,7 +49,7 @@ a, p{
 
 .base_pages {
     margin: 0px;
-    background-image: url('img/mohammad-rahmani-8qEB0fTe9Vw-unsplash.jpg');
+    background-image: url('/static/img/background-photo.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -65,6 +67,8 @@ a, p{
     justify-content: space-between;
     align-self: center;
     align-items: center;
+    gap: 60%;
+    
 }
 
 .header .buttons a {
@@ -82,7 +86,7 @@ a, p{
 }
 
 .header .buttons {
-    width: 20%;
+    width: 30%;
     padding: 3%;
     display: flex;
     justify-content: space-evenly;
@@ -101,7 +105,7 @@ a, p{
     padding: 3% 10%;
     border: 0px;
     border-radius: 5px;
-    background-color: var(--primary-color);
+    background-color: #18FFE3;
     font-family: "ClearSans-Bold";
     font-size: 22px;
     color: #223153;
@@ -112,9 +116,16 @@ a, p{
 }
 
 .auth_pages {
+    background-image: url('/static/img/background-photo.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
 }
 
 .center_block {
@@ -385,6 +396,7 @@ a, p{
     font-size: 18px;
     border: 2px #303D67;
     margin-top: 2%;
+    width: auto;
 }
 
 .tabcontent .input:disabled{
@@ -511,6 +523,7 @@ a, p{
 
 .account_preveiw .edit_profile_image::-webkit-file-upload-button {
     visibility: hidden;
+    width: auto;
 }
 
 .account_preveiw .edit_profile_image::before {
@@ -527,7 +540,6 @@ a, p{
     font-weight: 200;
     font-size: 10pt;
     color: #223153;
-    width: auto;
   }
 
 .first_block .account_preveiw{
@@ -849,6 +861,41 @@ a, p{
     height: auto;
     width: auto;
 }
+
+
+/* page 404 */
+.page_404{
+    display: flex;
+    justify-content: center;
+}
+
+.page_404 .stroke{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page_404 .stroke .a_back{
+    color: var(--primary-color);
+    font-size: 25px;
+}
+
+.page_404 .text_error{
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+
+.page_404 .error_heading{
+    font-family: 'ClearSans-Bold';
+    color: white;
+    font-size: 80px;
+    width: auto;
+    margin: 0%;
+    text-align: center;
+}
+
+/* Polina`s part */
+
 @font-face {
     font-family: 'ClearSans-Regular';
     src: url('../fonts/ClearSans-Regular.ttf');
