@@ -51,6 +51,8 @@
 
             </div>
         </div>
+        {% endwith %}
+        {% with form = request.environ['note_remove_form'] %}
         <div id="popup_watch{{note.id}}" class="overlay">
             <div class="popup">
                 <div class="header_for_pop_up">
@@ -75,7 +77,7 @@
                     {% with id = note.id %}
                     <div class="buttons_in_the_bottom">
                         <form method="POST" action="{{url_for('webapp.note.notes_remove_handler',note_id=id)}}">
-
+                            {{ form.csrf_token }}
                             {{ form.submit(class_="button_delite", value="Delete") }}
 
                         </form>
