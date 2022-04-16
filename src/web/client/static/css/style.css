@@ -1294,6 +1294,9 @@ a{
     min-height: 50px;
     cursor: pointer;
 }
+.textarea_for_link:focus{
+    outline:none ;
+}
 .input_for_title{
     font-family: 'ClearSans-Light';
     color:white;
@@ -1338,6 +1341,7 @@ a{
     vertical-align:top;
     margin-top: 20px;
     cursor: pointer;
+    border: none;
 }
 .buttons_in_the_bottom{
     display: inline-block;
