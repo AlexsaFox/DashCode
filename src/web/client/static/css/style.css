@@ -1067,7 +1067,7 @@ a{
     font-size: 100%;
 }
 .b_my_notes:focus{
-    background-color: #18FFE3;
+    background-color: var(--primary-color);
 }
 .display_with_button{
     display: inline-block;
@@ -1133,7 +1133,7 @@ a{
     display: inline-block;
 }
 .notes_author span{
-    color:#18FFE3;
+    color:var(--primary-color);
 }
 .note{
     font-family: 'ClearSans-Light';
@@ -1327,13 +1327,12 @@ a{
     margin-left: 1%;
 }
 .button_delite, .save{
-    background-color: #18FFE3;
+    background-color: var(--primary-color);
     border-radius: 8px;
     font-size: 120%;
     padding: 10px 15%;
     color:white;
     font-family: 'ClearSans-Bold';
-    background-color: #18FFE3;
     color:#223153;
     text-decoration: none;
     vertical-align:top;
@@ -1409,7 +1408,7 @@ textarea:focus {
     
     color:white;
     font-family: 'ClearSans-Bold';
-    background-color: #18FFE3;
+    background-color: var(--primary-color);
     color:#223153;
     text-decoration: none;
     
@@ -1470,7 +1469,7 @@ textarea:focus {
 .popup_check .buttons_for_check input{
     font-size: 80%;
     font-family:'ClearSans-Light';
-    background-color: #18FFE3;
+    background-color: var(--primary-color);
     border-radius: 5px;
     border: none;
     margin: 5% 2% 0px;
