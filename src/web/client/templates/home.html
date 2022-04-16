@@ -176,11 +176,16 @@
         </div>
         <div class="content">
             
+                
+                <ul style=" list-style-type: none;
+                max-height: 120px;
+                overflow-y: auto">
                 {% for note in notes %}
-                <ul>
-                    <li><a href="#popup_watch{{note.id}}">{{note.title}}</a></li>
+                    <li style="height: 30px;
+                    line-height: 30px;"><a href="#popup_watch{{note.id}}">{{note.title}}</a></li>
+                    {% endfor %}
                 </ul>
-                {% endfor %}
+                
             
 
         </div>

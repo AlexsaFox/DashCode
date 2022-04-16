@@ -861,10 +861,11 @@ All this is done for any sub-level being entered.
    font-family: 'ClearSans-Regular';
    color:white;
    padding: 0px 3%;
-   max-height: 40%;
+   height: 10%;
    overflow: auto;
    background-color: #303D67;
    border-radius: 0 0 10px 10px;
+   
 }
 .my_notes_popup .header_for_pop_up_acc{
     display: flex;
@@ -916,7 +917,7 @@ All this is done for any sub-level being entered.
    color:white;
    background-color: #09132B;
    text-align:left;
-
+	overflow-x: scroll;
    padding: 10px;
    border-radius: 10px;
    font-size: 20px;
