@@ -867,6 +867,9 @@ All this is done for any sub-level being entered.
    border-radius: 0 0 10px 10px;
    
 }
+
+
+
 .my_notes_popup .header_for_pop_up_acc{
     display: flex;
     font-family: 'ClearSans-Regular';
@@ -905,10 +908,10 @@ All this is done for any sub-level being entered.
 	margin: 70px auto;
    background: #09132B;
    border-radius: 10px;
-   width: 20%;
+   width: 20.2%;
    position: relative;
-   top:-1.9%;
-   left:39.8%;
+   top:-3.4%;
+   left:39.69%;
    padding-top: 20px;
 }
 .profile_popup .header_for_pop_up{
