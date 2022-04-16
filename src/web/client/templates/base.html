@@ -41,25 +41,7 @@
             {% endfor %}
         {% endif %} 
     {% endwith %}
-
-    {% if user %}
-        <p style="background-color: {{user.profile_color}};">You're logged in as {{user.username}}</p>
-    {% else %}
-        <p>You're not logged in</p>
-    {% endif %}
-    <hr>
-
-    <li><a href="{{ url_for('webapp.index.index_view') }}">Home</a></li>
-    {% if user %} 
-        <li><a href="{{ url_for('webapp.user.settings.settings_view') }}">Settings</a></li>
-        <li><a href="{{ url_for('webapp.user.profile.profile_view', username=session['username']) }}">Profile</a></li>
-        <li><a href="{{ url_for('webapp.auth.logout_handle') }}">Log out</a></li>
-    {% else %}
-        <li><a href="{{ url_for('webapp.auth.register_view') }}">Register</a></li>
-        <li><a href="{{ url_for('webapp.auth.login_view') }}">Log in</a></li>
-    {% endif %}
-    <hr>
-
+    
     <main>
     {% block content %}{% endblock %}
     </main>

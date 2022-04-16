@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <body class="base_pages">
     <div class="header">
         <h1>DashCode</h1>
@@ -9,27 +10,36 @@
             <button class="button_sign_up"><a href="{{ url_for('webapp.auth.register_view') }}">Sign Up</a></button>
         </div>
     </div>
-    <div>
-        <div class="one_of_the_titles_for_main_page">
-        <p><b>Unique knowledge repository.
-            <br>Every person.</b></p>
-        <span>This is more than a notepad or social network. Write, save what you really need and share it with the whole world!</span>
-    </div>
-        <div class="picture"><img src="{{ url_for('static', filename='img/8289.jpg') }}" class="picture" alt="image"></div>
-    </div>
-    <div>
-        <div class="one_of_the_titles_for_main_page">
-        <p><b>Find out without wasting time</b></p>
-        <span>Organize yourselves notes or go through public, so you can solve your problems as fast as possible.</span>
-    </div>
-        <div class="picture"><img src="{{ url_for('static', filename='img/OEVLX40.jpg') }}" class="picture" alt="image"></div>
-    </div>
-    <div>
-        <div class="one_of_the_titles_for_main_page">
-        <p><b>Never ask internet “How can I solve this problem?” again</b></p>
-        <span>Stale websites aren’t useful. As well as a mess of knowledge. In DashCode, your affective solutions and helpful tips.</span>
-    </div>
-        <div class="picture"><img src="{{ url_for('static', filename='img/2362840.jpg') }}" class="picture" alt="image"></div>
+    <div class="content">
+        <div class="material">
+            <div class="one_of_the_titles_for_main_page">
+                <p><b>Unique knowledge repository.
+                        <br>Every person.</b></p>
+                <span>This is more than a notepad or social network. Write, save what you really need and share it
+                    with the whole world!</span>
+            </div>
+            <div class="picture"><img src="{{ url_for('static', filename='img/8289.jpg') }}" class="picture"
+                    alt="image"></div>
+        </div>
+
+        <div class="material">
+            <div class="one_of_the_titles_for_main_page">
+                <p><b>Find out without wasting time</b></p>
+                <span>Organize yourselves notes or go through public, so you can solve your problems as fast as
+                    possible.</span>
+            </div>
+            <div class="picture"><img src="{{ url_for('static', filename='img/OEVLX40.jpg') }}" class="picture"
+                    alt="image"></div>
+        </div>
+        <div class="material">
+            <div class="one_of_the_titles_for_main_page">
+                <p><b>Never ask internet “How can I solve this problem?” again</b></p>
+                <span>Stale websites aren`t useful. As well as a mess of knowledge. In DashCode, your affective
+                    solutions and helpful tips.</span>
+            </div>
+            <div class="picture"><img src="{{ url_for('static', filename='img/2362840.jpg') }}" class="picture"
+                    alt="image"></div>
+        </div>
     </div>
 </body>
 {% endblock %}

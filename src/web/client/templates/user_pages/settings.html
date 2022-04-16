@@ -141,7 +141,7 @@
         <button class="standart_button" id="defaultOpen" onclick="openSettings(event, 'MyAccount')"><i class="fi fi-sr-user"></i>My Account</button>
         <button class="standart_button" onclick="openSettings(event, 'UserProfile')"><i class="fi fi-rr-pencil"></i>User Profile</button>
         <button class="standart_button" onclick="openSettings(event, 'APItoken')"><i class="fi fi-rr-key"></i>API token</button>
-        <button onclick="location.href='{{ url_for('webapp.user.profile.profile_view', username=request.environ['user'].username) }}'" class="standart_button"><i class="fi fi-rr-sign-out"></i>Back</button>
+        <button onclick="location.href='{{ url_for('webapp.index.index_view') }}'" class="standart_button"><i class="fi fi-rr-sign-out"></i>Back</button>
     </div>
 </div>
 <script>
