@@ -57,7 +57,7 @@
             <div class="popup">
                 <div class="header_for_pop_up">
                     <!-- <input id="input_for_title" class="input_for_title" placeholder="+ add" disabled> -->
-                    <input value="{{note.title}}" class="input_for_title">
+                    <input value="{{note.title}}" class="input_for_title" disabled>
                     {% if note.is_private == True %}
                     <div class="button_status"><span><i class='bx bxs-lock-alt'></i></span></div>
                     {% else %}
@@ -88,7 +88,7 @@
                 </div>
                 <hr class="line" />
                 <div class="info_about_writer">
-                    <span class="text_under_line">user:{{note.user.username}}</span>
+                    <span class="text_under_line">User: {{note.user.username}}</span>
                     <span class="text_under_line">Was created: {{note.creation_date.strftime('%Y-%m-%d at
                         %H:%M:%S')}}</span>
                 </div>
