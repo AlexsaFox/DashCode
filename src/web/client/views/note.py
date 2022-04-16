@@ -13,7 +13,8 @@ def get_note_by_id(note_id: str) -> Note:
 def notes_show():
     # User.query.filter_by(username=form.data['username_or_email']).first() or
     user_notes = Note.query.filter_by(user=request.environ['user']).all()
-    request.environ['user_notes'] = reversed(user_notes)
+    user_notes.reverse()
+    request.environ['user_notes'] = user_notes
     request.environ['note_remove_form'] = NoteRemoveForm()
     return render_template("note/index.html")
 @note_bp.get('/<note_id>')

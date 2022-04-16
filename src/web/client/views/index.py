@@ -8,7 +8,8 @@ index_bp = Blueprint('index', __name__)
 def index_view():
     if request.environ['user'] is not None:
         user_notes = Note.query.filter_by(user=request.environ['user']).all()
-        request.environ['user_notes'] = reversed(user_notes)
+        user_notes.reverse()
+        request.environ['user_notes'] = user_notes
         request.environ['note_remove_form'] = NoteRemoveForm()
         request.environ['note_create_form'] = NoteCreateForm()
         request.environ['note_edit_form'] = NoteEditForm()
