@@ -44,7 +44,7 @@ def notes_create_handle():
         owner_id=user.id
     )
     db_add(note)
-    return redirect(url_for('webapp.note.notes_show'))
+    return redirect(url_for('webapp.index.index_view'))
 
 @note_bp.get('/edit/<note_id>')
 @authorization_required
@@ -78,7 +78,7 @@ def notes_edit_handler(note_id):
         else:
             note.is_private = False
         db_save_changes()
-    return redirect(url_for('webapp.note.notes_show'))
+    return redirect(url_for('webapp.index.index_view'))
 
 @note_bp.post('/delete/<note_id>')
 @authorization_required
@@ -90,5 +90,5 @@ def notes_remove_handler(note_id):
     note = get_note_by_id(note_id)
     if note is not None:
         db_remove(note)
-    return redirect(url_for('webapp.note.notes_show'))
+    return redirect(url_for('webapp.index.index_view'))
 
