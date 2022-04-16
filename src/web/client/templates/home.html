@@ -117,38 +117,15 @@
 </div>
 <div class="block">
     {% with user = request.environ['user']%}
-    <div class="avatar"><img src="{{user.profile_picture_url}}" class="avatar" alt="Avatar"></div>
+    <div class="avatar"><a href="#popup4"><img src="{{user.profile_picture_url}}" class="avatar" alt="Avatar"></a></div>
     <div class="text"><span>{{user.username}}</span></div>
     {% endwith %}
     <div class="display_with_button">
         <a href="#popup"><button><i class='bx bx-plus'></i>Add notes</button></a>
         <a><button><i class='bx bx-right-arrow-alt'></i> Social media</button></a>
         <a><button><i class='bx bxs-user'></i> Subscritions</button></a>
-        <div class="display_with_button">
-
-            <div id="dl-menu" class="dl-menuwrapper">
-                <button class="dl-trigger"><i class='bx bx-right-arrow-alt'></i>My notes</button>
-                <ul class="dl-menu">
-                    <li>
-                        <a href="#">Python</a>
-                        <ul class="dl-submenu">
-                            <li>
-                                <a href="#">For</a>
-                                <ul class="dl-submenu">
-                                    {% for note in notes %}
-                                    <li><a href="#">{{note.title}}</a></li>
-                                    {%endfor%}
-                                </ul>
-                            </li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /dl-menuwrapper -->
-
-
+        <a href="#popup5"><button><i class='bx bx-plus'></i>My notes</button></a>
         </div>
-
     </div>
 </div>
 
@@ -169,6 +146,44 @@
 
             </div>
         </form>
+    </div>
+</div>
+{% endwith %}
+{% with user = request.environ['user']%}
+<div id="popup4" class="overlay_1">
+    <div class="profile_popup">
+        <div class="header_for_pop_up">
+            {{user.email}}
+        <a class="close" href="#">&times;</a>
+        </div>
+        <div class="content" style="padding: 10px;">
+            <form>
+                <hr>
+            <span><a href="/user/settings">Settings</a></span>
+                <br>
+            <span><a href="/auth/logout">Log out</a></span>
+            </form>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% with notes = request.environ['user_notes'] %}
+<div id="popup5" class="overlay_1">
+    <div class="my_notes_popup">
+        <div class="header_for_pop_up_acc">
+            All your notes:
+        <a class="close" href="#">&times;</a>
+        </div>
+        <div class="content">
+            
+                {% for note in notes %}
+                <ul>
+                    <li><a href="#popup_watch{{note.id}}">{{note.title}}</a></li>
+                </ul>
+                {% endfor %}
+            
+
+        </div>
     </div>
 </div>
 {% endwith %}

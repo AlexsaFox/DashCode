@@ -818,3 +818,145 @@ All this is done for any sub-level being entered.
 .demo-5 .dl-menuwrapper ul {
 	background: #643771;
 }
+
+.my_notes_popup{
+	margin: 70px auto;
+   background: #303D67;
+   border-radius: 10px;
+   width: 20%;
+   position: relative;
+   top:29%;
+   left:39.8%;
+   padding-top: 20px;
+}
+.my_notes_popup .header_for_pop_up{
+   display: flex;
+   font-family: 'Altone-SemiBold';
+   color:white;
+   background-color: #303D67;
+   text-align:left;
+
+   padding: 10px;
+   border-radius: 10px;
+   font-size: 20px;
+   margin: 0px 60px 20px 20px;
+   color: #F1F7ED;
+}
+
+.my_notes_popup .close {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ transition: all 200ms;
+ font-size: 190%;
+ font-weight: bold;
+ text-decoration: none;
+ color: #F1F7ED;
+}
+.my_notes_popup .close:hover {
+ color: #79AF96;
+}
+.my_notes_popup .content {
+   text-align: left;
+   font-family: 'ClearSans-Regular';
+   color:white;
+   padding: 0px 3%;
+   max-height: 40%;
+   overflow: auto;
+   background-color: #303D67;
+   border-radius: 0 0 10px 10px;
+}
+.my_notes_popup .header_for_pop_up_acc{
+    display: flex;
+    font-family: 'ClearSans-Regular';
+    color:white;
+    background-color: #303D67;
+    text-align:right;
+
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 0px 60px 20px 20px;
+    color: #F1F7ED;
+}
+.overlay_1 {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    z-index: 10;
+
+}
+.overlay_1:target {
+    visibility: visible;
+    opacity: 1;
+
+}
+
+
+
+.profile_popup{
+	margin: 70px auto;
+   background: #09132B;
+   border-radius: 10px;
+   width: 20%;
+   position: relative;
+   top:-1.9%;
+   left:39.8%;
+   padding-top: 20px;
+}
+.profile_popup .header_for_pop_up{
+   display: flex;
+   font-family: 'ClearSans-Regular';
+   color:white;
+   background-color: #09132B;
+   text-align:left;
+
+   padding: 10px;
+   border-radius: 10px;
+   font-size: 20px;
+   margin: 0px 60px 20px 20px;
+   color: #F1F7ED;
+}
+
+.profile_popup .close {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ transition: all 200ms;
+ font-size: 190%;
+ font-weight: bold;
+ text-decoration: none;
+ color: #F1F7ED;
+}
+.profile .close:hover {
+ color: #79AF96;
+}
+.profile_popup .content {
+   text-align: left;
+   font-family: 'ClearSans-Regular';
+   color:white;
+   padding: 0px 3%;
+   max-height: 40%;
+   overflow: auto;
+   background-color: #09132B;
+   border-radius: 0 0 10px 10px;
+}
+.profile_popup .header_for_pop_up_acc{
+    display: flex;
+    font-family: 'ClearSans-Regular';
+    color:white;
+    background-color: #303D67;
+    text-align:right;
+
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 0px 60px 20px 20px;
+    color: #F1F7ED;
+}
