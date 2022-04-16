@@ -1081,7 +1081,7 @@ a{
 .title_for_main_note{
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 20px;
+    height: 25px;
 }
 .title{
     display: inline-block;   
