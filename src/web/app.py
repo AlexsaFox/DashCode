@@ -2,11 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
+from flask_assets import Environment, Bundle
 
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 migrate = Migrate(render_as_batch=True)
+assets = Environment()
 
 
 def create_app() -> Flask:
@@ -28,6 +30,11 @@ def register_extensions(app: Flask):
     bcrypt.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+
+    assets.init_app(app)
+    with app.app_context():
+        scss = Bundle('scss/style.scss', filters='libsass', output='css/style.css')
+        assets.register('css_all', scss)
 
 
 def register_blueprints(app: Flask):
