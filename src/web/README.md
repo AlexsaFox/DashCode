@@ -47,7 +47,7 @@ $ flask run
 ```
 
 ### Workflow
-Place your .scss files into client/static/scss folder. By default, compiler
+Place your .scss files into client/assets/scss folder. By default, compiler
 searches for .scss files in this folder (does not include subfolders!!!). If
 you need to add file to compiler's scope, add it's name to `ASSETS_SCSS_FILES`
 in `config.py`.

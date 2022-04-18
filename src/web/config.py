@@ -46,7 +46,8 @@ class Config:
 
     # .scss files that must be compiled
     # Is relative to STATIC_FOLDER
-    ASSETS_SCSS_FILES = ['scss/*.scss']
+    # Using ../assets (not static folder), so these files are not exposed
+    ASSETS_SCSS_FILES = ['../assets/scss/*.scss']
 
 
 def build_production_db_uri():
