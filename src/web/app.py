@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 from flask_assets import Environment, Bundle
+from config import active_configuration
 
 
 bcrypt = Bcrypt()
@@ -12,7 +13,6 @@ assets = Environment()
 
 
 def create_app() -> Flask:
-    from config import active_configuration
     
     app = Flask(
         __name__.split('.')[0],
@@ -33,7 +33,8 @@ def register_extensions(app: Flask):
 
     assets.init_app(app)
     with app.app_context():
-        scss = Bundle('scss/style.scss', filters='libsass', output='css/style.css')
+        scss = Bundle(*active_configuration.ASSETS_SCSS_FILES, 
+                    filters='libsass,cssmin', output='css/style.css')
         assets.register('css_all', scss)
 
 

@@ -21,4 +21,4 @@ src/web/uploads/*
 # Flask-Assets cache
 /src/web/client/static/.webassets-cache
 # Compiled .css files
-# /src/web/client/static/css/
+/src/web/client/static/css/

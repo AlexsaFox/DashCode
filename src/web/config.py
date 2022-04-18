@@ -44,6 +44,10 @@ class Config:
     # Folder on system containing static files
     STATIC_FOLDER = os.path.join(base_dir, 'client', 'static')
 
+    # .scss files that must be compiled
+    # Is relative to STATIC_FOLDER
+    ASSETS_SCSS_FILES = ['scss/*.scss']
+
 
 def build_production_db_uri():
     """ Builds uri for production database using environment variables. """
