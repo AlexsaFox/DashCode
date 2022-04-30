@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+
+{% block title %}
+
+<title>SignUp - DashCode</title>
+
+{% endblock %}
+
+{% block content %} 
+<div class="auth_pages">
+    <div class="center_block">
+        <div>
+            <h1>DashCode</h1>
+            <div class="block_of_text">
+                <span>
+                    Dashcode is a web app for the writing and reading useful tips and helpful solutions for programmers and also for other people. With Dashcode you can organize your knowledge. 
+From just making notes to social media where you can find answers for all you questions.
+                </span>
+            </div>
+        </div>
+        <div class="right_block">
+            <div class="block_with_registr">
+                {% with form = request.environ['form'] %}
+                <form method="POST" action="{{ url_for('webapp.auth.register_handle') }}">
+                    {{ form.csrf_token }}
+                    <h2>{{form.username.label}}</h2>
+                    {{form.username(class_="input")}}
+                    <h2>{{form.email.label}}</h2>
+                    {{form.email(class_="input")}}
+                    <h2>{{form.password.label}}</h2>
+                    {{form.password(class_="input")}}
+                    <h2>{{form.confirm_password.label}}</h2>
+                    {{form.confirm_password(class_="input")}}
+                    {{ form.submit_registration(class_="button") }}
+                </form>
+                {% endwith %}
+            </div>
+            <div class="bottom_line">
+                <span>Already have login and password?</span>
+                <a href="{{ url_for('webapp.auth.login_view') }}">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
