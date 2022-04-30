@@ -1,0 +1,17 @@
+not-found: Not found
+login-sign-up:
+  text: "DashCode is a web app for the writing and reading useful tips and helpful solutions for programmers and also for other people. With DashCode you can organize your knowledge.\nFrom just making notes to social media where you can find answers for all you questions."
+login:
+  username-label: "Username or email"
+  password-label: "Password"
+  submit-button: "Login"
+  no-account: "Don't have an account yet?"
+  no-account-link: "Register now"
+sign-up:
+  username-label: "Username"
+  email-label: "Email"
+  password-label: "Password"
+  confirm-password-label: "Confirm password"
+  submit-button: "Register"
+  have-account: "Already have login?"
+  have-account-link: "Sign in"

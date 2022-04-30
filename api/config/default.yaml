@@ -1,0 +1,26 @@
+app:
+  title: "DashCode API"
+  description: "DashCode backend powered by FastAPI & GraphQL"
+
+server:
+  host: localhost
+  port: 8000
+
+database:
+  dsn: postgresql+asyncpg://user:password@localhost:5432/backend
+
+cache:
+  dsn: redis://localhost:6379
+  expire_minutes: 10800   # 3 hours
+
+jwt:
+  algorithm: HS256
+  expire_hours: 43200   # 30 days
+
+base_superuser:
+  username: admin
+  email: admin@admin.com
+  password: admin
+
+debug: false
+secret_key: please_change_me_in_production
