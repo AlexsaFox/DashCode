@@ -1,0 +1,45 @@
+<script setup lang="ts">
+defineProps<{
+  label: string
+  type: string
+  name: string
+}>()
+</script>
+
+<template>
+  <div class="input-container">
+    <label :for="name">{{ label }}</label>
+    <input :name="name" :type="type">
+  </div>
+</template>
+
+<style scoped lang="scss">
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 12px;
+
+  label {
+    color: #fff;
+    font-size: 28px;
+  }
+
+  input {
+    width: 100%;
+    height: 42px;
+    padding: 0 8px;
+    border-radius: 10px;
+    color: white;
+    font-family: 'ClearSans-Medium';
+    font-size: 18px;
+    background-color: #303D67;
+
+    &:focus {
+      outline: none;
+      background-color: #465586;
+    }
+  }
+}
+</style>
