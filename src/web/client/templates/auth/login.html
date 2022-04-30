@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+<title>LogIn - DashCode</title>
+
+{% endblock %}
+
+{% block content %}
+<div class="auth_pages">
+    <div class="center_block">
+        <div>
+            <h1>DashCode</h1>
+            <div class="block_of_text">
+                <span>
+                    Dashcode is a web app for the writing and reading useful tips and helpful solutions for programmers and also for other people. With Dashcode you can organize your knowledge. 
+From just making notes to social media where you can find answers for all you questions.
+                </span>
+            </div>
+        </div>
+        <div class="right_block">
+            <div class="block_with_registr">
+                {% with form = request.environ['form'] %}
+                <form method="POST" action="{{ url_for('webapp.auth.login_handle') }}"> 
+                    {{ form.csrf_token}}
+                    <h2>{{form.username_or_email.label}}</h2>
+                    {{form.username_or_email(class_="input")}}
+                    <h2>{{form.password.label}}</h2>
+                    {{form.password(class_="input")}}
+                    <div class="stroke">
+                        <div class="check">
+                            <label class="container">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                            <span class="text_remember_me">Remember me</span>
+                        </div>
+                        <a class="forgot">Forgot your password</a>
+                    </div>
+                    {{ form.submit_login(class_="button") }}
+                </form>
+                {% endwith %}
+            </div>
+            <div class="bottom_line">
+                <span>Don't have an account yet?</span>
+                <a href="{{ url_for('webapp.auth.register_view') }}">Register now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

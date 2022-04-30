@@ -1,0 +1,96 @@
+{% extends 'base.html' %} 
+{% block title %}
+
+<title>Home - DashCode</title>
+
+{% endblock %}
+{% block content %}
+<div class="overlay_for_space_for_note_edit_and_show"><div class="space_for_note_edit_and_show">
+    {% with note = request.environ['note'] %}
+    <input value="{{note.title}}" class="input_for_title" disabled>
+                    {% if note.is_private == True %}
+                    <div class="button_status"><span><i class='bx bxs-lock-alt'></i></span></div>
+                    {% else %}
+                    <div class="button_status"><span><i class='bx bx-lock-open-alt'></i></span></div>
+                    {% endif %}
+                    <button onclick="location.href='{{ url_for('webapp.index.index_view') }}'" class="button_back_to_all_notes">&times;</button>
+                    
+    <div class="content">
+                    <textarea class="comment" readonly>{{note.context}}</textarea>
+                    <!-- (class_="comment",placeholder="text",cols="80", rows="11") -->
+                    <a><textarea class="textarea_for_link" readonly>{{note.link}}</textarea></a>
+                    <!-- (class_="textarea_for_link",placeholder="htts://",cols="90", rows="1") -->
+                    {% with id=note.id %}
+                    <div class="buttons_in_the_bottom"><a href="{{url_for('webapp.note.notes_edit', note_id=id)}}"><input type="submit" class="save"
+                                value="Edit" ></a></div>
+                    {% endwith %}
+                    <hr class="line" />
+                    <div class="info_about_writer">
+                        <span class="text_under_line">User: {{note.user.username}}</span>
+                        <span class="text_under_line">Was created: {{note.creation_date.strftime('%Y-%m-%d at
+                                        %H:%M:%S')}}</span>
+                    </div>
+    </div>
+
+    {% endwith %}
+</div>
+</div>
+
+<div class="block">
+    {% with user = request.environ['user']%}
+    <div class="avatar"><a href="#popup4"><img src="{{user.profile_picture_url}}" class="avatar" alt="Avatar"></a></div>
+    <div class="text"><span>{{user.username}}</span></div>
+    {% endwith %}
+    <div class="display_with_button">
+        <a href="#popup"><button class="standart_button"><i class='bx bx-plus'></i>Add notes</button></a>
+        <a><button class="standart_button"><i class='bx bx-right-arrow-alt'></i> Social media</button></a>
+        <a><button class="standart_button"><i class='bx bxs-user'></i> Subscritions</button></a>
+        <a href="#popup5"><button class="standart_button"><i class='bx bx-plus'></i>My notes</button></a>
+        </div>
+    </div>
+{% with user = request.environ['user']%}
+<div id="popup4" class="overlay_1">
+    <div class="profile_popup">
+        <div class="header_for_pop_up">
+            {{user.email}}
+        <a class="close" href="#">&times;</a>
+        </div>
+        <div class="content" style="padding: 10px;">
+            <form>
+                <hr>
+            <span><a href="/user/settings">Settings</a></span>
+                <br>
+            <span><a href="/auth/logout">Log out</a></span>
+            </form>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% with notes = request.environ['user_notes'] %}
+<div id="popup5" class="overlay_1">
+    <div class="my_notes_popup">
+        <div class="header_for_pop_up_acc">
+            All your notes:
+        <a class="close" href="#">&times;</a>
+        </div>
+        <div class="content">
+            
+                
+                <ul style=" list-style-type: none;
+                max-height: 350px;
+                overflow-y: auto">
+                {% for note in notes %}
+                    <li style="height: 30px;line-height: 30px;">
+                        <a href="#popup_watch{{note.id}}">{{note.title}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                
+            
+
+        </div>
+    </div>
+</div>
+
+{% endwith %}
+{% endblock %}

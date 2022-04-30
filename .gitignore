@@ -1,0 +1,19 @@
+# VSCode workspace configuration
+.vscode
+
+# Python virtual environment
+venv/*
+
+# Python cache files
+__pycache__
+
+# Development database
+*.sqlite
+
+# python-dotenv environment variables
+.env
+
+# Everything in folder with user profile pictures,
+# except default profile picture
+src/web/uploads/*
+!src/web/uploads/default.jpeg
