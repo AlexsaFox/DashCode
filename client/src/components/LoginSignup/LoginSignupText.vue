@@ -10,7 +10,7 @@ const { t } = useI18n()
 </template>
 
 <style scoped lang="scss">
-@import './blockparts.scss';
+@import './block-parts.scss';
 
 .text-container {
   @include block-part;
