@@ -2,6 +2,7 @@ import strawberry
 
 from src.graphql.defenitions.user import User
 
+
 @strawberry.type
 class UserAlreadyExists:
     field: str

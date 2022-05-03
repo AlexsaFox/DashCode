@@ -55,7 +55,9 @@ class Note(Base):
     creation_date: datetime = Column(DateTime, nullable=False, default=datetime.now)
 
     user: User
-    _owner_id: int = Column(Integer, ForeignKey(User.id), name='owner_id', nullable=False)
+    _owner_id: int = Column(
+        Integer, ForeignKey(User.id), name='owner_id', nullable=False
+    )
 
     tags: list['Tag'] = relationship(
         'Tag', secondary=note_tag_association_table, backref='notes'
