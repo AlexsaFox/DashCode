@@ -2,6 +2,10 @@ app:
   title: "DashCode API"
   description: "DashCode backend powered by FastAPI & GraphQL"
 
+cors:
+  origins:
+  - http://localhost:3333
+
 server:
   host: localhost
   port: 8000

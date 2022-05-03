@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/store/useAuth'
+
+const credentials = ref({
+  username: '',
+  password: '',
+})
 const { t } = useI18n()
+
+const auth = useAuthStore()
+
+function onSubmit() {
+  auth.login(credentials.value.password, credentials.value.username, credentials.value.username)
+}
 </script>
 
 <template>
@@ -10,10 +22,20 @@ const { t } = useI18n()
       :bottom-link-text="t('login.no-account-link')"
       :submit-button-text="t('login.submit-button')"
       bottom-link-route="/signup"
-      :submit-action="() => {}"
+      :submit-action="onSubmit"
     >
-      <LoginSignupFormInput :label="t('login.username-label')" type="text" name="username" />
-      <LoginSignupFormInput :label="t('login.password-label')" type="password" name="password" />
+      <LoginSignupFormInput
+        :label="t('login.username-label')"
+        type="text"
+        name="username"
+        @changed="(username) => credentials.username = username"
+      />
+      <LoginSignupFormInput
+        :label="t('login.password-label')"
+        type="password"
+        name="password"
+        @changed="(passwd) => credentials.password = passwd"
+      />
     </LoginSignupForm>
   </div>
 </template>

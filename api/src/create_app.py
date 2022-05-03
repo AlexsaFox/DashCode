@@ -1,5 +1,6 @@
 from typing import Callable, Coroutine, cast
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
@@ -65,6 +66,14 @@ def create_app(config: Configuration) -> App:
 
     app.include_router(router)
     app.include_router(graphql_app, prefix='/graphql')
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=config.cors.origins,
+        allow_credentials=True,
+        allow_methods=['*'],
+        allow_headers=['*'],
+    )
 
     app.router.add_event_handler('startup', create_startup_hook(app))
     app.router.add_event_handler('shutdown', create_shutdown_hook(app))

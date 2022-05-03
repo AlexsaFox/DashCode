@@ -4,12 +4,18 @@ defineProps<{
   type: string
   name: string
 }>()
+
+const emit = defineEmits<{
+  (e: 'changed', newValue: string): void
+}>()
+
+const inputValue = ref('')
 </script>
 
 <template>
   <div class="input-container">
     <label :for="name">{{ label }}</label>
-    <input :name="name" :type="type">
+    <input v-model="inputValue" :name="name" :type="type" @change="emit('changed', inputValue)">
   </div>
 </template>
 
