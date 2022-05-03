@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/store/useAuth'
+import { useErrorsStore } from '~/store/useErrors'
 
 const { t } = useI18n()
+const auth = useAuthStore()
+const errors = useErrorsStore()
 
 const credentials = ref({
   username: '',
@@ -10,13 +13,9 @@ const credentials = ref({
   confirm_password: '',
 })
 
-const auth = useAuthStore()
-
 function onSubmit() {
   if (credentials.value.password !== credentials.value.confirm_password) {
-    // TODO: implement a proper error handler
-    // eslint-disable-next-line no-console
-    console.log('Password and confirm password fields do not match')
+    errors.addError('Password and confirm password fields do not match')
     return
   }
 

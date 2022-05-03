@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useErrorsStore } from './useErrors'
 import apolloClient from '~/modules/apollo'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
 import { REGISTER_USER_MUTATION } from '~/graphql/mutations'
@@ -20,8 +21,13 @@ export const useAuthStore = defineStore('auth', {
         },
       })).data
 
-      if (registerUser.__typename === 'RegisterUserSuccess')
+      if (registerUser.__typename === 'UserAlreadyExists') {
+        const { field, value } = registerUser
+        useErrorsStore().addError(`User with ${field} "${value}" already exists`)
+      }
+      else {
         this.login(password, username)
+      }
     },
 
     async login(password: string, username?: string, email?: string) {
