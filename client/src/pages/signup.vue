@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/store/useAuth'
-import { useErrorsStore } from '~/store/useErrors'
+import useAuthStore from '~/store/useAuth'
+import useErrorsStore from '~/store/useErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()

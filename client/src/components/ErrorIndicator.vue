@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useErrorsStore } from '~/store/useErrors'
+import useErrorsStore from '~/store/useErrors'
 
 const errors = useErrorsStore()
 </script>

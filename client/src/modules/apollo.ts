@@ -6,7 +6,7 @@ import {
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import config from '~/constants/config'
-import { useErrorsStore } from '~/store/useErrors'
+import useErrorsStore from '~/store/useErrors'
 
 const httpLink = createHttpLink({
   uri: config.api_host,

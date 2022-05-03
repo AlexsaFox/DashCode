@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import { useErrorsStore } from './useErrors'
+import useErrorsStore from './useErrors'
 import apolloClient from '~/modules/apollo'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
 import { REGISTER_USER_MUTATION } from '~/graphql/mutations'
 
-export const useAuthStore = defineStore('auth', {
+export default defineStore('auth', {
   state: () => ({
     loggedIn: localStorage.getItem('loggedIn') ?? false,
     user: (user => user ? JSON.parse(user) : null)(localStorage.getItem('user')),
