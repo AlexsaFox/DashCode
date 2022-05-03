@@ -1,5 +1,27 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/store/useAuth'
+
 const { t } = useI18n()
+
+const credentials = ref({
+  username: '',
+  email: '',
+  password: '',
+  confirm_password: '',
+})
+
+const auth = useAuthStore()
+
+function onSubmit() {
+  if (credentials.value.password !== credentials.value.confirm_password) {
+    // TODO: implement a proper error handler
+    // eslint-disable-next-line no-console
+    console.log('Password and confirm password fields do not match')
+    return
+  }
+
+  auth.register(credentials.value.username, credentials.value.email, credentials.value.password)
+}
 </script>
 
 <template>
@@ -10,12 +32,28 @@ const { t } = useI18n()
       :bottom-link-text="t('sign-up.have-account-link')"
       :submit-button-text="t('sign-up.submit-button')"
       bottom-link-route="/login"
-      :submit-action="() => {}"
+      :submit-action="onSubmit"
     >
-      <LoginSignupFormInput :label="t('sign-up.username-label')" type="text" name="username" />
-      <LoginSignupFormInput :label="t('sign-up.email-label')" type="email" name="email" />
-      <LoginSignupFormInput :label="t('sign-up.password-label')" type="password" name="password" />
-      <LoginSignupFormInput :label="t('sign-up.confirm-password-label')" type="password" name="confirm-password" />
+      <LoginSignupFormInput
+        :label="t('sign-up.username-label')"
+        type="text"
+        @changed="(username) => credentials.username = username"
+      />
+      <LoginSignupFormInput
+        :label="t('sign-up.email-label')"
+        type="email"
+        @changed="(email) => credentials.email = email"
+      />
+      <LoginSignupFormInput
+        :label="t('sign-up.password-label')"
+        type="password"
+        @changed="(passwd) => credentials.password = passwd"
+      />
+      <LoginSignupFormInput
+        :label="t('sign-up.confirm-password-label')"
+        type="password"
+        @changed="(passwd) => credentials.confirm_password = passwd"
+      />
     </LoginSignupForm>
   </div>
 </template>

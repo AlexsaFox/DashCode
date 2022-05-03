@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import apolloClient from '~/modules/apollo'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
+import { REGISTER_USER_MUTATION } from '~/graphql/mutations'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -9,6 +10,20 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    async register(username: string, email: string, password: string) {
+      const { registerUser } = (await apolloClient.mutate({
+        mutation: REGISTER_USER_MUTATION,
+        variables: {
+          username,
+          email,
+          password,
+        },
+      })).data
+
+      if (registerUser.__typename === 'RegisterUserSuccess')
+        this.login(password, username)
+    },
+
     async login(password: string, username?: string, email?: string) {
       const { token } = (await apolloClient.query({
         query: GET_TOKEN_QUERY,

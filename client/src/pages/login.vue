@@ -27,13 +27,11 @@ function onSubmit() {
       <LoginSignupFormInput
         :label="t('login.username-label')"
         type="text"
-        name="username"
         @changed="(username) => credentials.username = username"
       />
       <LoginSignupFormInput
         :label="t('login.password-label')"
         type="password"
-        name="password"
         @changed="(passwd) => credentials.password = passwd"
       />
     </LoginSignupForm>
