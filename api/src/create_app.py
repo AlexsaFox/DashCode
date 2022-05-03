@@ -2,6 +2,7 @@ from typing import Callable, Coroutine, cast
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
+from sqlalchemy.engine.row import Row
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from src.auth.utils import create_user
@@ -28,8 +29,8 @@ def create_startup_hook(app: App) -> Callable[[], Coroutine[None, None, None]]:
             query = await session.execute(
                 select(User).filter_by(username=base_superuser.username)
             )
-            user: User | None = query.first()
-            if user is None:
+            row: Row | None = query.one_or_none()
+            if row is None:
                 await session.run_sync(
                     create_user,
                     base_superuser.username,
