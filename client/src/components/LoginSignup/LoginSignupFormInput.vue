@@ -14,7 +14,7 @@ const inputValue = ref('')
 <template>
   <div class="input-container">
     <label :for="label">{{ label }}</label>
-    <input v-model="inputValue" :name="label" :type="type" @change="emit('changed', inputValue)">
+    <input v-model="inputValue" :name="label" :type="type" required @change="emit('changed', inputValue)">
   </div>
 </template>
 
