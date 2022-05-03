@@ -31,6 +31,7 @@ class ServerConfiguration(BaseModel):
 class CORSConfiguration(BaseModel):
     origins: list[AnyHttpUrl]
 
+
 class JWTConfiguration(BaseModel):
     algorithm: StrictStr
     expire_hours: PositiveInt

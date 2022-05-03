@@ -38,7 +38,11 @@ def authenticate_user(
     if username is None and email is None:
         raise UsernameOrEmailNotProvidedError
 
-    user: User | None = session.query(User).filter(or_(User.username == username, User.email == email)).first()
+    user: User | None = (
+        session.query(User)
+        .filter(or_(User.username == username, User.email == email))
+        .first()
+    )
     if user is None or not _is_password_valid(password, user.password_hash):
         raise AuthenticationFailedError
 

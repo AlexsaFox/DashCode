@@ -35,7 +35,9 @@ class StrawberrySchema(strawberry.Schema):
     SILENCED_ERR_TYPES = (PermissionError, ExpectedError)
 
     def process_errors(
-        self, errors: list[GraphQLError], execution_context: ExecutionContext | None = None
+        self,
+        errors: list[GraphQLError],
+        execution_context: ExecutionContext | None = None,
     ) -> None:
         not_silenced_errors: list[GraphQLError] = [
             err
