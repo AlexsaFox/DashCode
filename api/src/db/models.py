@@ -31,7 +31,7 @@ class User(Base):
         String(40), nullable=False, default='default.webp'
     )
 
-    notes: list['Note'] = relationship('Note', backref='user', lazy='true')
+    notes: list['Note'] = relationship('Note', backref='user', lazy='select')
 
 
 note_tag_association_table = Table(
