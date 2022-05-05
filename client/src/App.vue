@@ -8,6 +8,12 @@ useHead({
     { name: 'description', content: '' },
   ],
 })
+
+const { availableLocales, locale } = useI18n()
+
+const locales = availableLocales
+locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+
 </script>
 
 <template>

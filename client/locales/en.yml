@@ -27,6 +27,7 @@ sign-up:
     password: Password
     confirm-password: Confirm password
   errors:
+    user-exists: User with {field} "{value}" already exists
     username-required: Username is required
     email-required: Email is required
     email-invalid: Enter valid email address

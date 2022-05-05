@@ -1,3 +1,35 @@
 not-found: Не найден
+login:
+  no-account: ~
+  no-account-link: ~
+  submit-button: ~
+  labels:
+    username: ~
+    password: ~
+  errors:
+    username-required: ~
+    password-required: ~
 login-sign-up:
-  text: "Dashcode - это веб-приложение для написания и чтения полезных советов и полезных решений в особенности для программистов. С помощью Dashcode вы можете структурировать свои знания.\nОт простых заметок до социальной сети, в которой вы можете найти ответы на все интересующие вас вопросы."
+  text: >-
+    Dashcode - это веб-приложение для написания и чтения полезных советов и полезных
+    решений в особенности для программистов. С помощью Dashcode вы можете
+    структурировать свои знания.
+
+    От простых заметок до социальной сети, в которой вы можете найти ответы на
+    все интересующие вас вопросы.
+sign-up:
+  have-account: ~
+  have-account-link: ~
+  submit-button: ~
+  labels:
+    username: ~
+    email: ~
+    password: ~
+    confirm-password: ~
+  errors:
+    user-exists: Пользователь "{value}" уже зарегистрирован 
+    username-required: ~
+    email-required: ~
+    email-invalid: ~
+    password-required: ~
+    passwords-do-not-match: ~

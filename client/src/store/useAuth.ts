@@ -3,6 +3,7 @@ import useErrorsStore from './useErrors'
 import apolloClient from '~/modules/apollo'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
 import { REGISTER_USER_MUTATION } from '~/graphql/mutations'
+import { i18n } from '~/modules/i18n'
 
 export default defineStore('auth', {
   state: () => ({
@@ -23,7 +24,7 @@ export default defineStore('auth', {
 
       if (registerUser.__typename === 'UserAlreadyExists') {
         const { field, value } = registerUser
-        useErrorsStore().addError(`User with ${field} "${value}" already exists`)
+        useErrorsStore().addError(i18n.global.t('sign-up.errors.user-exists', { field, value }))
       }
       else {
         this.login(password, username)
