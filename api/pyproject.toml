@@ -14,6 +14,7 @@ python_version = "3.10"
 files = [
     "src",
     "tests",
+    "run.py",
 ]
 plugins = [
     "sqlalchemy.ext.mypy.plugin",
@@ -22,9 +23,11 @@ plugins = [
 
 [[tool.mypy.overrides]]
 module = [
-    "dynaconf",
     "authlib.jose.*",
+    "dynaconf",
+    "i18n",
     "testcontainers.*",
+    "uvicorn",
 ]
 ignore_missing_imports = true
 

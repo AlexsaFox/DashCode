@@ -43,6 +43,11 @@ class BaseSuperuser(BaseModel):
     email: StrictStr
 
 
+class LocalizationConfiguration(BaseModel):
+    fallback_locale: StrictStr
+    available_locales: list[StrictStr]
+
+
 class Configuration(BaseModel):
     app: AppConfiguration
     base_superuser: BaseSuperuser
@@ -52,6 +57,7 @@ class Configuration(BaseModel):
     debug: StrictBool
     environment: StrictStr
     jwt: JWTConfiguration
+    localization: LocalizationConfiguration
     secret_key: StrictStr
     server: ServerConfiguration
 

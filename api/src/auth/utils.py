@@ -16,13 +16,13 @@ from src.types import ExpectedError
 
 
 class AuthenticationFailedError(ExpectedError):
-    def __init__(self):
-        super().__init__('Wrong username/email or password')
+    def __init__(self, msg: str = 'Unable to find user with provided credentials'):
+        super().__init__(msg)
 
 
 class UsernameOrEmailNotProvidedError(ExpectedError):
-    def __init__(self):
-        super().__init__('You must provide username or email')
+    def __init__(self, msg: str = 'You must provide username or email'):
+        super().__init__(msg)
 
 
 def _is_password_valid(passwd: str, passwd_hash: str) -> bool:

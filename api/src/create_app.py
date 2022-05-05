@@ -11,6 +11,7 @@ from src.cache.utils import get_cache_backend
 from src.db.utils import get_engine
 from src.db.models import User
 from src.graphql.schema import graphql_app
+from src.locale.utils import set_up_locale
 from src.routes import router
 from src.types import AppState
 
@@ -21,6 +22,8 @@ class App(FastAPI):
 
 def create_startup_hook(app: App) -> Callable[[], Coroutine[None, None, None]]:
     async def startup_hook() -> None:
+        set_up_locale(app.app_state.config.localization)
+
         app.app_state.cache = get_cache_backend(app.app_state.config.cache)
 
         app.app_state.engine = get_engine(app.app_state.config.database)

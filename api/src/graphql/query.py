@@ -3,7 +3,11 @@ import strawberry
 from strawberry.types import Info
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
-from src.auth.utils import authenticate_user
+from src.auth.utils import (
+    AuthenticationFailedError,
+    UsernameOrEmailNotProvidedError,
+    authenticate_user,
+)
 from src.db.models import User as UserModel
 from src.graphql.auth import IsAuthenticated
 from src.graphql.definitions.token import Token
@@ -26,10 +30,15 @@ class Query:
         email: str | None = None,
     ) -> Token | None:
         session: AsyncSession = info.context['session']
-        # Might raise `AuthenticationFailedError` or `UsernameOrEmailNotProvidedError`.
-        # If that happens, error will be passed in `errors`` section of GraphQL response.
-        # Token value in that case will remain null.
-        user = await session.run_sync(
-            authenticate_user, username=username, email=email, password=password
-        )
+        t = info.context['translator']
+
+        try:
+            user = await session.run_sync(
+                authenticate_user, username=username, email=email, password=password
+            )
+        except AuthenticationFailedError:
+            raise AuthenticationFailedError(t('errors.auth.bad_credentials'))
+        except UsernameOrEmailNotProvidedError:
+            raise UsernameOrEmailNotProvidedError(t('errors.auth.no_login'))
+
         return Token.from_user(user, info)
