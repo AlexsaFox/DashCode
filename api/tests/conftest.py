@@ -42,7 +42,7 @@ def pytest_unconfigure(config: Config) -> None:
     config.stash[cache_container].stop()
 
 
-@pytest.fixture()
+@pytest.fixture
 def test_config(pytestconfig: Config) -> Configuration:
     config = load_configuration('testing')
     config.database.dsn = (
