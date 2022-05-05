@@ -71,12 +71,12 @@ function onSubmit() {
     <LoginSignupFormInput
       v-model="credentials.password"
       :label="t('sign-up.labels.password')"
-      type="text"
+      type="password"
     />
     <LoginSignupFormInput
       v-model="credentials.confirm_password"
       :label="t('sign-up.labels.confirm-password')"
-      type="text"
+      type="password"
     />
   </LoginSignupForm>
 </template>
