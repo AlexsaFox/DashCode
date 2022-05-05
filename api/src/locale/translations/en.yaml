@@ -1,0 +1,5 @@
+en:
+  errors:
+    auth:
+      bad_credentials: Unable to find user with provided credentials
+      no_login: You must provide username or email

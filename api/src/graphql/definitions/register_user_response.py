@@ -1,6 +1,7 @@
 import strawberry
 
-from src.graphql.defenitions.user import User
+from src.graphql.definitions.user import User
+
 
 @strawberry.type
 class UserAlreadyExists:

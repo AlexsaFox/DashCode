@@ -42,7 +42,7 @@ def pytest_unconfigure(config: Config) -> None:
     config.stash[cache_container].stop()
 
 
-@pytest.fixture()
+@pytest.fixture
 def test_config(pytestconfig: Config) -> Configuration:
     config = load_configuration('testing')
     config.database.dsn = (
@@ -58,14 +58,17 @@ def test_config(pytestconfig: Config) -> Configuration:
 
 
 @pytest.fixture
-def database_engine(test_config: Configuration) -> AsyncEngine:
-    return get_engine(test_config.database)
+async def database_engine(
+    test_config: Configuration,
+) -> AsyncGenerator[AsyncEngine, None]:
+    engine = get_engine(test_config.database)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
+    yield engine
 
-@pytest.fixture
-async def database_session(database_engine: AsyncEngine) -> AsyncGenerator[AsyncSession, None]:
-    async with AsyncSession(database_engine) as session:
-        yield session
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
 
 
 @pytest.fixture
@@ -74,21 +77,30 @@ async def cache(test_config: Configuration) -> Redis:
 
 
 @pytest.fixture
-async def app(test_config: Configuration, database_engine: AsyncEngine) -> AsyncGenerator[App, None]:
+async def app(
+    test_config: Configuration, database_engine: AsyncEngine
+) -> AsyncGenerator[App, None]:
     async with database_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    yield create_app(test_config)
+    app = create_app(test_config)
+    async with LifespanManager(app):
+        yield app
 
     async with database_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
 
 
 @pytest.fixture
+async def database_session(app: App) -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSession(app.app_state.engine) as session:
+        yield session
+
+
+@pytest.fixture
 async def client(app: App) -> AsyncGenerator[AsyncClient, None]:
-    async with LifespanManager(app):
-        async with AsyncClient(app=app, base_url='http://localhost') as async_client:
-            yield async_client
+    async with AsyncClient(app=app, base_url='http://localhost') as async_client:
+        yield async_client
 
 
 @pytest.fixture

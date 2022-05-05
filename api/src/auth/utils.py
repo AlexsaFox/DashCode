@@ -16,13 +16,13 @@ from src.types import ExpectedError
 
 
 class AuthenticationFailedError(ExpectedError):
-    def __init__(self):
-        super().__init__('Wrong username/email or password')
+    def __init__(self, msg: str = 'Unable to find user with provided credentials'):
+        super().__init__(msg)
 
 
 class UsernameOrEmailNotProvidedError(ExpectedError):
-    def __init__(self):
-        super().__init__('You must provide username or email')
+    def __init__(self, msg: str = 'You must provide username or email'):
+        super().__init__(msg)
 
 
 def _is_password_valid(passwd: str, passwd_hash: str) -> bool:
@@ -38,7 +38,11 @@ def authenticate_user(
     if username is None and email is None:
         raise UsernameOrEmailNotProvidedError
 
-    user: User | None = session.query(User).filter(or_(User.username == username, User.email == email)).first()
+    user: User | None = (
+        session.query(User)
+        .filter(or_(User.username == username, User.email == email))
+        .first()
+    )
     if user is None or not _is_password_valid(password, user.password_hash):
         raise AuthenticationFailedError
 

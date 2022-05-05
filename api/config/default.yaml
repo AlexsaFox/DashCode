@@ -26,5 +26,9 @@ base_superuser:
   email: admin@admin.com
   password: admin
 
+localization:
+  fallback_locale: en
+  available_locales: [en, ru]
+
 debug: false
 secret_key: please_change_me_in_production
