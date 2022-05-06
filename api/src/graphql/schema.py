@@ -17,7 +17,7 @@ from src.db.models import User as UserModel
 from src.dependencies import get_config
 from src.graphql.query import Query
 from src.graphql.mutation import Mutation
-from src.locale.dependencies import get_translator
+from src.locale.dependencies import Translator, get_translator
 from src.types import ExpectedError
 
 
@@ -26,7 +26,7 @@ async def get_context(
     cache: Redis = Depends(get_cache),
     config: Configuration = Depends(get_config),
     session: AsyncSession = Depends(get_session),
-    translator: Callable[[str, Any], str] = Depends(get_translator),
+    translator: Translator = Depends(get_translator),
 ) -> dict[str, Any]:
     return {
         'user': user,
