@@ -1,4 +1,3 @@
-from typing import Any, Callable, Optional
 import strawberry
 
 from strawberry.types import Info
@@ -10,7 +9,7 @@ from src.auth.utils import (
     authenticate_user,
 )
 from src.db.models import User as UserModel
-from src.graphql.auth import IsAuthenticated
+from src.graphql.permissions.auth import IsAuthenticated
 from src.graphql.definitions.token import Token
 from src.graphql.definitions.user import User
 from src.locale.dependencies import Translator

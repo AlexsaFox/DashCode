@@ -10,7 +10,7 @@ from src.config import LocalizationConfiguration
 
 
 class Translator(Protocol):
-    def __call__(self, expression: str, **kwargs: Any) -> str:
+    def __call__(self, code: str, **kwargs: Any) -> str:
         ...
 
 
@@ -41,7 +41,7 @@ def _parse_header(header: str) -> list[str]:
 
 
 def _get_translator_from_locale(locale: str) -> Translator:
-    return lambda expression, **kwargs: i18n.t(expression, locale=locale, **kwargs)
+    return lambda code, **kwargs: i18n.t(code, locale=locale, **kwargs)
 
 
 def get_translator(request: Request) -> Translator:

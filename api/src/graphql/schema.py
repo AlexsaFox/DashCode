@@ -1,7 +1,7 @@
 from aioredis import Redis
 import strawberry
 
-from typing import Any, Callable
+from typing import Any
 
 from fastapi import Depends
 from graphql import GraphQLError
