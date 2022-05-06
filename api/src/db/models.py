@@ -1,4 +1,4 @@
-from base64 import urlsafe_b64decode
+from base64 import urlsafe_b64encode
 from datetime import datetime
 from secrets import token_bytes
 
@@ -46,7 +46,9 @@ class Note(Base):
     __tablename__ = 'notes'
 
     id: str = Column(
-        String(12), primary_key=True, default=lambda: urlsafe_b64decode(token_bytes(12))
+        String(12),
+        primary_key=True,
+        default=lambda: urlsafe_b64encode(token_bytes(9)).decode(),
     )
     title: str = Column(String(65), nullable=False)
     content: str = Column(Text(), nullable=False)
