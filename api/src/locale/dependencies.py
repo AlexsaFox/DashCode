@@ -52,5 +52,7 @@ def get_translator(request: Request) -> Translator:
     for lang in accepted_langs:
         if lang in config.available_locales:
             return _get_translator_from_locale(lang)
+        if lang == '*':
+            return _get_translator_from_locale(config.fallback_locale)
 
     return _get_translator_from_locale(config.fallback_locale)
