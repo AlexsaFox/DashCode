@@ -38,8 +38,8 @@ class Query:
                 authenticate_user, username=username, email=email, password=password
             )
         except AuthenticationFailedError:
-            raise AuthenticationFailedError(t('errors.auth.bad_credentials'))
+            raise AuthenticationFailedError(t('auth.errors.bad_credentials'))
         except UsernameOrEmailNotProvidedError:
-            raise UsernameOrEmailNotProvidedError(t('errors.auth.no_login'))
+            raise UsernameOrEmailNotProvidedError(t('auth.errors.no_login'))
 
         return Token.from_user(user, info)
