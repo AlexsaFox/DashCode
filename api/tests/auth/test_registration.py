@@ -24,7 +24,6 @@ mutation {{
 '''
 
 
-@pytest.fixture()
 async def test_registration(graphql_client: GraphQLClient) -> None:
     response = await graphql_client.make_request(
         query=REGISTRATION_QUERY.format(
