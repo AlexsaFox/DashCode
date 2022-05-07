@@ -44,8 +44,6 @@ class Mutation:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
 
-        async with session.begin():
-            session.add(user)
         note: NoteModel = await session.run_sync(
             create_note, title, content, link, is_private, user
         )

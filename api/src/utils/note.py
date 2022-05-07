@@ -11,6 +11,7 @@ def create_note(
         link=link,
         is_private=is_private,
     )
+    session.add(user)
     user.notes.append(note)
     session.add(note)
     session.commit()
