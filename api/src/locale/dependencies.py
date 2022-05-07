@@ -1,9 +1,7 @@
 import re
-
-import i18n
-
 from typing import Any, Protocol
 
+import i18n
 from fastapi import Request
 
 from src.config import LocalizationConfiguration

@@ -1,19 +1,19 @@
 import strawberry
-
-from strawberry.types import Info
 from sqlalchemy.ext.asyncio.session import AsyncSession
+from strawberry.types import Info
 
 from src.auth.utils import UserExistsError, create_user
-from src.utils.note import create_note
-from src.db.models import User as UserModel, Note as NoteModel
-from src.graphql.permissions.auth import IsAuthenticated
-from src.graphql.definitions.user import User
+from src.db.models import Note as NoteModel
+from src.db.models import User as UserModel
 from src.graphql.definitions.note import Note
 from src.graphql.definitions.register_user_response import (
     RegisterUserResponse,
     RegisterUserSuccess,
     UserAlreadyExists,
 )
+from src.graphql.definitions.user import User
+from src.graphql.permissions.auth import IsAuthenticated
+from src.utils.note import create_note
 
 
 @strawberry.type

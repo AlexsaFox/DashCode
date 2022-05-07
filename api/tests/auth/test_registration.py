@@ -1,4 +1,5 @@
 import pytest
+
 from src.db.models import User
 from tests.utils import GraphQLClient
 

@@ -1,20 +1,19 @@
-import pytest
-
 from typing import AsyncGenerator
 
-from asgi_lifespan import LifespanManager
-from aioredis import Redis
+import pytest
 from _pytest.config import Config
+from aioredis import Redis
+from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
 from pydantic import RedisDsn
-from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
 
 from src.auth.utils import create_user, generate_jwt
 from src.cache.utils import get_cache_backend
-from src.create_app import App, create_app
 from src.config import Configuration, load_configuration
+from src.create_app import App, create_app
 from src.db.models import Base, User
 from src.db.utils import get_engine
 from tests.utils import GraphQLClient

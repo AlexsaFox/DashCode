@@ -1,5 +1,5 @@
-from typing import Any, Callable
 from functools import wraps
+from typing import Any, Callable
 
 from strawberry.permission import BasePermission
 from strawberry.types import Info

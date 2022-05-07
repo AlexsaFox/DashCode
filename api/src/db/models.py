@@ -6,13 +6,13 @@ from sqlalchemy import (
     Boolean,
     Column,
     DateTime,
-    Integer,
     ForeignKey,
+    Integer,
     String,
     Table,
     Text,
 )
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import declarative_base, relationship
 
 
 Base = declarative_base()

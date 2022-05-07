@@ -1,9 +1,9 @@
-import strawberry
-
 from datetime import datetime
 
-from src.graphql.definitions.user import User
+import strawberry
+
 from src.db.models import Note as NoteModel
+from src.graphql.definitions.user import User
 
 
 @strawberry.type

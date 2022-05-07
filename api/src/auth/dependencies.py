@@ -20,6 +20,7 @@ from src.db.dependencies import get_session
 from src.db.models import User
 from src.dependencies import get_config
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token', auto_error=False)
 
 

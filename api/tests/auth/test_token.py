@@ -1,12 +1,13 @@
 from typing import cast
-from aioredis import Redis
 
+from aioredis import Redis
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.dependencies import get_user_or_none
 from src.config import Configuration
 from src.db.models import User
 from tests.utils import GraphQLClient
+
 
 TOKEN_QUERY_USERNAME = '''
 {{

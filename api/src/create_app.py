@@ -1,4 +1,5 @@
 from typing import Callable, Coroutine, cast
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import select
@@ -6,10 +7,10 @@ from sqlalchemy.engine.row import Row
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from src.auth.utils import create_user
-from src.config import Configuration
 from src.cache.utils import get_cache_backend
-from src.db.utils import get_engine
+from src.config import Configuration
 from src.db.models import User
+from src.db.utils import get_engine
 from src.graphql.schema import graphql_app
 from src.locale.utils import set_up_locale
 from src.routes import router

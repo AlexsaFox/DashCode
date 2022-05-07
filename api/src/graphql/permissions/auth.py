@@ -1,6 +1,7 @@
 from typing import Any
 
 from strawberry.types import Info
+
 from src.graphql.permissions.locale import LocalizedPermission
 
 

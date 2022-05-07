@@ -1,6 +1,7 @@
 from src.db.models import User
 from tests.utils import GraphQLClient
 
+
 WHOAMI_QUERY = '''
 {
     whoami {

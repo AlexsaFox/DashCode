@@ -1,5 +1,6 @@
 from sqlalchemy.orm.session import Session
-from src.db.models import User, Note
+
+from src.db.models import Note, User
 
 
 def create_note(

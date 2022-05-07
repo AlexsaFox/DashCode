@@ -37,3 +37,23 @@ target-version = ['py310']
 skip-string-normalization = true
 include = "run\\.py|src|tests"
 preview = true
+
+[tool.isort]
+case_sensitive = true
+known_third_party = [
+    "graphql",
+]
+line_length = 88
+lines_after_imports = 2
+lines_between_sections = 1
+multi_line_output = 3
+profile = "black"
+py_version = 310
+skip = [
+    "migrations",
+    "venv",
+]
+src_paths = [
+    "src",
+    "tests",
+]

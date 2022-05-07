@@ -1,7 +1,7 @@
 import os
 from typing import Any, Literal, cast
-from dynaconf import Dynaconf
 
+from dynaconf import Dynaconf
 from pydantic import AnyHttpUrl, BaseModel, PositiveInt, RedisDsn, StrictBool, StrictStr
 
 

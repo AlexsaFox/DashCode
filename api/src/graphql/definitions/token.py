@@ -1,8 +1,7 @@
 import strawberry
-
 from strawberry.types import Info
-from src.auth.utils import generate_jwt
 
+from src.auth.utils import generate_jwt
 from src.config import Configuration
 from src.db.models import User as UserModel
 
