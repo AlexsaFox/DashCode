@@ -1,7 +1,6 @@
 from base64 import urlsafe_b64encode
 from datetime import datetime
 from secrets import token_bytes
-from typing import TYPE_CHECKING
 
 import bcrypt
 from sqlalchemy import (
@@ -20,31 +19,30 @@ from src.db.validation import (
     EMAIL_REGEXP,
     PASSWORD_REGEXP,
     USERNAME_REGEXP,
-    ValidationError,
+    ModelFieldValidationError,
 )
-
-
-if TYPE_CHECKING:
-    hybrid_property = property
-else:
-    from sqlalchemy.ext.hybrid import hybrid_property
 
 
 Base = declarative_base()
 
 
 class User(Base):
-    # fmt: off
-    if TYPE_CHECKING:
-        def __init__(self, username: str, email: str, is_superuser: bool = ...): ...
-    # fmt: on
-
     __tablename__ = 'users'
+
+    def __init__(
+        self, username: str, email: str, password: str, is_superuser: bool = False
+    ):
+        User.validate_fields(username=username, email=email, password=password)
+        self.username = username
+        self.email = email
+        self.is_superuser = is_superuser
+        salt: bytes = bcrypt.gensalt()
+        self.password_hash = bcrypt.hashpw(password.encode(), salt).decode()
 
     id: int = Column(Integer, primary_key=True)
     is_superuser: bool = Column(Boolean, nullable=False, default=False)
-    _username: str = Column('username', String(80), unique=True, nullable=False)
-    _email: str = Column('email', String(120), unique=True, nullable=False)
+    username: str = Column(String(80), unique=True, nullable=False)
+    email: str = Column(String(120), unique=True, nullable=False)
     password_hash: str = Column(String(100), nullable=False)
     profile_color: str = Column(String(7), nullable=False, default='#ffffff')
     profile_picture_filename: str = Column(
@@ -52,36 +50,26 @@ class User(Base):
     )
     notes: list['Note'] = relationship('Note', backref='user', lazy='select')
 
-    @hybrid_property
-    def email(self) -> str:
-        return self._email
+    @classmethod
+    def validate_fields(
+        self,
+        username: str | None = None,
+        email: str | None = None,
+        password: str | None = None,
+    ) -> None:
+        error_fields = []
 
-    @email.setter
-    def email(self, value: str):
-        if not EMAIL_REGEXP.fullmatch(value):
-            raise ValidationError('email', value)
-        self._email = value
+        if username is not None and not USERNAME_REGEXP.fullmatch(username):
+            error_fields.append('username')
 
-    @hybrid_property
-    def username(self) -> str:
-        return self._username
+        if email is not None and not EMAIL_REGEXP.fullmatch(email):
+            error_fields.append('email')
 
-    @username.setter
-    def username(self, value: str):
-        if not USERNAME_REGEXP.fullmatch(value):
-            raise ValidationError('username', value)
-        self._username = value
+        if password is not None and not PASSWORD_REGEXP.fullmatch(password):
+            error_fields.append('password')
 
-    @hybrid_property
-    def password(self) -> str:
-        raise AttributeError("can't access password")
-
-    @password.setter
-    def password(self, value: str):
-        if not PASSWORD_REGEXP.fullmatch(value):
-            raise ValidationError('password', value)
-        salt: bytes = bcrypt.gensalt()
-        self.password_hash = bcrypt.hashpw(value.encode(), salt).decode()
+        if error_fields:
+            raise ModelFieldValidationError(error_fields)
 
 
 note_tag_association_table = Table(

@@ -1,5 +1,3 @@
-import pytest
-
 from src.db.models import User
 from tests.utils import GraphQLClient
 
@@ -17,6 +15,12 @@ mutation {{
                 username
                 email
                 profileColor
+            }}
+        }}
+        ... on ValidationError {{
+            fields {{
+                field
+                details
             }}
         }}
     }}
@@ -90,3 +94,16 @@ async def test_registration_duplicate_email(
             }
         }
     }
+
+
+async def test_invalid_value(graphql_client: GraphQLClient) -> None:
+    response = await graphql_client.make_request(
+        query=REGISTRATION_QUERY.format(
+            username='this is definitely not a valid username because it has spaces',
+            email='valid@email.wow',
+            password='longandstrongpassword',
+        )
+    )
+
+    assert response.status_code == 200
+    assert response.json()['data']['registerUser']['__typename'] == 'ValidationError'

@@ -91,8 +91,8 @@ def create_user(
         username=username,
         email=email,
         is_superuser=is_superuser,
+        password=password,
     )
-    user.password = password
 
     try:
         session.add(user)

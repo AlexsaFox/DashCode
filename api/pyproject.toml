@@ -36,6 +36,7 @@ line-length = 88
 target-version = ['py310']
 skip-string-normalization = true
 include = "run\\.py|src|tests"
+extend-exclude = "src/locale/translations/.*"
 preview = true
 
 [tool.isort]

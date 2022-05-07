@@ -1,6 +1,7 @@
 import strawberry
 
 from src.graphql.definitions.user import User
+from src.graphql.definitions.validation_error import ValidationError
 
 
 @strawberry.type
@@ -15,5 +16,5 @@ class RegisterUserSuccess:
 
 
 RegisterUserResponse = strawberry.union(
-    "RegisterUserResponse", (RegisterUserSuccess, UserAlreadyExists)
+    "RegisterUserResponse", (RegisterUserSuccess, UserAlreadyExists, ValidationError)
 )

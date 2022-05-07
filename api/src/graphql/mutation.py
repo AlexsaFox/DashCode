@@ -5,7 +5,7 @@ from strawberry.types import Info
 from src.auth.utils import UserExistsError, create_user
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
-from src.db.validation import ValidationError
+from src.db.validation import ModelFieldValidationError
 from src.graphql.definitions.note import Note
 from src.graphql.definitions.register_user_response import (
     RegisterUserResponse,
@@ -13,6 +13,7 @@ from src.graphql.definitions.register_user_response import (
     UserAlreadyExists,
 )
 from src.graphql.definitions.user import User
+from src.graphql.definitions.validation_error import FieldError, ValidationError
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
 from src.utils.note import create_note
@@ -32,10 +33,14 @@ class Mutation:
                 create_user, username=username, email=email, password=password
             )
             return RegisterUserSuccess(User.from_instance(user))
+        except ModelFieldValidationError as err:
+            error_fields = [
+                FieldError(field=field, details=t(f'validation.user.errors.{field}'))
+                for field in err.fields
+            ]
+            return ValidationError(error_fields)
         except UserExistsError as err:
             return UserAlreadyExists(field=err.field, value=err.value)
-        except ValidationError as err:
-            raise ValueError(t(f'validation.user.errors.{err.field}'))
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     async def create_note(
