@@ -1,14 +1,14 @@
 not-found: Не найден
 login:
-  no-account: ~
-  no-account-link: ~
-  submit-button: ~
+  no-account: Всё ещё не зарегистрированы?
+  no-account-link: Зарегистрироваться сейчас
+  submit-button: Войти
   labels:
-    username: ~
-    password: ~
+    username: Ваш идентификатор или адрес электронной почты
+    password: Пароль
   errors:
-    username-required: ~
-    password-required: ~
+    username-required: Требуется идентификатор или адрес электронной почты
+    password-required: Требуется пароль
 login-sign-up:
   text: >-
     Dashcode - это веб-приложение для написания и чтения полезных советов и полезных
@@ -18,18 +18,18 @@ login-sign-up:
     От простых заметок до социальной сети, в которой вы можете найти ответы на
     все интересующие вас вопросы.
 sign-up:
-  have-account: ~
-  have-account-link: ~
-  submit-button: ~
+  have-account: Уже зарегистрированы?
+  have-account-link: Войти
+  submit-button: Вход
   labels:
-    username: ~
-    email: ~
-    password: ~
-    confirm-password: ~
+    username: Идентификатор пользователя
+    email: Адрес электронной почты
+    password: Пароль
+    confirm-password: Подтвердить пароль
   errors:
     user-exists: Пользователь "{value}" уже зарегистрирован 
-    username-required: ~
-    email-required: ~
-    email-invalid: ~
-    password-required: ~
-    passwords-do-not-match: ~
+    username-required: Требуется идентификатор
+    email-required: Требуется адрес электронной почты
+    email-invalid: Адрес электронной почты некорректен, введите корректный адрес
+    password-required: Требуется пароль
+    passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
