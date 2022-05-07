@@ -4,3 +4,15 @@ en:
       bad_credentials: Unable to find user with provided credentials
       no_login: You must provide username or email
       no_auth: Authentication required
+
+  validation:
+    user:
+      errors:
+        username: >-
+          Bad username. Username must contain only latin letters, digits,
+          underscores, dashes, dots and be less then 80 symbols long
+        email: >-
+          Bad email. Email address must be valid and can't contain more than 120
+          characters
+        password: >-
+          Password must contain at least 8 characters

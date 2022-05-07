@@ -24,7 +24,7 @@ jwt:
 base_superuser:
   username: admin
   email: admin@admin.com
-  password: admin
+  password: admin123
 
 localization:
   fallback_locale: en

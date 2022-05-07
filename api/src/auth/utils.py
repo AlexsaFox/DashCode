@@ -87,14 +87,12 @@ def create_user(
     password: str,
     is_superuser: bool = False,
 ) -> User:
-    salt: bytes = bcrypt.gensalt()
-    password_hash = bcrypt.hashpw(password.encode(), salt).decode()
     user = User(
         username=username,
         email=email,
-        password_hash=password_hash,
         is_superuser=is_superuser,
     )
+    user.password = password
 
     try:
         session.add(user)
