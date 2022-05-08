@@ -24,10 +24,6 @@ class UsernameOrEmailNotProvidedError(ExpectedError):
         super().__init__(msg)
 
 
-def _is_password_valid(passwd: str, passwd_hash: str) -> bool:
-    return bcrypt.checkpw(passwd.encode(), passwd_hash.encode())
-
-
 def authenticate_user(
     session: Session,
     password: str,
@@ -42,7 +38,7 @@ def authenticate_user(
         .filter(or_(User.username == username, User.email == email))
         .first()
     )
-    if user is None or not _is_password_valid(password, user.password_hash):
+    if user is None or not user.check_password(password):
         raise AuthenticationFailedError
 
     return cast(User, user)
@@ -106,3 +102,9 @@ def create_user(
         raise UserExistsError(column, value)
 
     return user
+
+
+def delete_user(session: Session, user: User):
+    session.add(user)
+    session.delete(user)
+    session.commit()

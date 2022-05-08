@@ -33,10 +33,6 @@ async def get_user_or_none(
     if token is None:
         return None
 
-    if await cache.exists(token):
-        pickled = await cache.get(token)
-        return pickle.loads(pickled)
-
     try:
         jwt_claims = decode_jwt(config, token)
     except (BadSignatureError, DecodeError, ExpiredTokenError, InvalidClaimError):
@@ -48,9 +44,6 @@ async def get_user_or_none(
     if row is None:
         return None
     user: User = row[0]
-
-    pickled = pickle.dumps(user)
-    await cache.set(token, pickled, config.cache.expire_minutes)
 
     return user
 

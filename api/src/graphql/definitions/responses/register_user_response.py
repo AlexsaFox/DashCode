@@ -1,7 +1,7 @@
 import strawberry
 
+from src.graphql.definitions.errors.validation_error import ValidationError
 from src.graphql.definitions.user import Account
-from src.graphql.definitions.validation_error import ValidationError
 
 
 @strawberry.type

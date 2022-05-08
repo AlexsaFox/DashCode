@@ -48,7 +48,9 @@ class User(Base):
     profile_picture_filename: str = Column(
         String(40), nullable=False, default='default.webp'
     )
-    notes: list['Note'] = relationship('Note', backref='user', lazy='select')
+    notes: list['Note'] = relationship(
+        'Note', backref='user', lazy='select', cascade='all, delete'
+    )
 
     @classmethod
     def validate_fields(
@@ -70,6 +72,9 @@ class User(Base):
 
         if error_fields:
             raise ModelFieldValidationError(error_fields)
+
+    def check_password(self, password: str) -> bool:
+        return bcrypt.checkpw(password.encode(), self.password_hash.encode())
 
 
 note_tag_association_table = Table(

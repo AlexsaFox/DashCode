@@ -2,19 +2,24 @@ import strawberry
 from sqlalchemy.ext.asyncio.session import AsyncSession
 from strawberry.types import Info
 
-from src.auth.utils import UserExistsError, create_user
+from src.auth.utils import UserExistsError, create_user, delete_user
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
 from src.db.validation import ModelFieldValidationError
+from src.graphql.definitions.errors.validation_error import FieldError, ValidationError
 from src.graphql.definitions.note import Note
-from src.graphql.definitions.register_user_response import (
+from src.graphql.definitions.responses.delete_user_response import (
+    DeleteUserResponse,
+    DeleteUserSuccess,
+)
+from src.graphql.definitions.responses.register_user_response import (
     RegisterUserResponse,
     RegisterUserSuccess,
     UserAlreadyExists,
 )
-from src.graphql.definitions.user import Account
-from src.graphql.definitions.validation_error import FieldError, ValidationError
+from src.graphql.definitions.user import Account, User
 from src.graphql.permissions.auth import IsAuthenticated
+from src.graphql.permissions.require_password import requires_password
 from src.locale.dependencies import Translator
 from src.utils.note import create_note
 
@@ -41,6 +46,15 @@ class Mutation:
             return ValidationError(error_fields)
         except UserExistsError as err:
             return UserAlreadyExists(field=err.field, value=err.value)
+
+    @strawberry.mutation(permission_classes=[IsAuthenticated])
+    @requires_password
+    async def delete_user(self, info: Info, password: str) -> DeleteUserResponse:
+        session: AsyncSession = info.context['session']
+        user: UserModel = info.context['user']
+
+        await session.run_sync(delete_user, user)
+        return DeleteUserSuccess(account=Account.from_instance(user))
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     async def create_note(
