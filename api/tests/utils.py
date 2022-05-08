@@ -7,11 +7,9 @@ class GraphQLClient:
         self.client = client
 
     async def make_request(
-        self,
-        query: str,
-        token: str | None = None,
+        self, query: str, token: str | None = None, lang_header: str = 'en'
     ) -> Response:
-        headers = {}
+        headers = {'Accept-Language': lang_header}
         if token is not None:
             headers['Authorization'] = f'Bearer {token}'
 

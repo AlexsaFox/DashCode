@@ -20,8 +20,6 @@ function go(location: string) {
 </template>
 
 <style scoped lang="scss">
-@import url('../../assets/scss/fonts.scss');
-
 button {
   margin: 0 6px;
   padding: 10px 32px;

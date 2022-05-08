@@ -1,4 +1,5 @@
 <template>
+  <ErrorIndicator />
   <main>
     <RouterView />
   </main>

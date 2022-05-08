@@ -1,20 +1,39 @@
 not-found: Not found
-login-sign-up:
-  text: "DashCode is a web app for the writing and reading useful tips and helpful solutions for programmers and also for other people. With DashCode you can organize your knowledge.\nFrom just making notes to social media where you can find answers for all you questions."
 login:
-  username-label: "Username or email"
-  password-label: "Password"
-  submit-button: "Login"
-  no-account: "Don't have an account yet?"
-  no-account-link: "Register now"
+  no-account: Don't have an account yet?
+  no-account-link: Register now
+  submit-button: Login
+  labels:
+    username: Username or email
+    password: Password
+  errors:
+    username-required: Username or email is required
+    password-required: Password is required
+login-sign-up:
+  text: >-
+    DashCode is a web app for the writing and reading useful tips and helpful
+    solutions for programmers and also for other people. With DashCode you can
+    organize your knowledge.
+
+    From just making notes to social media where you can find answers for all
+    you questions.
 sign-up:
-  username-label: "Username"
-  email-label: "Email"
-  password-label: "Password"
-  confirm-password-label: "Confirm password"
-  submit-button: "Register"
-  have-account: "Already have login?"
-  have-account-link: "Sign in"
+  have-account: Already have account?
+  have-account-link: Sign in
+  submit-button: Register
+  labels:
+    username: Username
+    email: Email
+    password: Password
+    confirm-password: Confirm password
+  errors:
+    user-exists: User with {field} "{value}" already exists
+    username-required: Username is required
+    email-required: Email is required
+    email-invalid: Enter valid email address
+    password-required: Password is required
+    passwords-do-not-match: Password and confirm password fields do not match
+
 note_show:
   edit-button: "Edit"
   author-of-note: "User"

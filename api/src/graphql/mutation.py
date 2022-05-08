@@ -4,8 +4,8 @@ from strawberry.types import Info
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from src.auth.utils import UserExistsError, create_user
-from src.graphql.defenitions.user import User
-from src.graphql.defenitions.register_user_response import (
+from src.graphql.definitions.user import User
+from src.graphql.definitions.register_user_response import (
     RegisterUserResponse,
     RegisterUserSuccess,
     UserAlreadyExists,
