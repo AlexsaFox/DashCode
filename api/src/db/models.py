@@ -1,6 +1,7 @@
 from base64 import urlsafe_b64encode
 from datetime import datetime
 from secrets import token_bytes
+from typing import Any, Callable, Mapping
 
 import bcrypt
 from sqlalchemy import (
@@ -13,9 +14,10 @@ from sqlalchemy import (
     Table,
     Text,
 )
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import Session, declarative_base, relationship
 
 from src.db.validation import (
+    COLOR_REGEXP,
     EMAIL_REGEXP,
     PASSWORD_REGEXP,
     USERNAME_REGEXP,
@@ -26,13 +28,52 @@ from src.db.validation import (
 Base = declarative_base()
 
 
-class User(Base):
+class ValidatedModel:
+    validators: Mapping[str, Callable[[Any], bool]]
+
+    def validate_fields(self, **kwargs: Any):
+        kwargs = {f: v for f, v in kwargs.items() if v is not None}
+
+        error_fields = []
+        for field, value in kwargs.items():
+            validate = self.validators.get(field)
+            if validate is None:
+                raise ValueError(f'Unknown field: {field}')
+
+            if not validate(value):
+                error_fields.append(field)
+
+        if error_fields:
+            raise ModelFieldValidationError(self, error_fields)
+
+    def update_fields(self, session: Session, **kwargs: Any):
+        kwargs = {f: v for f, v in kwargs.items() if v is not None}
+        self.validate_fields(**kwargs)
+
+        # Fields are already validated, so it's guaranteed that
+        # no impostors will be among them
+        for field, value in kwargs.items():
+            setattr(self, field, value)
+
+        session.add(self)
+        session.commit()
+        session.refresh(self)
+
+
+class User(Base, ValidatedModel):
     __tablename__ = 'users'
+
+    validators = {
+        'username': lambda val: USERNAME_REGEXP.fullmatch(val) is not None,
+        'email': lambda val: EMAIL_REGEXP.fullmatch(val) is not None,
+        'password': lambda val: PASSWORD_REGEXP.fullmatch(val) is not None,
+        'profile_color': lambda val: COLOR_REGEXP.fullmatch(val) is not None,
+    }
 
     def __init__(
         self, username: str, email: str, password: str, is_superuser: bool = False
     ):
-        User.validate_fields(username=username, email=email, password=password)
+        self.validate_fields(username=username, email=email, password=password)
         self.username = username
         self.email = email
         self.is_superuser = is_superuser
@@ -51,27 +92,6 @@ class User(Base):
     notes: list['Note'] = relationship(
         'Note', backref='user', lazy='select', cascade='all, delete'
     )
-
-    @classmethod
-    def validate_fields(
-        self,
-        username: str | None = None,
-        email: str | None = None,
-        password: str | None = None,
-    ) -> None:
-        error_fields = []
-
-        if username is not None and not USERNAME_REGEXP.fullmatch(username):
-            error_fields.append('username')
-
-        if email is not None and not EMAIL_REGEXP.fullmatch(email):
-            error_fields.append('email')
-
-        if password is not None and not PASSWORD_REGEXP.fullmatch(password):
-            error_fields.append('password')
-
-        if error_fields:
-            raise ModelFieldValidationError(error_fields)
 
     def check_password(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode(), self.password_hash.encode())

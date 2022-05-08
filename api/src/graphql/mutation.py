@@ -12,6 +12,10 @@ from src.graphql.definitions.responses.delete_user import (
     DeleteUserResponse,
     DeleteUserSuccess,
 )
+from src.graphql.definitions.responses.edit_account import (
+    EditAccountAuthResponse,
+    EditAccountSuccess,
+)
 from src.graphql.definitions.responses.register_user import (
     RegisterUserResponse,
     RegisterUserSuccess,
@@ -39,13 +43,51 @@ class Mutation:
             )
             return RegisterUserSuccess(Account.from_instance(user))
         except ModelFieldValidationError as err:
-            error_fields = [
-                FieldError(field=field, details=t(f'validation.user.errors.{field}'))
-                for field in err.fields
-            ]
-            return ValidationError(error_fields)
+            return ValidationError.from_exception(err, t)
         except UserExistsError as err:
             return UserAlreadyExists(field=err.field, value=err.value)
+
+    @strawberry.mutation(permission_classes=[IsAuthenticated])
+    @requires_password
+    async def edit_account_auth(
+        self,
+        info: Info,
+        password: str,
+        new_password: str | None = None,
+        new_email: str | None = None,
+    ) -> EditAccountAuthResponse:
+        session: AsyncSession = info.context['session']
+        user: UserModel = info.context['user']
+        t: Translator = info.context['translator']
+
+        try:
+            await session.run_sync(
+                user.update_fields, email=new_email, password=new_password
+            )
+            return EditAccountSuccess(Account.from_instance(user))
+        except ModelFieldValidationError as err:
+            return ValidationError.from_exception(err, t)
+
+    @strawberry.mutation(permission_classes=[IsAuthenticated])
+    async def edit_account(
+        self,
+        info: Info,
+        new_username: str | None = None,
+        new_profile_color: str | None = None,
+    ) -> EditAccountAuthResponse:
+        session: AsyncSession = info.context['session']
+        user: UserModel = info.context['user']
+        t: Translator = info.context['translator']
+
+        try:
+            await session.run_sync(
+                user.update_fields,
+                username=new_username,
+                profile_color=new_profile_color,
+            )
+            return EditAccountSuccess(Account.from_instance(user))
+        except ModelFieldValidationError as err:
+            return ValidationError.from_exception(err, t)
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     @requires_password

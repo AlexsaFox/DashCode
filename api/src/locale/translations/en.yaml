@@ -8,13 +8,13 @@ en:
         wrong_password: Wrong password
 
   validation:
-    user:
-      errors:
+    errors:
+      user:
         username: >-
           Bad username. Username must contain only latin letters, digits,
           underscores, dashes, dots and be less then 80 symbols long
         email: >-
           Bad email. Email address must be valid and can't contain more than 120
           characters
-        password: >-
-          Password must contain at least 8 characters
+        password: Password must contain at least 8 characters
+        profile_color: Profile color must be in the format of \#rrggbb
