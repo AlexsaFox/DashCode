@@ -1,10 +1,10 @@
 import strawberry
 
-from src.graphql.definitions.errors.response_error import ResponseError
+from src.graphql.definitions.errors.request_value_error import RequestValueError
 
 
 @strawberry.type
-class FieldError(ResponseError):
+class FieldError(RequestValueError):
     field: str
 
 

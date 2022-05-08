@@ -1,6 +1,6 @@
 import strawberry
 
-from src.graphql.definitions.errors.wrong_password import WrongPasswordError
+from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.graphql.definitions.user import Account
 
 
@@ -10,5 +10,5 @@ class DeleteUserSuccess:
 
 
 DeleteUserResponse = strawberry.union(
-    'DeleteUserResponse', (DeleteUserSuccess, WrongPasswordError)
+    'DeleteUserResponse', (DeleteUserSuccess, RequestValueError)
 )

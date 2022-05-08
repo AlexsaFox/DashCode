@@ -4,11 +4,12 @@ from strawberry.types import Info
 
 from src.auth.utils import (
     AuthenticationFailedError,
-    UsernameOrEmailNotProvidedError,
+    IdentificationError,
     authenticate_user,
 )
 from src.db.models import User as UserModel
-from src.graphql.definitions.token import Token
+from src.graphql.definitions.errors.request_value_error import RequestValueError
+from src.graphql.definitions.responses.get_token_response import GetTokenResponse, Token
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
@@ -28,7 +29,7 @@ class Query:
         password: str,
         username: str | None = None,
         email: str | None = None,
-    ) -> Token | None:
+    ) -> GetTokenResponse:
         session: AsyncSession = info.context['session']
         t: Translator = info.context['translator']
 
@@ -37,8 +38,8 @@ class Query:
                 authenticate_user, username=username, email=email, password=password
             )
         except AuthenticationFailedError:
-            raise AuthenticationFailedError(t('auth.errors.bad_credentials'))
-        except UsernameOrEmailNotProvidedError:
-            raise UsernameOrEmailNotProvidedError(t('auth.errors.no_login'))
+            return RequestValueError(t('auth.errors.bad_credentials'))
+        except IdentificationError:
+            return RequestValueError(t('auth.errors.no_login'))
 
         return Token.from_user(user, info)

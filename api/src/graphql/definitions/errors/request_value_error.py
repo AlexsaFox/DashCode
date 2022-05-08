@@ -2,5 +2,5 @@ import strawberry
 
 
 @strawberry.type
-class ResponseError:
+class RequestValueError:
     details: str

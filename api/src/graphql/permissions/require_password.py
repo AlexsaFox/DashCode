@@ -4,7 +4,7 @@ from typing import Callable
 from strawberry.types import Info
 
 from src.db.models import User as UserModel
-from src.graphql.definitions.errors.wrong_password import WrongPasswordError
+from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.locale.dependencies import Translator
 
 
@@ -15,7 +15,7 @@ def requires_password(func: Callable) -> Callable:
         t: Translator = info.context['translator']
 
         if not user.check_password(password):
-            return WrongPasswordError(t('auth.errors.require_password.wrong_password'))
+            return RequestValueError(t('auth.errors.require_password.wrong_password'))
         return await func(self, info=info, password=password, **kwargs)
 
     return password_check

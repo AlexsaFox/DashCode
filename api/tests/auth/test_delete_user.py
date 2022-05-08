@@ -9,7 +9,7 @@ DELETE_QUERY = '''
 mutation {{
     deleteUser(password: "{password}") {{
         __typename
-        ... on WrongPasswordError {{
+        ... on RequestValueError {{
             details
         }}
         ... on DeleteUserSuccess {{
@@ -67,7 +67,7 @@ async def test_delete_user_wrong_password(
     assert response.json() == {
         'data': {
             'deleteUser': {
-                '__typename': 'WrongPasswordError',
+                '__typename': 'RequestValueError',
                 'details': 'Wrong password',
             }
         }

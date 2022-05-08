@@ -5,8 +5,14 @@ from tests.utils import GraphQLClient
 TOKEN_QUERY_USERNAME = '''
 {{
     token(username: "{username}", password: "{password}") {{
-        accessToken
-        tokenType
+        __typename
+        ... on RequestValueError {{
+            details
+        }}
+        ... on Token {{
+            accessToken
+            tokenType
+        }}
     }}
 }}
 '''
@@ -23,4 +29,7 @@ async def check_localization(
     )
 
     assert response.status_code == 200
-    assert response.json()['errors'][0]['message'] == correct_err_str
+
+    data = response.json()['data']['token']
+    assert data['__typename'] == 'RequestValueError'
+    assert data['details'] == correct_err_str

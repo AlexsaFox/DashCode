@@ -19,7 +19,7 @@ class AuthenticationFailedError(ExpectedError):
         super().__init__(msg)
 
 
-class UsernameOrEmailNotProvidedError(ExpectedError):
+class IdentificationError(ExpectedError):
     def __init__(self, msg: str = 'You must provide username or email'):
         super().__init__(msg)
 
@@ -31,7 +31,7 @@ def authenticate_user(
     email: str | None = None,
 ) -> User:
     if username is None and email is None:
-        raise UsernameOrEmailNotProvidedError
+        raise IdentificationError
 
     user: User | None = (
         session.query(User)

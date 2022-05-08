@@ -12,16 +12,28 @@ from tests.utils import GraphQLClient
 TOKEN_QUERY_USERNAME = '''
 {{
     token(username: "{username}", password: "{password}") {{
-        accessToken
-        tokenType
+        __typename
+        ... on RequestValueError {{
+            details
+        }}
+        ... on Token {{
+            accessToken
+            tokenType
+        }}
     }}
 }}
 '''
 TOKEN_QUERY_EMAIL = '''
 {{
     token(email: "{email}", password: "{password}") {{
-        accessToken
-        tokenType
+        __typename
+        ... on RequestValueError {{
+            details
+        }}
+        ... on Token {{
+            accessToken
+            tokenType
+        }}
     }}
 }}
 '''
@@ -58,8 +70,9 @@ async def test_token_by_username(
     assert response.status_code == 200
     assert response.json().get('errors') is None
 
-    token_data = response.json()['data']['token']
-    await token_is_valid(token_data, user, database_session, cache, test_config)
+    data = response.json()['data']
+    assert data['token']['__typename'] == 'Token'
+    await token_is_valid(data['token'], user, database_session, cache, test_config)
 
 
 async def test_token_by_email(
@@ -75,8 +88,9 @@ async def test_token_by_email(
     assert response.status_code == 200
     assert response.json().get('errors') is None
 
-    token_data = response.json()['data']['token']
-    await token_is_valid(token_data, user, database_session, cache, test_config)
+    data = response.json()['data']
+    assert data['token']['__typename'] == 'Token'
+    await token_is_valid(data['token'], user, database_session, cache, test_config)
 
 
 async def test_login_with_bad_creds(graphql_client: GraphQLClient, user: User):
@@ -88,7 +102,5 @@ async def test_login_with_bad_creds(graphql_client: GraphQLClient, user: User):
     assert response.status_code == 200
 
     data = response.json()['data']
-    assert data['token'] is None
-
-    errors = response.json()['errors']
-    assert len(errors) > 0
+    assert data['token']['__typename'] == 'RequestValueError'
+    assert data['token']['details'] is not None
