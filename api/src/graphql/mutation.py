@@ -8,11 +8,11 @@ from src.db.models import User as UserModel
 from src.db.validation import ModelFieldValidationError
 from src.graphql.definitions.errors.validation_error import FieldError, ValidationError
 from src.graphql.definitions.note import Note
-from src.graphql.definitions.responses.delete_user_response import (
+from src.graphql.definitions.responses.delete_user import (
     DeleteUserResponse,
     DeleteUserSuccess,
 )
-from src.graphql.definitions.responses.register_user_response import (
+from src.graphql.definitions.responses.register_user import (
     RegisterUserResponse,
     RegisterUserSuccess,
     UserAlreadyExists,

@@ -9,7 +9,7 @@ from src.auth.utils import (
 )
 from src.db.models import User as UserModel
 from src.graphql.definitions.errors.request_value_error import RequestValueError
-from src.graphql.definitions.responses.get_token_response import GetTokenResponse, Token
+from src.graphql.definitions.responses.get_token import GetTokenResponse, Token
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
