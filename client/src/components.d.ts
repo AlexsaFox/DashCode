@@ -5,23 +5,16 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ActiveButton: typeof import('./components/Header/Buttons/ActiveButton.vue')['default']
-    Button: typeof import('./components/Header/HeaderButton.vue')['default']
-    Counter: typeof import('./components/Counter.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
-    HeadarButton: typeof import('./components/Header/HeaderButton.vue')['default']
     Header: typeof import('./components/Header/Header.vue')['default']
     HeaderButton: typeof import('./components/Header/HeaderButton.vue')['default']
-    InactiveButton: typeof import('./components/Header/Buttons/InactiveButton.vue')['default']
-    Input: typeof import('./components/LoginSignup/LoginSignupFormInput.vue')['default']
-    LoginSignupBase: typeof import('./components/LoginSignup/LoginSignupText.vue')['default']
     LoginSignupForm: typeof import('./components/LoginSignup/LoginSignupForm.vue')['default']
     LoginSignupFormInput: typeof import('./components/LoginSignup/LoginSignupFormInput.vue')['default']
     LoginSignupText: typeof import('./components/LoginSignup/LoginSignupText.vue')['default']
-    README: typeof import('./components/README.md')['default']
+    NavButtons: typeof import('./components/Home/NavButtons.vue')['default']
+    PopupCheck: typeof import('./components/Note/PopupCheck.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TextInput: typeof import('./components/LoginSignup/Inputs/TextInput.vue')['default']
   }
 }
 

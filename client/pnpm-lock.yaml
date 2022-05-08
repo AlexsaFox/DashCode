@@ -40,6 +40,7 @@ specifiers:
   vue-demi: ^0.12.5
   vue-i18n: ^9.1.9
   vue-router: ^4.0.14
+  vue-textarea-autosize: ^1.1.1
   vue-tsc: ^0.34.8
 
 dependencies:
@@ -53,6 +54,7 @@ dependencies:
   vue-demi: 0.12.5_vue@3.2.33
   vue-i18n: 9.1.9_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
+  vue-textarea-autosize: 1.1.1
 
 devDependencies:
   '@antfu/eslint-config': 0.20.6_eslint@8.13.0+typescript@4.6.3
@@ -2838,6 +2840,12 @@ packages:
       browserslist: 4.20.2
       semver: 7.0.0
     dev: true
+
+  /core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
+    deprecated: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
 
   /core-util-is/1.0.2:
     resolution: {integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=}
@@ -7113,6 +7121,12 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.1.4
       vue: 3.2.33
+    dev: false
+
+  /vue-textarea-autosize/1.1.1:
+    resolution: {integrity: sha512-B33Mg5ZDEfj/whhoPBLg25qqAdGHGM2NjDT99Qi5MXRyeLmXb4C3s6EprAHqy3nU0cooWXFU+IekI5DpoEbnFg==}
+    dependencies:
+      core-js: 2.6.12
     dev: false
 
   /vue-tsc/0.34.8_typescript@4.6.3:

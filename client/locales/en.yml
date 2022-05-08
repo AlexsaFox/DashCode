@@ -15,3 +15,11 @@ sign-up:
   submit-button: "Register"
   have-account: "Already have login?"
   have-account-link: "Sign in"
+note_show:
+  edit-button: "Edit"
+  author-of-note: "User"
+  date-of-creation-label: "Was created"
+note_edit:
+  save-button: "Save"
+note_create:
+  create-button: "Create"
