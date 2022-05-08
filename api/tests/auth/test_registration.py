@@ -11,10 +11,13 @@ mutation {{
             value
         }}
         ... on RegisterUserSuccess {{
-            user {{
-                username
+            account {{
+                user {{
+                    username
+                    profileColor
+                    isSuperuser
+                }}
                 email
-                profileColor
             }}
         }}
         ... on ValidationError {{
@@ -40,10 +43,13 @@ async def test_registration(graphql_client: GraphQLClient) -> None:
         'data': {
             'registerUser': {
                 '__typename': 'RegisterUserSuccess',
-                'user': {
-                    'username': 'user',
+                'account': {
+                    'user': {
+                        'username': 'user',
+                        'profileColor': '#ffffff',
+                        'isSuperuser': False,
+                    },
                     'email': 'user@user.com',
-                    'profileColor': '#ffffff',
                 },
             }
         }

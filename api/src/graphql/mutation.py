@@ -12,7 +12,7 @@ from src.graphql.definitions.register_user_response import (
     RegisterUserSuccess,
     UserAlreadyExists,
 )
-from src.graphql.definitions.user import User
+from src.graphql.definitions.user import Account
 from src.graphql.definitions.validation_error import FieldError, ValidationError
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
@@ -32,7 +32,7 @@ class Mutation:
             user = await session.run_sync(
                 create_user, username=username, email=email, password=password
             )
-            return RegisterUserSuccess(User.from_instance(user))
+            return RegisterUserSuccess(Account.from_instance(user))
         except ModelFieldValidationError as err:
             error_fields = [
                 FieldError(field=field, details=t(f'validation.user.errors.{field}'))

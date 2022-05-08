@@ -9,7 +9,7 @@ from src.auth.utils import (
 )
 from src.db.models import User as UserModel
 from src.graphql.definitions.token import Token
-from src.graphql.definitions.user import User
+from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
 
@@ -17,9 +17,9 @@ from src.locale.dependencies import Translator
 @strawberry.type
 class Query:
     @strawberry.field(permission_classes=[IsAuthenticated])
-    async def whoami(self, info: Info) -> User:
+    async def whoami(self, info: Info) -> Account:
         user: UserModel = info.context['user']
-        return User.from_instance(user)
+        return Account.from_instance(user)
 
     @strawberry.field
     async def token(

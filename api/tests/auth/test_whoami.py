@@ -5,10 +5,12 @@ from tests.utils import GraphQLClient
 WHOAMI_QUERY = '''
 {
     whoami {
-        username
+        user {
+            username
+            profileColor
+            isSuperuser
+        }
         email
-        profileColor
-        isSuperuser
     }
 }
 '''
@@ -23,7 +25,7 @@ async def test_whoami(graphql_client: GraphQLClient, token_user: tuple[str, User
     assert response.json().get('errors') is None
 
     user_data = response.json()['data']['whoami']
-    assert user_data['username'] == user.username
     assert user_data['email'] == user.email
-    assert user_data['profileColor'] == user.profile_color
-    assert user_data['isSuperuser'] == user.is_superuser
+    assert user_data['user']['username'] == user.username
+    assert user_data['user']['profileColor'] == user.profile_color
+    assert user_data['user']['isSuperuser'] == user.is_superuser

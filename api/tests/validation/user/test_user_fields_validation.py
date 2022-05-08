@@ -10,10 +10,13 @@ mutation {{
             value
         }}
         ... on RegisterUserSuccess {{
-            user {{
-                username
+            account {{
+                user {{
+                    username
+                    profileColor
+                    isSuperuser
+                }}
                 email
-                profileColor
             }}
         }}
         ... on ValidationError {{
