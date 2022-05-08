@@ -9,16 +9,16 @@
       <span>user.username</span>
     </div>
     <div class="display_with_button">
-      <a href="#popup"><button class="standart_button">
+      <a href="#popup"><button class="standard_button">
         <div class="i-carbon:add" />Add notes
       </button></a>
-      <a><button class="standart_button">
+      <a><button class="standard_button">
         <div class="i-carbon:arrow-right" />Social media
       </button></a>
-      <a><button class="standart_button">
+      <a><button class="standard_button">
         <div class="i-carbon:user-avatar-filled-alt" /> Subscritions
       </button></a>
-      <a href="#popup5"><button class="standart_button">
+      <a href="#popup5"><button class="standard_button">
         <div class="i-carbon:folder" />My notes
       </button></a>
     </div>
@@ -60,9 +60,9 @@
   </div>
 </template>
 <style scoped lang="scss">
-@import "../../assets/scss/StandartButton.scss";
-.standart_button{
-  @include standart_buttons;
+@import "../../assets/scss/standard-button.scss";
+.standard_button{
+  @include standard-button;
 }
 .block{
     color:white;
