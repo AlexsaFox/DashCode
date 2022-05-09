@@ -53,7 +53,7 @@ defineProps<{
   p {
     margin: 10px;
     color: white;
-    font-size: 16px;
+    font-size: 20px;
     font-family: 'ClearSans-Regular';
 
     a {

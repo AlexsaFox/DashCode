@@ -4,12 +4,25 @@
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
   title: 'DashCode',
-  meta: [
-    { name: 'description', content: '' },
-  ],
+  meta: [{ name: 'description', content: '' }],
 })
 </script>
 
 <template>
   <RouterView />
 </template>
+
+<style lang="scss">
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1a2641;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #303d67;
+  border-radius: 10px;
+}
+</style>

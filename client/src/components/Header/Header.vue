@@ -17,7 +17,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
   background-color: #111A2D;
 
   $nav-padding-y: 6px;

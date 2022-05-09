@@ -5,23 +5,28 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ActiveButton: typeof import('./components/Header/Buttons/ActiveButton.vue')['default']
-    Button: typeof import('./components/Header/HeaderButton.vue')['default']
-    Counter: typeof import('./components/Counter.vue')['default']
+    AccountPreview: typeof import('./components/Settings/left_part/MyAccount/AccountPreview.vue')['default']
+    AccountRemoval: typeof import('./components/Settings/left_part/MyAccount/AccountRemoval.vue')['default']
+    APIToken: typeof import('./components/Settings/left_part/ApiToken/APIToken.vue')['default']
+    Avatar: typeof import('./components/Settings/left_part/MyAccount/Avatar.vue')['default']
+    ChangeColor: typeof import('./components/Settings/left_part/UserProfile/ChangeColor.vue')['default']
+    ChangeUsername: typeof import('./components/Settings/left_part/UserProfile/ChangeUsername.vue')['default']
+    ContentBlock: typeof import('./components/ContentIndexPage/ContentBlock.vue')['default']
+    EditAvatarPopup: typeof import('./components/Settings/left_part/UserProfile/EditAvatarPopup.vue')['default']
+    EditInformation: typeof import('./components/Settings/left_part/MyAccount/EditInformation.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
-    HeadarButton: typeof import('./components/Header/HeaderButton.vue')['default']
     Header: typeof import('./components/Header/Header.vue')['default']
     HeaderButton: typeof import('./components/Header/HeaderButton.vue')['default']
-    InactiveButton: typeof import('./components/Header/Buttons/InactiveButton.vue')['default']
-    Input: typeof import('./components/LoginSignup/LoginSignupFormInput.vue')['default']
-    LoginSignupBase: typeof import('./components/LoginSignup/LoginSignupText.vue')['default']
     LoginSignupForm: typeof import('./components/LoginSignup/LoginSignupForm.vue')['default']
     LoginSignupFormInput: typeof import('./components/LoginSignup/LoginSignupFormInput.vue')['default']
     LoginSignupText: typeof import('./components/LoginSignup/LoginSignupText.vue')['default']
-    README: typeof import('./components/README.md')['default']
+    MyAccount: typeof import('./components/Settings/left_part/MyAccount/MyAccount.vue')['default']
+    Right_part: typeof import('./components/Settings/Right_part.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TextInput: typeof import('./components/LoginSignup/Inputs/TextInput.vue')['default']
+    SideButton: typeof import('./components/Settings/right_part/SideButton.vue')['default']
+    UserProfile: typeof import('./components/Settings/left_part/UserProfile/UserProfile.vue')['default']
+    UserSettings: typeof import('./components/Settings/left_part/UserProfile/UserSettings.vue')['default']
   }
 }
 

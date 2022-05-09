@@ -22,7 +22,7 @@ const { t } = useI18n()
 
 <style scoped lang="scss">
 .landing-form-container {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   padding: 0 300px;
   display: flex;
