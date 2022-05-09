@@ -17,4 +17,4 @@ en:
           Bad email. Email address must be valid and can't contain more than 120
           characters
         password: Password must contain at least 8 characters
-        profile_color: Profile color must be in the format of \#rrggbb
+        profile_color: "Profile color must be in the format of #rrggbb"

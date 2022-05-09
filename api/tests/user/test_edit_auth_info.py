@@ -1,8 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
-from src.auth.dependencies import get_user
 from src.auth.utils import AuthenticationFailedError, authenticate_user
-from src.config import Configuration
 from src.db.models import User
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
