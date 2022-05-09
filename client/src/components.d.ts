@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     ContentBlock: typeof import('./components/ContentIndexPage/ContentBlock.vue')['default']
     EditAvatarPopup: typeof import('./components/Settings/left_part/UserProfile/EditAvatarPopup.vue')['default']
     EditInformation: typeof import('./components/Settings/left_part/MyAccount/EditInformation.vue')['default']
+    ErrorIndicator: typeof import('./components/ErrorIndicator.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Header: typeof import('./components/Header/Header.vue')['default']
     HeaderButton: typeof import('./components/Header/HeaderButton.vue')['default']
@@ -27,6 +28,10 @@ declare module '@vue/runtime-core' {
     SideButton: typeof import('./components/Settings/right_part/SideButton.vue')['default']
     UserProfile: typeof import('./components/Settings/left_part/UserProfile/UserProfile.vue')['default']
     UserSettings: typeof import('./components/Settings/left_part/UserProfile/UserSettings.vue')['default']
+    NavButtons: typeof import('./components/Home/NavButtons.vue')['default']
+    PopupCheck: typeof import('./components/Note/PopupCheck.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
   }
 }
 

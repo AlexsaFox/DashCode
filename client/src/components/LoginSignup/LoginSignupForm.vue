@@ -25,7 +25,7 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-@import './blockparts.scss';
+@import './block-parts.scss';
 
 .form-container {
   @include block-part;

@@ -2,14 +2,23 @@
 defineProps<{
   label: string
   type: string
-  name: string
+  modelValue: string
 }>()
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', newValue: string): void
+}>()
+
+function onChanged(event: Event) {
+  const target = event.currentTarget as HTMLInputElement
+  emit('update:modelValue', target.value)
+}
 </script>
 
 <template>
   <div class="input-container">
-    <label :for="name">{{ label }}</label>
-    <input :name="name" :type="type">
+    <label :for="label">{{ label }}</label>
+    <input :value="modelValue" :name="label" :type="type" @input="onChanged">
   </div>
 </template>
 

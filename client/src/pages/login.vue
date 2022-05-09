@@ -1,21 +1,62 @@
 <script setup lang="ts">
+import { helpers, required } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
+import useAuthStore from '~/store/useAuth'
+import useErrorsStore from '~/store/useErrors'
+
 const { t } = useI18n()
+const auth = useAuthStore()
+const errors = useErrorsStore()
+
+const credentials = reactive({
+  username: '',
+  password: '',
+})
+
+const rules = {
+  username: {
+    required: helpers.withMessage(t('login.errors.username-required'), required),
+  },
+  password: {
+    required: helpers.withMessage(t('login.errors.password-required'), required),
+  },
+}
+
+const vuelidate = useVuelidate(rules, credentials)
+
+function onSubmit() {
+  errors.$reset()
+  vuelidate.value.$touch()
+
+  if (vuelidate.value.$error) {
+    for (const error of vuelidate.value.$errors)
+      errors.addError(error.$message.toString())
+  }
+  else {
+    auth.login(credentials.password, credentials.username, credentials.username)
+  }
+}
 </script>
 
 <template>
-  <div class="landing-form-container">
-    <LoginSignupText />
-    <LoginSignupForm
-      :bottom-text="t('login.no-account')"
-      :bottom-link-text="t('login.no-account-link')"
-      :submit-button-text="t('login.submit-button')"
-      bottom-link-route="/signup"
-      :submit-action="() => {}"
-    >
-      <LoginSignupFormInput :label="t('login.username-label')" type="text" name="username" />
-      <LoginSignupFormInput :label="t('login.password-label')" type="password" name="password" />
-    </LoginSignupForm>
-  </div>
+  <LoginSignupForm
+    :bottom-text="t('login.no-account')"
+    :bottom-link-text="t('login.no-account-link')"
+    :submit-button-text="t('login.submit-button')"
+    bottom-link-route="/signup"
+    :submit-action="onSubmit"
+  >
+    <LoginSignupFormInput
+      v-model="credentials.username"
+      :label="t('login.labels.username')"
+      type="text"
+    />
+    <LoginSignupFormInput
+      v-model="credentials.password"
+      :label="t('login.labels.password')"
+      type="password"
+    />
+  </LoginSignupForm>
 </template>
 
 <style scoped lang="scss">
@@ -31,5 +72,5 @@ const { t } = useI18n()
 
 <route lang="yaml">
 meta:
-  layout: landing
+  layout: login-signup
 </route>

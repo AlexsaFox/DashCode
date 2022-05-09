@@ -2,6 +2,10 @@ app:
   title: "DashCode API"
   description: "DashCode backend powered by FastAPI & GraphQL"
 
+cors:
+  origins:
+  - http://localhost:3333
+
 server:
   host: localhost
   port: 8000
@@ -21,6 +25,10 @@ base_superuser:
   username: admin
   email: admin@admin.com
   password: admin
+
+localization:
+  fallback_locale: en
+  available_locales: [en, ru]
 
 debug: false
 secret_key: please_change_me_in_production

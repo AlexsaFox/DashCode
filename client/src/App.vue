@@ -6,6 +6,12 @@ useHead({
   title: 'DashCode',
   meta: [{ name: 'description', content: '' }],
 })
+
+const { availableLocales, locale } = useI18n()
+
+const locales = availableLocales
+locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+
 </script>
 
 <template>
@@ -25,4 +31,5 @@ useHead({
   background-color: #303d67;
   border-radius: 10px;
 }
+@import url('~/assets/scss/fonts.scss');
 </style>

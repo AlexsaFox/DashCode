@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="logo">
-      <img src="../../assets/img/logo.svg">
+      <img src="/src/assets/img/logo.svg">
       <p>DashCode</p>
     </div>
     <div class="buttons">
@@ -11,8 +11,6 @@
 </template>
 
 <style scoped lang="scss">
-@import url('../../assets/scss/fonts.scss');
-
 nav {
   display: flex;
   justify-content: space-between;

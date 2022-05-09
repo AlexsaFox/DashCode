@@ -3,8 +3,10 @@ import bcrypt
 import calendar
 
 from datetime import datetime, timedelta
+from typing import cast
 
 from authlib.jose import JWTClaims, jwt
+from sqlalchemy import or_
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import IntegrityError
 
@@ -14,13 +16,13 @@ from src.types import ExpectedError
 
 
 class AuthenticationFailedError(ExpectedError):
-    def __init__(self):
-        super().__init__('Wrong username/email or password')
+    def __init__(self, msg: str = 'Unable to find user with provided credentials'):
+        super().__init__(msg)
 
 
 class UsernameOrEmailNotProvidedError(ExpectedError):
-    def __init__(self):
-        super().__init__('You must provide username or email')
+    def __init__(self, msg: str = 'You must provide username or email'):
+        super().__init__(msg)
 
 
 def _is_password_valid(passwd: str, passwd_hash: str) -> bool:
@@ -33,17 +35,18 @@ def authenticate_user(
     username: str | None = None,
     email: str | None = None,
 ) -> User:
-    if username is not None:
-        user: User | None = session.query(User).filter_by(username=username).first()
-    elif email is not None:
-        user: User | None = session.query(User).filter_by(email=email).first()
-    else:
+    if username is None and email is None:
         raise UsernameOrEmailNotProvidedError
 
+    user: User | None = (
+        session.query(User)
+        .filter(or_(User.username == username, User.email == email))
+        .first()
+    )
     if user is None or not _is_password_valid(password, user.password_hash):
         raise AuthenticationFailedError
 
-    return user
+    return cast(User, user)
 
 
 def generate_jwt(config: Configuration, user: User) -> str:

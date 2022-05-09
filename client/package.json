@@ -13,16 +13,23 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.1",
+    "@vuelidate/core": "2.0.0-alpha.41",
+    "@vuelidate/validators": "2.0.0-alpha.29",
     "@vueuse/core": "^8.3.0",
     "@vueuse/head": "^0.7.6",
+    "graphql": "^16.4.0",
+    "graphql-tag": "^2.12.6",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.13",
     "prism-theme-vars": "^0.2.2",
     "sass": "^1.51.0",
+    "vite-plugin-environment": "^1.1.1",
     "vue": "^3.2.33",
     "vue-demi": "^0.12.5",
     "vue-i18n": "^9.1.9",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue-textarea-autosize": "^1.1.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.20.6",

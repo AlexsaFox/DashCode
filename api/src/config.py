@@ -2,7 +2,7 @@ import os
 from typing import Any, Literal, cast
 from dynaconf import Dynaconf
 
-from pydantic import BaseModel, PositiveInt, RedisDsn, StrictBool, StrictStr
+from pydantic import AnyHttpUrl, BaseModel, PositiveInt, RedisDsn, StrictBool, StrictStr
 
 
 ENVIRONMENT = Literal['development', 'testing', 'production']
@@ -28,6 +28,10 @@ class ServerConfiguration(BaseModel):
     port: PositiveInt
 
 
+class CORSConfiguration(BaseModel):
+    origins: list[AnyHttpUrl]
+
+
 class JWTConfiguration(BaseModel):
     algorithm: StrictStr
     expire_hours: PositiveInt
@@ -39,14 +43,21 @@ class BaseSuperuser(BaseModel):
     email: StrictStr
 
 
+class LocalizationConfiguration(BaseModel):
+    fallback_locale: StrictStr
+    available_locales: list[StrictStr]
+
+
 class Configuration(BaseModel):
     app: AppConfiguration
     base_superuser: BaseSuperuser
     cache: CacheConfiguration
+    cors: CORSConfiguration
     database: DatabaseConfiguration
     debug: StrictBool
     environment: StrictStr
     jwt: JWTConfiguration
+    localization: LocalizationConfiguration
     secret_key: StrictStr
     server: ServerConfiguration
 

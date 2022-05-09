@@ -1,0 +1,21 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        files: ^api/(run.py|src|tests)
+        args:
+          - --config=api/pyproject.toml
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.950
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - fastapi==0.75.2
+          - SQLAlchemy==1.4.35
+          - sqlalchemy2-stubs==0.0.2a22
+          - strawberry-graphql==0.109.0
+        args:
+          - --ignore-missing-imports
+          - --config-file=api/pyproject.toml

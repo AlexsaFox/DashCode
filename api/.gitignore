@@ -15,5 +15,6 @@ __pycache__
 .postgres-data
 .redis-data
 
-# Pytest cache
+# Cache files
 .pytest_cache
+.mypy_cache
