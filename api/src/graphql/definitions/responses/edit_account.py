@@ -10,10 +10,6 @@ class EditAccountSuccess:
     account: Account
 
 
-EditAccountAuthResponse = strawberry.union(
-    'EditAccountResponse', (EditAccountSuccess, RequestValueError, ValidationError)
-)
-
 EditAccountResponse = strawberry.union(
-    'EditAccountResponse', (EditAccountSuccess, ValidationError)
+    'EditAccountResponse', (EditAccountSuccess, RequestValueError, ValidationError)
 )

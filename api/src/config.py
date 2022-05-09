@@ -48,6 +48,11 @@ class LocalizationConfiguration(BaseModel):
     available_locales: list[StrictStr]
 
 
+class FileUploadConfiguration(BaseModel):
+    max_size_mb: PositiveInt
+    allowed_extensions: list[StrictStr]
+
+
 class Configuration(BaseModel):
     app: AppConfiguration
     base_superuser: BaseSuperuser
@@ -56,6 +61,7 @@ class Configuration(BaseModel):
     database: DatabaseConfiguration
     debug: StrictBool
     environment: StrictStr
+    file_upload: FileUploadConfiguration
     jwt: JWTConfiguration
     localization: LocalizationConfiguration
     secret_key: StrictStr

@@ -11,6 +11,7 @@ from sqlalchemy.orm.session import Session
 
 from src.config import Configuration
 from src.db.models import User
+from src.db.utils import delete_file
 from src.types import ExpectedError
 
 
@@ -38,6 +39,7 @@ def authenticate_user(
         .filter(or_(User.username == username, User.email == email))
         .first()
     )
+
     if user is None or not user.check_password(password):
         raise AuthenticationFailedError
 
@@ -105,6 +107,7 @@ def create_user(
 
 
 def delete_user(session: Session, user: User):
+    user.reset_profile_picture()
     session.add(user)
     session.delete(user)
     session.commit()

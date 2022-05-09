@@ -8,6 +8,7 @@ class User:
     username: str
     profile_color: str
     is_superuser: bool
+    profile_picture_filename: str
 
     @classmethod
     def from_instance(cls, instance: UserModel):
@@ -15,6 +16,7 @@ class User:
             username=instance.username,
             profile_color=instance.profile_color,
             is_superuser=instance.is_superuser,
+            profile_picture_filename=instance.profile_picture_filename,
         )
 
 

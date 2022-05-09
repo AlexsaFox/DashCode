@@ -1,5 +1,8 @@
 import re
 
+from fastapi import UploadFile
+
+from src.config import BASE_DIR, FileUploadConfiguration
 from src.types import ExpectedError
 
 
@@ -17,3 +20,36 @@ class ModelFieldValidationError(ExpectedError):
             f'validation for following fields of model {self.model_name} has failed:'
             f' {", ".join(fields)}'
         )
+
+
+def validate_file(config: FileUploadConfiguration, file: UploadFile):
+    mime_type = file.content_type
+    if not mime_type.startswith('image/'):
+        raise FileBadMimeTypeError()
+
+    filename = file.filename
+    _, _, extension = filename.rpartition('.')
+    if extension not in config.allowed_extensions:
+        raise FileBadExtensionError()
+
+    file_sync = file.file
+    file_sync.seek(0, 2)
+    size = file_sync.tell()
+    file_sync.seek(0)
+    if size / (2 << 20) > config.max_size_mb:
+        raise FileTooLargeError()
+
+
+class FileBadMimeTypeError(ValueError):
+    def __init__(self, msg: str = 'Uploaded file extension is not supported'):
+        super().__init__(msg)
+
+
+class FileBadExtensionError(ValueError):
+    def __init__(self, msg: str = 'Uploaded file extension is not supported'):
+        super().__init__(msg)
+
+
+class FileTooLargeError(ValueError):
+    def __init__(self, msg: str = 'Uploaded file is too large'):
+        super().__init__(msg)

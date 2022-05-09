@@ -1,11 +1,22 @@
+from typing import Optional
+
 import strawberry
 from sqlalchemy.ext.asyncio.session import AsyncSession
+from strawberry.file_uploads import Upload
 from strawberry.types import Info
 
 from src.auth.utils import UserExistsError, create_user, delete_user
+from src.config import Configuration
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
-from src.db.validation import ModelFieldValidationError
+from src.db.utils import save_file
+from src.db.validation import (
+    FileBadExtensionError,
+    FileBadMimeTypeError,
+    FileTooLargeError,
+    ModelFieldValidationError,
+)
+from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.graphql.definitions.errors.validation_error import ValidationError
 from src.graphql.definitions.note import Note
 from src.graphql.definitions.responses.delete_user import (
@@ -13,7 +24,7 @@ from src.graphql.definitions.responses.delete_user import (
     DeleteUserSuccess,
 )
 from src.graphql.definitions.responses.edit_account import (
-    EditAccountAuthResponse,
+    EditAccountResponse,
     EditAccountSuccess,
 )
 from src.graphql.definitions.responses.register_user import (
@@ -55,7 +66,7 @@ class Mutation:
         password: str,
         new_password: str | None = None,
         new_email: str | None = None,
-    ) -> EditAccountAuthResponse:
+    ) -> EditAccountResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
         t: Translator = info.context['translator']
@@ -74,20 +85,38 @@ class Mutation:
         info: Info,
         new_username: str | None = None,
         new_profile_color: str | None = None,
-    ) -> EditAccountAuthResponse:
+        new_profile_picture: Optional[Upload] = None,  # Upload | None returns error
+    ) -> EditAccountResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
+        config: Configuration = info.context['config']
         t: Translator = info.context['translator']
 
         try:
+            user.validate_fields(username=new_username, profile_color=new_profile_color)
+
+            new_profile_picture_filename = None
+            if new_profile_picture is not None:
+                new_profile_picture_filename = await save_file(
+                    config.file_upload, new_profile_picture
+                )
+
             await session.run_sync(
                 user.update_fields,
                 username=new_username,
                 profile_color=new_profile_color,
+                profile_picture_filename=new_profile_picture_filename,
+                validate=False,
             )
             return EditAccountSuccess(Account.from_instance(user))
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
+        except FileTooLargeError as err:
+            return RequestValueError(t('validation.errors.user.upload_file'))
+        except FileBadExtensionError as err:
+            return RequestValueError(t('validation.errors.user.bad_extension'))
+        except FileBadMimeTypeError as err:
+            return RequestValueError(t('validation.errors.user.bad_mime_type'))
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     @requires_password

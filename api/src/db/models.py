@@ -16,6 +16,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Session, declarative_base, relationship
 
+from src.db.utils import delete_file
 from src.db.validation import (
     COLOR_REGEXP,
     EMAIL_REGEXP,
@@ -46,9 +47,10 @@ class ValidatedModel:
         if error_fields:
             raise ModelFieldValidationError(self, error_fields)
 
-    def update_fields(self, session: Session, **kwargs: Any):
+    def update_fields(self, session: Session, validate: bool = True, **kwargs: Any):
         kwargs = {f: v for f, v in kwargs.items() if v is not None}
-        self.validate_fields(**kwargs)
+        if validate:
+            self.validate_fields(**kwargs)
 
         # Fields are already validated, so it's guaranteed that
         # no impostors will be among them
@@ -68,6 +70,7 @@ class User(Base, ValidatedModel):
         'email': lambda val: EMAIL_REGEXP.fullmatch(val) is not None,
         'password': lambda val: PASSWORD_REGEXP.fullmatch(val) is not None,
         'profile_color': lambda val: COLOR_REGEXP.fullmatch(val) is not None,
+        'profile_picture_filename': lambda _: True,  # User can't control this
     }
 
     def __init__(
@@ -85,8 +88,8 @@ class User(Base, ValidatedModel):
     email: str = Column(String(120), unique=True, nullable=False)
     password_hash: str = Column(String(100), nullable=False)
     profile_color: str = Column(String(7), nullable=False, default='#ffffff')
-    profile_picture_filename: str = Column(
-        String(40), nullable=False, default='default.webp'
+    _profile_picture_filename: str = Column(
+        'profile_picture_filename', String(40), nullable=False, default='default.webp'
     )
     notes: list['Note'] = relationship(
         'Note', backref='user', lazy='select', cascade='all, delete'
@@ -103,6 +106,19 @@ class User(Base, ValidatedModel):
 
     def check_password(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode(), self.password_hash.encode())
+
+    @property
+    def profile_picture_filename(self) -> str:
+        return self._profile_picture_filename
+
+    @profile_picture_filename.setter
+    def profile_picture_filename(self, value: str):
+        if self._profile_picture_filename != 'default.webp':
+            delete_file(self._profile_picture_filename)
+        self._profile_picture_filename = value
+
+    def reset_profile_picture(self):
+        self.profile_picture_filename = 'default.webp'
 
 
 note_tag_association_table = Table(

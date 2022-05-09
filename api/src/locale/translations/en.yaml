@@ -18,3 +18,7 @@ en:
           characters
         password: Password must contain at least 8 characters
         profile_color: "Profile color must be in the format of #rrggbb"
+        upload_file:
+          too_large: Uploaded file size can't be larger than 16MB
+          bad_extension: Only images are allowed
+          bad_mime_type: Uploaded file must have type image/*

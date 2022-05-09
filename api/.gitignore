@@ -18,3 +18,7 @@ __pycache__
 # Cache files
 .pytest_cache
 .mypy_cache
+
+# Custom uploads
+uploads/*
+!uploads/default.webp
