@@ -19,6 +19,7 @@ from src.db.validation import (
 from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.graphql.definitions.errors.validation_error import ValidationError
 from src.graphql.definitions.note import Note
+from src.graphql.definitions.responses.create_note import CreateNoteResponse
 from src.graphql.definitions.responses.delete_user import (
     DeleteUserResponse,
     DeleteUserSuccess,
@@ -135,11 +136,15 @@ class Mutation:
         content: str,
         link: str = "",
         is_private: bool = True,
-    ) -> Note:
+    ) -> CreateNoteResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
+        t: Translator = info.context['translator']
+        try:
+            note: NoteModel = await session.run_sync(
+                create_note, title, content, link, is_private, user
+            )
+        except ModelFieldValidationError as err:
+            return ValidationError.from_exception(err, t)
 
-        note: NoteModel = await session.run_sync(
-            create_note, title, content, link, is_private, user
-        )
         return Note.from_instance(note)

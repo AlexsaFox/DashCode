@@ -20,6 +20,7 @@ from src.db.utils import delete_file
 from src.db.validation import (
     COLOR_REGEXP,
     EMAIL_REGEXP,
+    LINK_REGEXP,
     PASSWORD_REGEXP,
     USERNAME_REGEXP,
     ModelFieldValidationError,
@@ -129,8 +130,21 @@ note_tag_association_table = Table(
 )
 
 
-class Note(Base):
+class Note(Base, ValidatedModel):
     __tablename__ = 'notes'
+
+    validators = {
+        'title': lambda val: 1 <= len(val) <= 65,
+        'content': lambda val: len(val) >= 1,
+        'link': lambda val: LINK_REGEXP.fullmatch(val) is not None,
+    }
+
+    def __init__(self, title: str, content: str, link: str, is_private: bool = False):
+        self.validate_fields(title=title, link=link, content=content)
+        self.title = title
+        self.content = content
+        self.link = link
+        self.is_private = is_private
 
     id: str = Column(
         String(12),

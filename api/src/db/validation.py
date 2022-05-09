@@ -11,6 +11,8 @@ USERNAME_REGEXP = re.compile(r'[a-zA-Z0-9_\-\.]{1,80}')
 PASSWORD_REGEXP = re.compile(r'.{8,}')
 COLOR_REGEXP = re.compile(r'#[a-fA-F0-9]{6}')
 
+LINK_REGEXP = re.compile(r'^(?:.{0}|https?:\/\/[^\/]*\.[^\/]{1,6}(?:\/.*)?)$')
+
 
 class ModelFieldValidationError(ExpectedError):
     def __init__(self, model: object, fields: list[str]):
