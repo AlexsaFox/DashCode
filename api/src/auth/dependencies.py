@@ -1,6 +1,3 @@
-import pickle
-
-from aioredis import Redis
 from authlib.jose.errors import (
     BadSignatureError,
     DecodeError,

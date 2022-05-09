@@ -3,7 +3,6 @@ import re
 from datetime import datetime, timedelta
 from typing import cast
 
-import bcrypt
 from authlib.jose import JWTClaims, jwt
 from sqlalchemy import or_
 from sqlalchemy.exc import IntegrityError
@@ -11,7 +10,6 @@ from sqlalchemy.orm.session import Session
 
 from src.config import Configuration
 from src.db.models import User
-from src.db.utils import delete_file
 from src.types import ExpectedError
 
 

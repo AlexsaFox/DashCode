@@ -2,7 +2,7 @@ import re
 
 from fastapi import UploadFile
 
-from src.config import BASE_DIR, FileUploadConfiguration
+from src.config import FileUploadConfiguration
 from src.types import ExpectedError
 
 
