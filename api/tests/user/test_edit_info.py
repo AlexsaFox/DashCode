@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
 from src.auth.utils import AuthenticationFailedError, authenticate_user
 from src.db.models import User
+from tests.auth.utils import check_auth
 from tests.graphql.edit_account import EDIT_ACCOUNT_QUERY
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
@@ -123,3 +124,16 @@ async def test_edit_all(
     assert data['editAccount']['account']['user']['username'] == new_username
     assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
     assert await try_changes(database_engine, new_username, new_profile_color)
+
+
+async def test_edit_no_auth(
+    graphql_client: GraphQLClient,
+):
+    new_username = '3L1T3_H4X0R_1337'
+    new_profile_color = '#bad123'
+
+    data, errors = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={'newUsername': new_username, 'newProfileColor': new_profile_color},
+    )
+    check_auth(data, errors)

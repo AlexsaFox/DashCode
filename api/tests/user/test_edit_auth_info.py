@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
 from src.auth.utils import AuthenticationFailedError, authenticate_user
 from src.db.models import User
+from tests.auth.utils import check_auth
 from tests.graphql.edit_account_auth import EDIT_ACCOUNT_AUTH_QUERY
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
@@ -150,3 +151,18 @@ async def test_edit_bad_password(
     assert data['editAccountAuth']['details'] == 'Wrong password'
 
     assert not await try_credentials(database_engine, new_email, 'password')
+
+
+async def test_edit_no_auth(
+    graphql_client: GraphQLClient,
+):
+    new_email = 'different@email.com'
+
+    data, errors = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_AUTH_QUERY,
+        variables={
+            'password': 'never gonna give you up',
+            'newEmail': new_email,
+        },
+    )
+    check_auth(data, errors)

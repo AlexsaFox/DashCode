@@ -32,7 +32,7 @@ class GraphQLClient:
         variables: dict[str, Any] | None = None,
         token: str | None = None,
         lang_header: str = 'en',
-    ) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    ) -> tuple[dict[str, Any] | None, list[dict[str, Any]] | None]:
         response = await self.make_request(query, variables, token, lang_header)
         assert response.status_code == 200
 

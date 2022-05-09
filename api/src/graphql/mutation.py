@@ -6,7 +6,7 @@ from src.auth.utils import UserExistsError, create_user, delete_user
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
 from src.db.validation import ModelFieldValidationError
-from src.graphql.definitions.errors.validation_error import FieldError, ValidationError
+from src.graphql.definitions.errors.validation_error import ValidationError
 from src.graphql.definitions.note import Note
 from src.graphql.definitions.responses.delete_user import (
     DeleteUserResponse,
@@ -21,7 +21,7 @@ from src.graphql.definitions.responses.register_user import (
     RegisterUserSuccess,
     UserAlreadyExists,
 )
-from src.graphql.definitions.user import Account, User
+from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.graphql.permissions.require_password import requires_password
 from src.locale.dependencies import Translator
