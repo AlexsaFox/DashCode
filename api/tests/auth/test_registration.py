@@ -1,5 +1,6 @@
 from src.db.models import User
 from tests.utils import GraphQLClient
+from tests.validation.utils import check_validation_error
 
 
 REGISTRATION_QUERY = '''
@@ -102,14 +103,53 @@ async def test_registration_duplicate_email(
     }
 
 
-async def test_invalid_value(graphql_client: GraphQLClient) -> None:
+async def test_registration_invalid_username(graphql_client: GraphQLClient) -> None:
     response = await graphql_client.make_request(
         query=REGISTRATION_QUERY.format(
-            username='this is definitely not a valid username because it has spaces',
+            username='i am invalid :)',
             email='valid@email.wow',
             password='longandstrongpassword',
         )
     )
-
     assert response.status_code == 200
-    assert response.json()['data']['registerUser']['__typename'] == 'ValidationError'
+
+    data = response.json()['data']
+    check_validation_error(data['registerUser'], ['username'])
+
+
+async def test_registration_invalid_email(graphql_client: GraphQLClient) -> None:
+    response = await graphql_client.make_request(
+        query=REGISTRATION_QUERY.format(
+            username='i_am_valid', email='invalid...', password='longandstrongpassword'
+        )
+    )
+    assert response.status_code == 200
+
+    data = response.json()['data']
+    check_validation_error(data['registerUser'], ['email'])
+
+
+async def test_registration_invalid_password(graphql_client: GraphQLClient) -> None:
+    response = await graphql_client.make_request(
+        query=REGISTRATION_QUERY.format(
+            username='i_am_valid', email='valid@email.wow', password='short:('
+        )
+    )
+    assert response.status_code == 200
+
+    data = response.json()['data']
+    check_validation_error(data['registerUser'], ['password'])
+
+
+async def test_registration_multiple_bad(graphql_client: GraphQLClient) -> None:
+    response = await graphql_client.make_request(
+        query=REGISTRATION_QUERY.format(
+            username='i am invalid :)',
+            email='invalid...',
+            password='short:(',
+        )
+    )
+    assert response.status_code == 200
+
+    data = response.json()['data']
+    check_validation_error(data['registerUser'], ['username', 'email', 'password'])
