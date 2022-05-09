@@ -2,26 +2,8 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.models import User
+from tests.graphql.delete_user import DELETE_USER_QUERY
 from tests.utils import GraphQLClient
-
-
-DELETE_QUERY = '''
-mutation {{
-    deleteUser(password: "{password}") {{
-        __typename
-        ... on RequestValueError {{
-            details
-        }}
-        ... on DeleteUserSuccess {{
-            account {{
-                user {{
-                    username
-                }}
-            }}
-        }}
-    }}
-}}
-'''
 
 
 async def test_delete_user(
@@ -31,17 +13,14 @@ async def test_delete_user(
 ):
     token, user = token_user
 
-    response = await graphql_client.make_request(
-        DELETE_QUERY.format(password='password'), token=token
+    data, _ = await graphql_client.get_request_data(
+        query=DELETE_USER_QUERY, variables={'password': 'password'}, token=token
     )
-
-    assert response.status_code == 200
-    assert response.json() == {
-        'data': {
-            'deleteUser': {
-                '__typename': 'DeleteUserSuccess',
-                'account': {'user': {'username': user.username}},
-            }
+    assert data is not None
+    assert data == {
+        'deleteUser': {
+            '__typename': 'DeleteUserSuccess',
+            'account': {'user': {'username': user.username}},
         }
     }
 
@@ -59,17 +38,17 @@ async def test_delete_user_wrong_password(
 ):
     token, user = token_user
 
-    response = await graphql_client.make_request(
-        DELETE_QUERY.format(password='AAAAAAAAAAAAAAAAAAAAAAAA'), token=token
+    data, _ = await graphql_client.get_request_data(
+        query=DELETE_USER_QUERY,
+        variables={'password': 'AAAAAAAAAAAAAAAAAAAAAAAAAAAA'},
+        token=token,
     )
 
-    assert response.status_code == 200
-    assert response.json() == {
-        'data': {
-            'deleteUser': {
-                '__typename': 'RequestValueError',
-                'details': 'Wrong password',
-            }
+    assert data is not None
+    assert data == {
+        'deleteUser': {
+            '__typename': 'RequestValueError',
+            'details': 'Wrong password',
         }
     }
 

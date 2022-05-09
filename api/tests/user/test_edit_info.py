@@ -2,82 +2,9 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
 from src.auth.utils import AuthenticationFailedError, authenticate_user
 from src.db.models import User
+from tests.graphql.edit_account import EDIT_ACCOUNT_QUERY
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
-
-
-EDIT_USERNAME_QUERY = '''
-mutation {{
-    editAccount(newUsername: "{new_username}") {{
-        __typename
-        ... on EditAccountSuccess {{
-            account {{
-                user {{
-                    username
-                    profileColor
-                }}
-            }}
-        }}
-        ... on ValidationError {{
-            fields {{
-                field
-                details
-            }}
-        }}
-        ... on RequestValueError {{
-            details
-        }}
-    }}
-}}
-'''
-EDIT_COLOR_QUERY = '''
-mutation {{
-    editAccount(newProfileColor: "{new_profile_color}") {{
-        __typename
-        ... on EditAccountSuccess {{
-            account {{
-                user {{
-                    username
-                    profileColor
-                }}
-            }}
-        }}
-        ... on ValidationError {{
-            fields {{
-                field
-                details
-            }}
-        }}
-        ... on RequestValueError {{
-            details
-        }}
-    }}
-}}
-'''
-EDIT_ALL_QUERY = '''
-mutation {{
-    editAccount(newUsername: "{new_username}", newProfileColor: "{new_profile_color}") {{
-        __typename
-        ... on EditAccountSuccess {{
-            account {{
-                user {{
-                    username
-                    profileColor
-                }}
-            }}
-        }}
-        ... on ValidationError {{
-            fields {{
-                field
-                details
-            }}
-        }}
-        ... on RequestValueError {{
-            details
-        }}
-    }}
-}}
-'''
 
 
 async def try_changes(
@@ -106,12 +33,14 @@ async def test_edit_username(
     token, _ = token_user
     new_username = '3L1T3_H4X0R_1337'
 
-    response = await graphql_client.make_request(
-        query=EDIT_USERNAME_QUERY.format(new_username=new_username), token=token
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={
+            'newUsername': new_username,
+        },
+        token=token,
     )
-    assert response.status_code == 200
-
-    data = response.json()['data']
+    assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
     assert data['editAccount']['account']['user']['username'] == new_username
     assert await try_changes(database_engine, new_username)
@@ -125,12 +54,14 @@ async def test_edit_username_invalid_data(
     token, _ = token_user
     new_username = 'i_cant_contain_this -> Ъ <- symbol (and some others)'
 
-    response = await graphql_client.make_request(
-        query=EDIT_USERNAME_QUERY.format(new_username=new_username), token=token
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={
+            'newUsername': new_username,
+        },
+        token=token,
     )
-    assert response.status_code == 200
-
-    data = response.json()['data']
+    assert data is not None
     check_validation_error(data['editAccount'], ['username'])
     assert not await try_changes(database_engine, new_username)
 
@@ -143,12 +74,12 @@ async def test_edit_profile_color(
     token, user = token_user
     new_profile_color = '#c0ffee'
 
-    response = await graphql_client.make_request(
-        query=EDIT_COLOR_QUERY.format(new_profile_color=new_profile_color), token=token
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={'newProfileColor': new_profile_color},
+        token=token,
     )
-    assert response.status_code == 200
-
-    data = response.json()['data']
+    assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
     assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
     assert await try_changes(database_engine, user.username, new_profile_color)
@@ -162,12 +93,13 @@ async def test_edit_profile_color_invalid_data(
     token, user = token_user
     new_profile_color = '#lolkek'
 
-    response = await graphql_client.make_request(
-        query=EDIT_COLOR_QUERY.format(new_profile_color=new_profile_color), token=token
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={'newProfileColor': new_profile_color},
+        token=token,
     )
-    assert response.status_code == 200
-
-    data = response.json()['data']
+    assert data is not None
+    assert data is not None
     check_validation_error(data['editAccount'], ['profile_color'])
     assert not await try_changes(database_engine, user.username, new_profile_color)
 
@@ -181,15 +113,12 @@ async def test_edit_all(
     new_username = '3L1T3_H4X0R_1337'
     new_profile_color = '#bad123'
 
-    response = await graphql_client.make_request(
-        query=EDIT_ALL_QUERY.format(
-            new_username=new_username, new_profile_color=new_profile_color
-        ),
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={'newUsername': new_username, 'newProfileColor': new_profile_color},
         token=token,
     )
-    assert response.status_code == 200
-
-    data = response.json()['data']
+    assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
     assert data['editAccount']['account']['user']['username'] == new_username
     assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
