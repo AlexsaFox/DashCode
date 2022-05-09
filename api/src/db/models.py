@@ -77,8 +77,7 @@ class User(Base, ValidatedModel):
         self.username = username
         self.email = email
         self.is_superuser = is_superuser
-        salt: bytes = bcrypt.gensalt()
-        self.password_hash = bcrypt.hashpw(password.encode(), salt).decode()
+        self.password = password
 
     id: int = Column(Integer, primary_key=True)
     is_superuser: bool = Column(Boolean, nullable=False, default=False)
@@ -92,6 +91,15 @@ class User(Base, ValidatedModel):
     notes: list['Note'] = relationship(
         'Note', backref='user', lazy='select', cascade='all, delete'
     )
+
+    @property
+    def password(self):
+        raise AttributeError('password: write-only property')
+
+    @password.setter
+    def password(self, value):
+        salt: bytes = bcrypt.gensalt()
+        self.password_hash = bcrypt.hashpw(value.encode(), salt).decode()
 
     def check_password(self, password: str) -> bool:
         return bcrypt.checkpw(password.encode(), self.password_hash.encode())

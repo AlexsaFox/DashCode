@@ -1,6 +1,5 @@
 from typing import cast
 
-from aioredis import Redis
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.dependencies import get_user_or_none
@@ -43,13 +42,12 @@ async def token_is_valid(
     token_data: dict,
     user: User,
     database_session: AsyncSession,
-    cache: Redis,
     config: Configuration,
 ):
     assert token_data['tokenType'] == 'bearer'
 
     user_from_token = await get_user_or_none(
-        database_session, cache, config, token_data['accessToken']
+        database_session, config, token_data['accessToken']
     )
     assert user_from_token is not None
 
@@ -60,7 +58,6 @@ async def token_is_valid(
 async def test_token_by_username(
     graphql_client: GraphQLClient,
     database_session: AsyncSession,
-    cache: Redis,
     test_config: Configuration,
     user: User,
 ):
@@ -72,13 +69,12 @@ async def test_token_by_username(
 
     data = response.json()['data']
     assert data['token']['__typename'] == 'Token'
-    await token_is_valid(data['token'], user, database_session, cache, test_config)
+    await token_is_valid(data['token'], user, database_session, test_config)
 
 
 async def test_token_by_email(
     graphql_client: GraphQLClient,
     database_session: AsyncSession,
-    cache: Redis,
     test_config: Configuration,
     user: User,
 ):
@@ -90,7 +86,7 @@ async def test_token_by_email(
 
     data = response.json()['data']
     assert data['token']['__typename'] == 'Token'
-    await token_is_valid(data['token'], user, database_session, cache, test_config)
+    await token_is_valid(data['token'], user, database_session, test_config)
 
 
 async def test_login_with_bad_creds(graphql_client: GraphQLClient, user: User):

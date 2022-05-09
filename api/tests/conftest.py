@@ -57,17 +57,9 @@ def test_config(pytestconfig: Config) -> Configuration:
 
 
 @pytest.fixture
-async def database_engine(
-    test_config: Configuration,
-) -> AsyncGenerator[AsyncEngine, None]:
+async def database_engine(test_config: Configuration) -> AsyncEngine:
     engine = get_engine(test_config.database)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-    yield engine
-
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
+    return engine
 
 
 @pytest.fixture
