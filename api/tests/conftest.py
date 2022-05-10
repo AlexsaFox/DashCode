@@ -1,3 +1,4 @@
+from tempfile import mkdtemp
 from typing import AsyncGenerator
 
 import pytest
@@ -44,6 +45,7 @@ def pytest_unconfigure(config: Config) -> None:
 @pytest.fixture
 def test_config(pytestconfig: Config) -> Configuration:
     config = load_configuration('testing')
+    config.file_upload.upload_path = mkdtemp()
     config.database.dsn = (
         pytestconfig.stash[database_container]
         .get_connection_url()

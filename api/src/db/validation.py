@@ -38,12 +38,12 @@ def validate_file(config: FileUploadConfiguration, file: UploadFile):
     file_sync.seek(0, 2)
     size = file_sync.tell()
     file_sync.seek(0)
-    if size / (2 << 20) > config.max_size_mb:
+    if size / (1024 * 1024) > config.max_size_mb:
         raise FileTooLargeError()
 
 
 class FileBadMimeTypeError(ValueError):
-    def __init__(self, msg: str = 'Uploaded file extension is not supported'):
+    def __init__(self, msg: str = 'Uploaded file has bad MIME type'):
         super().__init__(msg)
 
 

@@ -113,11 +113,15 @@ class Mutation:
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
         except FileTooLargeError as err:
-            return RequestValueError(t('validation.errors.user.upload_file'))
+            return RequestValueError(t('validation.errors.user.upload_file.too_large'))
         except FileBadExtensionError as err:
-            return RequestValueError(t('validation.errors.user.bad_extension'))
+            return RequestValueError(
+                t('validation.errors.user.upload_file.bad_extension')
+            )
         except FileBadMimeTypeError as err:
-            return RequestValueError(t('validation.errors.user.bad_mime_type'))
+            return RequestValueError(
+                t('validation.errors.user.upload_file.bad_mime_type')
+            )
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     @requires_password

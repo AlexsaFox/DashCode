@@ -70,7 +70,7 @@ async def test_note_creation_invalid_title(
                     "field": "title",
                     "details": (
                         "Bad title. Title can't be empty and must contain less than 65"
-                        " caracters"
+                        " characters"
                     ),
                 }
             ]
