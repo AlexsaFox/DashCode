@@ -15,8 +15,9 @@ from src.auth.utils import create_user, generate_jwt
 from src.cache.utils import get_cache_backend
 from src.config import Configuration, load_configuration
 from src.create_app import App, create_app
-from src.db.models import Base, User
+from src.db.models import Base, Note, User
 from src.db.utils import get_engine
+from src.utils.note import create_note
 from tests.utils import GraphQLClient
 
 
@@ -106,6 +107,30 @@ async def user(database_session: AsyncSession) -> User:
 
 
 @pytest.fixture
+async def another_user(database_session: AsyncSession) -> User:
+    username = 'user_2'
+    email = 'user_2@mail.com'
+    password = 'password_2'
+    another_user = await database_session.run_sync(
+        create_user, username, email, password
+    )
+    return another_user
+
+
+@pytest.fixture
+async def note(database_session: AsyncSession, user: User) -> Note:
+    title = "kek for test_note_1"
+    content = 'KEEEEEEEEEK'
+    link = 'https://kek.net'
+    is_private = False
+    test_user = user
+    note = await database_session.run_sync(
+        create_note, title, content, link, is_private, test_user
+    )
+    return note
+
+
+@pytest.fixture
 def graphql_client(client: AsyncClient) -> GraphQLClient:
     return GraphQLClient(client)
 
@@ -113,3 +138,10 @@ def graphql_client(client: AsyncClient) -> GraphQLClient:
 @pytest.fixture
 def token_user(test_config: Configuration, user: User) -> tuple[str, User]:
     return generate_jwt(test_config, user), user
+
+
+@pytest.fixture
+def another_token_user(
+    test_config: Configuration, another_user: User
+) -> tuple[str, User]:
+    return generate_jwt(test_config, another_user), another_user
