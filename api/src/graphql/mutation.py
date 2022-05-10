@@ -19,7 +19,10 @@ from src.db.validation import (
 from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.graphql.definitions.errors.validation_error import ValidationError
 from src.graphql.definitions.note import Note
-from src.graphql.definitions.responses.create_note import CreateNoteResponse
+from src.graphql.definitions.responses.create_note import (
+    CreateNoteResponse,
+    CreateNoteSuccess,
+)
 from src.graphql.definitions.responses.delete_user import (
     DeleteUserResponse,
     DeleteUserSuccess,
@@ -151,4 +154,4 @@ class Mutation:
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
 
-        return Note.from_instance(note)
+        return CreateNoteSuccess(Note.from_instance(note))

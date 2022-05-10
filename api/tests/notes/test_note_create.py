@@ -33,14 +33,16 @@ async def test_note_creation(
     )
     assert data is not None
 
-    note_id = data['createNote']['id']
+    note_id = data['createNote']['note']['id']
 
     assert data == {
         "createNote": {
-            "id": note_id,
-            "title": "blabla",
-            "content": "blablabla",
-            "isPrivate": True,
+            "note": {
+                "id": note_id,
+                "title": "blabla",
+                "content": "blablabla",
+                "isPrivate": True,
+            }
         }
     }
     assert await get_note_by_id(database_session, note_id) is not None
