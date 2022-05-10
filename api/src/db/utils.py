@@ -19,12 +19,12 @@ async def save_file(config: FileUploadConfiguration, file: UploadFile) -> str:
     validate_file(config, file)
     _, _, extension = file.filename.rpartition('.')
     filename = urlsafe_b64encode(token_bytes(24)).decode() + '.' + extension
-    full_path = os.path.join(BASE_DIR, 'uploads', filename)
+    full_path = os.path.join(BASE_DIR, config.upload_path, filename)
     async with async_open(full_path, 'wb') as af:
         await af.write(await file.read())
     return filename
 
 
-def delete_file(filename: str):
-    full_path = os.path.join(BASE_DIR, 'uploads', filename)
+def delete_file(config: FileUploadConfiguration, filename: str):
+    full_path = os.path.join(BASE_DIR, config.upload_path, filename)
     os.remove(full_path)

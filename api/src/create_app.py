@@ -9,6 +9,7 @@ from sqlalchemy.ext.asyncio.session import AsyncSession
 from src.auth.utils import create_user
 from src.cache.utils import get_cache_backend
 from src.config import Configuration
+from src.db.mixins import AppConfigurationMixin
 from src.db.models import User
 from src.db.utils import get_engine
 from src.graphql.schema import graphql_app
@@ -73,6 +74,7 @@ def create_app(config: Configuration) -> App:
     )
     app.app_state = AppState()
     app.app_state.config = config
+    AppConfigurationMixin.init_config(config)
 
     app.include_router(router)
     app.include_router(graphql_app, prefix='/graphql')

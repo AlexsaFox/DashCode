@@ -32,6 +32,7 @@ localization:
 
 file_upload:
   max_size_mb: 16
+  upload_path: uploads
   allowed_extensions:
     [apng, avif, gif, jpg, jpeg, jfif, pjpeg, pjp, png, svg, webp]
 

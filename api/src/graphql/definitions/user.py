@@ -8,7 +8,7 @@ class User:
     username: str
     profile_color: str
     is_superuser: bool
-    profile_picture_filename: str
+    profile_picture_filename: str | None
 
     @classmethod
     def from_instance(cls, instance: UserModel):

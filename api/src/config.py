@@ -51,6 +51,7 @@ class LocalizationConfiguration(BaseModel):
 class FileUploadConfiguration(BaseModel):
     max_size_mb: PositiveInt
     allowed_extensions: list[StrictStr]
+    upload_path: StrictStr
 
 
 class Configuration(BaseModel):

@@ -1,7 +1,6 @@
 from base64 import urlsafe_b64encode
 from datetime import datetime
 from secrets import token_bytes
-from typing import Any, Callable, Mapping
 
 import bcrypt
 from sqlalchemy import (
@@ -14,8 +13,9 @@ from sqlalchemy import (
     Table,
     Text,
 )
-from sqlalchemy.orm import Session, declarative_base, relationship
+from sqlalchemy.orm import declarative_base, relationship
 
+from src.db.mixins import AppConfigurationMixin, ValidationMixin
 from src.db.utils import delete_file
 from src.db.validation import (
     COLOR_REGEXP,
@@ -23,47 +23,13 @@ from src.db.validation import (
     LINK_REGEXP,
     PASSWORD_REGEXP,
     USERNAME_REGEXP,
-    ModelFieldValidationError,
 )
 
 
 Base = declarative_base()
 
 
-class ValidatedModel:
-    validators: Mapping[str, Callable[[Any], bool]]
-
-    def validate_fields(self, **kwargs: Any):
-        kwargs = {f: v for f, v in kwargs.items() if v is not None}
-
-        error_fields = []
-        for field, value in kwargs.items():
-            validate = self.validators.get(field)
-            if validate is None:
-                raise ValueError(f'Unknown field: {field}')
-
-            if not validate(value):
-                error_fields.append(field)
-
-        if error_fields:
-            raise ModelFieldValidationError(self, error_fields)
-
-    def update_fields(self, session: Session, validate: bool = True, **kwargs: Any):
-        kwargs = {f: v for f, v in kwargs.items() if v is not None}
-        if validate:
-            self.validate_fields(**kwargs)
-
-        # Fields are already validated, so it's guaranteed that
-        # no impostors will be among them
-        for field, value in kwargs.items():
-            setattr(self, field, value)
-
-        session.add(self)
-        session.commit()
-        session.refresh(self)
-
-
-class User(Base, ValidatedModel):
+class User(Base, ValidationMixin, AppConfigurationMixin):
     __tablename__ = 'users'
 
     validators = {
@@ -89,8 +55,8 @@ class User(Base, ValidatedModel):
     email: str = Column(String(120), unique=True, nullable=False)
     password_hash: str = Column(String(100), nullable=False)
     profile_color: str = Column(String(7), nullable=False, default='#ffffff')
-    _profile_picture_filename: str = Column(
-        'profile_picture_filename', String(40), nullable=False, default='default.webp'
+    _profile_picture_filename: str | None = Column(
+        'profile_picture_filename', String(40), nullable=True, default=None
     )
     notes: list['Note'] = relationship(
         'Note', backref='user', lazy='select', cascade='all, delete'
@@ -109,17 +75,17 @@ class User(Base, ValidatedModel):
         return bcrypt.checkpw(password.encode(), self.password_hash.encode())
 
     @property
-    def profile_picture_filename(self) -> str:
+    def profile_picture_filename(self) -> str | None:
         return self._profile_picture_filename
 
     @profile_picture_filename.setter
-    def profile_picture_filename(self, value: str):
-        if self._profile_picture_filename != 'default.webp':
-            delete_file(self._profile_picture_filename)
+    def profile_picture_filename(self, value: str | None):
+        if self._profile_picture_filename is not None:
+            delete_file(self.config.file_upload, self._profile_picture_filename)
         self._profile_picture_filename = value
 
     def reset_profile_picture(self):
-        self.profile_picture_filename = 'default.webp'
+        self.profile_picture_filename = None
 
 
 note_tag_association_table = Table(
@@ -130,7 +96,7 @@ note_tag_association_table = Table(
 )
 
 
-class Note(Base, ValidatedModel):
+class Note(Base, ValidationMixin):
     __tablename__ = 'notes'
 
     validators = {
