@@ -9,11 +9,17 @@ async def test_whoami(graphql_client: GraphQLClient, token_user: tuple[str, User
 
     data, _ = await graphql_client.get_request_data(query=WHOAMI_QUERY, token=token)
     assert data is not None
+
     user_data = data['whoami']
-    assert user_data['email'] == user.email
-    assert user_data['user']['username'] == user.username
-    assert user_data['user']['profileColor'] == user.profile_color
-    assert user_data['user']['isSuperuser'] == user.is_superuser
+    assert user_data == {
+        'email': user.email,
+        'user': {
+            'username': user.username,
+            'profileColor': user.profile_color,
+            'isSuperuser': user.is_superuser,
+            'profilePictureFilename': user.profile_picture_filename,
+        },
+    }
 
 
 async def test_whoami_no_auth(graphql_client: GraphQLClient):

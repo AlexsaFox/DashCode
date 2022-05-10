@@ -12,6 +12,7 @@ mutation ($username: String!, $email: String!, $password: String!) {
                     username
                     profileColor
                     isSuperuser
+                    profilePictureFilename
                 }
                 email
             }

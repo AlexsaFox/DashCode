@@ -1,10 +1,18 @@
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
+
 from src.db.models import User
+from tests.auth.utils import try_credentials
 from tests.graphql.register_user import REGISTRATION_QUERY
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
 
 
-async def test_registration(graphql_client: GraphQLClient) -> None:
+async def test_registration(
+    graphql_client: GraphQLClient,
+    database_session: AsyncSession,
+    database_engine: AsyncEngine,
+) -> None:
     data, _ = await graphql_client.get_request_data(
         query=REGISTRATION_QUERY,
         variables={
@@ -13,19 +21,28 @@ async def test_registration(graphql_client: GraphQLClient) -> None:
             'password': 'longandstrongpassword',
         },
     )
+
+    query = await database_session.execute(select(User).filter_by(username='user'))
+    row = query.first()
+    assert row is not None
+    user: User = row[0]
+
     assert data == {
         'registerUser': {
             '__typename': 'RegisterUserSuccess',
             'account': {
                 'user': {
-                    'username': 'user',
-                    'profileColor': '#ffffff',
-                    'isSuperuser': False,
+                    'username': user.username,
+                    'profileColor': user.profile_color,
+                    'isSuperuser': user.is_superuser,
+                    'profilePictureFilename': user.profile_picture_filename,
                 },
-                'email': 'user@user.com',
+                'email': user.email,
             },
         }
     }
+
+    assert await try_credentials(database_engine, user.email, 'longandstrongpassword')
 
 
 async def test_registration_duplicate_username(

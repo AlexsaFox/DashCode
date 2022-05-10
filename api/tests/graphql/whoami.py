@@ -5,6 +5,7 @@ query {
             username
             profileColor
             isSuperuser
+            profilePictureFilename
         }
         email
     }
