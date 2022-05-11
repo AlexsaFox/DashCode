@@ -31,6 +31,10 @@ from src.graphql.definitions.responses.edit_account import (
     EditAccountResponse,
     EditAccountSuccess,
 )
+from src.graphql.definitions.responses.edit_note import (
+    EditNoteResponse,
+    EditNoteSuccess,
+)
 from src.graphql.definitions.responses.register_user import (
     RegisterUserResponse,
     RegisterUserSuccess,
@@ -40,7 +44,7 @@ from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.graphql.permissions.require_password import requires_password
 from src.locale.dependencies import Translator
-from src.utils.note import create_note
+from src.utils.note import NoteNotFoundError, NoteOwnerError, create_note, edit_note
 
 
 @strawberry.type
@@ -155,3 +159,30 @@ class Mutation:
             return ValidationError.from_exception(err, t)
 
         return CreateNoteSuccess(Note.from_instance(note))
+
+    @strawberry.mutation(permission_classes=[IsAuthenticated])
+    async def edit_note(
+        self,
+        info: Info,
+        note_id: str,
+        title: str | None = None,
+        content: str | None = None,
+        link: str | None = None,
+        is_private: bool | None = None,
+    ) -> EditNoteResponse:
+        session: AsyncSession = info.context['session']
+        user: UserModel = info.context['user']
+        t: Translator = info.context['translator']
+        try:
+            note: NoteModel = await session.run_sync(
+                edit_note, title, content, link, is_private, user, note_id
+            )
+        except ModelFieldValidationError as err:
+            return ValidationError.from_exception(err, t)
+        except NoteNotFoundError:
+            return RequestValueError(t('notes.errors.note_not_found'))
+
+        except NoteOwnerError:
+            return RequestValueError(t('notes.errors.bad_note_owner'))
+
+        return EditNoteSuccess(Note.from_instance(note))

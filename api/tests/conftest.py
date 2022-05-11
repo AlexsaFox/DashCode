@@ -87,7 +87,7 @@ async def app(
 
 @pytest.fixture
 async def database_session(app: App) -> AsyncGenerator[AsyncSession, None]:
-    async with AsyncSession(app.app_state.engine) as session:
+    async with AsyncSession(app.app_state.engine, expire_on_commit=False) as session:
         yield session
 
 

@@ -59,7 +59,10 @@ class User(Base, ValidationMixin, AppConfigurationMixin):
         'profile_picture_filename', String(40), nullable=True, default=None
     )
     notes: list['Note'] = relationship(
-        'Note', backref='user', lazy='select', cascade='all, delete'
+        'Note',
+        backref='user',
+        lazy='select',
+        cascade="save-update, merge, delete, delete-orphan",
     )
 
     @property
@@ -103,6 +106,7 @@ class Note(Base, ValidationMixin):
         'title': lambda val: 1 <= len(val) <= 65,
         'content': lambda val: len(val) >= 1,
         'link': lambda val: LINK_REGEXP.fullmatch(val) is not None,
+        'is_private': lambda val: type(val) == bool,
     }
 
     def __init__(self, title: str, content: str, link: str, is_private: bool = False):
@@ -125,7 +129,10 @@ class Note(Base, ValidationMixin):
 
     user: User
     _owner_id: int = Column(
-        Integer, ForeignKey(User.id), name='owner_id', nullable=False
+        Integer,
+        ForeignKey(User.id),
+        name='owner_id',
+        nullable=False,
     )
 
     tags: list['Tag'] = relationship(

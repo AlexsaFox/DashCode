@@ -93,7 +93,6 @@ def create_user(
     try:
         session.add(user)
         session.commit()
-        session.refresh(user)
     except IntegrityError as err:
         err_msg = str(err.orig)
         group = _INTEGRITY_ERROR_REGEXP.findall(err_msg)[0]

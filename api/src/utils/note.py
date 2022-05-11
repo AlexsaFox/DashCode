@@ -19,9 +19,29 @@ def create_note(
     user.notes.append(note)
     session.add(note)
     session.commit()
-    session.refresh(note)
-    session.refresh(user)
     return note
+
+
+def edit_note(
+    session: Session,
+    title: str | None,
+    content: str | None,
+    link: str | None,
+    is_private: bool | None,
+    user: User,
+    note_id: str,
+) -> Note:
+    note: Note | None = session.query(Note).filter(Note.id == note_id).first()
+
+    if note is None:
+        raise NoteNotFoundError
+    if note.user != user:
+        raise NoteOwnerError
+
+    note.update_fields(
+        session=session, title=title, content=content, link=link, is_private=is_private
+    )
+    return cast(Note, note)
 
 
 def get_note(session: Session, id: str, user: User) -> Note:
