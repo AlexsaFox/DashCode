@@ -5,9 +5,9 @@ from sqlalchemy.engine.row import Row
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.auth.utils import authenticate_user
+from src.config import Configuration
 from src.create_app import App
 from src.db.models import User
-from src.config import Configuration
 
 
 async def test_default_superuser(

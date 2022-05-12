@@ -1,6 +1,6 @@
 from src.db.models import User
-from tests.utils import GraphQLClient
 from tests.locale.utils import check_localization
+from tests.utils import GraphQLClient
 
 
 async def test_order(graphql_client: GraphQLClient, user: User):
@@ -11,7 +11,7 @@ async def test_order(graphql_client: GraphQLClient, user: User):
 
 
 async def test_wildcart(graphql_client: GraphQLClient, user: User):
-    header = '*'
+    header = '*;q=1, ru;q=0.5'
     await check_localization(
         graphql_client, user, header, 'Unable to find user with provided credentials'
     )

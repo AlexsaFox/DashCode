@@ -1,5 +1,33 @@
 en:
-  errors:
-    auth:
+  auth:
+    errors:
       bad_credentials: Unable to find user with provided credentials
       no_login: You must provide username or email
+      no_auth: Authentication required
+      require_password:
+        wrong_password: Wrong password
+  notes:
+    errors:
+      note_not_found: Unable to find a note with provided id
+      bad_note_owner: You haven't got permission to see note with provided id
+
+  validation:
+    errors:
+      user:
+        username: >-
+          Bad username. Username must contain only latin letters, digits,
+          underscores, dashes, dots and be less then 80 symbols long
+        email: >-
+          Bad email. Email address must be valid and can't contain more than 120
+          characters
+        password: Password must contain at least 8 characters
+        profile_color: "Profile color must be in the format of #rrggbb"
+        upload_file:
+          too_large: Uploaded file size can't be larger than 16MB
+          bad_extension: Only images are allowed
+          bad_mime_type: Uploaded file must have type image/*
+      note: 
+        title: Bad title. Title can't be empty and must contain less than 65 characters
+        content: Bad content. Content can't be empty
+        link: Bad link. Link must be valid
+        
