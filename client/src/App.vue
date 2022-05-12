@@ -4,9 +4,7 @@
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
   title: 'DashCode',
-  meta: [
-    { name: 'description', content: '' },
-  ],
+  meta: [{ name: 'description', content: '' }],
 })
 
 const { availableLocales, locale } = useI18n()
@@ -21,5 +19,17 @@ locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
 </template>
 
 <style lang="scss">
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1a2641;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #303d67;
+  border-radius: 10px;
+}
 @import url('~/assets/scss/fonts.scss');
 </style>

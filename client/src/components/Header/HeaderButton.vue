@@ -25,7 +25,7 @@ button {
   padding: 10px 32px;
   background-color: v-bind('bg');
 
-  font-size: 20px;
+  font-size: 22px;
   font-family: 'ClearSans-Regular';
   color: v-bind('fg');
   border-radius: 10px;

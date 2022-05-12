@@ -81,6 +81,17 @@ function onSubmit() {
   </LoginSignupForm>
 </template>
 
+<style scoped lang="scss">
+.landing-form-container {
+  height: 100vh;
+  width: 100%;
+  padding: 0 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+</style>
+
 <route lang="yaml">
 meta:
   layout: login-signup
