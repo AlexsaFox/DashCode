@@ -1,15 +1,17 @@
 from typing import Callable, Coroutine, cast
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.engine.row import Row
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from src.auth.utils import create_user
-from src.config import Configuration
 from src.cache.utils import get_cache_backend
-from src.db.utils import get_engine
+from src.config import Configuration
+from src.db.mixins import AppConfigurationMixin
 from src.db.models import User
+from src.db.utils import get_engine
 from src.graphql.schema import graphql_app
 from src.locale.utils import set_up_locale
 from src.routes import router
@@ -30,7 +32,12 @@ def create_startup_hook(app: App) -> Callable[[], Coroutine[None, None, None]]:
         async with AsyncSession(app.app_state.engine) as session:
             base_superuser = app.app_state.config.base_superuser
             query = await session.execute(
-                select(User).filter_by(username=base_superuser.username)
+                select(User).filter(
+                    or_(
+                        User.username == base_superuser.username,
+                        User.email == base_superuser.email,
+                    )
+                )
             )
             row: Row | None = query.one_or_none()
             if row is None:
@@ -67,6 +74,7 @@ def create_app(config: Configuration) -> App:
     )
     app.app_state = AppState()
     app.app_state.config = config
+    AppConfigurationMixin.init_config(config)
 
     app.include_router(router)
     app.include_router(graphql_app, prefix='/graphql')

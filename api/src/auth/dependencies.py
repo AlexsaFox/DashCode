@@ -1,6 +1,3 @@
-import pickle
-
-from aioredis import Redis
 from authlib.jose.errors import (
     BadSignatureError,
     DecodeError,
@@ -14,27 +11,22 @@ from sqlalchemy.engine.row import Row
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from src.auth.utils import decode_jwt
-from src.cache.dependencies import get_cache
 from src.config import Configuration
 from src.db.dependencies import get_session
 from src.db.models import User
 from src.dependencies import get_config
+
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token', auto_error=False)
 
 
 async def get_user_or_none(
     session: AsyncSession = Depends(get_session),
-    cache: Redis = Depends(get_cache),
     config: Configuration = Depends(get_config),
     token: str | None = Depends(oauth2_scheme),
 ) -> User | None:
     if token is None:
         return None
-
-    if await cache.exists(token):
-        pickled = await cache.get(token)
-        return pickle.loads(pickled)
 
     try:
         jwt_claims = decode_jwt(config, token)
@@ -48,15 +40,11 @@ async def get_user_or_none(
         return None
     user: User = row[0]
 
-    pickled = pickle.dumps(user)
-    await cache.set(token, pickled, config.cache.expire_minutes)
-
     return user
 
 
 async def get_user(
     session: AsyncSession = Depends(get_session),
-    cache: Redis = Depends(get_cache),
     config: Configuration = Depends(get_config),
     token: str | None = Depends(oauth2_scheme),
 ) -> User:
@@ -66,7 +54,7 @@ async def get_user(
         headers={'WWW-Authenticate': 'Bearer'},
     )
 
-    user: User | None = await get_user_or_none(session, cache, config, token)
+    user: User | None = await get_user_or_none(session, config, token)
     if user is None:
         raise authentication_failed
     return user
