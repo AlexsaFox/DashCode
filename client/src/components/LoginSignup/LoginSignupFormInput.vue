@@ -2,19 +2,23 @@
 defineProps<{
   label: string
   type: string
+  modelValue: string
 }>()
 
 const emit = defineEmits<{
-  (e: 'changed', newValue: string): void
+  (e: 'update:modelValue', newValue: string): void
 }>()
 
-const inputValue = ref('')
+function onChanged(event: Event) {
+  const target = event.currentTarget as HTMLInputElement
+  emit('update:modelValue', target.value)
+}
 </script>
 
 <template>
   <div class="input-container">
     <label :for="label">{{ label }}</label>
-    <input v-model="inputValue" :name="label" :type="type" required @change="emit('changed', inputValue)">
+    <input :value="modelValue" :name="label" :type="type" @input="onChanged">
   </div>
 </template>
 

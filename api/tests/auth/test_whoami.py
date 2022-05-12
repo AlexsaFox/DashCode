@@ -1,28 +1,27 @@
 from src.db.models import User
+from tests.auth.utils import check_auth
+from tests.graphql.whoami import WHOAMI_QUERY
 from tests.utils import GraphQLClient
-
-WHOAMI_QUERY = '''
-{
-    whoami {
-        username
-        email
-        profileColor
-        isSuperuser
-    }
-}
-'''
 
 
 async def test_whoami(graphql_client: GraphQLClient, token_user: tuple[str, User]):
     token, user = token_user
 
-    response = await graphql_client.make_request(WHOAMI_QUERY, token=token)
+    data, _ = await graphql_client.get_request_data(query=WHOAMI_QUERY, token=token)
+    assert data is not None
 
-    assert response.status_code == 200
-    assert response.json().get('errors') is None
+    user_data = data['whoami']
+    assert user_data == {
+        'email': user.email,
+        'user': {
+            'username': user.username,
+            'profileColor': user.profile_color,
+            'isSuperuser': user.is_superuser,
+            'profilePictureFilename': user.profile_picture_filename,
+        },
+    }
 
-    user_data = response.json()['data']['whoami']
-    assert user_data['username'] == user.username
-    assert user_data['email'] == user.email
-    assert user_data['profileColor'] == user.profile_color
-    assert user_data['isSuperuser'] == user.is_superuser
+
+async def test_whoami_no_auth(graphql_client: GraphQLClient):
+    data, errors = await graphql_client.get_request_data(query=WHOAMI_QUERY)
+    check_auth(data, errors)

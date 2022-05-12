@@ -4,7 +4,7 @@ app:
 
 cors:
   origins:
-  - http://localhost:3333
+    - http://localhost:3333
 
 server:
   host: localhost
@@ -15,16 +15,26 @@ database:
 
 cache:
   dsn: redis://localhost:6379
-  expire_minutes: 10800   # 3 hours
+  expire_minutes: 10800 # 3 hours
 
 jwt:
   algorithm: HS256
-  expire_hours: 43200   # 30 days
+  expire_hours: 43200 # 30 days
 
 base_superuser:
   username: admin
   email: admin@admin.com
-  password: admin
+  password: admin123
+
+localization:
+  fallback_locale: en
+  available_locales: [en, ru]
+
+file_upload:
+  max_size_mb: 16
+  upload_path: uploads
+  allowed_extensions:
+    [apng, avif, gif, jpg, jpeg, jfif, pjpeg, pjp, png, svg, webp]
 
 debug: false
 secret_key: please_change_me_in_production

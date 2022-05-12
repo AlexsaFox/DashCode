@@ -1,22 +1,23 @@
-import pytest
-
+from tempfile import mkdtemp
 from typing import AsyncGenerator
 
-from asgi_lifespan import LifespanManager
-from aioredis import Redis
+import pytest
 from _pytest.config import Config
+from aioredis import Redis
+from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
 from pydantic import RedisDsn
-from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 from testcontainers.postgres import PostgresContainer
 from testcontainers.redis import RedisContainer
 
 from src.auth.utils import create_user, generate_jwt
 from src.cache.utils import get_cache_backend
-from src.create_app import App, create_app
 from src.config import Configuration, load_configuration
-from src.db.models import Base, User
+from src.create_app import App, create_app
+from src.db.models import Base, Note, User
 from src.db.utils import get_engine
+from src.utils.note import create_note
 from tests.utils import GraphQLClient
 
 
@@ -42,9 +43,10 @@ def pytest_unconfigure(config: Config) -> None:
     config.stash[cache_container].stop()
 
 
-@pytest.fixture()
+@pytest.fixture
 def test_config(pytestconfig: Config) -> Configuration:
     config = load_configuration('testing')
+    config.file_upload.upload_path = mkdtemp()
     config.database.dsn = (
         pytestconfig.stash[database_container]
         .get_connection_url()
@@ -58,14 +60,9 @@ def test_config(pytestconfig: Config) -> Configuration:
 
 
 @pytest.fixture
-def database_engine(test_config: Configuration) -> AsyncEngine:
-    return get_engine(test_config.database)
-
-
-@pytest.fixture
-async def database_session(database_engine: AsyncEngine) -> AsyncGenerator[AsyncSession, None]:
-    async with AsyncSession(database_engine) as session:
-        yield session
+async def database_engine(test_config: Configuration) -> AsyncEngine:
+    engine = get_engine(test_config.database)
+    return engine
 
 
 @pytest.fixture
@@ -74,21 +71,30 @@ async def cache(test_config: Configuration) -> Redis:
 
 
 @pytest.fixture
-async def app(test_config: Configuration, database_engine: AsyncEngine) -> AsyncGenerator[App, None]:
+async def app(
+    test_config: Configuration, database_engine: AsyncEngine
+) -> AsyncGenerator[App, None]:
     async with database_engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    yield create_app(test_config)
+    app = create_app(test_config)
+    async with LifespanManager(app):
+        yield app
 
     async with database_engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
 
 
 @pytest.fixture
+async def database_session(app: App) -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSession(app.app_state.engine, expire_on_commit=False) as session:
+        yield session
+
+
+@pytest.fixture
 async def client(app: App) -> AsyncGenerator[AsyncClient, None]:
-    async with LifespanManager(app):
-        async with AsyncClient(app=app, base_url='http://localhost') as async_client:
-            yield async_client
+    async with AsyncClient(app=app, base_url='http://localhost') as async_client:
+        yield async_client
 
 
 @pytest.fixture
@@ -101,6 +107,30 @@ async def user(database_session: AsyncSession) -> User:
 
 
 @pytest.fixture
+async def another_user(database_session: AsyncSession) -> User:
+    username = 'user_2'
+    email = 'user_2@mail.com'
+    password = 'password_2'
+    another_user = await database_session.run_sync(
+        create_user, username, email, password
+    )
+    return another_user
+
+
+@pytest.fixture
+async def note(database_session: AsyncSession, user: User) -> Note:
+    title = "kek for test_note_1"
+    content = 'KEEEEEEEEEK'
+    link = 'https://kek.net'
+    is_private = False
+    test_user = user
+    note = await database_session.run_sync(
+        create_note, title, content, link, is_private, test_user
+    )
+    return note
+
+
+@pytest.fixture
 def graphql_client(client: AsyncClient) -> GraphQLClient:
     return GraphQLClient(client)
 
@@ -108,3 +138,10 @@ def graphql_client(client: AsyncClient) -> GraphQLClient:
 @pytest.fixture
 def token_user(test_config: Configuration, user: User) -> tuple[str, User]:
     return generate_jwt(test_config, user), user
+
+
+@pytest.fixture
+def another_token_user(
+    test_config: Configuration, another_user: User
+) -> tuple[str, User]:
+    return generate_jwt(test_config, another_user), another_user

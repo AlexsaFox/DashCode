@@ -1,14 +1,12 @@
-import re
-import bcrypt
 import calendar
-
+import re
 from datetime import datetime, timedelta
 from typing import cast
 
 from authlib.jose import JWTClaims, jwt
 from sqlalchemy import or_
-from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.session import Session
 
 from src.config import Configuration
 from src.db.models import User
@@ -16,17 +14,13 @@ from src.types import ExpectedError
 
 
 class AuthenticationFailedError(ExpectedError):
-    def __init__(self):
-        super().__init__('Wrong username/email or password')
+    def __init__(self, msg: str = 'Unable to find user with provided credentials'):
+        super().__init__(msg)
 
 
-class UsernameOrEmailNotProvidedError(ExpectedError):
-    def __init__(self):
-        super().__init__('You must provide username or email')
-
-
-def _is_password_valid(passwd: str, passwd_hash: str) -> bool:
-    return bcrypt.checkpw(passwd.encode(), passwd_hash.encode())
+class IdentificationError(ExpectedError):
+    def __init__(self, msg: str = 'You must provide username or email'):
+        super().__init__(msg)
 
 
 def authenticate_user(
@@ -36,10 +30,15 @@ def authenticate_user(
     email: str | None = None,
 ) -> User:
     if username is None and email is None:
-        raise UsernameOrEmailNotProvidedError
+        raise IdentificationError
 
-    user: User | None = session.query(User).filter(or_(User.username == username, User.email == email)).first()
-    if user is None or not _is_password_valid(password, user.password_hash):
+    user: User | None = (
+        session.query(User)
+        .filter(or_(User.username == username, User.email == email))
+        .first()
+    )
+
+    if user is None or not user.check_password(password):
         raise AuthenticationFailedError
 
     return cast(User, user)
@@ -84,19 +83,16 @@ def create_user(
     password: str,
     is_superuser: bool = False,
 ) -> User:
-    salt: bytes = bcrypt.gensalt()
-    password_hash = bcrypt.hashpw(password.encode(), salt).decode()
     user = User(
         username=username,
         email=email,
-        password_hash=password_hash,
         is_superuser=is_superuser,
+        password=password,
     )
 
     try:
         session.add(user)
         session.commit()
-        session.refresh(user)
     except IntegrityError as err:
         err_msg = str(err.orig)
         group = _INTEGRITY_ERROR_REGEXP.findall(err_msg)[0]
@@ -105,3 +101,10 @@ def create_user(
         raise UserExistsError(column, value)
 
     return user
+
+
+def delete_user(session: Session, user: User):
+    user.reset_profile_picture()
+    session.add(user)
+    session.delete(user)
+    session.commit()

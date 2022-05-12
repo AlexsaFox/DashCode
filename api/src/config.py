@@ -1,7 +1,7 @@
 import os
 from typing import Any, Literal, cast
-from dynaconf import Dynaconf
 
+from dynaconf import Dynaconf
 from pydantic import AnyHttpUrl, BaseModel, PositiveInt, RedisDsn, StrictBool, StrictStr
 
 
@@ -31,6 +31,7 @@ class ServerConfiguration(BaseModel):
 class CORSConfiguration(BaseModel):
     origins: list[AnyHttpUrl]
 
+
 class JWTConfiguration(BaseModel):
     algorithm: StrictStr
     expire_hours: PositiveInt
@@ -42,6 +43,17 @@ class BaseSuperuser(BaseModel):
     email: StrictStr
 
 
+class LocalizationConfiguration(BaseModel):
+    fallback_locale: StrictStr
+    available_locales: list[StrictStr]
+
+
+class FileUploadConfiguration(BaseModel):
+    max_size_mb: PositiveInt
+    allowed_extensions: list[StrictStr]
+    upload_path: StrictStr
+
+
 class Configuration(BaseModel):
     app: AppConfiguration
     base_superuser: BaseSuperuser
@@ -50,7 +62,9 @@ class Configuration(BaseModel):
     database: DatabaseConfiguration
     debug: StrictBool
     environment: StrictStr
+    file_upload: FileUploadConfiguration
     jwt: JWTConfiguration
+    localization: LocalizationConfiguration
     secret_key: StrictStr
     server: ServerConfiguration
 

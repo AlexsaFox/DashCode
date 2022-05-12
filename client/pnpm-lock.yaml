@@ -9,6 +9,8 @@ specifiers:
   '@types/nprogress': ^0.2.0
   '@vitejs/plugin-vue': ^2.3.1
   '@vue/test-utils': ^2.0.0-rc.21
+  '@vuelidate/core': 2.0.0-alpha.41
+  '@vuelidate/validators': 2.0.0-alpha.29
   '@vueuse/core': ^8.3.0
   '@vueuse/head': ^0.7.6
   critters: ^0.0.16
@@ -48,6 +50,8 @@ specifiers:
 
 dependencies:
   '@apollo/client': 3.6.1_graphql@16.4.0
+  '@vuelidate/core': 2.0.0-alpha.41_vue@3.2.33
+  '@vuelidate/validators': 2.0.0-alpha.29_vue@3.2.33
   '@vueuse/core': 8.3.0_vue@3.2.33
   '@vueuse/head': 0.7.6_vue@3.2.33
   graphql: 16.4.0
@@ -2176,6 +2180,24 @@ packages:
     dependencies:
       vue: 3.2.33
     dev: true
+
+  /@vuelidate/core/2.0.0-alpha.41_vue@3.2.33:
+    resolution: {integrity: sha512-fST7s5wiLW8ZNTexe8+7fDdBZYT7HjbuA43/XDtKTlHs1BMRDDaBoFLZbHSqmHisQvGXa7zLG9bvG8X5cHZaxg==}
+    dependencies:
+      vue-demi: 0.12.5_vue@3.2.33
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vuelidate/validators/2.0.0-alpha.29_vue@3.2.33:
+    resolution: {integrity: sha512-azVc2Fwx0umgJjVatzDwnVEdEGNhEdUISQKcLwTDJuNUFS9n1CUqMzfNW+CCTw1Wp8RwYiDS9/qKnEZs4ubF5w==}
+    dependencies:
+      vue-demi: 0.12.5_vue@3.2.33
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /@vueuse/core/8.3.0_vue@3.2.33:
     resolution: {integrity: sha512-GDHM0vr/E3mw1fbh3yj4DJCJ/KvTXtOtT0OR2kCKuEUOo0Btk45MDGI6MdIqsHMjI0OXBJl8jH8WFv64KU2mOQ==}
