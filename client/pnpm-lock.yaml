@@ -33,7 +33,6 @@ specifiers:
   unplugin-auto-import: ^0.7.1
   unplugin-vue-components: ^0.19.3
   vite: ^2.9.5
-  vite-plugin-environment: ^1.1.1
   vite-plugin-inspect: ^0.5.0
   vite-plugin-md: ^0.12.4
   vite-plugin-pages: ^0.23.0
@@ -61,7 +60,6 @@ dependencies:
   pinia: 2.0.13_ifhmkzsxec62ezvqv7qmanm4bq
   prism-theme-vars: 0.2.2
   sass: 1.51.0
-  vite-plugin-environment: 1.1.1_vite@2.9.5
   vue: 3.2.33
   vue-demi: 0.12.5_vue@3.2.33
   vue-i18n: 9.1.9_vue@3.2.33
@@ -1470,8 +1468,8 @@ packages:
       - supports-color
     dev: true
 
-  /@intlify/bundle-utils/3.0.0_vue-i18n@9.1.9:
-    resolution: {integrity: sha512-y43Z5Q3ZJvxqtD8xUH6U3yrlZeay7ZTqkzv1GQ4b0mGQtk5uptOT9Ra4qvGuUv8QyPQsortrA/OHWUD5ax5ZNQ==}
+  /@intlify/bundle-utils/3.1.0_vue-i18n@9.1.9:
+    resolution: {integrity: sha512-ghlJ0kR2cCQ8D+poKknC0Xx0ncOt3J3os7CcIAqqIWVF7k6AtGoCDnIru+YzlZcvFRNmP9wEZ7jKliojCdAWNg==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: '*'
@@ -1563,7 +1561,7 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 3.0.0_vue-i18n@9.1.9
+      '@intlify/bundle-utils': 3.1.0_vue-i18n@9.1.9
       '@intlify/shared': 9.2.0-beta.35
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
@@ -7017,14 +7015,6 @@ packages:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
     dev: true
-
-  /vite-plugin-environment/1.1.1_vite@2.9.5:
-    resolution: {integrity: sha512-kbUAZaqmiHap+7aqRfMolRGzCGhJSU45qDjgLM11DpSDzmiI5JL4EzdyAIUZ4g0WrO88EV2cdcq2fpNYuJ17Pg==}
-    peerDependencies:
-      vite: ^2.7
-    dependencies:
-      vite: 2.9.5_sass@1.51.0
-    dev: false
 
   /vite-plugin-inspect/0.5.0_vite@2.9.5:
     resolution: {integrity: sha512-eArca+5jrNx1hQL+5s79eT5Xq4VXjJcihJhK8GT/+W2GqefVxFO1WO78RnD0HPI+hKSdEFo+B4z2zeaE8DTvWQ==}
