@@ -3,7 +3,7 @@ import useErrorsStore from './useErrors'
 import apolloClient from '~/modules/apollo'
 import config from '~/constants/config'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
-import { REGISTER_USER_MUTATION } from '~/graphql/mutations'
+import { EDIT_USER_AUTH_MUTATION, REGISTER_USER_MUTATION } from '~/graphql/mutations'
 import { i18n } from '~/modules/i18n'
 
 export default defineStore('auth', {
@@ -34,14 +34,15 @@ export default defineStore('auth', {
         },
       })).data
 
+      const errors = useErrorsStore()
       if (registerUser.__typename === 'UserAlreadyExists') {
         const { field, value } = registerUser
-        useErrorsStore().addError(i18n.global.t('sign-up.errors.user-exists', { field, value }))
+        errors.addError(i18n.global.t('sign-up.errors.user-exists', { field, value }))
       }
       else if (registerUser.__typename === 'ValidationError') {
         const { fields } = registerUser
         for (const { details } of fields)
-          useErrorsStore().addError(details)
+          errors.addError(details)
       }
       else {
         this.login(password, username)
@@ -69,6 +70,31 @@ export default defineStore('auth', {
       }
     },
 
+    async edit_auth(email?: string, password?: string, currentPassword?: string) {
+      const { editAccountAuth } = (await apolloClient.mutate({
+        mutation: EDIT_USER_AUTH_MUTATION,
+        variables: {
+          newEmail: email,
+          newPassword: password === '' ? null : password,
+          password: currentPassword ?? null,
+        },
+      })).data
+
+      const errors = useErrorsStore()
+      if (editAccountAuth.__typename === 'RequestValueError') {
+        const { details } = editAccountAuth
+        errors.addError(details)
+      }
+      else if (editAccountAuth.__typename === 'ValidationError') {
+        const { fields } = editAccountAuth
+        for (const { details } of fields)
+          errors.addError(details)
+      }
+      else {
+        this.fetchUser()
+      }
+    },
+
     async fetchUser() {
       await apolloClient.query({
         query: WHOAMI_QUERY,
@@ -83,7 +109,6 @@ export default defineStore('auth', {
     async logout() {
       localStorage.removeItem('user')
       localStorage.removeItem('loggedIn')
-      this.$reset()
     },
   },
 })

@@ -1,23 +1,21 @@
 <script setup lang="ts">
 import Pages from '~/constants/types/pages'
+import useSettingsPageStore from '~/store/useSettingsPage'
 
 const { t } = useI18n()
 const router = useRouter()
-
-const emit = defineEmits<{
-  (e: 'changePage', page: any): void
-}>()
+const settingsPage = useSettingsPageStore()
 </script>
 
 <template>
   <h1>{{ t("settings.button-right-part-header") }}</h1>
-  <SideButton icon="" @button-click="emit('changePage', Pages.MyAccountPage)">
+  <SideButton icon="" @button-click="settingsPage.changePage(Pages.MyAccountPage)">
     <span class="i-carbon-user" /> Account
   </SideButton>
-  <SideButton @button-click="emit('changePage', Pages.UserProfilePage)">
+  <SideButton @button-click="settingsPage.changePage(Pages.UserProfilePage)">
     <span class="i-carbon-edit" /> Profile
   </SideButton>
-  <SideButton @button-click="emit('changePage', Pages.APITokenPage)">
+  <SideButton @button-click="settingsPage.changePage(Pages.APITokenPage)">
     <span class="i-carbon-api" /> API token
   </SideButton>
   <button class="standard-button" @click="router.back()">

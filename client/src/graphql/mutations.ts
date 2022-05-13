@@ -11,12 +11,13 @@ mutation($username: String!, $email: String!, $password: String!) {
       }
       ... on RegisterUserSuccess {
           account {
-              user {
-                  username
-                  profileColor
-                  isSuperuser
-              }
-              email
+            user {
+              username
+              profileColor
+              isSuperuser
+              profilePictureFilename
+            }
+            email
           }
       }
       ... on ValidationError {
@@ -28,4 +29,32 @@ mutation($username: String!, $email: String!, $password: String!) {
   }
 }
 
+`
+
+export const EDIT_USER_AUTH_MUTATION = gql`
+mutation($password: String!, $newPassword: String, $newEmail: String) {
+  editAccountAuth(password: $password, newPassword: $newPassword, newEmail: $newEmail) {
+      __typename
+      ... on EditAccountSuccess {
+          account {
+              user {
+                username
+                profileColor
+                isSuperuser
+                profilePictureFilename
+              }
+              email
+          }
+      }
+      ... on ValidationError {
+          fields {
+              field
+              details
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
 `

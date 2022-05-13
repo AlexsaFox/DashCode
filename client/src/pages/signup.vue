@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { email, helpers, required, sameAs } from '@vuelidate/validators'
+import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import useAuthStore from '~/store/useAuth'
 import useErrorsStore from '~/store/useErrors'
@@ -26,6 +26,7 @@ const rules = {
   },
   password: {
     required: helpers.withMessage(t('sign-up.errors.password-required'), required),
+    minLength: helpers.withMessage(t('sign-up.errors.password-too-short'), minLength(8)),
   },
   confirm_password: {
     sameAs: helpers.withMessage(
@@ -46,9 +47,10 @@ function onSubmit() {
       errors.addError(error.$message.toString())
   }
   else {
-    auth.register(credentials.username, credentials.email, credentials.password)
-    if (errors.errors.length == 0)
-      router.push('/')
+    auth.register(credentials.username, credentials.email, credentials.password).then(() => {
+      if (errors.errors.length === 0)
+        router.push('/')
+    })
   }
 }
 </script>

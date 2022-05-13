@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import useAuthStore from '~/store/useAuth'
+import useSettingsPageStore from '~/store/useSettingsPage'
+import Pages from '~/constants/types/pages'
 
 const auth = useAuthStore()
+const settingsPage = useSettingsPageStore()
 </script>
 
 <template>
@@ -17,7 +20,7 @@ const auth = useAuthStore()
     <button
       type="button"
       class="edit_profile"
-      onclick="openSettings(event, 'UserProfile')"
+      @click="settingsPage.changePage(Pages.UserProfilePage)"
     >
       Edit User Profile
     </button>

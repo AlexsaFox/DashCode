@@ -34,9 +34,10 @@ function onSubmit() {
       errors.addError(error.$message.toString())
   }
   else {
-    auth.login(credentials.password, credentials.username, credentials.username)
-    if (errors.errors.length === 0)
-      router.push('/')
+    auth.login(credentials.password, credentials.username, credentials.username).then(() => {
+      if (errors.errors.length === 0)
+        router.push('/')
+    })
   }
 }
 </script>
