@@ -1,12 +1,18 @@
+<script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
+
+const auth = useAuthStore()
+</script>
+
 <template>
   <div class="stroke">
     <div class="profile">
       <div class="avatar_s">
         <img
-          src="src/assets/img/2e483781-a491-4b82-9bf4-560a76752829.jpg"
+          :src="auth.profilePicture"
         >
       </div>
-      <h2>USERNAME</h2>
+      <h2>{{ auth.user.user.username }}</h2>
     </div>
     <button
       type="button"

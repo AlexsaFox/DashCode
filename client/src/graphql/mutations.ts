@@ -2,7 +2,7 @@
 import gql from 'graphql-tag'
 
 export const REGISTER_USER_MUTATION = gql`
-mutation ($username: String!, $email: String!, $password: String!) {
+mutation($username: String!, $email: String!, $password: String!) {
   registerUser(username: $username, email: $email, password: $password) {
       __typename
       ... on UserAlreadyExists {
@@ -10,10 +10,22 @@ mutation ($username: String!, $email: String!, $password: String!) {
           value
       }
       ... on RegisterUserSuccess {
-          user {
-              isSuperuser
+          account {
+              user {
+                  username
+                  profileColor
+                  isSuperuser
+              }
+              email
+          }
+      }
+      ... on ValidationError {
+          fields {
+              field
+              details
           }
       }
   }
 }
+
 `

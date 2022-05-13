@@ -2,19 +2,29 @@
 import gql from 'graphql-tag'
 
 export const GET_TOKEN_QUERY = gql`
-query ($username: String, $email: String, $password: String!) {
-  token (username: $username, email: $email, password: $password) {
-    accessToken
+query($username: String, $email: String, $password: String!) {
+  token(username: $username, email: $email, password: $password) {
+      __typename
+      ... on RequestValueError {
+          details
+      }
+      ... on Token {
+          accessToken
+          tokenType
+      }
   }
 }
 `
 export const WHOAMI_QUERY = gql`
 query {
   whoami {
-    username,
-    email,
-    profileColor,
-    isSuperuser
+      user {
+          username
+          isSuperuser
+          profileColor
+          profilePictureFilename
+      }
+      email
   }
 }
 `

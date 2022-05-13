@@ -7,6 +7,7 @@ import useErrorsStore from '~/store/useErrors'
 const { t } = useI18n()
 const auth = useAuthStore()
 const errors = useErrorsStore()
+const router = useRouter()
 
 const credentials = reactive({
   username: '',
@@ -46,6 +47,8 @@ function onSubmit() {
   }
   else {
     auth.register(credentials.username, credentials.email, credentials.password)
+    if (errors.errors.length == 0)
+      router.push('/')
   }
 }
 </script>

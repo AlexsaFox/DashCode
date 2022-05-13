@@ -18,13 +18,21 @@ login-sign-up:
     From just making notes to social media where you can find answers for all
     you questions.
 sign-up:
-  username-label: "Username"
-  email-label: "Email"
-  password-label: "Password"
-  confirm-password-label: "Confirm password"
   submit-button: "Register"
   have-account: "Already have login?"
   have-account-link: "Sign in"
+  labels:
+    username: Username
+    email: Email
+    password: Password
+    confirm-password: Confirm password
+  errors:
+    user-exists: User with {field} "{value}" already exists
+    username-required: Username is required
+    email-required: Email is required
+    email-invalid: Enter valid email address
+    password-required: Password is required
+    passwords-do-not-match: Password and confirm password fields do not match
 index:
   title-1: "Unique knowledge repository."
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
@@ -57,21 +65,6 @@ settings:
   button-generate-new-token-label: "Generate new token"
   upload-profile-image-label: "Upload profile image:"
   button-browse-image-label: "Browse"
-  have-account: Already have account?
-  have-account-link: Sign in
-  submit-button: Register
-  labels:
-    username: Username
-    email: Email
-    password: Password
-    confirm-password: Confirm password
-  errors:
-    user-exists: User with {field} "{value}" already exists
-    username-required: Username is required
-    email-required: Email is required
-    email-invalid: Enter valid email address
-    password-required: Password is required
-    passwords-do-not-match: Password and confirm password fields do not match
 
 note_show:
   edit-button: "Edit"

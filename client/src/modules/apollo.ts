@@ -9,7 +9,7 @@ import config from '~/constants/config'
 import useErrorsStore from '~/store/useErrors'
 
 const httpLink = createHttpLink({
-  uri: config.api_host,
+  uri: config.graphql_host,
 })
 
 const errorLink = onError(({ graphQLErrors }) => {

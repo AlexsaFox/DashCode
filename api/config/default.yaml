@@ -36,9 +36,5 @@ file_upload:
   allowed_extensions:
     [apng, avif, gif, jpg, jpeg, jfif, pjpeg, pjp, png, svg, webp]
 
-localization:
-  fallback_locale: en
-  available_locales: [en, ru]
-
 debug: false
 secret_key: please_change_me_in_production

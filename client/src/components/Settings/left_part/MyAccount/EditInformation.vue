@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
 
 const { t } = useI18n()
+const auth = useAuthStore()
 
 const enabledEmailField = ref(false)
 const showPasswordField = ref(false)
@@ -14,7 +16,7 @@ const showPasswordField = ref(false)
         <h2>{{ t("settings.email-label") }}</h2>
         <input
           id="input_email" :disabled="!enabledEmailField" type="email" class="input email"
-          value="expampleexpampleexpampleexpample@email.com"
+          :value="auth.user.email"
         >
       </div>
       <button v-if="!enabledEmailField" type="button" class="edit" @click="enabledEmailField = true">
