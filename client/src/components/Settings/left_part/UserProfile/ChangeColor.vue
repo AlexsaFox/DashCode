@@ -8,7 +8,7 @@ const { t } = useI18n()
     <div class="bottom_line">
       <input type="color" class="change_profile_color">
       <button class="edit">
-        {{ t("settings.button-edit-label") }}
+        {{ t("settings.button-submit-color-label") }}
       </button>
     </div>
   </div>

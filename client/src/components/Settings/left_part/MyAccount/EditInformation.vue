@@ -21,17 +21,17 @@ const formData = reactive({
 
 const rules = {
   email: {
-    email: helpers.withMessage(t('settings.my-account-email-invalid'), email),
+    email: helpers.withMessage(t('settings.account.errors.email-invalid'), email),
   },
   confirmPassword: {
     sameAs: helpers.withMessage(
-      t('settings.my-account-passwords-do-not-match'),
+      t('settings.account.errors.passwords-do-not-match'),
       sameAs(computed(() => formData.newPassword)),
     ),
-    minLength: helpers.withMessage(t('settings.my-account-password-too-short'), minLength(8)),
+    minLength: helpers.withMessage(t('settings.account.errors.password-too-short'), minLength(8)),
   },
   currentPassword: {
-    required: helpers.withMessage(t('settings.my-account-password-required'), required),
+    required: helpers.withMessage(t('settings.account.errors.password-required'), required),
   },
 }
 

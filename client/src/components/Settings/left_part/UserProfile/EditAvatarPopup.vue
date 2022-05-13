@@ -20,14 +20,20 @@ function updatePreviewImage() {
     }
   }
 }
+
+const emit = defineEmits<{
+  (e: 'closePopup'): void
+}>()
 </script>
 
 <template>
-  <div id="popup_avatar" class="overlay">
+  <div class="overlay">
     <div class="popup">
       <div class="header">
         <span>{{ t("settings.button-edit-avatar-label") }}</span>
-        <a class="close" href="#">&times;</a>
+        <button class="close" @click="emit('closePopup')">
+          &times;
+        </button>
       </div>
       <div class="content">
         <img v-if="imageData" :src="imageData">
@@ -66,16 +72,9 @@ function updatePreviewImage() {
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
   height: 100%;
   z-index: 10;
   overflow-y: auto;
-
-  &:target {
-    visibility: visible;
-    opacity: 1;
-  }
 }
 
 .popup {

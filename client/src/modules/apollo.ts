@@ -12,7 +12,7 @@ const httpLink = createHttpLink({
   uri: config.graphql_host,
 })
 
-const errorLink = onError(({ graphQLErrors }) => {
+const graphQLErrorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
     const errors = useErrorsStore()
     for (const error of graphQLErrors)
@@ -31,7 +31,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const apolloClient = new ApolloClient({
-  link: authLink.concat(errorLink.concat(httpLink)),
+  link: authLink.concat(graphQLErrorLink.concat(httpLink)),
   cache: new InMemoryCache(),
 })
 
