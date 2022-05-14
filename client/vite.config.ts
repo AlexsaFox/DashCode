@@ -88,7 +88,7 @@ export default defineConfig(({ mode }) => {
         },
       }),
 
-      // https://github.com/antfu/vite-plugin-pwa
+      // https://g2ithub.com/antfu/vite-plugin-pwa
       VitePWA({
         registerType: 'autoUpdate',
         includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
@@ -133,6 +133,7 @@ export default defineConfig(({ mode }) => {
     ssgOptions: {
       script: 'async',
       formatting: 'minify',
+      format: 'cjs',
       onFinished() { generateSitemap() },
     },
 
@@ -144,6 +145,5 @@ export default defineConfig(({ mode }) => {
         inline: ['@vue', '@vueuse', 'vue-demi'],
       },
     },
-
   }
 })

@@ -1,4 +1,6 @@
-from sqlalchemy.ext.asyncio import AsyncSession
+from typing import Any
+
+from sqlalchemy.ext.asyncio import AsyncEngine
 
 from src.db.models import Note, User
 from tests.graphql.edit_note import NOTE_EDIT_QUERY
@@ -6,20 +8,31 @@ from tests.notes.test_note_create import get_note_by_id
 from tests.utils import GraphQLClient
 
 
+async def check_note(note_id: str, engine: AsyncEngine, **kwargs: Any):
+    note = await get_note_by_id(engine, note_id)
+    for field, value in kwargs.items():
+        if field == 'note_id':
+            field = "id"
+        assert getattr(note, field) == value
+
+
 async def test_note_editing(
-    graphql_client: GraphQLClient, token_user: tuple[str, User], note: Note
+    graphql_client: GraphQLClient,
+    database_engine: AsyncEngine,
+    token_user: tuple[str, User],
+    note: Note,
 ):
     token, _ = token_user
-
+    request_variables = {
+        "note_id": note.id,
+        "title": "test_title",
+        "content": "test_content",
+        "link": "https://testlink.test",
+        "is_private": False,
+    }
     data, _ = await graphql_client.get_request_data(
         query=NOTE_EDIT_QUERY,
-        variables={
-            "note_id": note.id,
-            "title": "test_title",
-            "content": "test_content",
-            "link": "https://testlink.test",
-            "is_private": False,
-        },
+        variables=request_variables,
         token=token,
     )
     assert data is not None
@@ -32,10 +45,161 @@ async def test_note_editing(
                 "id": note.id,
                 "title": "test_title",
                 "content": "test_content",
+                "link": "https://testlink.test",
                 "isPrivate": False,
             },
         }
     }
+    request_variables.pop("note_id")
+    await check_note(note.id, database_engine, **request_variables)
+
+
+async def test_note_editing_without_title(
+    graphql_client: GraphQLClient,
+    database_engine: AsyncEngine,
+    token_user: tuple[str, User],
+    note: Note,
+):
+    token, _ = token_user
+    request_variables = {
+        "note_id": note.id,
+        "content": "test_content",
+        "link": "https://testlink.test",
+        "is_private": False,
+    }
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_EDIT_QUERY,
+        variables=request_variables,
+        token=token,
+    )
+    assert data is not None
+
+    assert data['editNote']['__typename'] == "EditNoteSuccess"
+    assert data == {
+        "editNote": {
+            "__typename": "EditNoteSuccess",
+            "note": {
+                "id": note.id,
+                "title": note.title,
+                "content": "test_content",
+                "link": "https://testlink.test",
+                "isPrivate": False,
+            },
+        }
+    }
+    request_variables.pop("note_id")
+    await check_note(note.id, database_engine, **request_variables)
+
+
+async def test_note_editing_without_content(
+    graphql_client: GraphQLClient,
+    database_engine: AsyncEngine,
+    token_user: tuple[str, User],
+    note: Note,
+):
+    token, _ = token_user
+    request_variables = {
+        "note_id": note.id,
+        "title": "test_title",
+        "link": "https://testlink.test",
+        "is_private": False,
+    }
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_EDIT_QUERY,
+        variables=request_variables,
+        token=token,
+    )
+    assert data is not None
+
+    assert data['editNote']['__typename'] == "EditNoteSuccess"
+    assert data == {
+        "editNote": {
+            "__typename": "EditNoteSuccess",
+            "note": {
+                "id": note.id,
+                "title": "test_title",
+                "content": note.content,
+                "link": "https://testlink.test",
+                "isPrivate": False,
+            },
+        }
+    }
+    request_variables.pop("note_id")
+    await check_note(note.id, database_engine, **request_variables)
+
+
+async def test_note_editing_without_link(
+    graphql_client: GraphQLClient,
+    database_engine: AsyncEngine,
+    token_user: tuple[str, User],
+    note: Note,
+):
+    token, _ = token_user
+    request_variables = {
+        "note_id": note.id,
+        "title": "test_title",
+        "content": "test_content",
+        "is_private": False,
+    }
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_EDIT_QUERY,
+        variables=request_variables,
+        token=token,
+    )
+    assert data is not None
+
+    assert data['editNote']['__typename'] == "EditNoteSuccess"
+    assert data == {
+        "editNote": {
+            "__typename": "EditNoteSuccess",
+            "note": {
+                "id": note.id,
+                "title": "test_title",
+                "content": "test_content",
+                "link": note.link,
+                "isPrivate": False,
+            },
+        }
+    }
+    request_variables.pop("note_id")
+    await check_note(note.id, database_engine, **request_variables)
+
+
+async def test_note_editing_without_privacy(
+    graphql_client: GraphQLClient,
+    database_engine: AsyncEngine,
+    token_user: tuple[str, User],
+    note: Note,
+):
+    token, _ = token_user
+    request_variables = {
+        "note_id": note.id,
+        "title": "test_title",
+        "content": "test_content",
+        "link": "https://testlink.test",
+    }
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_EDIT_QUERY,
+        variables=request_variables,
+        token=token,
+    )
+    assert data is not None
+
+    assert data['editNote']['__typename'] == "EditNoteSuccess"
+    assert data == {
+        "editNote": {
+            "__typename": "EditNoteSuccess",
+            "note": {
+                "id": note.id,
+                "title": "test_title",
+                "content": "test_content",
+                "link": "https://testlink.test",
+                "isPrivate": note.is_private,
+            },
+        }
+    }
+    request_variables.pop("note_id")
+    await check_note(note.id, database_engine, **request_variables)
 
 
 async def test_note_editing_invalid_id(

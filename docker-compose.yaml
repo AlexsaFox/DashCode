@@ -1,0 +1,68 @@
+version: "3.7"
+
+services:
+  redis:
+    image: redis
+    expose:
+      - 6379
+    volumes:
+      - ./.redis-data:/data
+    command: --save 60 100
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=backend
+    expose:
+      - 5432
+    volumes:
+      - ./.postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  api:
+    build: api
+    container_name: dashcode_api
+    expose:
+      - 8000
+    environment:
+      - DYNACONF_ENV=production
+      - API_server__host=0.0.0.0
+      - API_server__port=8000
+      - API_cors__origins=['http://nginx_client']
+      - API_database__dsn=postgresql+asyncpg://user:password@postgres:5432/backend
+      - API_cache__dsan=redis://redis:6379
+      - API_debug=false
+      - API_secret_key=ababa
+    restart: unless-stopped
+    networks:
+      - app-network
+    depends_on:
+      - redis
+      - postgres
+
+  nginx_client:
+    build:
+      context: client
+      args:
+        - API_HOST=http://localhost/api
+    container_name: dashcode_nginx_client
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
+    networks:
+      - app-network
+    depends_on:
+      - api
+
+
+networks:
+  app-network:

@@ -76,6 +76,7 @@ def load_configuration(env: ENVIRONMENT | None = None) -> Configuration:
     settings = Dynaconf(
         settings_files=['default.yaml', f'{env}.yaml', '.secrets.yaml'],
         load_dotenv=True,
+        envvar_prefix='API',
         merge_enabled=True,
         root_path=os.path.join(BASE_DIR, 'config'),
     )
