@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': ^0.20.6
-  '@apollo/client': ^3.6.1
+  '@apollo/client': ^3.6.2
   '@iconify-json/carbon': ^1.1.3
   '@intlify/vite-plugin-vue-i18n': ^4.0.0
   '@types/markdown-it-link-attributes': ^3.0.1
@@ -46,11 +46,10 @@ specifiers:
   vue-demi: ^0.12.5
   vue-i18n: ^9.1.9
   vue-router: ^4.0.14
-  vue-textarea-autosize: ^1.1.1
   vue-tsc: ^0.34.8
 
 dependencies:
-  '@apollo/client': 3.6.1_graphql@16.4.0
+  '@apollo/client': 3.6.2_graphql@16.4.0
   '@vuelidate/core': 2.0.0-alpha.41_vue@3.2.33
   '@vuelidate/validators': 2.0.0-alpha.29_vue@3.2.33
   '@vueuse/core': 8.3.0_vue@3.2.33
@@ -66,7 +65,6 @@ dependencies:
   vue-demi: 0.12.5_vue@3.2.33
   vue-i18n: 9.1.9_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
-  vue-textarea-autosize: 1.1.1
 
 devDependencies:
   '@antfu/eslint-config': 0.20.6_jzhokl4shvj5szf5bgr66kln2a
@@ -222,8 +220,8 @@ packages:
       leven: 3.1.0
     dev: true
 
-  /@apollo/client/3.6.1_graphql@16.4.0:
-    resolution: {integrity: sha512-WGC7n2IS7GIbCCfVvu58Qncmj6qUBYbI/DxPVHGffDuY5y5l+OI2YIr5UXyR8+G9Ly1d6iYbX6l6l+Rw6F6gHA==}
+  /@apollo/client/3.6.2_graphql@16.4.0:
+    resolution: {integrity: sha512-DNWyl+NNU2VsfHtXwOr4rV9hnQFPkl2/dNXeouhk9q7bXCWdEh3K8YTt/frULGVKbQjtnlPmz8C+LFI/JZ2N3w==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
       graphql-ws: ^5.5.5
@@ -247,10 +245,10 @@ packages:
       optimism: 0.16.1
       prop-types: 15.8.1
       symbol-observable: 4.0.0
-      ts-invariant: 0.10.1
+      ts-invariant: 0.10.3
       tslib: 2.3.1
       use-sync-external-store: 1.1.0
-      zen-observable-ts: 1.2.3
+      zen-observable-ts: 1.2.5
     dev: false
 
   /@babel/code-frame/7.16.7:
@@ -2930,12 +2928,6 @@ packages:
       browserslist: 4.20.2
       semver: 7.0.0
     dev: true
-
-  /core-js/2.6.12:
-    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
-    deprecated: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
-    requiresBuild: true
-    dev: false
 
   /core-util-is/1.0.2:
     resolution: {integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=}
@@ -6669,8 +6661,8 @@ packages:
       punycode: 2.1.1
     dev: true
 
-  /ts-invariant/0.10.1:
-    resolution: {integrity: sha512-dOmY3naALBtNyK+nrVGzD8DVxSJ9OIHragItZ3XvxGORNAZL6uszgQYaD3PW+TPh2NWNsOpuQUxznuvTkmcdqw==}
+  /ts-invariant/0.10.3:
+    resolution: {integrity: sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==}
     engines: {node: '>=8'}
     dependencies:
       tslib: 2.3.1
@@ -7261,12 +7253,6 @@ packages:
       vue: 3.2.33
     dev: false
 
-  /vue-textarea-autosize/1.1.1:
-    resolution: {integrity: sha512-B33Mg5ZDEfj/whhoPBLg25qqAdGHGM2NjDT99Qi5MXRyeLmXb4C3s6EprAHqy3nU0cooWXFU+IekI5DpoEbnFg==}
-    dependencies:
-      core-js: 2.6.12
-    dev: false
-
   /vue-tsc/0.34.8_typescript@4.6.3:
     resolution: {integrity: sha512-RvuFwiuj2lfSnTGHhLy6xLspNA7VOU3low+Ckvbl3utw6A6ELmXDUuuo8VAzNm7HuJe3M64lAxxWdOOG3vqMVw==}
     hasBin: true
@@ -7652,8 +7638,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zen-observable-ts/1.2.3:
-    resolution: {integrity: sha512-hc/TGiPkAWpByykMwDcem3SdUgA4We+0Qb36bItSuJC9xD0XVBZoFHYoadAomDSNf64CG8Ydj0Qb8Od8BUWz5g==}
+  /zen-observable-ts/1.2.5:
+    resolution: {integrity: sha512-QZWQekv6iB72Naeake9hS1KxHlotfRpe+WGNbNx5/ta+R3DNjVO2bswf63gXlWDcs+EMd7XY8HfVQyP1X6T4Zg==}
     dependencies:
       zen-observable: 0.8.15
     dev: false

@@ -73,8 +73,7 @@ settings:
   button-generate-new-token-label: "Generate new token"
   upload-profile-image-label: "Upload profile image:"
   button-browse-image-label: "Browse"
-
-note_show:
+note-show:
   edit-button: "Edit"
   author-of-note: "User"
   date-of-creation-label: "Was created"

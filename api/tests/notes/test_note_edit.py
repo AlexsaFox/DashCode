@@ -1,8 +1,5 @@
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from src.db.models import Note, User
 from tests.graphql.edit_note import NOTE_EDIT_QUERY
-from tests.notes.test_note_create import get_note_by_id
 from tests.utils import GraphQLClient
 
 
