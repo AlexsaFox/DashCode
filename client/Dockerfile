@@ -7,7 +7,7 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 COPY package.json pnpm*.yaml .npmrc ./
-RUN pnpm install --silent
+RUN pnpm install --silent 
 
 COPY . .
 RUN pnpm build
