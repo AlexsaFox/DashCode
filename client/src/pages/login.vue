@@ -7,6 +7,7 @@ import useErrorsStore from '~/store/useErrors'
 const { t } = useI18n()
 const auth = useAuthStore()
 const errors = useErrorsStore()
+const router = useRouter()
 
 const credentials = reactive({
   username: '',
@@ -33,7 +34,10 @@ function onSubmit() {
       errors.addError(error.$message.toString())
   }
   else {
-    auth.login(credentials.password, credentials.username, credentials.username)
+    auth.login(credentials.password, credentials.username, credentials.username).then(() => {
+      if (errors.errors.length === 0)
+        router.push('/')
+    })
   }
 }
 </script>
@@ -58,6 +62,17 @@ function onSubmit() {
     />
   </LoginSignupForm>
 </template>
+
+<style scoped lang="scss">
+.landing-form-container {
+  height: 100vh;
+  width: 100%;
+  padding: 0 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+</style>
 
 <route lang="yaml">
 meta:

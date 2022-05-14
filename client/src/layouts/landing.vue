@@ -1,5 +1,4 @@
 <template>
-  <ErrorIndicator />
   <main>
     <RouterView />
   </main>
@@ -11,5 +10,7 @@ main {
   background-image: url('~/assets/img/background-photo.webp');
   background-attachment: fixed;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>

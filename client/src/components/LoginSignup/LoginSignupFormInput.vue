@@ -31,6 +31,7 @@ function onChanged(event: Event) {
   margin-bottom: 12px;
 
   label {
+    font-family: 'ClearSans-Regular';
     color: #fff;
     font-size: 28px;
   }
@@ -48,6 +49,13 @@ function onChanged(event: Event) {
     &:focus {
       outline: none;
       background-color: #465586;
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: inset 0 0 0 50px #223153;
+      /* цвет вашего фона */
+      -webkit-text-fill-color: white;
+      /* цвет текста */
     }
   }
 }

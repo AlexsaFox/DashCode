@@ -18,17 +18,67 @@ login-sign-up:
     From just making notes to social media where you can find answers for all
     you questions.
 sign-up:
-  have-account: Already have account?
-  have-account-link: Sign in
-  submit-button: Register
+  submit-button: "Register"
+  have-account: "Already have login?"
+  have-account-link: "Sign in"
   labels:
     username: Username
     email: Email
     password: Password
     confirm-password: Confirm password
   errors:
+    user-exists: User with {field} "{value}" already exists
     username-required: Username is required
     email-required: Email is required
     email-invalid: Enter valid email address
     password-required: Password is required
+    password-too-short: Your password must contain at least 8 characters
     passwords-do-not-match: Password and confirm password fields do not match
+index:
+  title-1: "Unique knowledge repository."
+  text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
+  title-2: "Without wasting time."
+  text-2: "Organize yours notes or go through public ones. With them you can solve your problems as fast as possible."
+  title-3: "Never ask internet “How can I solve this problem?” again."
+  text-3: "In DashCode, your information and solutions are at hand!"
+settings:
+  account:
+    header: "My Account"
+    header-base-settings: "BASE SETTINGS"
+    errors:
+      email-invalid: "Enter valid email address"
+      passwords-do-not-match: "Password and confirm password fields do not match"
+      password-too-short: "Your new password must contain at least 8 characters"
+      password-required: "You have to specify your current password for security reasons"
+  button-right-part-header: "User Settings"
+  button-right-part-back: "Back"
+  email-label: "EMAIL"
+  new-password-label: "NEW PASSWORD"
+  confirm-password-label: "CONFIRM PASSWORD"
+  current-password-label: "CURRENT PASSWORD"
+  button-edit-label: Edit
+  button-submit-color-label: Apply
+  button-edit-avatar-label: "Edit avatar"
+  button-change-password-label: "Change password"
+  button-submit-changes-label: "Submit"
+  user-profile-header: "User Profile"
+  user-profile-header-preview: "PREVIEW"
+  user-profile-header-change-profile-color: "CHANGE PROFILE COLOR"
+  change-color-label: This color will be used in your interface
+  username-label: "USERNAME"
+  api-token-header: "API Token"
+  token-label: "TOKEN"
+  button-copy-token-label: "Copy Token"
+  expiration-datetime-label: "EXPIRATION DATETIME:"
+  button-generate-new-token-label: "Generate new token"
+  upload-profile-image-label: "Upload profile image:"
+  button-browse-image-label: "Browse"
+
+note_show:
+  edit-button: "Edit"
+  author-of-note: "User"
+  date-of-creation-label: "Was created"
+note_edit:
+  save-button: "Save"
+note_create:
+  create-button: "Create"
