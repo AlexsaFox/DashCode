@@ -7,6 +7,7 @@ mutation($note_id: String! $title: String, $content: String, $link: String, $is_
                 id
                 title
                 content
+                link
                 isPrivate
             }
         }
