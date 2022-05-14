@@ -26,8 +26,7 @@ en:
           too_large: Uploaded file size can't be larger than 16MB
           bad_extension: Only images are allowed
           bad_mime_type: Uploaded file must have type image/*
-      note: 
+      note:
         title: Bad title. Title can't be empty and must contain less than 65 characters
         content: Bad content. Content can't be empty
         link: Bad link. Link must be valid
-        

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { email, helpers, required, sameAs } from '@vuelidate/validators'
+import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import useAuthStore from '~/store/useAuth'
 import useErrorsStore from '~/store/useErrors'
@@ -7,6 +7,7 @@ import useErrorsStore from '~/store/useErrors'
 const { t } = useI18n()
 const auth = useAuthStore()
 const errors = useErrorsStore()
+const router = useRouter()
 
 const credentials = reactive({
   username: '',
@@ -25,6 +26,7 @@ const rules = {
   },
   password: {
     required: helpers.withMessage(t('sign-up.errors.password-required'), required),
+    minLength: helpers.withMessage(t('sign-up.errors.password-too-short'), minLength(8)),
   },
   confirm_password: {
     sameAs: helpers.withMessage(
@@ -45,7 +47,10 @@ function onSubmit() {
       errors.addError(error.$message.toString())
   }
   else {
-    auth.register(credentials.username, credentials.email, credentials.password)
+    auth.register(credentials.username, credentials.email, credentials.password).then(() => {
+      if (errors.errors.length === 0)
+        router.push('/')
+    })
   }
 }
 </script>
@@ -71,15 +76,26 @@ function onSubmit() {
     <LoginSignupFormInput
       v-model="credentials.password"
       :label="t('sign-up.labels.password')"
-      type="text"
+      type="password"
     />
     <LoginSignupFormInput
       v-model="credentials.confirm_password"
       :label="t('sign-up.labels.confirm-password')"
-      type="text"
+      type="password"
     />
   </LoginSignupForm>
 </template>
+
+<style scoped lang="scss">
+.landing-form-container {
+  height: 100vh;
+  width: 100%;
+  padding: 0 300px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+</style>
 
 <route lang="yaml">
 meta:
