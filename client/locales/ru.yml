@@ -20,7 +20,7 @@ login-sign-up:
 sign-up:
   submit-button: "Войти"
   have-account: "Уже есть логин?"
-  have-account-link: "Вход
+  have-account-link: "Вход"
 labels:
   username: Идентификатор пользователя
   email: Адрес электронной почты
