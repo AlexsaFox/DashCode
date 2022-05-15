@@ -1,2 +1,10 @@
 # VSCode workspace configuration
 .vscode
+
+# Developmet database data
+.postgres-data
+.redis-data
+
+# Cache files
+.pytest_cache
+.mypy_cache

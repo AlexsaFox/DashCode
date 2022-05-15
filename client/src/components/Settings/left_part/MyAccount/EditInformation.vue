@@ -1,9 +1,57 @@
 <script setup lang="ts">
+import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
+import useAuthStore from '~/store/useAuth'
+import useErrorsStore from '~/store/useErrors'
 
 const { t } = useI18n()
+const auth = useAuthStore()
+const errors = useErrorsStore()
+const router = useRouter()
 
 const enabledEmailField = ref(false)
 const showPasswordField = ref(false)
+
+const formData = reactive({
+  email: auth.user.email,
+  newPassword: '',
+  confirmPassword: '',
+  currentPassword: '',
+})
+
+const rules = {
+  email: {
+    email: helpers.withMessage(t('settings.account.errors.email-invalid'), email),
+  },
+  confirmPassword: {
+    sameAs: helpers.withMessage(
+      t('settings.account.errors.passwords-do-not-match'),
+      sameAs(computed(() => formData.newPassword)),
+    ),
+    minLength: helpers.withMessage(t('settings.account.errors.password-too-short'), minLength(8)),
+  },
+  currentPassword: {
+    required: helpers.withMessage(t('settings.account.errors.password-required'), required),
+  },
+}
+
+const vuelidate = useVuelidate(rules, formData)
+
+function onSubmit() {
+  errors.$reset()
+  vuelidate.value.$touch()
+
+  if (vuelidate.value.$error) {
+    for (const error of vuelidate.value.$errors)
+      errors.addError(error.$message.toString())
+  }
+  else {
+    auth.edit_auth(formData.email, formData.newPassword, formData.currentPassword).then(() => {
+      if (errors.errors.length === 0)
+        router.go(0)
+    })
+  }
+}
 
 </script>
 
@@ -13,8 +61,8 @@ const showPasswordField = ref(false)
       <div class="left">
         <h2>{{ t("settings.email-label") }}</h2>
         <input
-          id="input_email" :disabled="!enabledEmailField" type="email" class="input email"
-          value="expampleexpampleexpampleexpample@email.com"
+          id="input_email" v-model="formData.email" :disabled="!enabledEmailField" type="email"
+          class="input email"
         >
       </div>
       <button v-if="!enabledEmailField" type="button" class="edit" @click="enabledEmailField = true">
@@ -25,13 +73,13 @@ const showPasswordField = ref(false)
       <div id="new_password_container" class="stroke password">
         <div class="left">
           <h2>{{ t("settings.new-password-label") }}</h2>
-          <input type="password" class="input">
+          <input v-model="formData.newPassword" type="password" class="input">
         </div>
       </div>
       <div id="confirm_password_container" class="stroke password">
         <div class="left">
           <h2>{{ t("settings.confirm-password-label") }}</h2>
-          <input type="password" class="input">
+          <input v-model="formData.confirmPassword" type="password" class="input">
         </div>
       </div>
     </div>
@@ -40,7 +88,7 @@ const showPasswordField = ref(false)
       <div id="current_password_container" class="stroke password">
         <div class="left">
           <h2>{{ t("settings.current-password-label") }}</h2>
-          <input type="password" class="input">
+          <input v-model="formData.currentPassword" type="password" class="input">
         </div>
       </div>
     </div>
@@ -51,7 +99,7 @@ const showPasswordField = ref(false)
       {{ t("settings.button-change-password-label") }}
     </button>
 
-    <button v-if="showPasswordField || enabledEmailField" id="edit_account_settings" class="edit account">
+    <button v-if="showPasswordField || enabledEmailField" id="edit_account_settings" class="edit account" @click="onSubmit()">
       {{ t("settings.button-submit-changes-label") }}
     </button>
   </div>

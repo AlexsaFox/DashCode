@@ -29,9 +29,17 @@ def create_startup_hook(app: App) -> Callable[[], Coroutine[None, None, None]]:
         app.app_state.cache = get_cache_backend(app.app_state.config.cache)
 
         app.app_state.engine = get_engine(app.app_state.config.database)
-        async with AsyncSession(app.app_state.engine) as session:
+        # Use both session and connection here
+        # because connection is stateless, meaning that if multiple
+        # workers run at the same time and connect to database, they
+        # should receive updated data. that's not the case with sessions,
+        # which are not updated after creation. But session is still needed
+        # for ORM creation of user if it doesn't exist yet.
+        async with app.app_state.engine.connect() as conn, AsyncSession(
+            app.app_state.engine
+        ) as session:
             base_superuser = app.app_state.config.base_superuser
-            query = await session.execute(
+            query = await conn.execute(
                 select(User).filter(
                     or_(
                         User.username == base_superuser.username,

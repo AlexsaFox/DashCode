@@ -1,18 +1,18 @@
 <script setup lang="ts">
-// const { t } = useI18n()
-
+const showEditAvatarPopup = ref(false)
 </script>
+
 <template>
   <div class="account_preveiw">
     <div class="profile_color" />
     <div class="stroke_s">
       <div class="profile">
-        <a href="#popup_avatar">
+        <button @click="showEditAvatarPopup = !showEditAvatarPopup">
           <div class="avatar_s">
-            <img src="src/assets/img/2e483781-a491-4b82-9bf4-560a76752829.jpg">
+            <img src="/src/assets/img/2e483781-a491-4b82-9bf4-560a76752829.jpg">
           </div>
-        </a>
-        <EditAvatarPopup />
+        </button>
+        <EditAvatarPopup v-if="showEditAvatarPopup" @close-popup="showEditAvatarPopup = false" />
       </div>
     </div>
     <ChangeUsername />
@@ -108,5 +108,4 @@
     margin: -3% 0% 2% 4%;
   }
 }
-
 </style>

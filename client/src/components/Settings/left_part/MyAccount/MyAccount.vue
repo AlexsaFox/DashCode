@@ -4,9 +4,9 @@ const { t } = useI18n()
 
 <template>
   <div id="MyAccount" class="tabcontent">
-    <h1>{{ t("settings.my-account-header") }}</h1>
+    <h1>{{ t("settings.account.header") }}</h1>
     <hr>
-    <h3>{{ t("settings.my-account-header-base-settings") }}</h3>
+    <h3>{{ t("settings.account.header-base-settings") }}</h3>
     <AccountPreview />
     <hr>
     <AccountRemoval />

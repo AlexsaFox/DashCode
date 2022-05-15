@@ -1,12 +1,18 @@
+<script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
+
+const auth = useAuthStore()
+</script>
+
 <template>
   <div class="block">
     <div class="avatar">
       <a href="#popup4">
-        <img src="../../../src/assets/img/205d9582975737a8b02fb1e5bbc02fd5.jpg" class="avatar" alt="Avatar">
+        <img :src="auth.profilePicture" class="avatar" alt="Avatar">
       </a>
     </div>
     <div class="text">
-      <span>user.username</span>
+      <span>{{ auth.user.user.username }}</span>
     </div>
     <div class="display_with_button">
       <a href="#popup"><button class="standard_button">
@@ -16,7 +22,7 @@
         <div class="i-carbon:arrow-right" />Social media
       </button></a>
       <a><button class="standard_button">
-        <div class="i-carbon:user-avatar-filled-alt" /> Subscritions
+        <div class="i-carbon:user-avatar-filled-alt" /> Subscriptions
       </button></a>
       <a href="#popup5"><button class="standard_button">
         <div class="i-carbon:folder" />My notes
@@ -31,9 +37,9 @@
       </div>
       <hr>
       <div class="content" style="padding: 10px;">
-        <span><a href="/user/settings">Settings</a></span>
+        <span><router-link to="/settings">Settings</router-link></span>
         <br>
-        <span><a href="/auth/logout">Log out</a></span>
+        <span><button @click="auth.logout()">Log out</button></span>
       </div>
     </div>
   </div>

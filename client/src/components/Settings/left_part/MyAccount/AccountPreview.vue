@@ -1,5 +1,5 @@
 <template>
-  <div class="account_preveiw">
+  <div class="account_preview">
     <div class="profile_color" />
     <Avatar />
     <EditInformation />
@@ -7,7 +7,7 @@
 </template>
 
 <style scoped lang="scss">
-.account_preveiw {
+.account_preview {
   border-radius: 15px;
   background-color: #303d67;
   padding-bottom: 2%;

@@ -1,24 +1,20 @@
 <script setup lang="ts">
+import useSettingsPageStore from '~/store/useSettingsPage'
+import Pages from '~/constants/types/pages'
 
-enum Pages{
-  MyAccountPage,
-  UserProfilePage,
-  APITokenPage,
-}
-
-const activePage = ref(Pages.MyAccountPage)
+const settingsPage = useSettingsPageStore()
 
 </script>
 
 <template>
   <div class="page_settings">
     <div class="left_part">
-      <MyAccount v-if="activePage == Pages.MyAccountPage" />
-      <UserProfile v-if="activePage == Pages.UserProfilePage" />
-      <APIToken v-if="activePage == Pages.APITokenPage" />
+      <MyAccount v-if="settingsPage.currentPage == Pages.MyAccountPage" />
+      <UserProfile v-if="settingsPage.currentPage == Pages.UserProfilePage" />
+      <APIToken v-if="settingsPage.currentPage == Pages.APITokenPage" />
     </div>
     <div class="right_part">
-      <Right_part @change-page="(page) => { activePage = page}" />
+      <Right_part />
     </div>
   </div>
 </template>

@@ -1,18 +1,10 @@
-<template>
-  <div>
-    <Header>
-      <HeaderButton href="login">
-        Log In
-      </HeaderButton>
-      <HeaderButton href="signup" fg="#111a2d" bg="#9e6dee">
-        Sign up
-      </HeaderButton>
-    </Header>
-  </div>
-  <ContentBlock />
-</template>
+<script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
 
-<route lang="yaml">
-meta:
-  layout: landing
-</route>
+const auth = useAuthStore()
+</script>
+
+<template>
+  <HomePage v-if="auth.loggedIn" />
+  <LandingPage v-else />
+</template>
