@@ -1,0 +1,84 @@
+not-found: Nicht gefunden
+login:
+  no-account: Noch nicht registriert?
+  no-account-link: Jetzt registrieren
+  submit-button: Anmelden
+  labels:
+    username: Benutzername oder E-mail Adresse
+    password: Passwort
+  errors:
+    username-required: Name oder E-Mail-Adresse erforderlich
+    password-required: Passwort erforderlich
+login-sign-up:
+  text: >-
+    Dashcode - ist eine Webanwendung zum Schreiben und Lesen nützlicher Tipps und nützlich
+    Lösungen speziell für Programmierer. Mit Dashcode ist das möglich
+    Strukturieren Sie Ihr Wissen.
+
+    Von einfachen Notizen bis hin zu einem sozialen Netzwerk, in dem Sie Antworten finden können
+    alle Ihre Fragen.
+sign-up:
+  submit-button: "Registrieren"
+  have-account: "Уже есть логин?"
+  have-account-link: "Anmelden"
+index:
+  title-1: "Einzigartiges Wissensarchiv."
+  text-1: "Dies ist mehr als ein Notizblock oder ein soziales Netzwerk. Schreiben, speichern Sie, was Sie wirklich brauchen, und teilen Sie es mit der ganzen Welt!"
+  title-2: "Ohne Zeit zu verschwenden."
+  text-2: "Organisieren Sie Ihre Notizen oder gehen Sie öffentliche durch. Mit ihnen können Sie Ihre Probleme schnellstmöglich lösen."
+  title-3: "Fragen Sie niemals das Internet: „Wie kann ich dieses Problem lösen?“ wieder."
+  text-3: "In DashCode sind Ihre Informationen und Lösungen griffbereit!"
+settings:
+  account:
+    header: "Mein Konto"
+    header-base-settings: "GRUNDEINSTELLUNGEN"
+    errors:
+      email-invalid: "Geben Sie eine gültige E-Mail-Adresse ein"
+      passwords-do-not-match: "Поля пароля и подтверждения пароля не совпадают"
+      password-too-short: "Ihr neues Passwort muss mindestens 8 Zeichen enthalten"
+      password-required: "Aus Sicherheitsgründen müssen Sie Ihr aktuelles Passwort angeben"
+  button-right-part-header: "Benutzereinstellungen"
+  button-right-part-back: "Zurück"
+  email-label: "EMAIL"
+  new-password-label: "NEUES PASSWORT"
+  confirm-password-label: "BESTÄTIGE DAS PASSWORT"
+  current-password-label: "AKTUELLES PASSWORT"
+  button-edit-label: "Bearbeiten"
+  button-edit-avatar-label: "Profilbild bearbeiten"
+  button-change-password-label: "Ändere das Passwort"
+  button-submit-changes-label: "Bestätigen Sie"
+  user-profile-header: "Benutzerprofil"
+  user-profile-header-preview: "VORSCHAU"
+  user-profile-header-change-profile-color: "PROFILFARBE ÄNDERN"
+  change-color-label: "Im Format '#rrggbb' (mit #)."
+  username-label: "NUTZERNAME"
+  api-token-header: "API-Token"
+  token-label: "TOKEN"
+  button-copy-token-label: "Token kopieren"
+  expiration-datetime-label: "ABLAUFDATUM UHRZEIT:"
+  button-generate-new-token-label: "Neues Token generieren"
+  upload-profile-image-label: "Profilbild hochladen:"
+  button-browse-image-label: "Durchsuche"
+  have-account: Haben Sie bereits ein Konto?
+  have-account-link: Anmelden
+  submit-button: Registrieren
+labels:
+  username: Benutzername
+  email: E-Mail-Addresse
+  password: Passwort
+  confirm-password: Bestätigen Sie das Passwort
+errors:
+  user-exists: Benutzer mit {field} "{value}" existiert bereits
+  username-required: Kontoname erforderlich
+  email-required: E-Mail-Adresse
+  email-invalid: E-Mail-Adresse ist ungültig, bitte geben Sie eine gültige Adresse ein
+  password-required: Passwort erforderlich
+  passwords-do-not-match: Das Passwort stimmt nicht mit den Kontoinformationen überein, bitte geben Sie das richtige Passwort ein
+note_show:
+  edit-button: "Bearbeiten"
+  author-of-note: "Benutzer"
+  date-of-creation-label: "Wurde erstellt"
+note_edit:
+  save-button: "Speichern"
+note_create:
+  create-button: "Erstellen"

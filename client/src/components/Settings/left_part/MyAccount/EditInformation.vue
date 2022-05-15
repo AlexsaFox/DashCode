@@ -2,11 +2,10 @@
 import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import useAuthStore from '~/store/useAuth'
-import useErrorsStore from '~/store/useErrors'
+import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const errors = useErrorsStore()
 const router = useRouter()
 
 const enabledEmailField = ref(false)
@@ -38,19 +37,11 @@ const rules = {
 const vuelidate = useVuelidate(rules, formData)
 
 function onSubmit() {
-  errors.$reset()
-  vuelidate.value.$touch()
-
-  if (vuelidate.value.$error) {
-    for (const error of vuelidate.value.$errors)
-      errors.addError(error.$message.toString())
-  }
-  else {
-    auth.edit_auth(formData.email, formData.newPassword, formData.currentPassword).then(() => {
-      if (errors.errors.length === 0)
-        router.go(0)
-    })
-  }
+  checkFormErrors(
+    vuelidate,
+    () => { return auth.edit_auth(formData.currentPassword, formData.email, formData.newPassword) },
+    () => { router.go(0) },
+  )
 }
 
 </script>

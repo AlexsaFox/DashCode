@@ -1,7 +1,31 @@
 <script setup lang="ts">
+import { helpers, required } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
+import useAuthStore from '~/store/useAuth'
+import checkFormErrors from '~/utils/checkFormErrors'
+
 const { t } = useI18n()
+const auth = useAuthStore()
+const router = useRouter()
 
 const editUsernameField = ref(false)
+const usernameForm = reactive({
+  username: auth.user.user.username,
+})
+
+const rules = {
+  username: {
+    required: helpers.withMessage(t('settings.profile.errors.username-required'), required),
+  },
+}
+
+const vuelidate = useVuelidate(rules, usernameForm)
+
+function onSubmit() {
+  checkFormErrors(vuelidate, () => { return auth.edit(undefined, usernameForm.username) }, () => {
+    router.go(0)
+  })
+}
 </script>
 
 <template>
@@ -9,13 +33,13 @@ const editUsernameField = ref(false)
     <div class="edit_username">
       <div class="left">
         <h2>{{ t("settings.username-label") }}</h2>
-        <input :disabled="!editUsernameField" class="input username" value="Username">
+        <input v-model="usernameForm.username" :disabled="!editUsernameField" class="input username">
       </div>
     </div>
     <button v-if="!editUsernameField" type="button" class="edit username" @click="editUsernameField = true">
       {{ t("settings.button-edit-label") }}
     </button>
-    <button v-if="editUsernameField" class="edit name">
+    <button v-if="editUsernameField" class="edit name" @click="onSubmit">
       {{ t("settings.button-submit-changes-label") }}
     </button>
   </div>

@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.2",
+    "@types/apollo-upload-client": "^17.0.0",
     "@vuelidate/core": "2.0.0-alpha.41",
     "@vuelidate/validators": "2.0.0-alpha.29",
     "@vueuse/core": "^8.3.0",
     "@vueuse/head": "^0.7.6",
+    "apollo-upload-client": "^17.0.0",
     "graphql": "^16.4.0",
     "graphql-tag": "^2.12.6",
     "nprogress": "^0.2.0",

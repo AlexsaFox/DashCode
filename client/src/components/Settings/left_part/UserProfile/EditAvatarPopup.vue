@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
+import useErrorsStore from '~/store/useErrors'
+
 const { t } = useI18n()
+const router = useRouter()
+
+const emit = defineEmits<{
+  (e: 'closePopup'): void
+}>()
 
 const fileForm = ref<HTMLInputElement | null>(null)
 const imageData = ref('')
@@ -21,9 +29,16 @@ function updatePreviewImage() {
   }
 }
 
-const emit = defineEmits<{
-  (e: 'closePopup'): void
-}>()
+function onSubmit() {
+  const files = fileForm.value?.files
+  if (files) {
+    useAuthStore().editProfilePicture(files[0]).then(() => {
+      if (useErrorsStore().errors.length === 0)
+        router.go(0)
+    })
+  }
+  else { emit('closePopup') }
+}
 </script>
 
 <template>
@@ -54,7 +69,7 @@ const emit = defineEmits<{
         </div>
 
         <div class="send-button-container">
-          <button type="submit" class="send_button">
+          <button type="submit" class="send_button" @click="onSubmit">
             {{ t("settings.button-submit-changes-label") }}
           </button>
         </div>

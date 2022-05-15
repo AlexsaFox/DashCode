@@ -58,3 +58,29 @@ mutation($password: String!, $newPassword: String, $newEmail: String) {
   }
 }
 `
+
+export const EDIT_USER_MUTATION = gql`
+mutation($newUsername: String, $newProfileColor: String, $newProfilePicture: Upload) {
+  editAccount(newUsername: $newUsername, newProfileColor: $newProfileColor, newProfilePicture: $newProfilePicture) {
+      __typename
+      ... on EditAccountSuccess {
+          account {
+              user {
+                  username
+                  profileColor
+                  profilePictureFilename
+              }
+          }
+      }
+      ... on ValidationError {
+          fields {
+              field
+              details
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`

@@ -18,18 +18,66 @@ login-sign-up:
     От простых заметок до социальной сети, в которой вы можете найти ответы на
     все интересующие вас вопросы.
 sign-up:
-  have-account: Уже зарегистрированы?
-  have-account-link: Войти
-  submit-button: Вход
-  labels:
-    username: Идентификатор пользователя
-    email: Адрес электронной почты
-    password: Пароль
-    confirm-password: Подтвердить пароль
-  errors:
-    user-exists: Пользователь "{value}" уже зарегистрирован 
-    username-required: Требуется идентификатор
-    email-required: Требуется адрес электронной почты
-    email-invalid: Адрес электронной почты некорректен, введите корректный адрес
-    password-required: Требуется пароль
-    passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
+  submit-button: "Войти"
+  have-account: "Уже есть логин?"
+  have-account-link: "Вход"
+labels:
+  username: Идентификатор пользователя
+  email: Адрес электронной почты
+  password: Пароль
+  confirm-password: Подтвердить пароль
+errors:
+  user-exists: Пользователь с {field} "{value}" уже есть
+  username-required: Требуется идентификатор
+  email-required: Требуется адрес электронной почты
+  email-invalid: Адрес электронной почты некорректен, введите корректный адрес
+  password-required: Требуется пароль
+  passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
+
+index:
+  title-1: "Уникальное хранилище данных"
+  text-1: "Это больше чем просто блокнот или социальная сеть. Записывайте и сохраняйте то, что вам нужно и делитесь этим с другими пользователями"
+  title-2: "Не тратьте время"
+  text-2: "Систематизируйте свои заметки или смотрите общедоступные. С ними вы можете решить проблему максимально быстро"
+  title-3: "Больше не нужно спрашивать в Интернете: «Как я могу решить эту проблему?» снова"
+  text-3: "В DashCode ваша информация и решения всегда под рукой!"
+settings:
+  account:
+    header: "Мой аккаунт"
+    header-base-settings: "ОСНОВНЫЕ НАСТРОЙКИ"
+    errors:
+      email-invalid: "Введите правильный адрес"
+      passwords-do-not-match: "Поля пароля и подтверждения пароля не совпадают"
+      password-too-short: "Ваш новый пароль должен содержать не менее 8 символов"
+      password-required: "Вы должны указать свой текущий пароль из соображений безопасности"
+  button-right-part-header: "Настройки пользователя"
+  button-right-part-back: "Назад"
+  email-label: "EMAIL"
+  new-password-label: "НОВЫЙ ПАРОЛЬ"
+  confirm-password-label: "ПОДТВЕРДИТЕ ПАРОЛЬ"
+  current-password-label: "ТЕКУЩИЙ ПАРОЛЬ"
+  button-edit-label: Изменить
+  button-submit-color-label: Применить
+  button-edit-avatar-label: "Изменить аватар"
+  button-change-password-label: "Изменить пароль"
+  button-submit-changes-label: "Изменить"
+  user-profile-header: "Профиль пользователя"
+  user-profile-header-preview: "Предпросмотр"
+  user-profile-header-change-profile-color: "Изменить цвет профиля"
+  change-color-label: Этот цвет будет исползован в интерфейсе
+  username-label: "ИМЯ ПОЛЬЗОВАТЕЛЯ"
+  api-token-header: "API токен"
+  token-label: "ТОКЕН"
+  button-copy-token-label: "Скопировать токен"
+  expiration-datetime-label: "ДАТА ИСТЕЧЕНИЯ:"
+  button-generate-new-token-label: "Создать новый токен"
+  upload-profile-image-label: "Загрузить изображение профиля:"
+  button-browse-image-label: "Поиск"
+note-show:
+  edit-button: "Изменить"
+  author-of-note: "Пользователь"
+  date-of-creation-label: "Был создан"
+note_edit:
+  save-button: "Сохранить"
+note_create:
+  create-button: "Создать"
