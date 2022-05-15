@@ -1,0 +1,87 @@
+not-found: extraviado
+login:
+  no-account: ¿Aún no estás registrado?
+  no-account-link: Regístrate ahora
+  submit-button: Registrarse
+  labels:
+    username: Tu nombre o dirección de correo electrónico
+    password: Contraseña
+  errors:
+    username-required: ID o correo electrónico requerido
+    password-required: Se requiere contraseña
+login-sign-up:
+  text: >-
+    Dashcode - es una aplicación web para escribir y leer consejos útiles y útiles
+     soluciones especialmente para programadores. Con Dashcode puedes
+     estructurar su conocimiento.
+
+     Desde simples notas hasta una red social donde encontrar respuestas a
+     todas tus preguntas
+sign-up:
+  submit-button: "Registro"
+  have-account: "¿Ya tiene inicio de sesión?"
+  have-account-link: "Iniciar sesión"
+
+index: 
+  title-1: "Un repositorio único de conocimiento."
+  text-1: "Es más que un bloc de notas o una red social. ¡Escribe y guarda lo que realmente necesitas y comparte con todo el mundo!"
+  title-2: "No pierdas tu tiempo."
+  text-2: "Organice sus notas o vea las públicas. Con ellos, puede resolver sus problemas lo más rápido posible."
+  title-3: "No más preguntas en Internet: "¿Cómo resolver este problema?" otra vez."
+  text-3: "¡Con DashCode, su información y soluciones están siempre al alcance de su mano!"
+settings:
+  account: 
+    header: "Mi cuenta"
+    header-base-settings: "AJUSTES BÁSICOS"
+    errors:
+      email-invalid: "Introduzca una dirección de correo electrónico válida"
+      passwords-do-not-match: "Los campos de contraseña y confirmación de contraseña no coinciden"
+      password-too-short: "Su nueva contraseña debe contener al menos 8 caracteres"
+      password-required: "Tienes que especificar tu contraseña actual por razones de seguridad"
+  button-right-part-header: "Сonfiguración de parte del usuario"
+  button-right-part-back: "Volver"
+  email-label: "EMAIL"
+  new-password-label: "NUEVA CONTRASEÑA"
+  confirm-password-label: "CONFIRMAR CONTRASEÑA"
+  current-password-label: "CONTRASEÑA ACTUAL"
+  button-edit-label: "Сambiar la configuración"
+  button-edit-avatar-label: "Cambiar avatar"
+  button-change-password-label: "Cambiar foto de perfil"
+  button-submit-changes-label: "Confirmar"
+  user-profile-header: "Perfil del usuario"
+  user-profile-header-preview: "PREESTRENO"
+  user-profile-header-change-profile-color: "CAMBIAR COLOR DE PERFIL"
+  change-color-label: "En el formato '#rrggbb' (con #)."
+  username-label: "NOMBRE DE USUARIO"
+  api-token-header: "FICHAS API"
+  token-label: "FICHAS"
+  button-copy-token-label: "Сopiar token"
+  expiration-datetime-label: "FECHA DE CADUCIDAD:"
+  button-generate-new-token-label: "Generar una ficha"
+  upload-profile-image-label: "Subir foto de perfil:"
+  button-browse-image-label: "Aplicar"
+  have-account: Ya tienes una cuenta?
+  have-account-link: Iniciar sesión
+  submit-button: Confirmar
+  
+labels:
+    username: ID de usuario
+    email: Dirección de correo electrónico
+    password: Contraseña
+    confirm-password: Confirmar Contraseña
+errors:
+    user-exists: El usuario con {field} "{value}" ya existe
+    username-required: Identificación de usuario requerida
+    email-required: Se requiere la dirección de correo electrónico del usuario
+    email-invalid: La dirección de correo electrónico no es válida, ingrese una dirección válida
+    password-required: Se requiere contraseña
+    passwords-do-not-match: La contraseña no coincide con la información de la cuenta, ingrese la contraseña correcta
+    note_show:
+
+edit-button: "Editar"
+  author-of-note: "Usuario"
+  date-of-creation-label: "Fue creado"
+note_edit:
+  save-button: "Guardar"
+note_create:
+  create-button: "Crear"
