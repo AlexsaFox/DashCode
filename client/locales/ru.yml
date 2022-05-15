@@ -18,16 +18,16 @@ login-sign-up:
     От простых заметок до социальной сети, в которой вы можете найти ответы на
     все интересующие вас вопросы.
 sign-up:
-  have-account: Уже зарегистрированы?
-  have-account-link: Войти
-  submit-button: Вход
+  submit-button: "Войти"
+  have-account: "Уже есть логин?"
+  have-account-link: "Вход
 labels:
   username: Идентификатор пользователя
   email: Адрес электронной почты
   password: Пароль
   confirm-password: Подтвердить пароль
 errors:
-  user-exists: Пользователь "{value}" уже зарегистрирован 
+  user-exists: Пользователь с {field} "{value}" уже есть
   username-required: Требуется идентификатор
   email-required: Требуется адрес электронной почты
   email-invalid: Адрес электронной почты некорректен, введите корректный адрес
@@ -63,21 +63,21 @@ settings:
   button-submit-changes-label: "Изменить"
   user-profile-header: "Профиль пользователя"
   user-profile-header-preview: "Предпросмотр"
-  user-profile-header-change-profile-color: "CHANGE PROFILE COLOR"
-  change-color-label: This color will be used in your interface
-  username-label: "USERNAME"
-  api-token-header: "API Token"
-  token-label: "TOKEN"
-  button-copy-token-label: "Copy Token"
-  expiration-datetime-label: "EXPIRATION DATETIME:"
-  button-generate-new-token-label: "Generate new token"
-  upload-profile-image-label: "Upload profile image:"
-  button-browse-image-label: "Browse"
+  user-profile-header-change-profile-color: "Изменить цвет профиля"
+  change-color-label: Этот цвет будет исползован в интерфейсе
+  username-label: "ИМЯ ПОЛЬЗОВАТЕЛЯ"
+  api-token-header: "API токен"
+  token-label: "ТОКЕН"
+  button-copy-token-label: "Скопировать токен"
+  expiration-datetime-label: "ДАТА ИСТЕЧЕНИЯ:"
+  button-generate-new-token-label: "Создать новый токен"
+  upload-profile-image-label: "Загрузить изображение профиля:"
+  button-browse-image-label: "Поиск"
 note-show:
-  edit-button: "Edit"
-  author-of-note: "User"
-  date-of-creation-label: "Was created"
+  edit-button: "Изменить"
+  author-of-note: "Пользователь"
+  date-of-creation-label: "Был создан"
 note_edit:
-  save-button: "Save"
+  save-button: "Сохранить"
 note_create:
-  create-button: "Create"
+  create-button: "Создать"

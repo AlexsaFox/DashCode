@@ -18,13 +18,9 @@ login-sign-up:
      Desde simples notas hasta una red social donde encontrar respuestas a
      todas tus preguntas
 sign-up:
-  username-label: "Nombre de usuario" 
-  email-label: "Correo electrónico la dirección"
-  password-label: "Сontraseña de la cuenta"
-  confirm-password-label: "Confirmar Contraseña" 
-  have-account: ¿Ya registrado?
-  have-account-link: Registrarse
-  submit-button: Acceso
+  submit-button: "Registro"
+  have-account: "¿Ya tiene inicio de sesión?"
+  have-account-link: "Iniciar sesión"
 
 index: 
   title-1: "Un repositorio único de conocimiento."
@@ -34,15 +30,14 @@ index:
   title-3: "No más preguntas en Internet: "¿Cómo resolver este problema?" otra vez."
   text-3: "¡Con DashCode, su información y soluciones están siempre al alcance de su mano!"
 settings:
-  account: ~
-    header: "My Account"
-    header-base-settings: "BASE SETTINGS"
+  account: 
+    header: "Mi cuenta"
+    header-base-settings: "AJUSTES BÁSICOS"
     errors:
-      email-invalid: "Enter valid email address"
-      passwords-do-not-match: "Password and confirm password fields do not match"
-      password-too-short: "Your new password must contain at least 8 characters"
-      password-required: "You have to specify your current password for security reasons"
-      ~
+      email-invalid: "Introduzca una dirección de correo electrónico válida"
+      passwords-do-not-match: "Los campos de contraseña y confirmación de contraseña no coinciden"
+      password-too-short: "Su nueva contraseña debe contener al menos 8 caracteres"
+      password-required: "Tienes que especificar tu contraseña actual por razones de seguridad"
   button-right-part-header: "Сonfiguración de parte del usuario"
   button-right-part-back: "Volver"
   email-label: "EMAIL"
