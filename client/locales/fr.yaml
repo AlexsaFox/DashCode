@@ -1,0 +1,92 @@
+not-found: Pas trouvé
+login:
+  no-account: Toujours pas inscrit?
+  no-account-link: Enregistrez un compte maintenant
+  submit-button: Connexion
+  labels:
+    username: Votre nom d'utilisateur ou votre adresse e-mail
+    password: Mot de passe
+  errors:
+    username-required: Pièce d'identité ou email requis
+    password-required: Mot de passe requis
+login-sign-up:
+  text: >-
+    Dashcode - est une application web pour écrire et lire des conseils utiles et utiles
+     solutions spécialement pour les programmeurs. Avec Dashcode, vous pouvez
+     structurez vos connaissances.
+
+     De simples notes à un réseau social où vous pouvez trouver des réponses à
+     toutes vos questions.
+sign-up:
+  username-label: "Nom d'utilisateur" 
+  email-label: "E-mail"
+  password-label: "Mot de passe"
+  confirm-password-label: "Confirmez le mot de passe" 
+  have-account: Vous avez déjà un compte?
+  have-account-link: S'identifier
+  submit-button: Connexion
+
+index: 
+  title-1: "Un référentiel unique de connaissances."
+  text-1: "C'est plus qu'un bloc-notes ou un réseau social. Écrivez et enregistrez ce dont vous avez vraiment besoin et partagez-le avec le monde !"
+  title-2: "Ne perdez pas de temps."
+  text-2: "Organisez vos notes ou affichez les notes publiques. Avec eux, vous pouvez résoudre vos problèmes le plus rapidement possible."
+  title-3: "Plus besoin de demander sur Internet : "Comment résoudre ce problème ?" de nouveau."
+  text-3: "Avec DashCode, vos informations et solutions sont toujours à portée de main !"
+settings:
+  account: ~
+    header: "My Account"
+    header-base-settings: "BASE SETTINGS"
+    errors:
+      email-invalid: "Enter valid email address"
+      passwords-do-not-match: "Password and confirm password fields do not match"
+      password-too-short: "Your new password must contain at least 8 characters"
+      password-required: "You have to specify your current password for security reasons"
+      ~
+  button-right-part-header: "Paramètres utilisateur"
+  button-right-part-back: "Arrière"
+  email-label: "E-MAIL"
+  new-password-label: "NOUVEAU MOT DE PASSE"
+  confirm-password-label: "CONFIRMEZ LE MOT DE PASSE"
+  current-password-label: "MOT DE PASSE ACTUEL"
+  button-edit-label: "Changer"
+  button-edit-avatar-label: "Modifier la photo de profil"
+  button-change-password-label: "Changer le mot de passe"
+  button-submit-changes-label: "Confirmer"
+  user-profile-header: "Profil de l'utilisateur"
+  user-profile-header-preview: "APERÇU"
+  user-profile-header-change-profile-color: "CHANGER LA COULEUR DU PROFIL"
+  change-color-label: "Au format '#rrggbb' (avec #)."
+  username-label: "NOM D'UTILISATEUR"
+  api-token-header: "API TOKEN"
+  token-label: "JETON"
+  button-copy-token-label: "Copier le jeton"
+  expiration-datetime-label: "DATE D'EXPIRATION:"
+  button-generate-new-token-label: "Générer un jeton"
+  upload-profile-image-label: "Importer une photo de profil :"
+  button-browse-image-label: "Appliquer"
+  have-account: Vous avez déjà un compte?
+  have-account-link: Entrer
+  submit-button: Confirmer
+
+labels:
+  username: Identifiant d'utilisateur
+  email: Adresse e-mail
+  password: Mot de passe
+  confirm-password: Confirmez le mot de passe
+errors:
+  user-exists: L'utilisateur avec {field} "{value}" existe déjà
+  username-required: Pièce d'identité requise
+  email-required: Adresse mail (requis)
+  email-invalid: L'adresse e-mail n'est pas valide, veuillez entrer une adresse valide
+  password-required: Mot de passe requis
+  passwords-do-not-match: Le mot de passe ne correspond pas aux informations du compte, veuillez entrer le mot de passe correct
+
+note_show:
+  edit-button: "Changer"
+  author-of-note: "Utilisateur"
+  date-of-creation-label: "Déjà créé"
+note_edit:
+  save-button: "Sauver"
+note_create:
+  create-button: "Créer"

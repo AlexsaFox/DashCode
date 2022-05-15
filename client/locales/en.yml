@@ -21,19 +21,19 @@ sign-up:
   submit-button: "Register"
   have-account: "Already have login?"
   have-account-link: "Sign in"
-  labels:
-    username: Username
-    email: Email
-    password: Password
-    confirm-password: Confirm password
-  errors:
-    user-exists: User with {field} "{value}" already exists
-    username-required: Username is required
-    email-required: Email is required
-    email-invalid: Enter valid email address
-    password-required: Password is required
-    password-too-short: Your password must contain at least 8 characters
-    passwords-do-not-match: Password and confirm password fields do not match
+labels:
+  username: Username
+  email: Email
+  password: Password
+  confirm-password: Confirm password
+errors:
+  user-exists: User with {field} "{value}" already exists
+  username-required: Username is required
+  email-required: Email is required
+  email-invalid: Enter valid email address
+  password-required: Password is required
+  password-too-short: Your password must contain at least 8 characters
+  passwords-do-not-match: Password and confirm password fields do not match
 index:
   title-1: "Unique knowledge repository."
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
@@ -42,7 +42,7 @@ index:
   title-3: "Never ask internet “How can I solve this problem?” again."
   text-3: "In DashCode, your information and solutions are at hand!"
 settings:
-  account:
+  account: ~
     header: "My Account"
     header-base-settings: "BASE SETTINGS"
     errors:
@@ -50,6 +50,7 @@ settings:
       passwords-do-not-match: "Password and confirm password fields do not match"
       password-too-short: "Your new password must contain at least 8 characters"
       password-required: "You have to specify your current password for security reasons"
+      ~
   button-right-part-header: "User Settings"
   button-right-part-back: "Back"
   email-label: "EMAIL"
