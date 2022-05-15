@@ -5,6 +5,7 @@ specifiers:
   '@apollo/client': ^3.6.2
   '@iconify-json/carbon': ^1.1.3
   '@intlify/vite-plugin-vue-i18n': ^4.0.0
+  '@types/apollo-upload-client': ^17.0.0
   '@types/markdown-it-link-attributes': ^3.0.1
   '@types/nprogress': ^0.2.0
   '@vitejs/plugin-vue': ^2.3.1
@@ -13,6 +14,7 @@ specifiers:
   '@vuelidate/validators': 2.0.0-alpha.29
   '@vueuse/core': ^8.3.0
   '@vueuse/head': ^0.7.6
+  apollo-upload-client: ^17.0.0
   critters: ^0.0.16
   cross-env: ^7.0.3
   cypress: ^9.5.4
@@ -46,14 +48,17 @@ specifiers:
   vue-demi: ^0.12.5
   vue-i18n: ^9.1.9
   vue-router: ^4.0.14
+  vue-textarea-autosize: ^1.1.1
   vue-tsc: ^0.34.8
 
 dependencies:
   '@apollo/client': 3.6.2_graphql@16.4.0
+  '@types/apollo-upload-client': 17.0.0
   '@vuelidate/core': 2.0.0-alpha.41_vue@3.2.33
   '@vuelidate/validators': 2.0.0-alpha.29_vue@3.2.33
   '@vueuse/core': 8.3.0_vue@3.2.33
   '@vueuse/head': 0.7.6_vue@3.2.33
+  apollo-upload-client: 17.0.0_efrbjtmhtvkaobfgob2cep2qqy
   graphql: 16.4.0
   graphql-tag: 2.12.6_graphql@16.4.0
   nprogress: 0.2.0
@@ -65,6 +70,7 @@ dependencies:
   vue-demi: 0.12.5_vue@3.2.33
   vue-i18n: 9.1.9_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
+  vue-textarea-autosize: 1.1.1
 
 devDependencies:
   '@antfu/eslint-config': 0.20.6_jzhokl4shvj5szf5bgr66kln2a
@@ -1699,6 +1705,18 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
+  /@types/apollo-upload-client/17.0.0:
+    resolution: {integrity: sha512-S1HUj9g+wn0fM29vLsnD87hTW2h2k/ELlTTJ+mUHTnF6oxmm46KkqxrzFPR7u2rQBjjSiKQEaXLqBn76s8bzBg==}
+    dependencies:
+      '@apollo/client': 3.6.2_graphql@16.4.0
+      '@types/extract-files': 8.1.1
+      graphql: 16.4.0
+    transitivePeerDependencies:
+      - graphql-ws
+      - react
+      - subscriptions-transport-ws
+    dev: false
+
   /@types/chai-subset/1.3.3:
     resolution: {integrity: sha512-frBecisrNGz+F4T6bcc+NLeolfiojh5FxW2klu669+8BARtyQv2C/GkNW6FUodVe4BroGMP/wER/YDGc7rEllw==}
     dependencies:
@@ -1718,6 +1736,10 @@ packages:
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
     dev: true
+
+  /@types/extract-files/8.1.1:
+    resolution: {integrity: sha512-dMJJqBqyhsfJKuK7p7HyyNmki7qj1AlwhUKWx6KrU7i1K2T2SPsUsSUTWFmr/sEM1q8rfR8j5IyUmYrDbrhfjQ==}
+    dev: false
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
@@ -2389,6 +2411,18 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
+  /apollo-upload-client/17.0.0_efrbjtmhtvkaobfgob2cep2qqy:
+    resolution: {integrity: sha512-pue33bWVbdlXAGFPkgz53TTmxVMrKeQr0mdRcftNY+PoHIdbGZD0hoaXHvO6OePJAkFz7OiCFUf98p1G/9+Ykw==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >= 16.0.0}
+    peerDependencies:
+      '@apollo/client': ^3.0.0
+      graphql: 14 - 16
+    dependencies:
+      '@apollo/client': 3.6.2_graphql@16.4.0
+      extract-files: 11.0.0
+      graphql: 16.4.0
+    dev: false
+
   /appdata-path/1.0.0:
     resolution: {integrity: sha512-ZbH3ezXfnT/YE3NdqduIt4lBV+H0ybvA2Qx3K76gIjQvh8gROpDFdDLpx6B1QJtW7zxisCbpTlCLhKqoR8cDBw==}
     dev: true
@@ -2928,6 +2962,12 @@ packages:
       browserslist: 4.20.2
       semver: 7.0.0
     dev: true
+
+  /core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
+    deprecated: core-js@<3.4 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
 
   /core-util-is/1.0.2:
     resolution: {integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=}
@@ -4068,6 +4108,11 @@ packages:
   /extend/3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
     dev: true
+
+  /extract-files/11.0.0:
+    resolution: {integrity: sha512-FuoE1qtbJ4bBVvv94CC7s0oTnKUGvQs+Rjf1L2SJFfS+HTVVjhPFtehPdQ0JiGPqVNfSSZvL5yzHHQq2Z4WNhQ==}
+    engines: {node: ^12.20 || >= 14.13}
+    dev: false
 
   /extract-zip/2.0.1_supports-color@8.1.1:
     resolution: {integrity: sha512-GDhU9ntwuKyGXdZBUgTIe+vXnWj0fppUEtMDL0+idd5Sta8TGpHssn/eusA9mrPr9qNDym6SxAYZjNvCn/9RBg==}
@@ -7251,6 +7296,12 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.1.4
       vue: 3.2.33
+    dev: false
+
+  /vue-textarea-autosize/1.1.1:
+    resolution: {integrity: sha512-B33Mg5ZDEfj/whhoPBLg25qqAdGHGM2NjDT99Qi5MXRyeLmXb4C3s6EprAHqy3nU0cooWXFU+IekI5DpoEbnFg==}
+    dependencies:
+      core-js: 2.6.12
     dev: false
 
   /vue-tsc/0.34.8_typescript@4.6.3:

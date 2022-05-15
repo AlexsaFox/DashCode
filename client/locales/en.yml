@@ -64,6 +64,11 @@ settings:
   user-profile-header: "User Profile"
   user-profile-header-preview: "PREVIEW"
   user-profile-header-change-profile-color: "CHANGE PROFILE COLOR"
+  profile:
+    errors:
+      username-required: Username can't be null
+      profile-color-required: You need to specify profile color
+      profile-color-bad-format: "Profile color must be in format of #rrggbb" 
   change-color-label: This color will be used in your interface
   username-label: "USERNAME"
   api-token-header: "API Token"

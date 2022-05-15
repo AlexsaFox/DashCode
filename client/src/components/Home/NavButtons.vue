@@ -39,7 +39,7 @@ const auth = useAuthStore()
       <div class="content" style="padding: 10px;">
         <span><router-link to="/settings">Settings</router-link></span>
         <br>
-        <span><button @click="auth.logout()">Log out</button></span>
+        <span><button @click="auth.logout().then(() => {$router.go(0)})">Log out</button></span>
       </div>
     </div>
   </div>
