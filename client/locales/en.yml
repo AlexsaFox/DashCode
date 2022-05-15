@@ -42,7 +42,7 @@ index:
   title-3: "Never ask internet “How can I solve this problem?” again."
   text-3: "In DashCode, your information and solutions are at hand!"
 settings:
-  account: 
+  account:
     header: "My Account"
     header-base-settings: "BASE SETTINGS"
     errors:
@@ -68,7 +68,7 @@ settings:
     errors:
       username-required: Username can't be null
       profile-color-required: You need to specify profile color
-      profile-color-bad-format: "Profile color must be in format of #rrggbb" 
+      profile-color-bad-format: "Profile color must be in format of #rrggbb"
   change-color-label: This color will be used in your interface
   username-label: "USERNAME"
   api-token-header: "API Token"
