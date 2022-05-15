@@ -21,6 +21,19 @@ sign-up:
   submit-button: "Register"
   have-account: "Already have login?"
   have-account-link: "Sign in"
+  labels:
+    username: Username
+    email: Email
+    password: Password
+    confirm-password: Confirm password
+  errors:
+    user-exists: User with {field} "{value}" already exists
+    username-required: Username is required
+    email-required: Email is required
+    email-invalid: Enter valid email address
+    password-required: Password is required
+    password-too-short: Your password must contain at least 8 characters
+    passwords-do-not-match: Password and confirm password fields do not match
 labels:
   username: Username
   email: Email
