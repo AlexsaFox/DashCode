@@ -21,7 +21,7 @@ sign-up:
   submit-button: "Registrieren"
   have-account: "Уже есть логин?"
   have-account-link: "Anmelden"
-index: 
+index:
   title-1: "Einzigartiges Wissensarchiv."
   text-1: "Dies ist mehr als ein Notizblock oder ein soziales Netzwerk. Schreiben, speichern Sie, was Sie wirklich brauchen, und teilen Sie es mit der ganzen Welt!"
   title-2: "Ohne Zeit zu verschwenden."
@@ -29,7 +29,7 @@ index:
   title-3: "Fragen Sie niemals das Internet: „Wie kann ich dieses Problem lösen?“ wieder."
   text-3: "In DashCode sind Ihre Informationen und Lösungen griffbereit!"
 settings:
- account: 
+  account:
     header: "Mein Konto"
     header-base-settings: "GRUNDEINSTELLUNGEN"
     errors:
@@ -44,7 +44,7 @@ settings:
   confirm-password-label: "BESTÄTIGE DAS PASSWORT"
   current-password-label: "AKTUELLES PASSWORT"
   button-edit-label: "Bearbeiten"
-   button-edit-avatar-label: "Profilbild bearbeiten"
+  button-edit-avatar-label: "Profilbild bearbeiten"
   button-change-password-label: "Ändere das Passwort"
   button-submit-changes-label: "Bestätigen Sie"
   user-profile-header: "Benutzerprofil"
@@ -74,7 +74,7 @@ errors:
   email-invalid: E-Mail-Adresse ist ungültig, bitte geben Sie eine gültige Adresse ein
   password-required: Passwort erforderlich
   passwords-do-not-match: Das Passwort stimmt nicht mit den Kontoinformationen überein, bitte geben Sie das richtige Passwort ein
-note_show: 
+note_show:
   edit-button: "Bearbeiten"
   author-of-note: "Benutzer"
   date-of-creation-label: "Wurde erstellt"

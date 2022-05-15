@@ -22,15 +22,15 @@ sign-up:
   have-account: "Vous avez déjà une connexion ?"
   have-account-link: "S'identifier"
 
-index: 
+index:
   title-1: "Un référentiel unique de connaissances."
   text-1: "C'est plus qu'un bloc-notes ou un réseau social. Écrivez et enregistrez ce dont vous avez vraiment besoin et partagez-le avec le monde !"
   title-2: "Ne perdez pas de temps."
   text-2: "Organisez vos notes ou affichez les notes publiques. Avec eux, vous pouvez résoudre vos problèmes le plus rapidement possible."
-  title-3: "Plus besoin de demander sur Internet : "Comment résoudre ce problème ?" de nouveau."
+  title-3: 'Plus besoin de demander sur Internet : "Comment résoudre ce problème ?" de nouveau.'
   text-3: "Avec DashCode, vos informations et solutions sont toujours à portée de main !"
 settings:
-  account: 
+  account:
     header: "Mon compte"
     header-base-settings: "RÉGLAGES DE BASE"
     errors:

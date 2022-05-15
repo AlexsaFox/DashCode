@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
+
+const auth = useAuthStore()
 const showEditAvatarPopup = ref(false)
 </script>
 
@@ -9,7 +12,7 @@ const showEditAvatarPopup = ref(false)
       <div class="profile">
         <button @click="showEditAvatarPopup = !showEditAvatarPopup">
           <div class="avatar_s">
-            <img src="/src/assets/img/2e483781-a491-4b82-9bf4-560a76752829.jpg">
+            <img :src="auth.profilePicture">
           </div>
         </button>
         <EditAvatarPopup v-if="showEditAvatarPopup" @close-popup="showEditAvatarPopup = false" />

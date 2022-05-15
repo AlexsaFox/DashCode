@@ -1,14 +1,14 @@
 import {
   ApolloClient,
   InMemoryCache,
-  createHttpLink,
 } from '@apollo/client/core'
+import { createUploadLink } from 'apollo-upload-client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import config from '~/constants/config'
 import useErrorsStore from '~/store/useErrors'
 
-const httpLink = createHttpLink({
+const uploadLink = createUploadLink({
   uri: config.graphql_host,
 })
 
@@ -31,7 +31,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const apolloClient = new ApolloClient({
-  link: authLink.concat(graphQLErrorLink.concat(httpLink)),
+  link: authLink.concat(graphQLErrorLink.concat(uploadLink)),
   cache: new InMemoryCache(),
 })
 

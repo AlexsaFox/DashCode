@@ -1,0 +1,4 @@
+<template>
+  <ErrorIndicator />
+  <RouterView />
+</template>

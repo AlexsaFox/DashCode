@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
 import useErrorsStore from './useErrors'
+import { nullIfEmpty, processCommonErrors } from './utils'
 import apolloClient from '~/modules/apollo'
 import config from '~/constants/config'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
-import { EDIT_USER_AUTH_MUTATION, REGISTER_USER_MUTATION } from '~/graphql/mutations'
+import { EDIT_USER_AUTH_MUTATION, EDIT_USER_MUTATION, REGISTER_USER_MUTATION } from '~/graphql/mutations'
 import { i18n } from '~/modules/i18n'
 
 export default defineStore('auth', {
@@ -39,13 +40,11 @@ export default defineStore('auth', {
         const { field, value } = registerUser
         errors.addError(i18n.global.t('sign-up.errors.user-exists', { field, value }))
       }
-      else if (registerUser.__typename === 'ValidationError') {
-        const { fields } = registerUser
-        for (const { details } of fields)
-          errors.addError(details)
+      else if (registerUser.__typename !== 'RegisterUserSuccess') {
+        processCommonErrors(registerUser)
       }
       else {
-        this.login(password, username)
+        await this.login(password, username)
       }
     },
 
@@ -59,9 +58,8 @@ export default defineStore('auth', {
         },
       })).data
 
-      if (token.__typename === 'RequestValueError') {
-        const { details } = token
-        useErrorsStore().addError(details)
+      if (token.__typename !== 'Token') {
+        processCommonErrors(token)
       }
       else {
         localStorage.setItem('token', token.accessToken)
@@ -70,29 +68,56 @@ export default defineStore('auth', {
       }
     },
 
-    async edit_auth(email?: string, password?: string, currentPassword?: string) {
+    async editAuth(currentPassword: string, email?: string, password?: string) {
       const { editAccountAuth } = (await apolloClient.mutate({
         mutation: EDIT_USER_AUTH_MUTATION,
         variables: {
           newEmail: email,
-          newPassword: password === '' ? null : password,
-          password: currentPassword ?? null,
+          newPassword: nullIfEmpty(password),
+          password: currentPassword,
         },
       })).data
 
-      const errors = useErrorsStore()
-      if (editAccountAuth.__typename === 'RequestValueError') {
-        const { details } = editAccountAuth
-        errors.addError(details)
-      }
-      else if (editAccountAuth.__typename === 'ValidationError') {
-        const { fields } = editAccountAuth
-        for (const { details } of fields)
-          errors.addError(details)
-      }
-      else {
-        this.fetchUser()
-      }
+      if (editAccountAuth.__typename !== 'EditAccountSuccess')
+        processCommonErrors(editAccountAuth)
+
+      else
+        await this.fetchUser()
+    },
+
+    async edit(profileColor?: string, username?: string) {
+      const { editAccount } = (await apolloClient.mutate({
+        mutation: EDIT_USER_MUTATION,
+        variables: {
+          newProfileColor: nullIfEmpty(profileColor),
+          newUsername: nullIfEmpty(username),
+        },
+      })).data
+
+      if (editAccount.__typename !== 'EditAccountSuccess')
+        processCommonErrors(editAccount)
+
+      else
+        await this.fetchUser()
+    },
+
+    async editProfilePicture(file: File) {
+      console.log(file)
+      const { editAccount } = (await apolloClient.mutate({
+        mutation: EDIT_USER_MUTATION,
+        variables: {
+          newProfilePicture: file,
+        },
+        context: {
+          hasUpload: true,
+        },
+      })).data
+
+      if (editAccount.__typename !== 'EditAccountSuccess')
+        processCommonErrors(editAccount)
+
+      else
+        await this.fetchUser()
     },
 
     async fetchUser() {

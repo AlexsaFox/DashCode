@@ -2,11 +2,10 @@
 import { email, helpers, minLength, required, sameAs } from '@vuelidate/validators'
 import { useVuelidate } from '@vuelidate/core'
 import useAuthStore from '~/store/useAuth'
-import useErrorsStore from '~/store/useErrors'
+import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const errors = useErrorsStore()
 const router = useRouter()
 
 const credentials = reactive({
@@ -39,19 +38,11 @@ const rules = {
 const vuelidate = useVuelidate(rules, credentials)
 
 function onSubmit() {
-  errors.$reset()
-  vuelidate.value.$touch()
-
-  if (vuelidate.value.$error) {
-    for (const error of vuelidate.value.$errors)
-      errors.addError(error.$message.toString())
-  }
-  else {
-    auth.register(credentials.username, credentials.email, credentials.password).then(() => {
-      if (errors.errors.length === 0)
-        router.push('/')
-    })
-  }
+  checkFormErrors(
+    vuelidate,
+    () => { return auth.register(credentials.username, credentials.email, credentials.password) },
+    () => { router.push('/') },
+  )
 }
 </script>
 

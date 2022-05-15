@@ -11,8 +11,3 @@
   </div>
   <ContentBlock />
 </template>
-
-<route lang="yaml">
-meta:
-  layout: landing
-</route>

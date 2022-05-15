@@ -27,7 +27,7 @@ index:
   text-1: "Es más que un bloc de notas o una red social. ¡Escribe y guarda lo que realmente necesitas y comparte con todo el mundo!"
   title-2: "No pierdas tu tiempo."
   text-2: "Organice sus notas o vea las públicas. Con ellos, puede resolver sus problemas lo más rápido posible."
-  title-3: "No más preguntas en Internet: "¿Cómo resolver este problema?" otra vez."
+  title-3: "No más preguntas en Internet: \"¿Cómo resolver este problema?\" otra vez."
   text-3: "¡Con DashCode, su información y soluciones están siempre al alcance de su mano!"
 settings:
   account: 
@@ -79,8 +79,8 @@ errors:
     note_show:
 
 edit-button: "Editar"
-  author-of-note: "Usuario"
-  date-of-creation-label: "Fue creado"
+author-of-note: "Usuario"
+date-of-creation-label: "Fue creado"
 note_edit:
   save-button: "Guardar"
 note_create:
