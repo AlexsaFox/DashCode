@@ -16,6 +16,10 @@ mutation($password: String!, $newEmail: String, $newPassword: String) {
         ... on RequestValueError {
             details
         }
+        ... on UserAlreadyExists {
+            field
+            value
+        }
     }
 }
 '''

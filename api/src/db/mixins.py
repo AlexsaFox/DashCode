@@ -1,8 +1,10 @@
 from typing import Any, Callable, Mapping
 
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from src.config import Configuration
+from src.db.errors import ObjectExistsError
 from src.db.validation import ModelFieldValidationError
 
 
@@ -34,9 +36,11 @@ class ValidationMixin:
         for field, value in kwargs.items():
             setattr(self, field, value)
 
-        session.add(self)
-        session.commit()
-        session.refresh(self)
+        try:
+            session.add(self)
+            session.commit()
+        except IntegrityError as err:
+            raise ObjectExistsError(err)
 
 
 class AppConfigurationMixin:

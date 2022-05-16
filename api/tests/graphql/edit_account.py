@@ -19,6 +19,10 @@ mutation($newUsername: String, $newProfileColor: String) {
         ... on RequestValueError {
             details
         }
+        ... on UserAlreadyExists {
+            field
+            value
+        }
     }
 }
 '''

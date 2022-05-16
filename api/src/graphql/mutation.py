@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio.session import AsyncSession
 from strawberry.file_uploads import Upload
 from strawberry.types import Info
 
-from src.auth.utils import UserExistsError, create_user, delete_user
+from src.auth.utils import ObjectExistsError, create_user, delete_user
 from src.config import Configuration
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
@@ -63,8 +63,8 @@ class Mutation:
             return RegisterUserSuccess(Account.from_instance(user))
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
-        except UserExistsError as err:
-            return UserAlreadyExists(field=err.field, value=err.value)
+        except ObjectExistsError as err:
+            return UserAlreadyExists.from_exception(err)
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     @requires_password
@@ -86,6 +86,8 @@ class Mutation:
             return EditAccountSuccess(Account.from_instance(user))
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
+        except ObjectExistsError as err:
+            return UserAlreadyExists.from_exception(err)
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     async def edit_account(
@@ -119,6 +121,8 @@ class Mutation:
             return EditAccountSuccess(Account.from_instance(user))
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
+        except ObjectExistsError as err:
+            return UserAlreadyExists.from_exception(err)
         except FileTooLargeError as err:
             return RequestValueError(t('validation.errors.user.upload_file.too_large'))
         except FileBadExtensionError as err:

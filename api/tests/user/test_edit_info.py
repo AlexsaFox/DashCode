@@ -47,6 +47,30 @@ async def test_edit_username(
     assert await try_changes(database_engine, new_username)
 
 
+async def test_edit_username_exists(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    database_engine: AsyncEngine,
+    another_user: User,
+):
+    token, _ = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_QUERY,
+        variables={
+            'newUsername': another_user.username,
+        },
+        token=token,
+    )
+    assert data is not None
+    assert data['editAccount'] == {
+        '__typename': 'UserAlreadyExists',
+        'field': 'username',
+        'value': another_user.username,
+    }
+    assert not await try_changes(database_engine, another_user.username)
+
+
 async def test_edit_username_invalid_data(
     graphql_client: GraphQLClient,
     token_user: tuple[str, User],
