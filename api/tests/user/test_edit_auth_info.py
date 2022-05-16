@@ -30,6 +30,31 @@ async def test_edit_email(
     assert await try_credentials(database_engine, new_email, 'password')
 
 
+async def test_edit_email_exists(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    database_engine: AsyncEngine,
+    another_user: User,
+):
+    token, _ = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=EDIT_ACCOUNT_AUTH_QUERY,
+        variables={
+            'password': 'password',
+            'newEmail': another_user.email,
+        },
+        token=token,
+    )
+    assert data is not None
+    assert data['editAccountAuth'] == {
+        '__typename': 'UserAlreadyExists',
+        'field': 'email',
+        'value': another_user.email,
+    }
+    assert not await try_credentials(database_engine, another_user.email, 'password')
+
+
 async def test_edit_email_invalid_data(
     graphql_client: GraphQLClient,
     token_user: tuple[str, User],
