@@ -1,5 +1,4 @@
 import calendar
-import re
 from datetime import datetime, timedelta
 from typing import cast
 
@@ -9,16 +8,16 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.session import Session
 
 from src.config import Configuration
+from src.db.errors import ObjectExistsError
 from src.db.models import User
-from src.types import ExpectedError
 
 
-class AuthenticationFailedError(ExpectedError):
+class AuthenticationFailedError(ValueError):
     def __init__(self, msg: str = 'Unable to find user with provided credentials'):
         super().__init__(msg)
 
 
-class IdentificationError(ExpectedError):
+class IdentificationError(ValueError):
     def __init__(self, msg: str = 'You must provide username or email'):
         super().__init__(msg)
 
@@ -63,19 +62,6 @@ def decode_jwt(config: Configuration, token: str) -> JWTClaims:
     return claims
 
 
-_INTEGRITY_ERROR_REGEXP = re.compile(
-    r'.* duplicate key value violates unique constraint \"(.*)\"\n'
-    r'DETAIL:  Key \((.*)\)=\((.*)\) already exists\.'
-)
-
-
-class UserExistsError(ExpectedError):
-    def __init__(self, field: str, value: str):
-        self.field = field
-        self.value = value
-        super().__init__(f'User with {field} {value} already exists')
-
-
 def create_user(
     session: Session,
     username: str,
@@ -94,11 +80,7 @@ def create_user(
         session.add(user)
         session.commit()
     except IntegrityError as err:
-        err_msg = str(err.orig)
-        group = _INTEGRITY_ERROR_REGEXP.findall(err_msg)[0]
-        column: str = group[1]
-        value: str = group[2]
-        raise UserExistsError(column, value)
+        raise ObjectExistsError(err, 'user')
 
     return user
 
