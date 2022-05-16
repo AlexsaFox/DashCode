@@ -102,7 +102,6 @@ export default defineStore('auth', {
     },
 
     async editProfilePicture(file: File) {
-      console.log(file)
       const { editAccount } = (await apolloClient.mutate({
         mutation: EDIT_USER_MUTATION,
         variables: {
@@ -124,8 +123,10 @@ export default defineStore('auth', {
       await apolloClient.query({
         query: WHOAMI_QUERY,
       }).then(({ data }) => {
-        this.loggedIn = true
-        this.user = data.whoami
+        this.$patch({
+          loggedIn: true,
+          user: data.whoami,
+        })
         localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn))
         localStorage.setItem('user', JSON.stringify(this.user))
       })

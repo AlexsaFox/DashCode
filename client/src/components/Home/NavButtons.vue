@@ -2,48 +2,44 @@
 import useAuthStore from '~/store/useAuth'
 
 const auth = useAuthStore()
+
+const showUserMenu = ref(false)
+const showNotesMenu = ref(false)
 </script>
 
 <template>
   <div class="block">
-    <div class="avatar">
-      <a href="#popup4">
+    <section class="user-menu">
+      <header class="user-data" @click="showUserMenu = !showUserMenu">
         <img :src="auth.profilePicture" class="avatar" alt="Avatar">
-      </a>
-    </div>
-    <div class="text">
-      <span>{{ auth.user.user.username }}</span>
-    </div>
+        <h3>{{ auth.user.user.username }}</h3>
+      </header>
+      <nav v-if="showUserMenu">
+        <router-link to="/settings">
+          Settings
+        </router-link>
+        <button class="logout" @click="auth.logout().then(() => { $router.go(0) })">
+          Log out
+        </button>
+      </nav>
+    </section>
     <div class="display_with_button">
-      <a href="#popup"><button class="standard_button">
+      <a><button class="standard_button">
         <div class="i-carbon:add" />Add notes
       </button></a>
       <a><button class="standard_button">
         <div class="i-carbon:arrow-right" />Social media
       </button></a>
-      <a><button class="standard_button">
+      <!-- Not yet!! -->
+      <!-- <a><button class="standard_button">
         <div class="i-carbon:user-avatar-filled-alt" /> Subscriptions
-      </button></a>
-      <a href="#popup5"><button class="standard_button">
+      </button></a> -->
+      <a><button class="standard_button">
         <div class="i-carbon:folder" />My notes
       </button></a>
     </div>
   </div>
-  <div id="popup4" class="overlay">
-    <div class="profile_popup">
-      <div class="header_for_pop_up">
-        user.name
-        <a class="close" href="#">&times;</a>
-      </div>
-      <hr>
-      <div class="content" style="padding: 10px;">
-        <span><router-link to="/settings">Settings</router-link></span>
-        <br>
-        <span><button @click="auth.logout().then(() => {$router.go(0)})">Log out</button></span>
-      </div>
-    </div>
-  </div>
-  <div id="popup5" class="overlay_1">
+  <div v-if="showNotesMenu">
     <div class="my_notes_popup">
       <div class="header_for_pop_up_acc">
         All your notes:
@@ -67,171 +63,168 @@ const auth = useAuthStore()
 </template>
 <style scoped lang="scss">
 @import "../../assets/scss/standard-button.scss";
-.standard_button{
+
+.standard_button {
   @include standard-button;
 }
-.block{
-    color:white;
-    font-family: 'ClearSans-Regular';
-    display: inline-block;
-    position: fixed;
-    width: 20%;
-    right: 15px;
-    top:40px;
 
-}
-.text{
-    position: absolute;
-    top:40px;
-    left: 150px;
-    display: inline-block;
-    font-size:140%;
-}
-.avatar {
-    position: relative;
-    overflow:hidden;
-    width:100px;
-    height:100px;
-    display: inline-block;
-    margin-bottom: 10%;
-    margin-left: 2%;
+.block {
+  color: white;
+  font-family: 'ClearSans-Regular';
+  display: inline-block;
+  position: fixed;
+  width: 20%;
+  right: 15px;
+  top: 15px;
 }
 
-.avatar img {
-    border-radius: 50%;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:100px;
-    height:100px;
-    display: inline-block;
-    object-fit:cover;
-}
-.display_with_button div{
-    color: #F1F7ED;
-}
-.display_with_button button{
-    width:100%;
-}
-.b_my_notes:focus{
-    background-color: var(--primary-color);
-}
-.display_with_button{
-    display: inline-block;
-    width:100%;
-}
-.overlay {
-    position: fixed;
-    top: -20px;
-    bottom: 0;
-    left: 0;
-    right: 0.8vw;
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-    height: 100%;
-    z-index: 10;
+.user-menu {
+  background-color: #465586;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 25px 0;
 
-}
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-    overflow:none;
-}
-.profile_popup{
-   margin: 70px auto;
-   background: #09132B;
-   border-radius: 10px;
-   width: 20.2%;
-   position: relative;
-   top:-3.4%;
-   left:39.69%;
-   padding-top: 20px;
-   color:white;
-   .header_for_pop_up{
-   font-family: 'ClearSans-Regular';
-   color:white;
-   background-color: #09132B;
-   text-align:left;
-   padding: 10px;
-   border-radius: 10px;
-   font-size: 20px;
-   margin: 0px 6% 0px 4%;
-   color: #F1F7ED;
-   overflow: hidden;
-  text-overflow: ellipsis;
-}
-.close {
- position: absolute;
- top: 20px;
- right: 20px;
- transition: all 200ms;
- font-size: 120%;
- font-weight: bold;
- text-decoration: none;
- color: #F1F7ED;
-}
-.close:hover {
- color: #303D67;
-}
-.content {
-   text-align: left;
-   font-family: 'ClearSans-Regular';
-   color:white;
-   padding: 0px 3%;
-   max-height: 40%;
-   overflow: auto;
-   margin-left: 4%;
-   background-color: #09132B;
-   border-radius: 0 0 10px 10px;
-}
-.header_for_pop_up_acc{
+  .user-data {
     display: flex;
-    font-family: 'ClearSans-Regular';
-    color:white;
-    background-color: #303D67;
-    text-align:right;
+    align-items: center;
+    padding: 10px;
+    background-color: #223153;
+    transition-duration: 0.2s;
 
+    &:hover {
+      background-color: rgba(70, 85, 134, 0.7);
+      cursor: pointer;
+    }
+
+    h3 {
+      font-size: 28px;
+      margin-left: 30px;
+    }
+
+    img {
+      padding: 5px;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+  }
+
+  nav {
+    $button-count: 2;
+    $button-height: 50px;
+
+    z-index: -1;
+    animation-duration: 0.2s;
+    animation-name: slidein;
+
+    a,
+    button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      line-height: $button-height;
+      font-family: "ClearSans-Light";
+      font-size: 20px;
+      transition-duration: 0.3s;
+      user-select: none;
+
+      &:hover {
+        background-color: #617299;
+      }
+
+      &.logout:hover {
+        background-color: #fa3b3b;
+      }
+    }
+
+    @keyframes slidein {
+      from {
+        height: 0;
+      }
+
+      to {
+        height: $button-count * $button-height;
+      }
+    }
+  }
+}
+
+.display_with_button div {
+  color: #F1F7ED;
+}
+
+.display_with_button button {
+  width: 100%;
+}
+
+.b_my_notes:focus {
+  background-color: var(--primary-color);
+}
+
+.display_with_button {
+  display: inline-block;
+  width: 100%;
+}
+
+.profile_popup {
+  margin: 70px auto;
+  background: #09132B;
+  border-radius: 10px;
+  width: 20.2%;
+  position: relative;
+  top: -3.4%;
+  left: 39.69%;
+  padding-top: 20px;
+  color: white;
+
+  .header_for_pop_up {
+    font-family: 'ClearSans-Regular';
+    color: white;
+    background-color: #09132B;
+    text-align: left;
     padding: 10px;
     border-radius: 10px;
     font-size: 20px;
-    margin: 0px 60px 20px 20px;
+    margin: 0px 6% 0px 4%;
     color: #F1F7ED;
-}
-}
-.overlay_1 {
-    position: fixed;
-    top:90px;
-    bottom: 0;
-    left: 0;
-    right: 15px;
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-    height: 100%;
-    z-index: 10;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-}
-.overlay_1:target {
-    visibility: visible;
-    opacity: 1;
-}
-.my_notes_popup{
-   margin: 70px auto;
-   background: #303D67;
-   border-radius: 10px;
-   width: 20.5%;
-   position: relative;
-   top:29%;
-   left:39.8%;
-   padding-top: 20px;
-  .header_for_pop_up{
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: all 200ms;
+    font-size: 120%;
+    font-weight: bold;
+    text-decoration: none;
+    color: #F1F7ED;
+  }
+
+  .close:hover {
+    color: #303D67;
+  }
+
+  .content {
+    text-align: left;
+    font-family: 'ClearSans-Regular';
+    color: white;
+    padding: 0px 3%;
+    max-height: 40%;
+    overflow: auto;
+    margin-left: 4%;
+    background-color: #09132B;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .header_for_pop_up_acc {
     display: flex;
-    font-family: 'Altone-SemiBold';
-    color:white;
+    font-family: 'ClearSans-Regular';
+    color: white;
     background-color: #303D67;
-    text-align:left;
+    text-align: right;
 
     padding: 10px;
     border-radius: 10px;
@@ -239,6 +232,32 @@ const auth = useAuthStore()
     margin: 0px 60px 20px 20px;
     color: #F1F7ED;
   }
+}
+
+.my_notes_popup {
+  margin: 70px auto;
+  background: #303D67;
+  border-radius: 10px;
+  width: 20.5%;
+  position: relative;
+  top: 29%;
+  left: 39.8%;
+  padding-top: 20px;
+
+  .header_for_pop_up {
+    display: flex;
+    font-family: 'Altone-SemiBold';
+    color: white;
+    background-color: #303D67;
+    text-align: left;
+
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 0px 60px 20px 20px;
+    color: #F1F7ED;
+  }
+
   .close {
     position: absolute;
     top: 20px;
@@ -249,13 +268,15 @@ const auth = useAuthStore()
     text-decoration: none;
     color: #F1F7ED;
   }
+
   .close:hover {
     color: #09132B;
   }
+
   .content {
     text-align: left;
     font-family: 'ClearSans-Regular';
-    color:white;
+    color: white;
     padding: 0px 3%;
     height: 10%;
     overflow: auto;
@@ -264,19 +285,18 @@ const auth = useAuthStore()
 
   }
 
-  .header_for_pop_up_acc{
-      display: flex;
-      font-family: 'ClearSans-Regular';
-      color:white;
-      background-color: #303D67;
-      text-align:right;
+  .header_for_pop_up_acc {
+    display: flex;
+    font-family: 'ClearSans-Regular';
+    color: white;
+    background-color: #303D67;
+    text-align: right;
 
-      padding: 10px;
-      border-radius: 10px;
-      font-size: 20px;
-      margin: 0px 60px 20px 20px;
-      color: #F1F7ED;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 0px 60px 20px 20px;
+    color: #F1F7ED;
   }
 }
-
 </style>
