@@ -78,11 +78,12 @@ export default defineStore('auth', {
         },
       })).data
 
-      if (editAccountAuth.__typename !== 'EditAccountSuccess')
-        processCommonErrors(editAccountAuth)
-
-      else
-        await this.fetchUser()
+      if (editAccountAuth.__typename === 'UserAlreadyExists') {
+        const { field, value } = editAccountAuth
+        useErrorsStore().addError(i18n.global.t('sign-up.errors.user-exists', { field, value }))
+      }
+      else if (editAccountAuth.__typename !== 'EditAccountSuccess') { processCommonErrors(editAccountAuth) }
+      else { await this.fetchUser() }
     },
 
     async edit(profileColor?: string, username?: string) {
@@ -94,11 +95,12 @@ export default defineStore('auth', {
         },
       })).data
 
-      if (editAccount.__typename !== 'EditAccountSuccess')
-        processCommonErrors(editAccount)
-
-      else
-        await this.fetchUser()
+      if (editAccount.__typename === 'UserAlreadyExists') {
+        const { field, value } = editAccount
+        useErrorsStore().addError(i18n.global.t('sign-up.errors.user-exists', { field, value }))
+      }
+      else if (editAccount.__typename !== 'EditAccountSuccess') { processCommonErrors(editAccount) }
+      else { await this.fetchUser() }
     },
 
     async editProfilePicture(file: File) {

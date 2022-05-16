@@ -46,6 +46,10 @@ mutation($password: String!, $newPassword: String, $newEmail: String) {
               email
           }
       }
+      ... on UserAlreadyExists {
+          field
+          value
+      }
       ... on ValidationError {
           fields {
               field
@@ -71,6 +75,10 @@ mutation($newUsername: String, $newProfileColor: String, $newProfilePicture: Upl
                   profilePictureFilename
               }
           }
+      }
+      ... on UserAlreadyExists {
+          field
+          value
       }
       ... on ValidationError {
           fields {
