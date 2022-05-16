@@ -51,10 +51,10 @@ services:
     build:
       context: client
       args:
-        - API_HOST=http://localhost/api
+        - API_HOST=${DASHCODE_PROTOCOL}://${DASHCODE_DOMAIN}:${DASHCODE_PORT}/${DASHCODE_API_PREFIX}
     container_name: dashcode_nginx_client
     ports:
-      - 80:80
+      - ${DASHCODE_PORT}:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     restart: unless-stopped

@@ -1,0 +1,56 @@
+stages:
+  - lint
+  - test
+  - deploy
+  
+lint-job:
+  before_script:
+    - ./ci/before_script.sh
+  stage: lint
+  script:
+    - ./ci/lint-job.sh
+  tags: 
+    - main
+  variables:
+    GIT_CLEAN_FLAGS: none
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+    - if: $CI_COMMIT_BRANCH == "dev"
+      when: always
+    - when: never
+test-job:
+  stage: test
+  script:
+    - ./ci/test_job.sh
+  tags: 
+    - main
+  variables:
+    GIT_CLEAN_FLAGS: none
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+    - if: $CI_COMMIT_BRANCH == "dev"
+      when: always
+    - when: never
+deploy-job:
+  stage: deploy
+  script:
+    - export DASHCODE_API_PREFIX=${DASHCODE_API_PREFIX}
+    - export DASHCODE_DOMAIN=${DASHCODE_DOMAIN}
+    - export DASHCODE_PORT=${DASHCODE_PORT}
+    - export DASHCODE_PROTOCOL=${DASHCODE_PROTOCOL}
+    - docker-compose stop 
+    - docker-compose rm -f
+    - docker-compose build --parallel
+    - docker-compose up -d
+  tags:
+    - main
+  variables:
+    GIT_CLEAN_FLAGS: none
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+    - if: $CI_COMMIT_BRANCH == "dev"
+      when: always
+    - when: never
