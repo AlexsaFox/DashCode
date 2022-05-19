@@ -252,7 +252,7 @@ async def test_note_editing_invalid_owner(
     assert data == {
         "editNote": {
             "__typename": "RequestValueError",
-            "details": "You haven't got permission to see note with provided id",
+            "details": "You haven't got access to the note with provided id",
         }
     }
 

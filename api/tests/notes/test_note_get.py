@@ -50,9 +50,7 @@ async def test_note_receiving_invalid_owner(
     )
     assert data is not None
     assert data == {
-        "getNote": {
-            "details": "You haven't got permission to see note with provided id"
-        }
+        "getNote": {"details": "You haven't got access to the note with provided id"}
     }
 
 
