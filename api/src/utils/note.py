@@ -1,5 +1,6 @@
 from typing import cast
 
+from pydantic import NoneIsAllowedError
 from sqlalchemy.orm.session import Session
 
 from src.db.models import Note, User
@@ -51,6 +52,18 @@ def get_note(session: Session, id: str, user: User) -> Note:
         raise NoteNotFoundError
     if note.user != user:
         raise NoteOwnerError
+    return cast(Note, note)
+
+
+def remove_note(session: Session, id: str, user: User) -> Note:
+    note = session.query(Note).filter(Note.id == id).first()
+    if note is None:
+        raise NoteNotFoundError
+    if note.user != user:
+        raise NoteOwnerError
+    session.add(note)
+    session.delete(note)
+    session.commit()
     return cast(Note, note)
 
 

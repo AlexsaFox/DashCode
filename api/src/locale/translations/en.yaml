@@ -9,7 +9,7 @@ en:
   notes:
     errors:
       note_not_found: Unable to find a note with provided id
-      bad_note_owner: You haven't got permission to see note with provided id
+      bad_note_owner: You haven't got access to the note with provided id
 
   validation:
     errors:
