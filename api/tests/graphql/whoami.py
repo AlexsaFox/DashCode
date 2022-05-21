@@ -1,13 +1,14 @@
 WHOAMI_QUERY = '''
 query {
     whoami {
-        user {
-            username
-            profileColor
-            isSuperuser
-            profilePictureFilename
-        }
+        username
+        profileColor
+        isSuperuser
+        profilePictureFilename
         email
+        notes {
+            id
+        }
     }
 }
 '''

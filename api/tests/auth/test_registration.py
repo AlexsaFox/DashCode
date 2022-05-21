@@ -31,13 +31,12 @@ async def test_registration(
         'registerUser': {
             '__typename': 'RegisterUserSuccess',
             'account': {
-                'user': {
-                    'username': user.username,
-                    'profileColor': user.profile_color,
-                    'isSuperuser': user.is_superuser,
-                    'profilePictureFilename': user.profile_picture_filename,
-                },
+                'username': user.username,
                 'email': user.email,
+                'profileColor': user.profile_color,
+                'isSuperuser': user.is_superuser,
+                'profilePictureFilename': user.profile_picture_filename,
+                'notes': [],
             },
         }
     }

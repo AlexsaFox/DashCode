@@ -8,13 +8,14 @@ mutation ($username: String!, $email: String!, $password: String!) {
         }
         ... on RegisterUserSuccess {
             account {
-                user {
-                    username
-                    profileColor
-                    isSuperuser
-                    profilePictureFilename
-                }
+                username
+                profileColor
+                isSuperuser
+                profilePictureFilename
                 email
+                notes {
+                    id
+                }
             }
         }
         ... on ValidationError {

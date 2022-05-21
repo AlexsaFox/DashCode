@@ -12,13 +12,12 @@ async def test_whoami(graphql_client: GraphQLClient, token_user: tuple[str, User
 
     user_data = data['whoami']
     assert user_data == {
+        'username': user.username,
         'email': user.email,
-        'user': {
-            'username': user.username,
-            'profileColor': user.profile_color,
-            'isSuperuser': user.is_superuser,
-            'profilePictureFilename': user.profile_picture_filename,
-        },
+        'profileColor': user.profile_color,
+        'isSuperuser': user.is_superuser,
+        'profilePictureFilename': user.profile_picture_filename,
+        'notes': [],
     }
 
 

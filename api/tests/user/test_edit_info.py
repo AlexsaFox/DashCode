@@ -43,7 +43,7 @@ async def test_edit_username(
     )
     assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
-    assert data['editAccount']['account']['user']['username'] == new_username
+    assert data['editAccount']['account']['username'] == new_username
     assert await try_changes(database_engine, new_username)
 
 
@@ -106,7 +106,7 @@ async def test_edit_profile_color(
     )
     assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
-    assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
+    assert data['editAccount']['account']['profileColor'] == new_profile_color
     assert await try_changes(database_engine, user.username, new_profile_color)
 
 
@@ -145,8 +145,8 @@ async def test_edit_all(
     )
     assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
-    assert data['editAccount']['account']['user']['username'] == new_username
-    assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
+    assert data['editAccount']['account']['username'] == new_username
+    assert data['editAccount']['account']['profileColor'] == new_profile_color
     assert await try_changes(database_engine, new_username, new_profile_color)
 
 
