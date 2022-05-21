@@ -1,14 +1,19 @@
 from typing import cast
 
-from pydantic import NoneIsAllowedError
 from sqlalchemy.orm.session import Session
 
-from src.db.models import Note, User
+from src.db.models import Note, Tag, User
 from src.types import ExpectedError
 
 
 def create_note(
-    session: Session, title: str, content: str, link: str, is_private: bool, user: User
+    session: Session,
+    title: str,
+    content: str,
+    tags: list[str],
+    link: str,
+    is_private: bool,
+    user: User,
 ) -> Note:
     note = Note(
         title=title,
@@ -16,10 +21,16 @@ def create_note(
         link=link,
         is_private=is_private,
     )
+
+    note.tags = [Tag.get_tag(session, tag_content) for tag_content in tags]
+
     session.add(user)
     user.notes.append(note)
+
     session.add(note)
+
     session.commit()
+    session.refresh(note)
     return note
 
 

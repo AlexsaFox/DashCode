@@ -159,15 +159,19 @@ class Mutation:
         info: Info,
         title: str,
         content: str,
+        tags: list[str] | None = None,
         link: str = "",
         is_private: bool = True,
     ) -> CreateNoteResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
         t: Translator = info.context['translator']
+
+        tags = tags if tags is not None else []
+
         try:
             note: NoteModel = await session.run_sync(
-                create_note, title, content, link, is_private, user
+                create_note, title, content, tags, link, is_private, user
             )
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
