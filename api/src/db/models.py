@@ -13,7 +13,7 @@ from sqlalchemy import (
     Table,
     Text,
 )
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import Session, declarative_base, relationship
 
 from src.db.mixins import AppConfigurationMixin, ValidationMixin
 from src.db.utils import delete_file
@@ -22,6 +22,7 @@ from src.db.validation import (
     EMAIL_REGEXP,
     LINK_REGEXP,
     PASSWORD_REGEXP,
+    TAG_REGEXP,
     USERNAME_REGEXP,
 )
 
@@ -136,14 +137,30 @@ class Note(Base, ValidationMixin):
     )
 
     tags: list['Tag'] = relationship(
-        'Tag', secondary=note_tag_association_table, backref='notes'
+        'Tag', secondary=note_tag_association_table, backref='notes', lazy="selectin"
     )
 
 
-class Tag(Base):
+class Tag(Base, ValidationMixin):
     __tablename__ = 'tags'
+
+    validators = {'content': lambda val: TAG_REGEXP.fullmatch(val) is not None}
+
+    def __init__(self, content: str):
+        content = content.lower()
+        self.validate_fields(content=content)
+        self.content = content
 
     id: int = Column(Integer, primary_key=True)
     content: str = Column(String(30), nullable=False)
 
     notes: list[Note]
+
+    @classmethod
+    def get_tag(cls, session: Session, content: str):
+        tag: Tag | None = (
+            session.query(Tag).filter(Tag.content == content.lower()).one_or_none()
+        )
+        if tag is not None:
+            return tag
+        return cls(content)

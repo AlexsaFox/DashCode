@@ -13,6 +13,7 @@ class Note:
     content: str
     link: str
     is_private: bool
+    tags: list[str]
     creation_date: datetime
     user: User
 
@@ -26,4 +27,5 @@ class Note:
             is_private=instance.is_private,
             creation_date=instance.creation_date,
             user=User.from_instance(instance.user),
+            tags=[tag.content for tag in instance.tags],
         )
