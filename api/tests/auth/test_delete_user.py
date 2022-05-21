@@ -27,7 +27,7 @@ async def test_delete_user(
     assert data == {
         'deleteUser': {
             '__typename': 'DeleteUserSuccess',
-            'account': {'user': {'username': user.username}},
+            'account': {'username': user.username},
         }
     }
     assert not await user_exists(database_session, user.username)
