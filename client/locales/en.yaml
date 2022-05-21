@@ -94,10 +94,17 @@ settings:
   username-label: "USERNAME"
   api-token-header: "API Token"
   token-label: "TOKEN"
-  
   expiration-datetime-label: "EXPIRATION DATETIME:"
-  
   upload-profile-image-label: "Upload profile image:"
+  account_removal:
+    header: "ACCOUNT REMOVAL"
+    text: "Disabling your account means you can recover it at any time after
+          this action."
+    button-label: "Delete Account" 
+    warning:
+      text: "Are you sure you want to delete your account?"
+      header: "Warning!"
+      button-label: "Yes"
   
 note-show:
   edit-button: "Edit"

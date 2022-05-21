@@ -73,7 +73,6 @@ const { t } = useI18n()
   display: flex;
   justify-content: space-between;
   padding-bottom: 2%;
-  margin-top: 3%;
 
   .left {
     width: 45%;
