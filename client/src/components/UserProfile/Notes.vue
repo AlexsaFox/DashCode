@@ -3,15 +3,7 @@
     <div class="main_body_for_note">
       <button>
         <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
+          <div class="title_for_main_note"><span>note.title</span></div>
           <div class="note">
             <span>note.context</span>
           </div>
@@ -24,15 +16,7 @@
     <div class="main_body_for_note">
       <button>
         <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
+          <div class="title_for_main_note"><span>note.title</span></div>
           <div class="note">
             <span>note.context</span>
           </div>
@@ -45,36 +29,7 @@
     <div class="main_body_for_note">
       <button>
         <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
-          <div class="note">
-            <span>note.context</span>
-          </div>
-          <div class="link">
-            <span>note.link</span>
-          </div>
-        </a>
-      </button>
-    </div>
-    <div class="main_body_for_note">
-      <button>
-        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
+          <div class="title_for_main_note"><span>note.title</span></div>
           <div class="note">
             <span>note.context</span>
           </div>
@@ -85,9 +40,7 @@
       </button>
     </div>
   </div>
-  <NavButtons />
 </template>
-
 <style scoped lang="scss">
 .space_for_notes {
   display: inline-block;
@@ -118,11 +71,6 @@
     &:hover{
        transform: translateY(-10px);
     }
-    .block_for_header{
-      display: flex;
-      justify-content: space-between;
-      margin: 5px;
-    }
     span{
       font-family: 'ClearSans-Regular';
       color: white;
@@ -139,6 +87,7 @@
     text-overflow: ellipsis;
     height: 28px;
     display: inline-block;
+    margin: 0.5px 5px;
   }
 
   .note {
@@ -172,13 +121,6 @@
       font-family: 'ClearSans-Light';
       color: white;
       text-align: center;
-    }
-  }
-
-  .public_private {
-    margin-top: 5px;
-    div {
-      color: white;
     }
   }
 }
