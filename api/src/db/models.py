@@ -62,7 +62,7 @@ class User(Base, ValidationMixin, AppConfigurationMixin):
     notes: list['Note'] = relationship(
         'Note',
         backref='user',
-        lazy='select',
+        lazy='selectin',
         cascade="save-update, merge, delete, delete-orphan",
     )
 

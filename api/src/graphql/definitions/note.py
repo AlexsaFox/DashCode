@@ -3,7 +3,10 @@ from datetime import datetime
 import strawberry
 
 from src.db.models import Note as NoteModel
-from src.graphql.definitions.user import User
+
+
+# Following import was moved to bottom of file to resolve circular import issue
+# from src.graphql.definitions.user import User
 
 
 @strawberry.type
@@ -15,7 +18,7 @@ class Note:
     is_private: bool
     tags: list[str]
     creation_date: datetime
-    user: User
+    user: 'User'
 
     @classmethod
     def from_instance(cls, instance: NoteModel):
@@ -29,3 +32,19 @@ class Note:
             user=User.from_instance(instance.user),
             tags=[tag.content for tag in instance.tags],
         )
+
+    @classmethod
+    def from_instance_and_user(cls, instance: NoteModel, user: 'User'):
+        return cls(
+            id=instance.id,
+            title=instance.title,
+            content=instance.content,
+            link=instance.link,
+            is_private=instance.is_private,
+            creation_date=instance.creation_date,
+            user=user,
+            tags=[tag.content for tag in instance.tags],
+        )
+
+
+from src.graphql.definitions.user import User
