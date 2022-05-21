@@ -185,15 +185,17 @@ class Mutation:
         note_id: str,
         title: str | None = None,
         content: str | None = None,
+        tags: list[str] | None = None,
         link: str | None = None,
         is_private: bool | None = None,
     ) -> EditNoteResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
         t: Translator = info.context['translator']
+
         try:
             note: NoteModel = await session.run_sync(
-                edit_note, title, content, link, is_private, user, note_id
+                edit_note, title, content, tags, link, is_private, user, note_id
             )
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
