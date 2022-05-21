@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import useAuthStore from '~/store/useAuth'
-
+const { t } = useI18n()
 const auth = useAuthStore()
 </script>
 <template>
@@ -12,7 +12,7 @@ const auth = useAuthStore()
       <span>@Anonim</span>
     </div>
     <div class="amount_of_notes">
-      <span>public notes: 20</span>
+      <span>{{ t("user-profile.profile-block.amount_of_notes-label") }}: 20</span>
     </div>
   </div>
 </template>
