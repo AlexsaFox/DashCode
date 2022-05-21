@@ -1,15 +1,21 @@
+<script setup lang="ts">
+const { t } = useI18n()
+
+const showDeleteAccountPopup = ref(false)
+</script>
+
 <template>
   <div class="base_settings">
     <div class="account_removal">
       <div class="text">
-        <h3>ACCOUNT REMOVAL</h3>
-        <span>Disabling your account means you can recover it at any time after
-          this action.</span>
+        <h3>{{ t("settings.account_removal.header") }}</h3>
+        <span>{{ t("settings.account_removal.text") }}</span>
       </div>
 
-      <button class="delete_account">
-        Delete Account
+      <button class="delete_account" @click="showDeleteAccountPopup = true">
+        {{ t("settings.account_removal.button-label") }}
       </button>
+      <DeleteAccountPopup v-if="showDeleteAccountPopup" @close-popup="showDeleteAccountPopup = false"/>
     </div>
   </div>
 </template>
