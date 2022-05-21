@@ -20,9 +20,8 @@ def create_note(
         content=content,
         link=link,
         is_private=is_private,
+        tags=[Tag.get_tag(session, tag_content) for tag_content in tags],
     )
-
-    note.tags = [Tag.get_tag(session, tag_content) for tag_content in tags]
 
     session.add(user)
     user.notes.append(note)
@@ -52,16 +51,26 @@ def edit_note(
         raise NoteOwnerError
 
     if tags is not None:
+        new_tags = [Tag.get_tag(session, tag_content) for tag_content in tags]
         old_tags = note.tags.copy()
-        note.tags = [Tag.get_tag(session, tag_content) for tag_content in tags]
-        for tag in old_tags:
-            if len(tag.notes) == 0:
-                session.delete(tag)
-        # No commit needed, because note.update_fields will commit changes anyways
+    else:
+        new_tags = note.tags
+        old_tags = []
 
     note.update_fields(
-        session=session, title=title, content=content, link=link, is_private=is_private
+        session=session,
+        title=title,
+        content=content,
+        link=link,
+        is_private=is_private,
+        tags=new_tags,
     )
+
+    for tag in old_tags:
+        if len(tag.notes) == 0:
+            session.delete(tag)
+    session.commit()
+
     return cast(Note, note)
 
 

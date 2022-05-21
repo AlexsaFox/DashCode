@@ -132,6 +132,20 @@ async def note(database_session: AsyncSession, user: User) -> Note:
 
 
 @pytest.fixture
+async def private_note(database_session: AsyncSession, user: User) -> Note:
+    title = "It 3 am in the morning..."
+    content = '... put my key in the door and bodies ar laying all over the floor and'
+    tags = ['pytest', 'fixture', 'testing']
+    link = 'https://eminem.com'
+    is_private = True
+    test_user = user
+    note = await database_session.run_sync(
+        create_note, title, content, tags, link, is_private, test_user
+    )
+    return note
+
+
+@pytest.fixture
 def graphql_client(client: AsyncClient) -> GraphQLClient:
     return GraphQLClient(client)
 
