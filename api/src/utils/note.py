@@ -38,6 +38,7 @@ def edit_note(
     session: Session,
     title: str | None,
     content: str | None,
+    tags: list[str] | None,
     link: str | None,
     is_private: bool | None,
     user: User,
@@ -49,6 +50,14 @@ def edit_note(
         raise NoteNotFoundError
     if note.user != user:
         raise NoteOwnerError
+
+    if tags is not None:
+        old_tags = note.tags.copy()
+        note.tags = [Tag.get_tag(session, tag_content) for tag_content in tags]
+        for tag in old_tags:
+            if len(tag.notes) == 0:
+                session.delete(tag)
+        # No commit needed, because note.update_fields will commit changes anyways
 
     note.update_fields(
         session=session, title=title, content=content, link=link, is_private=is_private
