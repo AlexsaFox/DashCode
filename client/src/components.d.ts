@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     NavButtons: typeof import('./components/Home/NavButtons.vue')['default']
     Notes: typeof import('./components/UserProfile/Notes.vue')['default']
     PopupCheck: typeof import('./components/Note/PopupCheck.vue')['default']
+    PopupCheckDel: typeof import('./components/Note/PopupCheckDel.vue')['default']
     ProfileBlock: typeof import('./components/UserProfile/ProfileBlock.vue')['default']
     Right_part: typeof import('./components/Settings/Right_part.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

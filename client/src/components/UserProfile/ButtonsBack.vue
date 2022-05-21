@@ -1,11 +1,14 @@
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
 <template>
   <div class="block">
     <div class="display_with_button">
       <a><button class="standard_button">
-        <div class="i-carbon:arrow-right" />Back to profile
+        <div class="i-carbon:arrow-right" />{{ t("user-profile.buttons-back.button-back-to-profile") }}
       </button></a>
       <a><button class="standard_button">
-        <div class="i-carbon:user-avatar-filled-alt" />Back to social media
+        <div class="i-carbon:user-avatar-filled-alt" />{{ t("user-profile.buttons-back.button-back-to-social-media") }}
       </button></a>
     </div>
   </div>
