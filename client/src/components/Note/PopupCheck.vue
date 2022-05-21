@@ -1,3 +1,6 @@
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
 <template>
   <div id="popup_check" class="overlay">
     <div class="popup_check">
@@ -5,18 +8,18 @@
         <a class="close" href="#">&times;</a>
       </div>
       <div class="content">
-        <span>Do you want to save your changes?</span>
+        <span>{{ t("note-edit.warning-label") }}</span>
         <div class="buttons_for_check">
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" value="Unsave"></a>
+            <a href="#"><input type="button" :value="t('note-edit.unsave-button')"></a>
           </div>
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" value="Save"></a>
+            <a href="#"><input type="button" :value="t('note-edit.save-button')"></a>
           </div>
           <div class="each_button_for_popup_check">
             <a href="#popup_watch"><input
               type="button"
-              value="Cancel"
+              :value="t('note-edit.cancel-button')"
             ></a>
           </div>
         </div>
