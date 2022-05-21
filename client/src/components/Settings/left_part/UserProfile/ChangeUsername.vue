@@ -37,10 +37,10 @@ function onSubmit() {
       </div>
     </div>
     <button v-if="!editUsernameField" type="button" class="edit username" @click="editUsernameField = true">
-      {{ t("settings.button-edit-label") }}
+      {{ t("settings.button.edit.label") }}
     </button>
     <button v-if="editUsernameField" class="edit name" @click="onSubmit">
-      {{ t("settings.button-submit-changes-label") }}
+      {{ t("settings.button.submit.changes-label") }}
     </button>
   </div>
 </template>
@@ -51,7 +51,7 @@ function onSubmit() {
 
   h2 {
     font-family: "ClearSans-Medium";
-    font-size: 15px;
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.6);
     margin: 0%;
     font-weight: 500;
@@ -94,7 +94,7 @@ function onSubmit() {
   border-radius: 5px;
   color: white;
   font-family: "ClearSans-Light";
-  font-size: 18px;
+  font-size: 22px;
   border: 2px #303d67;
   margin-top: 2%;
   width: auto;
@@ -104,7 +104,7 @@ function onSubmit() {
     border: 0px;
     color: white;
     font-family: "ClearSans-Light";
-    font-size: 18px;
+
   }
 
   &:focus {
@@ -112,7 +112,7 @@ function onSubmit() {
     border: 0px;
     color: white;
     font-family: "ClearSans-Light";
-    font-size: 18px;
+
     outline: 2px solid rgba(39, 55, 91);
   }
 

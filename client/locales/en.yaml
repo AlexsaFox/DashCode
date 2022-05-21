@@ -69,14 +69,22 @@ settings:
   new-password-label: "NEW PASSWORD"
   confirm-password-label: "CONFIRM PASSWORD"
   current-password-label: "CURRENT PASSWORD"
-  button-edit-label: Edit
-  button-submit-color-label: Apply
-  button-edit-avatar-label: "Edit avatar"
-  button-change-password-label: "Change password"
-  button-submit-changes-label: "Submit"
-  user-profile-header: "User Profile"
-  user-profile-header-preview: "PREVIEW"
-  user-profile-header-change-profile-color: "CHANGE PROFILE COLOR"
+  button:
+    edit:
+      label: Edit
+      avatar-label: "Edit avatar"
+    submit:
+      color-label: Apply
+      changes-label: "Submit"
+    change-password-label: "Change password"
+    show-token-label: "Show token"
+    browse-image-label: "Browse"
+    copy-token-label: "Copy Token"
+  user-profile:
+    header:
+      label: "User Profile"
+      preview: "PREVIEW"
+      change-profile-color: "CHANGE PROFILE COLOR"
   profile:
     errors:
       username-required: Username can't be null
@@ -86,11 +94,11 @@ settings:
   username-label: "USERNAME"
   api-token-header: "API Token"
   token-label: "TOKEN"
-  button-copy-token-label: "Copy Token"
+  
   expiration-datetime-label: "EXPIRATION DATETIME:"
-  button-generate-new-token-label: "Generate new token"
+  
   upload-profile-image-label: "Upload profile image:"
-  button-browse-image-label: "Browse"
+  
 note-show:
   edit-button: "Edit"
   author-of-note: "User"

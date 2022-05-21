@@ -41,6 +41,11 @@ const settingsPage = useSettingsPageStore()
     justify-content: flex-start;
     gap: 10%;
     width: 30%;
+
+    h2{
+      font-family: 'ClearSans-Regular';
+      font-size: 24px;
+    }
   }
   .stroke.username {
     display: flex;

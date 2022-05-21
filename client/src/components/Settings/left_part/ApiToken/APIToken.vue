@@ -10,18 +10,14 @@ const { t } = useI18n()
       <div class="left">
         <h3>{{ t("settings.token-label") }}</h3>
         <textarea id="API_token" class="token" readonly>user.api_token</textarea>
-        <button type="button" class="copy_token" onclick="copyToken(event)">
-          {{ t("settings.button-copy-token-label") }}
-        </button>
       </div>
       <div class="right">
-        <h3>{{ t("settings.expiration-datetime-label") }}</h3>
-        <span> api_token_expiration_datetime</span>
-        <form action="{{ url_for('webapp.user.settings.regenerate_api_token') }}" method="post">
-          <button type="submit" class="generate_token">
-            {{ t("settings.button-generate-new-token-label") }}
-          </button>
-        </form>
+        <button type="submit" class="button_token">
+          {{ t("settings.button.show-token-label") }}
+        </button>
+        <button type="button" class="button_token" onclick="copyToken(event)">
+          {{ t("settings.button.copy-token-label") }}
+        </button>
       </div>
     </div>
   </div>
@@ -52,6 +48,7 @@ const { t } = useI18n()
     color: rgba(255, 255, 255, 0.6);
     font-weight: 100;
     margin-bottom: 2%;
+    font-size: 20px;
   }
 
 }
@@ -61,7 +58,7 @@ const { t } = useI18n()
 */
 
 .tabcontent hr {
-  margin-top: 3%;
+  margin: 3% 0% 2%;
   border: 0px;
   border-top: 3px solid #465586;
 }
@@ -91,18 +88,34 @@ const { t } = useI18n()
       color: white;
       border-radius: 10px;
       font-family: 'ClearSans-Medium';
-      font-size: 18px;
+      font-size: 20px;
       padding: 3%;
       resize: none;
       width: 100%;
       height: 175px;
+
+      &:focus {
+        outline: none;
+      }
+
+    }
+  }
+
+  .right {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+
+    span {
+      color: white;
+      font-family: 'ClearSans-Medium';
+      font-size: 20px;
+      font-weight: 200;
     }
 
-    .token:focus {
-      outline: none;
-    }
-
-    .copy_token {
+    .button_token {
       margin: 4% 0% 0%;
       background-color: #465586;
       width: 100%;
@@ -114,46 +127,15 @@ const { t } = useI18n()
       border-radius: 10px;
       border: 0;
       transition: 0.5s;
+
+      &:hover {
+        background-color: #303D67;
+        cursor: pointer;
+        transition: 0.5s;
+      }
     }
 
-    .copy_token:hover {
-      background-color: #303D67;
-      cursor: pointer;
-      transition: 0.5s;
-    }
   }
 
-  .right {
-    width: 45%;
-    display: block;
-    height: auto;
-
-    span {
-      color: white;
-      font-family: 'ClearSans-Medium';
-      font-size: 20px;
-      font-weight: 200;
-    }
-
-    .generate_token {
-      background-color: #465586;
-      bottom: 0px;
-      margin-top: 15%;
-      width: 80%;
-      height: 60px;
-      border-radius: 10px;
-      color: white;
-      font-family: 'ClearSans-Medium';
-      font-size: 18px;
-      border: 0;
-      transition: 0.5s;
-    }
-
-    .generate_token:hover {
-      background-color: #303D67;
-      cursor: pointer;
-      transition: 0.5s;
-    }
-  }
 }
 </style>
