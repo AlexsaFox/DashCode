@@ -8,6 +8,7 @@ query($id: String!) {
                 content
                 link
                 isPrivate
+                tags
             }
         }
         ... on RequestValueError {
