@@ -67,13 +67,19 @@ def get_note(session: Session, id: str, user: User) -> Note:
 
 
 def remove_note(session: Session, id: str, user: User) -> Note:
-    note = session.query(Note).filter(Note.id == id).first()
+    note: Note | None = session.query(Note).filter(Note.id == id).first()
     if note is None:
         raise NoteNotFoundError
     if note.user != user:
         raise NoteOwnerError
+
     session.add(note)
     session.delete(note)
+
+    for tag in note.tags:
+        if len(tag.notes) == 0:
+            session.delete(tag)
+
     session.commit()
     return cast(Note, note)
 
