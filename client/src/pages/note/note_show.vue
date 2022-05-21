@@ -34,6 +34,8 @@ const { t } = useI18n()
         <a href="{{url_for('webapp.note.notes_edit', note_id=id)}}">
           <input type="submit" class="save" :value="t('note-show.edit-button')">
         </a>
+        <a href="#popup_check_del"><input type="submit" class="save" :value="t('note-show.delete-button')"></a>
+        <PopupCheckDel />
         <hr class="line">
         <div class="info_about_writer">
           <span class="text_under_line">{{ t("note-show.author-of-note") }}: note.user.username</span>
@@ -54,7 +56,7 @@ const { t } = useI18n()
   padding: 10px;
   border-radius: 10px;
   font-size: 20px;
-  margin: 0px 0px 20px 20px;
+  margin: 0px 0px 1vw 2% ;
   color: #F1F7ED;
   width: 80%;
   border: none;
@@ -73,6 +75,7 @@ const { t } = useI18n()
 }
 
 .save {
+  margin: 20px 4% 1vw 2%;
   background-color: #86faf8;
   border-radius: 8px;
   font-size: 120%;
@@ -128,6 +131,7 @@ textarea:focus {
   font-family: 'ClearSans-Light';
   color: white;
   margin: 0px 3%;
+  font-size: 110%;
 }
 
 .info_about_writer {
@@ -196,7 +200,7 @@ textarea:focus {
   border-radius: 8px;
   font-size: 20px;
   color: #F1F7ED;
-  width: 75%;
+  width: 90%;
   border: none;
   resize: none;
   height: 50px;
