@@ -45,7 +45,7 @@ function onSubmit() {
   <div class="overlay">
     <div class="popup">
       <div class="header">
-        <span>{{ t("settings.button-edit-avatar-label") }}</span>
+        <span>{{ t("settings.button.edit.avatar-label") }}</span>
         <button class="close" @click="emit('closePopup')">
           &times;
         </button>
@@ -59,7 +59,7 @@ function onSubmit() {
               {{ imageName }}
             </div>
             <div class="selectbutton">
-              {{ t("settings.button-browse-image-label") }}
+              {{ t("settings.button.browse-image-label") }}
             </div>
             <input
               id="id_profile_picture" ref="fileForm" type="file" name="profile_picture"
@@ -70,7 +70,7 @@ function onSubmit() {
 
         <div class="send-button-container">
           <button type="submit" class="send_button" @click="onSubmit">
-            {{ t("settings.button-submit-changes-label") }}
+            {{ t("settings.button.submit.changes-label") }}
           </button>
         </div>
       </div>

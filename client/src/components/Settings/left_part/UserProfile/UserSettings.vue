@@ -86,7 +86,7 @@ const showEditAvatarPopup = ref(false)
   border-radius: 15px;
   background-color: #303d67;
   padding-bottom: 2%;
-  margin-right: 40%;
+  width: 50%;
 
   .profile_color {
     background-color: #9e6dee;

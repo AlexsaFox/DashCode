@@ -29,19 +29,19 @@ function onSubmit() {
 </script>
 
 <template>
-  <div class="first_block profile_color">
+  <div class="profile_color">
     <h4>{{ t("settings.change-color-label") }}</h4>
     <div class="bottom_line">
       <input v-model="colorForm.color" type="color" class="change_profile_color">
       <button class="edit" @click="onSubmit">
-        {{ t("settings.button-submit-color-label") }}
+        {{ t("settings.button.submit.color-label") }}
       </button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.first_block.profile_color {
+.profile_color {
   .bottom_line {
     display: flex;
     justify-content: flex-start;
