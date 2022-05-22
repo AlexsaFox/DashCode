@@ -34,19 +34,6 @@ sign-up:
     password-required: Password is required
     password-too-short: Your password must contain at least 8 characters
     passwords-do-not-match: Password and confirm password fields do not match
-labels:
-  username: Username
-  email: Email
-  password: Password
-  confirm-password: Confirm password
-errors:
-  user-exists: User with {field} "{value}" already exists
-  username-required: Username is required
-  email-required: Email is required
-  email-invalid: Enter valid email address
-  password-required: Password is required
-  password-too-short: Your password must contain at least 8 characters
-  passwords-do-not-match: Password and confirm password fields do not match
 index:
   title-1: "Unique knowledge repository."
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
