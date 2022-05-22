@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     ChangeColor: typeof import('./components/Settings/left_part/UserProfile/ChangeColor.vue')['default']
     ChangeUsername: typeof import('./components/Settings/left_part/UserProfile/ChangeUsername.vue')['default']
     ContentBlock: typeof import('./components/ContentIndexPage/ContentBlock.vue')['default']
+    DeleteAccountPopup: typeof import('./components/Settings/left_part/MyAccount/DeleteAccountPopup.vue')['default']
     EditAvatarPopup: typeof import('./components/Settings/left_part/UserProfile/EditAvatarPopup.vue')['default']
     EditInformation: typeof import('./components/Settings/left_part/MyAccount/EditInformation.vue')['default']
     ErrorIndicator: typeof import('./components/ErrorIndicator.vue')['default']

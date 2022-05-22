@@ -77,11 +77,24 @@ errors:
   password-required: Mot de passe requis
   passwords-do-not-match: Le mot de passe ne correspond pas aux informations du compte, veuillez entrer le mot de passe correct
 
-note_show:
-  edit-button: "Changer"
+note-show:
+  edit-button: "Modifier"
+  delete-button: "Supprimer"
   author-of-note: "Utilisateur"
-  date-of-creation-label: "Déjà créé"
-note_edit:
+  date-of-creation-label: "A été créé"
+  warning-label: « Voulez-vous supprimer cette note ?»
+  yes-button: "Oui"
+  no-button: "Non"
+note-edit:
   save-button: "Sauver"
+  warning-label: "Voulez-vous enregistrer vos modifications?"
+  unsave-button: "Ne pas enregistrer"
+  cancel-button: "Annuler"
 note_create:
   create-button: "Créer"
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Retour au profil"
+    button-back-to-social-media: "Retour aux réseaux sociaux"
+  profile-block:
+    amount_of_notes-label: "notes publiques"
