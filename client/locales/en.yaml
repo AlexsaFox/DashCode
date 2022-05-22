@@ -117,7 +117,7 @@ note-show:
 note-edit:
   save-button: "Save"
   warning-label: "Do you want to save your changes?"
-  unsave-button: "Unsave"
+  unsave-button: "Do not save"
   cancel-button: "Cancel"
 note_create:
   create-button: "Create"
@@ -127,4 +127,3 @@ user-profile:
     button-back-to-social-media: "Back to social media"
   profile-block:
     amount_of_notes-label: "public notes"
-
