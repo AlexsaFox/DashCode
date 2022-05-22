@@ -24,7 +24,7 @@ const settingsPage = useSettingsPageStore()
     background-color: #1A2641;
     display: flex;
     justify-content: space-between;
-    padding: 2%;
+    padding: 15px;
     color: white;
     width: auto;
 }
@@ -39,7 +39,7 @@ const settingsPage = useSettingsPageStore()
     font-family: 'ClearSans-Bold';
     font-size: 32px;
     position: fixed;
-    right: 2%;
+    right: 15px;
     top: 1%;
 }
 </style>

@@ -2,25 +2,19 @@
 const { t } = useI18n()
 </script>
 <template>
-  <div id="popup_check" class="overlay">
+  <div id="popup_check_del" class="overlay">
     <div class="popup_check">
       <div class="header_for_pop_up">
         <a class="close" href="#">&times;</a>
       </div>
       <div class="content">
-        <span>{{ t("note-edit.warning-label") }}</span>
+        <span>{{ t("note-show.warning-label") }}</span>
         <div class="buttons_for_check">
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" :value="t('note-edit.unsave-button')"></a>
+            <a href="#"><input class="yes" type="button" :value="t('note-show.yes-button')"></a>
           </div>
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" :value="t('note-edit.save-button')"></a>
-          </div>
-          <div class="each_button_for_popup_check">
-            <a href="#popup_watch"><input
-              type="button"
-              :value="t('note-edit.cancel-button')"
-            ></a>
+            <a href="#"><input type="button" :value="t('note-show.no-button')"></a>
           </div>
         </div>
       </div>
@@ -80,22 +74,23 @@ const { t } = useI18n()
     color:#223153;
     border-radius: 5px;
     border: none;
-    margin: 5% 2% 0px;
+    margin: 5% 1% 0px;
     padding: 0px 15%;
     cursor: pointer;
     &:hover{
       opacity: 0.8;
     }
 }
-
 .popup_check .buttons_for_check{
     margin:5% 0px;
     padding-bottom: 2%;
 }
 .each_button_for_popup_check{
     display: inline-block;
-    width: 20%;
-
+    width: 40%;
+    .yes:hover{
+      background-color: rgba(255, 0, 0, 0.8);
+    }
 }
 
 </style>

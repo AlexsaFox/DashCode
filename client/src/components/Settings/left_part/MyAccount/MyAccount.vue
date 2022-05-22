@@ -34,6 +34,7 @@ const { t } = useI18n()
     color: rgba(255, 255, 255, 0.6);
     font-weight: 100;
     margin-bottom: 2%;
+    font-size: 20px;
   }
 
 }

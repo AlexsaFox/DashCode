@@ -1,75 +1,28 @@
 <script setup lang="ts">
-import useAuthStore from '~/store/useAuth'
-import useErrorsStore from '~/store/useErrors'
-
 const { t } = useI18n()
-const router = useRouter()
 
 const emit = defineEmits<{
   (e: 'closePopup'): void
 }>()
-
-const fileForm = ref<HTMLInputElement | null>(null)
-const imageData = ref('')
-const imageName = ref('')
-
-function updatePreviewImage() {
-  const files = fileForm.value?.files
-  if (files) {
-    imageName.value = files[0].name
-    const fileReader = new FileReader()
-    fileReader.readAsDataURL(files[0])
-    fileReader.onload = function() {
-      const result = this.result
-      if (result instanceof ArrayBuffer)
-        imageData.value = result.toString()
-      else
-        imageData.value = result ?? ''
-    }
-  }
-}
-
-function onSubmit() {
-  const files = fileForm.value?.files
-  if (files) {
-    useAuthStore().editProfilePicture(files[0]).then(() => {
-      if (useErrorsStore().errors.length === 0)
-        router.go(0)
-    })
-  }
-  else { emit('closePopup') }
-}
 </script>
 
 <template>
   <div class="overlay">
     <div class="popup">
       <div class="header">
-        <span>{{ t("settings.button.edit.avatar-label") }}</span>
+        <span>{{ t("settings.account_removal.warning.header") }}</span>
         <button class="close" @click="emit('closePopup')">
           &times;
         </button>
       </div>
       <div class="content">
-        <img v-if="imageData" :src="imageData">
-        <div class="field">
-          <span class="label">{{ t("settings.upload-profile-image-label") }}</span>
-          <div class="fileform">
-            <div id="fileformlabel">
-              {{ imageName }}
-            </div>
-            <div class="selectbutton">
-              {{ t("settings.button.browse-image-label") }}
-            </div>
-            <input
-              id="id_profile_picture" ref="fileForm" type="file" name="profile_picture"
-              @change="updatePreviewImage"
-            >
+        <span class="text">{{ t("settings.account_removal.warning.text") }}</span>
+        <div class="stroke">
+          <div class="left">
+            <h2>{{ t("settings.current-password-label") }}</h2>
+            <input type="password" class="input">
           </div>
-        </div>
-
-        <div class="send-button-container">
-          <button type="submit" class="send_button" @click="onSubmit">
+          <button type="submit" class="send_button">
             {{ t("settings.button.submit.changes-label") }}
           </button>
         </div>
@@ -120,12 +73,13 @@ function onSubmit() {
 
   span {
     font-family: 'ClearSans-Medium';
-    color: rgba(255, 255, 255, 0.8);
+    color: #fa3b3b;
     font-size: 24px;
   }
 
   .content {
-    text-align: left;
+    display: flex;
+    flex-direction: column;
     font-family: 'ClearSans-Regular';
     color: white;
     padding: 0px 3%;
@@ -137,35 +91,63 @@ function onSubmit() {
     flex-direction: column;
     align-items: center;
 
-    img {
-      width: auto;
-      height: 25vh;
-      aspect-ratio: 1 / 1;
-      border-radius: 20px;
+    .text {
+      font-family: 'ClearSans-Medium';
+      color: white;
+      font-size: 24px;
     }
 
-    .send-button-container {
-      width: 100%;
-      text-align: center;
-    }
-
-    .field {
-      margin-top: 12px;
+    .stroke {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 3% 0%;
       width: 100%;
 
-      .label {
+      h2 {
         font-family: "ClearSans-Medium";
+        font-size: 18px;
         color: rgba(255, 255, 255, 0.6);
+        margin: 0%;
+        font-weight: 500;
+      }
+
+      .input {
+        background-color: #223153;
+        border: 0px;
+        color: white;
+        font-family: "ClearSans-Light";
         font-size: 20px;
+        border: 2px #223153;
+        margin-top: 2%;
+        width: auto;
+        padding: 1% 2%;
+        border-radius: 5px;
+        margin-bottom: 2%;
+
+        &:focus {
+          background-color: #223153;
+          border: 0px;
+          color: white;
+          font-family: "ClearSans-Light";
+
+          outline: 2px solid rgba(39, 55, 91);
+        }
+
+        &:-webkit-autofill {
+          -webkit-box-shadow: inset 0 0 0 50px #223153;
+          /* цвет вашего фона */
+          -webkit-text-fill-color: white;
+          /* цвет текста */
+        }
       }
     }
 
     .send_button {
       font-family: "ClearSans-Regular";
       color: white;
-      margin: auto;
       margin-top: 3%;
-      padding: 6px 12px;
+      padding: 12px 16px;
       background: #223153;
       border: none;
       border-radius: 5px;

@@ -10,7 +10,7 @@
 .account_preview {
   border-radius: 15px;
   background-color: #303d67;
-  padding-bottom: 2%;
+  padding-bottom: 0.5%;
   margin: 0% 5%;
   margin-right: 10%;
   .profile_color {
