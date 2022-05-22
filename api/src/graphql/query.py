@@ -68,14 +68,20 @@ class Query:
 
     @strawberry.field(permission_classes=[IsAuthenticated])
     async def get_public_notes(
-        self, info: Info, first: int = 10, after: Cursor | None = None
+        self,
+        info: Info,
+        first: int = 10,
+        after: Cursor | None = None,
+        newest_first: bool = True,
     ) -> GetPublicNotesResponse:
         session: AsyncSession = info.context['session']
         t: Translator = info.context['translator']
 
         notes: list[NoteModel]
         try:
-            notes = await session.run_sync(get_public_notes, after, first + 1)
+            notes = await session.run_sync(
+                get_public_notes, after, first + 1, newest_first
+            )
         except NoteNotFoundError:
             return RequestValueError(t('notes.errors.note_not_found'))
 
