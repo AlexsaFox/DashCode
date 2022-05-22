@@ -72,12 +72,14 @@ settings:
       label: "User Profile"
       preview: "PREVIEW"
       change-profile-color: "CHANGE PROFILE COLOR"
+      change-language: "CHANGE PROFILE LANGUAGE"
   profile:
     errors:
       username-required: Username can't be null
       profile-color-required: You need to specify profile color
       profile-color-bad-format: "Profile color must be in format of #rrggbb"
   change-color-label: This color will be used in your interface
+  change-language-label: This language will be used in your interface
   username-label: "USERNAME"
   api-token-header: "API Token"
   token-label: "TOKEN"
@@ -92,6 +94,12 @@ settings:
       text: "Are you sure you want to delete your account?"
       header: "Warning!"
       button-label: "Yes"
+  languages:
+    english-label: "English"
+    french-label: "French"
+    german-label: "German"
+    spanish-label: "Spanish"
+    russian-label: "Russian"
   
 note-show:
   edit-button: "Edit"
