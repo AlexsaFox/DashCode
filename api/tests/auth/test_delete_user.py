@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.db.models import User
-from tests.auth.utils import check_auth
+from tests.auth.utils import check_auth_error
 from tests.graphql.delete_user import DELETE_USER_QUERY
 from tests.utils import GraphQLClient
 
@@ -61,4 +61,4 @@ async def test_delete_user_no_auth(graphql_client: GraphQLClient):
         query=DELETE_USER_QUERY,
         variables={'password': 'password'},
     )
-    check_auth(data, errors)
+    check_auth_error(data, errors)

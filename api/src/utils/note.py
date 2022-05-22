@@ -105,20 +105,31 @@ def remove_note(session: Session, id: str, user: User) -> Note:
 
 def get_public_notes(session: Session, from_id: str | None, amount: int) -> list[Note]:
     if from_id is None:
-        start_from = session.query(Note).first()
-        if start_from is None:
+        first_note: Note | None = session.query(Note).first()
+        if first_note is None:
             return []
+        start_from_id = first_note.row_id
     else:
-        start_from = session.query(Note).filter(Note.id == from_id).first()
+        start_from: Note | None = (
+            session.query(Note)
+            .where(and_(Note.is_private == False, Note.id == from_id))
+            .first()
+        )
         if start_from is None:
             raise NoteNotFoundError
+        start_from_id = start_from.row_id + 1
 
     notes = (
         session.query(Note)
-        .filter(and_(Note.is_private == False, Note.row_id > start_from.row_id))
+        .where(and_(Note.is_private == False, Note.row_id >= start_from_id))
         .limit(amount)
         .all()
     )
+
+    # Load all users to session
+    for note in notes:
+        session.refresh(note.user)
+
     return notes
 
 

@@ -14,7 +14,7 @@ async def try_credentials(engine: AsyncEngine, email: str, password: str) -> boo
         return False
 
 
-def check_auth(data: dict[str, Any] | None, errors: list[dict[str, Any]] | None):
+def check_auth_error(data: dict[str, Any] | None, errors: list[dict[str, Any]] | None):
     assert data is None
     assert errors is not None
     assert errors[0]['message'] == 'Authentication required'
