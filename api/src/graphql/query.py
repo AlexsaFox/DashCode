@@ -7,15 +7,17 @@ from src.auth.utils import (
     IdentificationError,
     authenticate_user,
 )
+from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
 from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.graphql.definitions.note import Note
+from src.graphql.definitions.pagination import Connection, Cursor, Page
 from src.graphql.definitions.responses.get_note import GetNoteResponse, GetNoteSuccess
 from src.graphql.definitions.responses.get_token import GetTokenResponse, Token
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
-from src.utils.note import NoteNotFoundError, NoteOwnerError, get_note
+from src.utils.note import NoteNotFoundError, NoteOwnerError, get_note, get_public_notes
 
 
 @strawberry.type
@@ -62,3 +64,27 @@ class Query:
             return RequestValueError(t('notes.errors.bad_note_owner'))
 
         return GetNoteSuccess(Note.from_instance(note))
+
+    @strawberry.field(permission_classes=[IsAuthenticated])
+    async def get_public_notes(
+        self, info: Info, first: int = 10, after: Cursor | None = None
+    ) -> Connection[Note]:
+        session: AsyncSession = info.context['session']
+
+        notes: list[NoteModel]
+        notes = await session.run_sync(get_public_notes, after, first + 1)
+
+        has_next_page = len(notes) == first + 1
+        edges = [
+            Note.from_instance(note).to_edge()
+            for note in (notes[:-1] if has_next_page else notes)
+        ]
+
+        return Connection(
+            page_info=Page(
+                has_next_page=has_next_page,
+                start_cursor=edges[0].cursor if len(edges) > 0 else None,
+                end_cursor=edges[-1].cursor if len(edges) > 0 else None,
+            ),
+            edges=edges,
+        )

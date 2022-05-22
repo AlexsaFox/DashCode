@@ -3,6 +3,7 @@ from datetime import datetime
 import strawberry
 
 from src.db.models import Note as NoteModel
+from src.graphql.definitions.pagination import Cursor, Edge
 
 
 # Following import was moved to bottom of file to resolve circular import issue
@@ -45,6 +46,15 @@ class Note:
             user=user,
             tags=[tag.content for tag in instance.tags],
         )
+
+    def get_cursor(self) -> Cursor:
+        return self.id
+
+    def id_from_cursor(self, cursor: Cursor):
+        return cursor
+
+    def to_edge(self) -> Edge['Note']:
+        return Edge(node=self, cursor=self.get_cursor())
 
 
 from src.graphql.definitions.user import User

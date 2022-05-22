@@ -8,6 +8,7 @@ from sqlalchemy import (
     Column,
     DateTime,
     ForeignKey,
+    Identity,
     Integer,
     String,
     Table,
@@ -24,7 +25,6 @@ from src.db.validation import (
     PASSWORD_REGEXP,
     TAG_REGEXP,
     USERNAME_REGEXP,
-    ModelFieldValidationError,
 )
 
 
@@ -136,6 +136,7 @@ class Note(Base, ValidationMixin):
         primary_key=True,
         default=lambda: urlsafe_b64encode(token_bytes(9)).decode(),
     )
+    row_id: int = Column(Integer, Identity(start=0, minvalue=0, increment=1))
     title: str = Column(String(65), nullable=False)
     content: str = Column(Text(), nullable=False)
     link: str = Column(Text(), nullable=False)
