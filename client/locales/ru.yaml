@@ -72,12 +72,34 @@ settings:
   expiration-datetime-label: "ДАТА ИСТЕЧЕНИЯ:"
   button-generate-new-token-label: "Создать новый токен"
   upload-profile-image-label: "Загрузить изображение профиля:"
+  account_removal:
+    header: "Удаление аккаунта"
+    text: «Отключение вашей учетной записи означает, что вы можете восстановить ее в любое время после
+           это действие».
+    button-label: "Удалить" 
+    warning:
+      text: «Вы уверены, что хотите удалить свой аккаунт?»
+      header: "Предупреждение!"
+      button-label: "Да"
   button-browse-image-label: "Поиск"
 note-show:
-  edit-button: "Изменить"
+  edit-button: "Править"
+  delete-button: "Удалить"
   author-of-note: "Пользователь"
-  date-of-creation-label: "Был создан"
-note_edit:
+  date-of-creation-label: "Уже создан"
+  warning-label: "Хотите удалить заметку?"
+  yes-button: "Да"
+  no-button: "Нет"
+note-edit:
   save-button: "Сохранить"
+  warning-label: "Хотите сохранить изменения?"
+  unsave-button: "Не сохранять"
+  cancel-button: "Отменить"
 note_create:
   create-button: "Создать"
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Назад к профилю"
+    button-back-to-social-media: "Назад к социальным сетям"
+  profile-block:
+    amount_of_notes-label: "публичные заметкиф"

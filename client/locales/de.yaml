@@ -58,6 +58,15 @@ settings:
   expiration-datetime-label: "ABLAUFDATUM UHRZEIT:"
   button-generate-new-token-label: "Neues Token generieren"
   upload-profile-image-label: "Profilbild hochladen:"
+  account_removal:
+    header: "Удаление аккаунта"
+    text: «Отключение вашей учетной записи означает, что вы можете восстановить ее в любое время после
+           это действие».
+    button-label: "Удалить" 
+    warning:
+      text: «Вы уверены, что хотите удалить свой аккаунт?»
+      header: "Предупреждение!"
+      button-label: "Да"
   button-browse-image-label: "Durchsuche"
   have-account: Haben Sie bereits ein Konto?
   have-account-link: Anmelden
@@ -74,11 +83,26 @@ errors:
   email-invalid: E-Mail-Adresse ist ungültig, bitte geben Sie eine gültige Adresse ein
   password-required: Passwort erforderlich
   passwords-do-not-match: Das Passwort stimmt nicht mit den Kontoinformationen überein, bitte geben Sie das richtige Passwort ein
-note_show:
+
+note-show:
   edit-button: "Bearbeiten"
+  delete-button: "Löschen"
   author-of-note: "Benutzer"
   date-of-creation-label: "Wurde erstellt"
-note_edit:
+  warning-label: "Möchten Sie diese Notiz löschen?"
+  yes-button: "Ja"
+  no-button: "Nein"
+note-edit:
   save-button: "Speichern"
+  warning-label: "Möchtest du deine Änderungen speichern?"
+  unsave-button: "Nicht speichern"
+  cancel-button: "Absagen"
 note_create:
   create-button: "Erstellen"
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Zurück zum Profil"
+    button-back-to-social-media: "Zurück zu den sozialen Medien"
+  profile-block:
+    amount_of_notes-label: "öffentliche Notizen"
+
