@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from src.db.models import User
-from tests.auth.utils import check_auth, try_credentials
+from tests.auth.utils import check_auth_error, try_credentials
 from tests.graphql.edit_account_auth import EDIT_ACCOUNT_AUTH_QUERY
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
@@ -180,4 +180,4 @@ async def test_edit_no_auth(
             'newEmail': new_email,
         },
     )
-    check_auth(data, errors)
+    check_auth_error(data, errors)

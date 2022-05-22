@@ -1,5 +1,5 @@
 from src.db.models import Note, User
-from tests.auth.utils import check_auth
+from tests.auth.utils import check_auth_error
 from tests.graphql.whoami import WHOAMI_QUERY
 from tests.utils import GraphQLClient
 
@@ -61,4 +61,4 @@ async def test_whoami_with_private_note(
 
 async def test_whoami_no_auth(graphql_client: GraphQLClient):
     data, errors = await graphql_client.get_request_data(query=WHOAMI_QUERY)
-    check_auth(data, errors)
+    check_auth_error(data, errors)

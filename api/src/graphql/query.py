@@ -13,6 +13,7 @@ from src.graphql.definitions.errors.request_value_error import RequestValueError
 from src.graphql.definitions.note import Note
 from src.graphql.definitions.pagination import Connection, Cursor, Page
 from src.graphql.definitions.responses.get_note import GetNoteResponse, GetNoteSuccess
+from src.graphql.definitions.responses.get_public_notes import GetPublicNotesResponse
 from src.graphql.definitions.responses.get_token import GetTokenResponse, Token
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
@@ -68,11 +69,15 @@ class Query:
     @strawberry.field(permission_classes=[IsAuthenticated])
     async def get_public_notes(
         self, info: Info, first: int = 10, after: Cursor | None = None
-    ) -> Connection[Note]:
+    ) -> GetPublicNotesResponse:
         session: AsyncSession = info.context['session']
+        t: Translator = info.context['translator']
 
         notes: list[NoteModel]
-        notes = await session.run_sync(get_public_notes, after, first + 1)
+        try:
+            notes = await session.run_sync(get_public_notes, after, first + 1)
+        except NoteNotFoundError:
+            return RequestValueError(t('notes.errors.note_not_found'))
 
         has_next_page = len(notes) == first + 1
         edges = [
