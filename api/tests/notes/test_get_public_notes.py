@@ -38,9 +38,8 @@ async def create_test_notes(
         )
         notes_data[i] = (note.id, title, privacy, owner)
 
-    await database_session.close()
-
-    return notes_data
+    # Reverse before notes are sorted from newest to old by default when fetching them
+    return notes_data[::-1]
 
 
 async def test_get_public_notes_default_args(
@@ -117,6 +116,31 @@ async def test_get_public_notes_after(
     assert pub_id_2 not in received_ids
 
 
+async def test_get_public_notes_after_from_oldest(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    create_test_notes: list[tuple[str, str, bool, User]],
+):
+    token, _ = token_user
+
+    (pub_id_1, _, _, _), (pub_id_2, _, _, _) = [
+        note for note in create_test_notes if note[2] == False
+    ][::-1][:2]
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={'after': pub_id_2, 'newestFirst': False},
+        token=token,
+    )
+    assert data is not None
+
+    edges = data['getPublicNotes']['edges']
+    received_ids = [edge['node']['id'] for edge in edges]
+    assert len(edges) == 5
+    assert pub_id_1 not in received_ids
+    assert pub_id_2 not in received_ids
+
+
 async def test_get_public_notes_length_after(
     graphql_client: GraphQLClient,
     token_user: tuple[str, User],
@@ -131,6 +155,35 @@ async def test_get_public_notes_length_after(
         variables={
             'first': 2,
             'after': public_ids[1],
+        },
+        token=token,
+    )
+    assert data is not None
+
+    edges = data['getPublicNotes']['edges']
+    received_ids = [edge['node']['id'] for edge in edges]
+    assert len(edges) == 2
+    assert public_ids[0] not in received_ids
+    assert public_ids[1] not in received_ids
+    assert public_ids[2] in received_ids
+    assert public_ids[3] in received_ids
+
+
+async def test_get_public_notes_length_after_from_oldest(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    create_test_notes: list[tuple[str, str, bool, User]],
+):
+    token, _ = token_user
+
+    public_ids = [note[0] for note in create_test_notes if note[2] == False][::-1]
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={
+            'first': 2,
+            'after': public_ids[1],
+            'newestFirst': False,
         },
         token=token,
     )
@@ -217,6 +270,37 @@ async def test_get_public_notes_end_cursor(
     assert received_ids == public_ids
 
 
+async def test_get_public_notes_end_cursor_from_oldest(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    create_test_notes: list[tuple[str, str, bool, User]],
+):
+    token, _ = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={'first': 3, 'after': None, 'newestFirst': False},
+        token=token,
+    )
+    assert data is not None
+    page_info = data['getPublicNotes']['pageInfo']
+    end_cursor = page_info['endCursor']
+    edges1 = data['getPublicNotes']['edges']
+    received_ids = [edge['node']['id'] for edge in edges1]
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={'first': 4, 'after': end_cursor, 'newestFirst': False},
+        token=token,
+    )
+    assert data is not None
+    edges2 = data['getPublicNotes']['edges']
+    received_ids += [edge['node']['id'] for edge in edges2]
+
+    public_ids = [note[0] for note in create_test_notes if note[2] == False][::-1]
+    assert received_ids == public_ids
+
+
 async def test_get_public_notes_start_cursor(
     graphql_client: GraphQLClient,
     token_user: tuple[str, User],
@@ -295,6 +379,32 @@ async def test_get_public_notes_after_last_note(
     assert len(edges) == 0
 
 
+async def test_get_public_notes_after_last_note_from_oldest(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    create_test_notes: list[tuple[str, str, bool, User]],
+):
+    token, _ = token_user
+
+    public_ids = [note[0] for note in create_test_notes if note[2] == False]
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={'after': public_ids[0], 'newestFirst': False},
+        token=token,
+    )
+    assert data is not None
+    page_info = data['getPublicNotes']['pageInfo']
+    edges = data['getPublicNotes']['edges']
+
+    assert page_info == {
+        'hasNextPage': False,
+        'startCursor': None,
+        'endCursor': None,
+    }
+    assert len(edges) == 0
+
+
 async def test_get_public_notes_requested_zero_elements_from_start(
     graphql_client: GraphQLClient,
     token_user: tuple[str, User],
@@ -302,9 +412,37 @@ async def test_get_public_notes_requested_zero_elements_from_start(
 ):
     token, _ = token_user
 
+    public_ids = [note[0] for note in create_test_notes if note[2] == False]
+
     data, _ = await graphql_client.get_request_data(
         query=GET_PUBLIC_NOTES_QUERY,
-        variables={'first': 0},
+        variables={'first': 0, 'after': public_ids[0]},
+        token=token,
+    )
+    assert data is not None
+    page_info = data['getPublicNotes']['pageInfo']
+    edges = data['getPublicNotes']['edges']
+
+    assert page_info == {
+        'hasNextPage': True,
+        'startCursor': None,
+        'endCursor': None,
+    }
+    assert len(edges) == 0
+
+
+async def test_get_public_notes_requested_zero_elements_from_start_from_oldest(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    create_test_notes: list[tuple[str, str, bool, User]],
+):
+    token, _ = token_user
+
+    public_ids = [note[0] for note in create_test_notes if note[2] == False]
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={'first': 0, 'after': public_ids[-1], 'newestFirst': False},
         token=token,
     )
     assert data is not None
@@ -357,6 +495,32 @@ async def test_get_public_notes_requested_zero_elements_from_last(
     data, _ = await graphql_client.get_request_data(
         query=GET_PUBLIC_NOTES_QUERY,
         variables={'first': 0, 'after': public_ids[-1]},
+        token=token,
+    )
+    assert data is not None
+    page_info = data['getPublicNotes']['pageInfo']
+    edges = data['getPublicNotes']['edges']
+
+    assert page_info == {
+        'hasNextPage': False,
+        'startCursor': None,
+        'endCursor': None,
+    }
+    assert len(edges) == 0
+
+
+async def test_get_public_notes_requested_zero_elements_from_last_from_oldest(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    create_test_notes: list[tuple[str, str, bool, User]],
+):
+    token, _ = token_user
+
+    public_ids = [note[0] for note in create_test_notes if note[2] == False]
+
+    data, _ = await graphql_client.get_request_data(
+        query=GET_PUBLIC_NOTES_QUERY,
+        variables={'first': 0, 'after': public_ids[0], 'newestFirst': False},
         token=token,
     )
     assert data is not None

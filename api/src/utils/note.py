@@ -103,9 +103,15 @@ def remove_note(session: Session, id: str, user: User) -> Note:
     return cast(Note, note)
 
 
-def get_public_notes(session: Session, from_id: str | None, amount: int) -> list[Note]:
+def get_public_notes(
+    session: Session, from_id: str | None, amount: int, newest_first: bool
+) -> list[Note]:
+    order_coef = -1 if newest_first else 1
+
     if from_id is None:
-        first_note: Note | None = session.query(Note).first()
+        first_note: Note | None = (
+            session.query(Note).order_by(order_coef * Note.row_id).first()
+        )
         if first_note is None:
             return []
         start_from_id = first_note.row_id
@@ -117,11 +123,19 @@ def get_public_notes(session: Session, from_id: str | None, amount: int) -> list
         )
         if start_from is None:
             raise NoteNotFoundError
-        start_from_id = start_from.row_id + 1
+        start_from_id = start_from.row_id + order_coef
+
+    print(start_from_id)
 
     notes = (
         session.query(Note)
-        .where(and_(Note.is_private == False, Note.row_id >= start_from_id))
+        .order_by(order_coef * Note.row_id)
+        .where(
+            and_(
+                Note.is_private == False,
+                order_coef * (Note.row_id - start_from_id) >= 0,
+            )
+        )
         .limit(amount)
         .all()
     )
