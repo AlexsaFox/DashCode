@@ -1,5 +1,6 @@
 from typing import cast
 
+from sqlalchemy import and_
 from sqlalchemy.orm.session import Session
 
 from src.db.models import Note, Tag, User
@@ -100,6 +101,25 @@ def remove_note(session: Session, id: str, user: User) -> Note:
 
     session.commit()
     return cast(Note, note)
+
+
+def get_public_notes(session: Session, from_id: str | None, amount: int) -> list[Note]:
+    if from_id is None:
+        start_from = session.query(Note).first()
+        if start_from is None:
+            return []
+    else:
+        start_from = session.query(Note).filter(Note.id == from_id).first()
+        if start_from is None:
+            raise NoteNotFoundError
+
+    notes = (
+        session.query(Note)
+        .filter(and_(Note.is_private == False, Note.row_id > start_from.row_id))
+        .limit(amount)
+        .all()
+    )
+    return notes
 
 
 class NoteNotFoundError(ExpectedError):
