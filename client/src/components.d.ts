@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     MyAccount: typeof import('./components/Settings/left_part/MyAccount/MyAccount.vue')['default']
     NavButtons: typeof import('./components/Home/NavButtons.vue')['default']
     Notes: typeof import('./components/UserProfile/Notes.vue')['default']
+    OneButtonBack: typeof import('./components/SocialMedia/OneButtonBack.vue')['default']
     PopupCheck: typeof import('./components/Note/PopupCheck.vue')['default']
     PopupCheckDel: typeof import('./components/Note/PopupCheckDel.vue')['default']
     ProfileBlock: typeof import('./components/UserProfile/ProfileBlock.vue')['default']
