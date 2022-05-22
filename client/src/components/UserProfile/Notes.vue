@@ -39,6 +39,32 @@
         </a>
       </button>
     </div>
+    <div class="main_body_for_note">
+      <button>
+        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
+          <div class="title_for_main_note"><span>note.title</span></div>
+          <div class="note">
+            <span>note.context</span>
+          </div>
+          <div class="link">
+            <span>note.link</span>
+          </div>
+        </a>
+      </button>
+    </div>
+    <div class="main_body_for_note">
+      <button>
+        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
+          <div class="title_for_main_note"><span>note.title</span></div>
+          <div class="note">
+            <span>note.context</span>
+          </div>
+          <div class="link">
+            <span>note.link</span>
+          </div>
+        </a>
+      </button>
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
