@@ -10,15 +10,17 @@ from src.auth.utils import (
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
 from src.graphql.definitions.errors.request_value_error import RequestValueError
-from src.graphql.definitions.note import Note
+from src.graphql.definitions.note import Note, User
 from src.graphql.definitions.pagination import Connection, Cursor, Page
 from src.graphql.definitions.responses.get_note import GetNoteResponse, GetNoteSuccess
 from src.graphql.definitions.responses.get_public_notes import GetPublicNotesResponse
 from src.graphql.definitions.responses.get_token import GetTokenResponse, Token
+from src.graphql.definitions.responses.get_user import GetUserResponse, GetUserSuccess
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.locale.dependencies import Translator
 from src.utils.note import NoteNotFoundError, NoteOwnerError, get_note, get_public_notes
+from src.utils.user import UserNotFoundError, get_user
 
 
 @strawberry.type
@@ -65,6 +67,18 @@ class Query:
             return RequestValueError(t('notes.errors.bad_note_owner'))
 
         return GetNoteSuccess(Note.from_instance(note))
+
+    @strawberry.field(permission_classes=[IsAuthenticated])
+    async def get_user(self, info: Info, username: str) -> GetUserResponse:
+        session: AsyncSession = info.context['session']
+        t: Translator = info.context['translator']
+
+        try:
+            user = await session.run_sync(get_user, username=username)
+        except UserNotFoundError:
+            return RequestValueError(t('users.errors.user_not_found'))
+
+        return GetUserSuccess(User.from_instance(user))
 
     @strawberry.field(permission_classes=[IsAuthenticated])
     async def get_public_notes(
