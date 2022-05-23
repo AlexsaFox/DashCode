@@ -6,11 +6,10 @@ import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const router = useRouter()
 
 const editUsernameField = ref(false)
 const usernameForm = reactive({
-  username: auth.user.user.username,
+  username: auth.user.username,
 })
 
 const rules = {
@@ -22,9 +21,13 @@ const rules = {
 const vuelidate = useVuelidate(rules, usernameForm)
 
 function onSubmit() {
-  checkFormErrors(vuelidate, () => { return auth.edit(undefined, usernameForm.username) }, () => {
-    router.go(0)
-  })
+  checkFormErrors(vuelidate,
+    () => { return auth.edit(undefined, usernameForm.username) },
+    () => {
+      usernameForm.username = auth.user.username
+      editUsernameField.value = false
+    },
+  )
 }
 </script>
 

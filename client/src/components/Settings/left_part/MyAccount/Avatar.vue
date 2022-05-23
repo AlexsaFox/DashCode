@@ -11,11 +11,9 @@ const settingsPage = useSettingsPageStore()
   <div class="stroke">
     <div class="profile">
       <div class="avatar_s">
-        <img
-          :src="auth.profilePicture"
-        >
+        <user-profile-picture />
       </div>
-      <h2>{{ auth.user.user.username }}</h2>
+      <h2>{{ auth.user.username }}</h2>
     </div>
     <button
       type="button"

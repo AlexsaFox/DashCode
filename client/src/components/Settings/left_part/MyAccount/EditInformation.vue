@@ -6,7 +6,6 @@ import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const router = useRouter()
 
 const enabledEmailField = ref(false)
 const showPasswordField = ref(false)
@@ -39,8 +38,12 @@ const vuelidate = useVuelidate(rules, formData)
 function onSubmit() {
   checkFormErrors(
     vuelidate,
-    () => { return auth.edit_auth(formData.currentPassword, formData.email, formData.newPassword) },
-    () => { router.go(0) },
+    () => { return auth.editAuth(formData.currentPassword, formData.email, formData.newPassword) },
+    () => {
+      formData.email = auth.user.email
+      enabledEmailField.value = false
+      showPasswordField.value = false
+    },
   )
 }
 
