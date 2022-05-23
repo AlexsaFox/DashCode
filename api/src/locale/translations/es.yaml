@@ -1,0 +1,31 @@
+es:
+  auth:
+    errors:
+      bad_credentials: No se puede encontrar al usuario con las credenciales proporcionadas
+      no_login: Debe proporcionar un nombre de usuario o dirección de correo electrónico
+      no_auth: Autorización requerida
+      require_password:
+        wrong_password: Contraseña incorrecta
+  notes:
+    errors:
+      note_not_found: Не удалось найти заметку с указанным идентификатором
+      bad_note_owner: No tienes permiso para ver la nota con la identificación dada
+
+  validation:
+    errors:
+      user:
+        username: >-
+         Nombre de usuario no válido. El nombre de usuario debe contener solo letras latinas, números,
+         guiones bajos, guiones, puntos y tener menos de 80 caracteres
+        email: >-
+          Email inválido. La dirección de correo electrónico debe ser válida y no puede exceder los 120 caracteres.
+        password: La contraseña debe contener al menos 8 caracteres
+        profile_color: "El color del perfil debe tener el formato #rrggbb"
+        upload_file:
+          too_large: El tamaño del archivo cargado no puede exceder los 16 MB.
+          bad_extension: Solo se permite la imagen
+          bad_mime_type: Formato de archivo descargable image/*
+      note: 
+        title: Título no válido. El título no puede estar vacío y debe tener menos de 65 caracteres.
+        content: Contenido no válido. El contenido no puede estar vacío.
+        link: URL invalida. El enlace debe ser válido

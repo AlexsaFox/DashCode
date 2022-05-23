@@ -8,12 +8,13 @@ from sqlalchemy import (
     Column,
     DateTime,
     ForeignKey,
+    Identity,
     Integer,
     String,
     Table,
     Text,
 )
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import Session, declarative_base, relationship
 
 from src.db.mixins import AppConfigurationMixin, ValidationMixin
 from src.db.utils import delete_file
@@ -22,6 +23,7 @@ from src.db.validation import (
     EMAIL_REGEXP,
     LINK_REGEXP,
     PASSWORD_REGEXP,
+    TAG_REGEXP,
     USERNAME_REGEXP,
 )
 
@@ -61,7 +63,7 @@ class User(Base, ValidationMixin, AppConfigurationMixin):
     notes: list['Note'] = relationship(
         'Note',
         backref='user',
-        lazy='select',
+        lazy='selectin',
         cascade="save-update, merge, delete, delete-orphan",
     )
 
@@ -107,20 +109,34 @@ class Note(Base, ValidationMixin):
         'content': lambda val: len(val) >= 1,
         'link': lambda val: LINK_REGEXP.fullmatch(val) is not None,
         'is_private': lambda val: type(val) == bool,
+        'tags': lambda tags: all(
+            TAG_REGEXP.fullmatch(tag.content) is not None for tag in tags
+        ),
     }
 
-    def __init__(self, title: str, content: str, link: str, is_private: bool = False):
-        self.validate_fields(title=title, link=link, content=content)
+    def __init__(
+        self,
+        title: str,
+        content: str,
+        tags: list['Tag'],
+        link: str,
+        is_private: bool = False,
+    ):
+        self.validate_fields(
+            title=title, link=link, content=content, is_private=is_private, tags=tags
+        )
         self.title = title
         self.content = content
         self.link = link
         self.is_private = is_private
+        self.tags = tags
 
     id: str = Column(
         String(12),
         primary_key=True,
         default=lambda: urlsafe_b64encode(token_bytes(9)).decode(),
     )
+    row_id: int = Column(Integer, Identity(start=0, minvalue=0, increment=1))
     title: str = Column(String(65), nullable=False)
     content: str = Column(Text(), nullable=False)
     link: str = Column(Text(), nullable=False)
@@ -136,14 +152,27 @@ class Note(Base, ValidationMixin):
     )
 
     tags: list['Tag'] = relationship(
-        'Tag', secondary=note_tag_association_table, backref='notes'
+        'Tag', secondary=note_tag_association_table, backref='notes', lazy="selectin"
     )
 
 
-class Tag(Base):
+class Tag(Base, ValidationMixin):
     __tablename__ = 'tags'
+
+    def __init__(self, content: str):
+        content = content.lower()
+        self.content = content
 
     id: int = Column(Integer, primary_key=True)
     content: str = Column(String(30), nullable=False)
 
     notes: list[Note]
+
+    @classmethod
+    def get_tag(cls, session: Session, content: str):
+        tag: Tag | None = (
+            session.query(Tag).filter(Tag.content == content.lower()).one_or_none()
+        )
+        if tag is not None:
+            return tag
+        return cls(content)

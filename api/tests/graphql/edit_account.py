@@ -4,10 +4,8 @@ mutation($newUsername: String, $newProfileColor: String) {
         __typename
         ... on EditAccountSuccess {
             account {
-                user {
-                    username
-                    profileColor
-                }
+                username
+                profileColor
             }
         }
         ... on ValidationError {

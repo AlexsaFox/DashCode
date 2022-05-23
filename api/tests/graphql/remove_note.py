@@ -1,17 +1,17 @@
-NOTE_GET_QUERY = '''
-query($id: String!) {
-    getNote(id: $id) {
-        ... on GetNoteSuccess {
+NOTE_REMOVE_QUERY = '''
+mutation($id: String!){
+    removeNote(id: $id){
+        __typename
+        ... on RemoveNoteSuccess {
             note {
                 id
                 title
                 content
                 link
                 isPrivate
-                tags
             }
         }
-        ... on RequestValueError {
+        ... on RequestValueError{
             details
         }
     }

@@ -11,5 +11,8 @@ async def test_english_localization(graphql_client: GraphQLClient, user: User):
 
 async def test_non_english_localization(graphql_client: GraphQLClient, user: User):
     await check_localization(
-        graphql_client, user, 'ru', 'Пользователь с указанными данными не был найден'
+        graphql_client,
+        user,
+        'ru',
+        'Не удалось найти пользователя с предоставленными учетными данными',
     )

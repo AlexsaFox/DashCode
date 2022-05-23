@@ -22,8 +22,8 @@ async def send_file(
             '{"query": "mutation ($newUsername: String, $newProfileColor: String,'
             ' $newProfilePicture: Upload) {editAccount(newUsername: $newUsername,'
             ' newProfileColor: $newProfileColor,newProfilePicture: $newProfilePicture)'
-            ' {__typename ... on EditAccountSuccess {account {email user {username'
-            ' profileColor profilePictureFilename}}}... on ValidationError {fields'
+            ' {__typename ... on EditAccountSuccess {account {email username'
+            ' profileColor profilePictureFilename}}... on ValidationError {fields'
             ' {field details}}... on RequestValueError{details}}}","variables": {'
             ' "newProfilePicture": 123 }}'
         ),
@@ -88,9 +88,7 @@ def check_good_response(
     assert data is not None
     assert errors is None
 
-    uploaded_file_name = data['editAccount']['account']['user'][
-        'profilePictureFilename'
-    ]
+    uploaded_file_name = data['editAccount']['account']['profilePictureFilename']
     assert file_exists(uploaded_file_name, config)
     assert files_are_same(temp_file, uploaded_file_name, config)
 
@@ -229,9 +227,7 @@ async def test_view_uploaded_file(
     token, _ = token_user
     data, _ = await send_file(client, temp_file.name, token)
     assert data is not None
-    uploaded_file_name = data['editAccount']['account']['user'][
-        'profilePictureFilename'
-    ]
+    uploaded_file_name = data['editAccount']['account']['profilePictureFilename']
 
     response = await client.get(f'/uploads/{uploaded_file_name}')
     assert response.status_code == 200

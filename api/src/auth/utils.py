@@ -79,6 +79,7 @@ def create_user(
     try:
         session.add(user)
         session.commit()
+        session.refresh(user)
     except IntegrityError as err:
         raise ObjectExistsError(err, 'user')
 

@@ -6,7 +6,10 @@ from tests.utils import GraphQLClient
 async def test_order(graphql_client: GraphQLClient, user: User):
     header = 'en-US;q=0.5, ru-RU;q=1'
     await check_localization(
-        graphql_client, user, header, 'Пользователь с указанными данными не был найден'
+        graphql_client,
+        user,
+        header,
+        'Не удалось найти пользователя с предоставленными учетными данными',
     )
 
 
@@ -20,14 +23,20 @@ async def test_wildcart(graphql_client: GraphQLClient, user: User):
 async def test_no_quality(graphql_client: GraphQLClient, user: User):
     header = 'ru-RU, en-US'
     await check_localization(
-        graphql_client, user, header, 'Пользователь с указанными данными не был найден'
+        graphql_client,
+        user,
+        header,
+        'Не удалось найти пользователя с предоставленными учетными данными',
     )
 
 
 async def test_non_existing_locale(graphql_client: GraphQLClient, user: User):
     header = 'xx-XX;q=1, ru;q=0.001'
     await check_localization(
-        graphql_client, user, header, 'Пользователь с указанными данными не был найден'
+        graphql_client,
+        user,
+        header,
+        'Не удалось найти пользователя с предоставленными учетными данными',
     )
 
 

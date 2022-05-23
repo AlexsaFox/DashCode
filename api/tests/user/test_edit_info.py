@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 
 from src.auth.utils import AuthenticationFailedError, authenticate_user
 from src.db.models import User
-from tests.auth.utils import check_auth
+from tests.auth.utils import check_auth_error
 from tests.graphql.edit_account import EDIT_ACCOUNT_QUERY
 from tests.utils import GraphQLClient
 from tests.validation.utils import check_validation_error
@@ -43,7 +43,7 @@ async def test_edit_username(
     )
     assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
-    assert data['editAccount']['account']['user']['username'] == new_username
+    assert data['editAccount']['account']['username'] == new_username
     assert await try_changes(database_engine, new_username)
 
 
@@ -106,7 +106,7 @@ async def test_edit_profile_color(
     )
     assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
-    assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
+    assert data['editAccount']['account']['profileColor'] == new_profile_color
     assert await try_changes(database_engine, user.username, new_profile_color)
 
 
@@ -145,8 +145,8 @@ async def test_edit_all(
     )
     assert data is not None
     assert data['editAccount']['__typename'] == 'EditAccountSuccess'
-    assert data['editAccount']['account']['user']['username'] == new_username
-    assert data['editAccount']['account']['user']['profileColor'] == new_profile_color
+    assert data['editAccount']['account']['username'] == new_username
+    assert data['editAccount']['account']['profileColor'] == new_profile_color
     assert await try_changes(database_engine, new_username, new_profile_color)
 
 
@@ -160,4 +160,4 @@ async def test_edit_no_auth(
         query=EDIT_ACCOUNT_QUERY,
         variables={'newUsername': new_username, 'newProfileColor': new_profile_color},
     )
-    check_auth(data, errors)
+    check_auth_error(data, errors)
