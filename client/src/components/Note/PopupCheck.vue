@@ -1,3 +1,6 @@
+<script setup lang="ts">
+const { t } = useI18n()
+</script>
 <template>
   <div id="popup_check" class="overlay">
     <div class="popup_check">
@@ -5,18 +8,18 @@
         <a class="close" href="#">&times;</a>
       </div>
       <div class="content">
-        <span>Do you want to save your changes?</span>
+        <span>{{ t("note-edit.warning-label") }}</span>
         <div class="buttons_for_check">
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" value="Unsave"></a>
+            <a href="#"><input type="button" :value="t('note-edit.unsave-button')"></a>
           </div>
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" value="Save"></a>
+            <a href="#"><input type="button" :value="t('note-edit.save-button')"></a>
           </div>
           <div class="each_button_for_popup_check">
             <a href="#popup_watch"><input
               type="button"
-              value="Cancel"
+              :value="t('note-edit.cancel-button')"
             ></a>
           </div>
         </div>
@@ -24,7 +27,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped lang="scss">
 .overlay {
     position: fixed;
     top: 0;
@@ -72,14 +75,19 @@
 }
 .popup_check .buttons_for_check input{
     font-size: 80%;
-    font-family:'ClearSans-Light';
+    font-family:'ClearSans-Regular';
     background-color: #86faf8;
     color:#223153;
     border-radius: 5px;
     border: none;
     margin: 5% 2% 0px;
     padding: 0px 15%;
+    cursor: pointer;
+    &:hover{
+      opacity: 0.8;
+    }
 }
+
 .popup_check .buttons_for_check{
     margin:5% 0px;
     padding-bottom: 2%;
@@ -87,6 +95,7 @@
 .each_button_for_popup_check{
     display: inline-block;
     width: 20%;
+
 }
 
 </style>

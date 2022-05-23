@@ -20,7 +20,7 @@ async def test_note_creation(
     token_user: tuple[str, User],
     database_engine: AsyncEngine,
 ):
-    token, _ = token_user
+    token, user = token_user
 
     data, _ = await graphql_client.get_request_data(
         query=NOTE_CREATE_QUERY,
@@ -43,10 +43,164 @@ async def test_note_creation(
                 "title": "blabla",
                 "content": "blablabla",
                 "isPrivate": True,
+                "tags": [],
+                "user": {
+                    "username": user.username,
+                },
             }
         }
     }
     assert await get_note_by_id(database_engine, note_id) is not None
+
+
+async def test_note_creation_with_empty_tags(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    database_engine: AsyncEngine,
+):
+    token, user = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_CREATE_QUERY,
+        variables={
+            "title": "blabla",
+            "content": "blablabla",
+            "link": "https://google.com",
+            "is_private": True,
+            "tags": [],
+        },
+        token=token,
+    )
+    assert data is not None
+
+    note_id = data['createNote']['note']['id']
+
+    assert data == {
+        "createNote": {
+            "note": {
+                "id": note_id,
+                "title": "blabla",
+                "content": "blablabla",
+                "isPrivate": True,
+                "tags": [],
+                "user": {
+                    "username": user.username,
+                },
+            }
+        }
+    }
+    assert await get_note_by_id(database_engine, note_id) is not None
+
+
+async def test_note_creation_with_tags(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    database_engine: AsyncEngine,
+):
+    token, user = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_CREATE_QUERY,
+        variables={
+            "title": "blabla",
+            "content": "blablabla",
+            "link": "https://google.com",
+            "is_private": True,
+            "tags": ["the", "next", "episode"],
+        },
+        token=token,
+    )
+    assert data is not None
+
+    note_id = data['createNote']['note']['id']
+
+    assert data == {
+        "createNote": {
+            "note": {
+                "id": note_id,
+                "title": "blabla",
+                "content": "blablabla",
+                "isPrivate": True,
+                "tags": ["the", "next", "episode"],
+                "user": {
+                    "username": user.username,
+                },
+            }
+        }
+    }
+    assert await get_note_by_id(database_engine, note_id) is not None
+
+
+async def test_note_creation_with_uppercase_tags(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+    database_engine: AsyncEngine,
+):
+    token, user = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_CREATE_QUERY,
+        variables={
+            "title": "blabla",
+            "content": "blablabla",
+            "link": "https://google.com",
+            "is_private": True,
+            "tags": ["I", "loVE", "CheESE"],
+        },
+        token=token,
+    )
+    assert data is not None
+
+    note_id = data['createNote']['note']['id']
+
+    assert data == {
+        "createNote": {
+            "note": {
+                "id": note_id,
+                "title": "blabla",
+                "content": "blablabla",
+                "isPrivate": True,
+                "tags": ["i", "love", "cheese"],
+                "user": {
+                    "username": user.username,
+                },
+            }
+        }
+    }
+    assert await get_note_by_id(database_engine, note_id) is not None
+
+
+async def test_note_creation_with_invalid_tags(
+    graphql_client: GraphQLClient,
+    token_user: tuple[str, User],
+):
+    token, user = token_user
+
+    data, _ = await graphql_client.get_request_data(
+        query=NOTE_CREATE_QUERY,
+        variables={
+            "title": "blabla",
+            "content": "blablabla",
+            "link": "https://google.com",
+            "is_private": True,
+            "tags": ["@", "_", "@"],
+        },
+        token=token,
+    )
+    assert data is not None
+    assert data == {
+        "createNote": {
+            "fields": [
+                {
+                    "field": "tags",
+                    "details": (
+                        "Tag must contain only lowercase alphanumeric characters or"
+                        " dashes and be shorter than 30 characters"
+                    ),
+                }
+            ]
+        }
+    }
 
 
 async def test_note_creation_invalid_title(

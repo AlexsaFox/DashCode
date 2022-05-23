@@ -34,19 +34,6 @@ sign-up:
     password-required: Password is required
     password-too-short: Your password must contain at least 8 characters
     passwords-do-not-match: Password and confirm password fields do not match
-labels:
-  username: Username
-  email: Email
-  password: Password
-  confirm-password: Confirm password
-errors:
-  user-exists: User with {field} "{value}" already exists
-  username-required: Username is required
-  email-required: Email is required
-  email-invalid: Enter valid email address
-  password-required: Password is required
-  password-too-short: Your password must contain at least 8 characters
-  passwords-do-not-match: Password and confirm password fields do not match
 index:
   title-1: "Unique knowledge repository."
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
@@ -69,33 +56,69 @@ settings:
   new-password-label: "NEW PASSWORD"
   confirm-password-label: "CONFIRM PASSWORD"
   current-password-label: "CURRENT PASSWORD"
-  button-edit-label: Edit
-  button-submit-color-label: Apply
-  button-edit-avatar-label: "Edit avatar"
-  button-change-password-label: "Change password"
-  button-submit-changes-label: "Submit"
-  user-profile-header: "User Profile"
-  user-profile-header-preview: "PREVIEW"
-  user-profile-header-change-profile-color: "CHANGE PROFILE COLOR"
+  button:
+    edit:
+      label: Edit
+      avatar-label: "Edit avatar"
+    submit:
+      color-label: Apply
+      changes-label: "Submit"
+    change-password-label: "Change password"
+    show-token-label: "Show token"
+    browse-image-label: "Browse"
+    copy-token-label: "Copy Token"
+  user-profile:
+    header:
+      label: "User Profile"
+      preview: "PREVIEW"
+      change-profile-color: "CHANGE PROFILE COLOR"
+      change-language: "CHANGE PROFILE LANGUAGE"
   profile:
     errors:
       username-required: Username can't be null
       profile-color-required: You need to specify profile color
       profile-color-bad-format: "Profile color must be in format of #rrggbb"
   change-color-label: This color will be used in your interface
+  change-language-label: This language will be used in your interface
   username-label: "USERNAME"
   api-token-header: "API Token"
   token-label: "TOKEN"
-  button-copy-token-label: "Copy Token"
   expiration-datetime-label: "EXPIRATION DATETIME:"
-  button-generate-new-token-label: "Generate new token"
   upload-profile-image-label: "Upload profile image:"
-  button-browse-image-label: "Browse"
+  account_removal:
+    header: "ACCOUNT REMOVAL"
+    text: "Disabling your account means you can recover it at any time after
+          this action."
+    button-label: "Delete Account" 
+    warning:
+      text: "Are you sure you want to delete your account?"
+      header: "Warning!"
+      button-label: "Yes"
+  languages:
+    english-label: "English"
+    french-label: "French"
+    german-label: "German"
+    spanish-label: "Spanish"
+    russian-label: "Russian"
+  
 note-show:
   edit-button: "Edit"
+  delete-button: "Delete"
   author-of-note: "User"
   date-of-creation-label: "Was created"
-note_edit:
+  warning-label: "Do you want to delete this note?"
+  yes-button: "Yes"
+  no-button: "No"
+note-edit:
   save-button: "Save"
+  warning-label: "Do you want to save your changes?"
+  unsave-button: "Do not save"
+  cancel-button: "Cancel"
 note_create:
   create-button: "Create"
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Back to profile"
+    button-back-to-social-media: "Back to social media"
+  profile-block:
+    amount_of_notes-label: "public notes"

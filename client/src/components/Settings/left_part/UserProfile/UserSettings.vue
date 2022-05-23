@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import useAuthStore from '~/store/useAuth'
-
-const auth = useAuthStore()
 const showEditAvatarPopup = ref(false)
 </script>
 
@@ -12,7 +9,7 @@ const showEditAvatarPopup = ref(false)
       <div class="profile">
         <button @click="showEditAvatarPopup = !showEditAvatarPopup">
           <div class="avatar_s">
-            <img :src="auth.profilePicture">
+            <user-profile-picture />
           </div>
         </button>
         <EditAvatarPopup v-if="showEditAvatarPopup" @close-popup="showEditAvatarPopup = false" />
@@ -86,7 +83,7 @@ const showEditAvatarPopup = ref(false)
   border-radius: 15px;
   background-color: #303d67;
   padding-bottom: 2%;
-  margin-right: 40%;
+  width: 50%;
 
   .profile_color {
     background-color: #9e6dee;

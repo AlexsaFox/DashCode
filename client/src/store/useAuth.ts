@@ -7,7 +7,7 @@ import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
 import { EDIT_USER_AUTH_MUTATION, EDIT_USER_MUTATION, REGISTER_USER_MUTATION } from '~/graphql/mutations'
 import { i18n } from '~/modules/i18n'
 
-export default defineStore('auth', {
+const useAuthStore = defineStore('auth', {
   state: () => ({
     loggedIn: localStorage.getItem('loggedIn') ?? false,
     user: (user => user ? JSON.parse(user) : null)(localStorage.getItem('user')),
@@ -15,12 +15,8 @@ export default defineStore('auth', {
 
   getters: {
     profilePicture(state) {
-      const filename = state.user.user.profilePictureFilename
-      if (filename !== null)
-        return `${config.api_host}/uploads/${filename}`
-
-      else
-        return '/src/assets/img/205d9582975737a8b02fb1e5bbc02fd5.jpg'
+      const filename = state.user.profilePictureFilename
+      return filename === null ? null : `${config.api_host}/uploads/${filename}`
     },
   },
 
@@ -122,16 +118,16 @@ export default defineStore('auth', {
     },
 
     async fetchUser() {
-      await apolloClient.query({
+      const { data } = await apolloClient.query({
         query: WHOAMI_QUERY,
-      }).then(({ data }) => {
-        this.$patch({
-          loggedIn: true,
-          user: data.whoami,
-        })
-        localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn))
-        localStorage.setItem('user', JSON.stringify(this.user))
       })
+
+      this.$state = {
+        loggedIn: true,
+        user: data.whoami,
+      }
+      localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn))
+      localStorage.setItem('user', JSON.stringify(this.user))
     },
 
     async logout() {
@@ -140,3 +136,5 @@ export default defineStore('auth', {
     },
   },
 })
+
+export default useAuthStore

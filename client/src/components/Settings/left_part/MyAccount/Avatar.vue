@@ -11,11 +11,9 @@ const settingsPage = useSettingsPageStore()
   <div class="stroke">
     <div class="profile">
       <div class="avatar_s">
-        <img
-          :src="auth.profilePicture"
-        >
+        <user-profile-picture />
       </div>
-      <h2>{{ auth.user.user.username }}</h2>
+      <h2>{{ auth.user.username }}</h2>
     </div>
     <button
       type="button"
@@ -41,6 +39,11 @@ const settingsPage = useSettingsPageStore()
     justify-content: flex-start;
     gap: 10%;
     width: 30%;
+
+    h2{
+      font-family: 'ClearSans-Regular';
+      font-size: 24px;
+    }
   }
   .stroke.username {
     display: flex;

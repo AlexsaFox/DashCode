@@ -21,19 +21,19 @@ sign-up:
   submit-button: "Войти"
   have-account: "Уже есть логин?"
   have-account-link: "Вход"
-labels:
-  username: Идентификатор пользователя
-  email: Адрес электронной почты
-  password: Пароль
-  confirm-password: Подтвердить пароль
-errors:
-  user-exists: Пользователь с {field} "{value}" уже есть
-  username-required: Требуется идентификатор
-  email-required: Требуется адрес электронной почты
-  email-invalid: Адрес электронной почты некорректен, введите корректный адрес
-  password-required: Требуется пароль
-  passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
-
+  labels:
+    username: Идентификатор пользователя
+    email: Адрес электронной почты
+    password: Пароль
+    confirm-password: Подтвердить пароль
+  errors:
+    user-exists: Пользователь с {field} "{value}" уже есть
+    username-required: Требуется идентификатор
+    email-required: Требуется адрес электронной почты
+    email-invalid: Адрес электронной почты некорректен, введите корректный адрес
+    password-too-short: Your password must contain at least 8 character !!!!!!!
+    password-required: Требуется пароль
+    passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
 index:
   title-1: "Уникальное хранилище данных"
   text-1: "Это больше чем просто блокнот или социальная сеть. Записывайте и сохраняйте то, что вам нужно и делитесь этим с другими пользователями"
@@ -56,28 +56,68 @@ settings:
   new-password-label: "НОВЫЙ ПАРОЛЬ"
   confirm-password-label: "ПОДТВЕРДИТЕ ПАРОЛЬ"
   current-password-label: "ТЕКУЩИЙ ПАРОЛЬ"
-  button-edit-label: Изменить
-  button-submit-color-label: Применить
-  button-edit-avatar-label: "Изменить аватар"
-  button-change-password-label: "Изменить пароль"
-  button-submit-changes-label: "Изменить"
-  user-profile-header: "Профиль пользователя"
-  user-profile-header-preview: "Предпросмотр"
-  user-profile-header-change-profile-color: "Изменить цвет профиля"
+  button:
+    edit:
+      avatar-label: "Изменить аватар"
+      label: Изменить
+    submit:
+      color-label: Применить
+      changes-label: "Изменить"
+    change-password-label: "Изменить пароль"
+    show-token-label: "Show token !!!!!!!!!!"
+    browse-image-label: "Browse"
+    copy-token-label: "Copy Token"
+  user-profile:
+    header:
+      label: "Профиль пользователя"
+      preview: "Предпросмотр"
+      change-profile-color: "Изменить цвет профиля"
+      change-language: "CHANGE PROFILE LANGUAGE!!!!!!!!!"
+  profile:
+    errors:
+      username-required: Username can't be null!!!!!!!!!!!
+      profile-color-required: You need to specify profile color
+      profile-color-bad-format: "Profile color must be in format of #rrggbb"
   change-color-label: Этот цвет будет исползован в интерфейсе
+  change-language-label: This language will be used in your interface!!!!!!
   username-label: "ИМЯ ПОЛЬЗОВАТЕЛЯ"
   api-token-header: "API токен"
   token-label: "ТОКЕН"
-  button-copy-token-label: "Скопировать токен"
   expiration-datetime-label: "ДАТА ИСТЕЧЕНИЯ:"
-  button-generate-new-token-label: "Создать новый токен"
   upload-profile-image-label: "Загрузить изображение профиля:"
-  button-browse-image-label: "Поиск"
+  account_removal:
+    header: "УДАЛЕНИЕ АККАУНТА"
+    text: «Отключение вашей учетной записи означает, что вы можете восстановить ее в любое время после
+           это действие».
+    button-label: "Удалить" 
+    warning:
+      text: «Вы уверены, что хотите удалить свой аккаунт?»
+      header: "Предупреждение!"
+      button-label: "Да"
+  languages:
+    english-label: "English!!!!!!!!!!"
+    french-label: "French"
+    german-label: "German"
+    spanish-label: "Spanish"
+    russian-label: "Russian"
 note-show:
-  edit-button: "Изменить"
+  edit-button: "Править"
+  delete-button: "Удалить"
   author-of-note: "Пользователь"
-  date-of-creation-label: "Был создан"
-note_edit:
+  date-of-creation-label: "Уже создан"
+  warning-label: "Хотите удалить заметку?"
+  yes-button: "Да"
+  no-button: "Нет"
+note-edit:
   save-button: "Сохранить"
+  warning-label: "Хотите сохранить изменения?"
+  unsave-button: "Не сохранять"
+  cancel-button: "Отменить"
 note_create:
   create-button: "Создать"
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Назад к профилю"
+    button-back-to-social-media: "Назад к социальным сетям"
+  profile-block:
+    amount_of_notes-label: "публичные заметки"

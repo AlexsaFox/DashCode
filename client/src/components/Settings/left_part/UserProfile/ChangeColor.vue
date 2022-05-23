@@ -6,48 +6,62 @@ import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const router = useRouter()
 
 const colorForm = reactive({
-  color: auth.user.user.profileColor,
+  color: auth.user.profileColor,
 })
 
 const rules = {
   color: {
     required: helpers.withMessage(t('settings.profile.errors.profile-color-required'), required),
-    regexp: helpers.withMessage(t('settings.profile.errors.profile-color-bad-format'), helpers.regex(/^\#[0-9a-fA-F]{6}$/)),
+    regexp: helpers.withMessage(
+      t('settings.profile.errors.profile-color-bad-format'),
+      helpers.regex(/^\#[0-9a-fA-F]{6}$/),
+    ),
   },
 }
 
 const vuelidate = useVuelidate(rules, colorForm)
 
 function onSubmit() {
-  checkFormErrors(vuelidate, () => { return auth.edit(colorForm.color, undefined) }, () => {
-    router.go(0)
-  })
+  checkFormErrors(
+    vuelidate,
+    () => { return auth.edit(colorForm.color, undefined) },
+    () => { colorForm.color = auth.user.profileColor },
+  )
 }
 </script>
 
 <template>
-  <div class="first_block profile_color">
+  <div class="profile_color">
+    <h3>{{ t('settings.user-profile.header.change-profile-color') }}</h3>
     <h4>{{ t("settings.change-color-label") }}</h4>
     <div class="bottom_line">
       <input v-model="colorForm.color" type="color" class="change_profile_color">
       <button class="edit" @click="onSubmit">
-        {{ t("settings.button-submit-color-label") }}
+        {{ t("settings.button.submit.color-label") }}
       </button>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.first_block.profile_color {
+.profile_color {
+  width: 50%;
+  h3 {
+    font-family: "ClearSans-Medium";
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 100;
+    margin-bottom: 2%;
+    font-size: 20px;
+  }
+
   .bottom_line {
     display: flex;
     justify-content: flex-start;
     gap: 5%;
     align-items: center;
-    width: 50%;
+    width: 100%;
     margin-top: 3%;
 
     .input {
@@ -70,7 +84,7 @@ function onSubmit() {
       color: white;
       font-family: 'ClearSans-Light';
       font-size: 20px;
-      width: 16%;
+      width: 20%;
     }
 
     .change_profile_color {

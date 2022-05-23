@@ -21,6 +21,7 @@ async def test_note_receiving(
                 "content": note.content,
                 "link": note.link,
                 "isPrivate": note.is_private,
+                "tags": [tag.content for tag in note.tags],
             }
         }
     }

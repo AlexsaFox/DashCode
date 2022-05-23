@@ -4,17 +4,20 @@ const { t } = useI18n()
 
 <template>
   <div id="UserProfile" class="tabcontent">
-    <h1>{{ t('settings.user-profile-header') }}</h1>
+    <h1>{{ t('settings.user-profile.header.label') }}</h1>
     <hr>
     <div class="user_stroke">
+      <h3>{{ t('settings.user-profile.header.preview') }}</h3>
       <div class="first_block">
-        <h3>{{ t('settings.user-profile-header-preview') }}</h3>
         <UserSettings />
       </div>
     </div>
     <hr>
-    <h3>{{ t('settings.user-profile-header-change-profile-color') }}</h3>
-    <ChangeColor />
+
+    <div class="bottom_line">
+      <ChangeColor />
+      <ChangeLanguage />
+    </div>
   </div>
 </template>
 
@@ -24,22 +27,35 @@ const { t } = useI18n()
   color: white;
   margin: 0%;
 }
+
 .tabcontent {
   // display: none;
   background-color: #223153;
   border-radius: 15px;
   padding: 3%;
+
   h1 {
     font-family: "ClearSans-Bold";
     margin: 0%;
     font-size: 28px;
     margin-bottom: 2%;
   }
+
   h3 {
     font-family: "ClearSans-Medium";
     color: rgba(255, 255, 255, 0.6);
     font-weight: 100;
     margin-bottom: 2%;
+    font-size: 20px;
+  }
+
+  .first_block {
+    display: flex;
+    justify-content: center;
+  }
+
+  .bottom_line {
+    display: flex;
   }
 
 }
@@ -59,5 +75,4 @@ const { t } = useI18n()
   height: 150px;
   width: 1px;
 }
-
 </style>

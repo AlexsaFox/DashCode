@@ -28,7 +28,7 @@ const { t } = useI18n()
         <textarea class="textarea_for_link" placeholder="https://" cols="90" rows="1">note.link</textarea>
 
         <!-- {% with id=request.environ['note_id'] %} -->
-        <input type="submit" class="save" :value="t('note_edit.save-button')">
+        <input type="submit" class="save" :value="t('note-edit.save-button')">
 
         <!-- {% endwith %} -->
       </div>

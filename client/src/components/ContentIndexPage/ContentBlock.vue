@@ -12,7 +12,7 @@ const { t } = useI18n()
         </p>
       </div>
       <div class="picture">
-        <img src="../../assets/img/8289.webp" alt="image">
+        <img src="../../assets/img/landing-img-1.webp" alt="image">
       </div>
     </div>
     <div class="material">
@@ -23,7 +23,7 @@ const { t } = useI18n()
         </p>
       </div>
       <div class="picture">
-        <img src="../../assets/img/OEVLX40.webp" alt="image">
+        <img src="../../assets/img/landing-img-2.webp" alt="image">
       </div>
     </div>
     <div class="material">
@@ -32,7 +32,7 @@ const { t } = useI18n()
         <p>{{ t("index.text-3") }}</p>
       </div>
       <div class="picture">
-        <img src="../../assets/img/2362840.webp" alt="image">
+        <img src="../../assets/img/landing-img-3.webp" alt="image">
       </div>
     </div>
   </div>

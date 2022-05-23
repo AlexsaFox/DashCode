@@ -6,7 +6,6 @@ import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const router = useRouter()
 
 const enabledEmailField = ref(false)
 const showPasswordField = ref(false)
@@ -39,8 +38,12 @@ const vuelidate = useVuelidate(rules, formData)
 function onSubmit() {
   checkFormErrors(
     vuelidate,
-    () => { return auth.edit_auth(formData.currentPassword, formData.email, formData.newPassword) },
-    () => { router.go(0) },
+    () => { return auth.editAuth(formData.currentPassword, formData.email, formData.newPassword) },
+    () => {
+      formData.email = auth.user.email
+      enabledEmailField.value = false
+      showPasswordField.value = false
+    },
   )
 }
 
@@ -57,7 +60,7 @@ function onSubmit() {
         >
       </div>
       <button v-if="!enabledEmailField" type="button" class="edit" @click="enabledEmailField = true">
-        {{ t("settings.button-edit-label") }}
+        {{ t("settings.button.edit.label") }}
       </button>
     </div>
     <div v-if="showPasswordField">
@@ -87,11 +90,11 @@ function onSubmit() {
       v-if="!showPasswordField" id="button_change_password" type="button" class="change_password"
       @click="showPasswordField = true"
     >
-      {{ t("settings.button-change-password-label") }}
+      {{ t("settings.button.change-password-label") }}
     </button>
 
     <button v-if="showPasswordField || enabledEmailField" id="edit_account_settings" class="edit account" @click="onSubmit()">
-      {{ t("settings.button-submit-changes-label") }}
+      {{ t("settings.button.submit.changes-label") }}
     </button>
   </div>
 </template>
@@ -106,12 +109,13 @@ function onSubmit() {
   .stroke {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 1% 0%;
 
     .left {
       h2 {
         font-family: "ClearSans-Medium";
-        font-size: 15px;
+        font-size: 18px;
         color: rgba(255, 255, 255, 0.6);
         margin: 0%;
         font-weight: 500;
@@ -146,17 +150,19 @@ function onSubmit() {
     border: 0px;
     color: white;
     font-family: "ClearSans-Light";
-    font-size: 18px;
+    font-size: 20px;
     border: 2px #303d67;
     margin-top: 2%;
     width: auto;
+    padding: 1% 2%;
+    border-radius: 5px;
 
     &:disabled {
       background-color: #465586;
       border: 0px;
       color: white;
       font-family: "ClearSans-Light";
-      font-size: 18px;
+
     }
 
     &:focus {
@@ -164,7 +170,7 @@ function onSubmit() {
       border: 0px;
       color: white;
       font-family: "ClearSans-Light";
-      font-size: 18px;
+
       outline: 2px solid rgba(39, 55, 91);
     }
 

@@ -18,13 +18,11 @@ query($username: String, $email: String, $password: String!) {
 export const WHOAMI_QUERY = gql`
 query {
   whoami {
-      user {
-          username
-          isSuperuser
-          profileColor
-          profilePictureFilename
-      }
+      username
       email
+      isSuperuser
+      profileColor
+      profilePictureFilename
   }
 }
 `
