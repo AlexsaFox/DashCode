@@ -38,6 +38,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     SideButton: typeof import('./components/Settings/right_part/SideButton.vue')['default']
     UserProfile: typeof import('./components/Settings/left_part/UserProfile/UserProfile.vue')['default']
+    UserProfilePicture: typeof import('./components/User/UserProfilePicture.vue')['default']
     UserSettings: typeof import('./components/Settings/left_part/UserProfile/UserSettings.vue')['default']
   }
 }

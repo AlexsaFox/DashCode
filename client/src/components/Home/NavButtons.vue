@@ -11,8 +11,8 @@ const showNotesMenu = ref(false)
   <div class="block">
     <section class="user-menu">
       <header class="user-data" @click="showUserMenu = !showUserMenu">
-        <img :src="auth.profilePicture" class="avatar" alt="Avatar">
-        <h3>{{ auth.user.user.username }}</h3>
+        <user-profile-picture class="avatar" alt="Avatar" />
+        <h3>{{ auth.user.username }}</h3>
       </header>
       <nav v-if="showUserMenu">
         <router-link to="/settings">

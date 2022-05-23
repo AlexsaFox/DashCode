@@ -6,25 +6,29 @@ import checkFormErrors from '~/utils/checkFormErrors'
 
 const { t } = useI18n()
 const auth = useAuthStore()
-const router = useRouter()
 
 const colorForm = reactive({
-  color: auth.user.user.profileColor,
+  color: auth.user.profileColor,
 })
 
 const rules = {
   color: {
     required: helpers.withMessage(t('settings.profile.errors.profile-color-required'), required),
-    regexp: helpers.withMessage(t('settings.profile.errors.profile-color-bad-format'), helpers.regex(/^\#[0-9a-fA-F]{6}$/)),
+    regexp: helpers.withMessage(
+      t('settings.profile.errors.profile-color-bad-format'),
+      helpers.regex(/^\#[0-9a-fA-F]{6}$/),
+    ),
   },
 }
 
 const vuelidate = useVuelidate(rules, colorForm)
 
 function onSubmit() {
-  checkFormErrors(vuelidate, () => { return auth.edit(colorForm.color, undefined) }, () => {
-    router.go(0)
-  })
+  checkFormErrors(
+    vuelidate,
+    () => { return auth.edit(colorForm.color, undefined) },
+    () => { colorForm.color = auth.user.profileColor },
+  )
 }
 </script>
 
