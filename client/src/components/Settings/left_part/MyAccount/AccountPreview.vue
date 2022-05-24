@@ -14,7 +14,7 @@
   margin: 0% 5%;
   margin-right: 10%;
   .profile_color {
-    background-color: #9e6dee;
+    background-color: var(--user-color);
     height: 90px;
     border-radius: 15px 15px 0px 0px;
   }

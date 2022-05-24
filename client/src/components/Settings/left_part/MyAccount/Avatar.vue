@@ -53,12 +53,12 @@ const settingsPage = useSettingsPageStore()
     margin: 3% 2% 3% 4%;
   }
   .edit_profile {
-    background-color: #9e6dee;
+    background-color: var(--user-color);
     width: 50%;
     height: 35px;
     border: 0px;
     border-radius: 5px;
-    color: #223153;
+    color: var(--user-contrasting-color);
     font-family: "ClearSans-Light";
     font-size: 18px;
     transition: 0.5s;

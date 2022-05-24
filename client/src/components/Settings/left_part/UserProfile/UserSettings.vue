@@ -43,12 +43,12 @@ const showEditAvatarPopup = ref(false)
 }
 
 .edit_profile {
-  background-color: #9e6dee;
+  background-color: var(--user-color);
   width: 50%;
   height: 35px;
   border: 0px;
   border-radius: 5px;
-  color: #223153;
+  color: var(--user-contrasting-color);
   font-family: "ClearSans-Light";
   font-size: 18px;
   transition: 0.5s;
@@ -86,7 +86,7 @@ const showEditAvatarPopup = ref(false)
   width: 50%;
 
   .profile_color {
-    background-color: #9e6dee;
+    background-color: var(--user-color);
     height: 90px;
     border-radius: 15px 15px 0px 0px;
   }
