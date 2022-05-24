@@ -73,6 +73,7 @@ settings:
       changes-label: "Submit"
     change-password-label: "Change password"
     show-token-label: "Show token"
+    hide-token-label: Hide token
     browse-image-label: "Browse"
     copy-token-label: "Copy Token"
   user-profile:
@@ -91,6 +92,9 @@ settings:
   username-label: "USERNAME"
   api-token-header: "API Token"
   token-label: "TOKEN"
+  token:
+    token-hidden: "[hidden]"
+    copied: Copied to clipboard!
   expiration-datetime-label: "EXPIRATION DATETIME:"
   upload-profile-image-label: "Upload profile image:"
   account_removal:
