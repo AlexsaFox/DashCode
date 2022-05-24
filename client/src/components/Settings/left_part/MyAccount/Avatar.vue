@@ -37,7 +37,6 @@ const settingsPage = useSettingsPageStore()
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10%;
     width: 30%;
 
     h2{
@@ -67,29 +66,18 @@ const settingsPage = useSettingsPageStore()
     cursor: pointer;
     opacity: 0.8;
   }
-  .stroke_s {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8%;
-    width: auto;
-    margin: -3% 0% 2% 4%;
-  }
   .avatar_s {
-    position: relative;
     overflow: hidden;
-    width: 5vw;
-    height: 10vh;
-    display: inline-block;
+    height: 120px;
+    width: 120px;
+    min-width: 120px;
+    border-radius: 100%;
+
+    border: 10px solid #303d67;
+
     img {
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 5vw;
-      height: 10vh;
-      display: inline-block;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
     }
   }

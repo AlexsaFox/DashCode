@@ -164,6 +164,7 @@ function onSubmit() {
         }
 
         &:-webkit-autofill {
+          box-shadow: inset 0 0 0 50px #223153;
           -webkit-box-shadow: inset 0 0 0 50px #223153;
           /* цвет вашего фона */
           -webkit-text-fill-color: white;
