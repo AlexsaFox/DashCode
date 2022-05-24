@@ -3,7 +3,7 @@ import useSettingsPageStore from '~/store/useSettingsPage'
 import Pages from '~/constants/types/pages'
 
 const settingsPage = useSettingsPageStore()
-
+settingsPage.changePage(Pages.MyAccountPage)
 </script>
 
 <template>
