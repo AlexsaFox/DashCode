@@ -121,11 +121,26 @@ async def another_user(database_session: AsyncSession) -> User:
 async def note(database_session: AsyncSession, user: User) -> Note:
     title = "kek for test_note_1"
     content = 'KEEEEEEEEEK'
+    tags = ['pytest', 'fixture', 'testing']
     link = 'https://kek.net'
     is_private = False
     test_user = user
     note = await database_session.run_sync(
-        create_note, title, content, link, is_private, test_user
+        create_note, title, content, tags, link, is_private, test_user
+    )
+    return note
+
+
+@pytest.fixture
+async def private_note(database_session: AsyncSession, user: User) -> Note:
+    title = "It 3 am in the morning..."
+    content = '... put my key in the door and bodies ar laying all over the floor and'
+    tags = ['pytest', 'fixture', 'testing']
+    link = 'https://eminem.com'
+    is_private = True
+    test_user = user
+    note = await database_session.run_sync(
+        create_note, title, content, tags, link, is_private, test_user
     )
     return note
 

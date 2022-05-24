@@ -29,6 +29,7 @@ const errors = useErrorsStore()
 }
 section {
   position: fixed;
+  z-index: 9999999;
 
   ul {
     padding: 0 10px;

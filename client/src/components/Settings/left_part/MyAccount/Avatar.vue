@@ -11,11 +11,9 @@ const settingsPage = useSettingsPageStore()
   <div class="stroke">
     <div class="profile">
       <div class="avatar_s">
-        <img
-          :src="auth.profilePicture"
-        >
+        <user-profile-picture />
       </div>
-      <h2>{{ auth.user.user.username }}</h2>
+      <h2>{{ auth.user.username }}</h2>
     </div>
     <button
       type="button"
@@ -39,7 +37,6 @@ const settingsPage = useSettingsPageStore()
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10%;
     width: 30%;
 
     h2{
@@ -55,12 +52,12 @@ const settingsPage = useSettingsPageStore()
     margin: 3% 2% 3% 4%;
   }
   .edit_profile {
-    background-color: #9e6dee;
+    background-color: var(--user-color);
     width: 50%;
     height: 35px;
     border: 0px;
     border-radius: 5px;
-    color: #223153;
+    color: var(--user-contrasting-color);
     font-family: "ClearSans-Light";
     font-size: 18px;
     transition: 0.5s;
@@ -69,29 +66,18 @@ const settingsPage = useSettingsPageStore()
     cursor: pointer;
     opacity: 0.8;
   }
-  .stroke_s {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8%;
-    width: auto;
-    margin: -3% 0% 2% 4%;
-  }
   .avatar_s {
-    position: relative;
     overflow: hidden;
-    width: 5vw;
-    height: 10vh;
-    display: inline-block;
+    height: 120px;
+    width: 120px;
+    min-width: 120px;
+    border-radius: 100%;
+
+    border: 10px solid #303d67;
+
     img {
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 5vw;
-      height: 10vh;
-      display: inline-block;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
     }
   }

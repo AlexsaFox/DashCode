@@ -7,9 +7,7 @@ mutation($password: String!) {
         }
         ... on DeleteUserSuccess {
             account {
-                user {
-                    username
-                }
+                username
             }
         }
     }

@@ -41,6 +41,14 @@ index:
   text-2: "Organize yours notes or go through public ones. With them you can solve your problems as fast as possible."
   title-3: "Never ask internet “How can I solve this problem?” again."
   text-3: "In DashCode, your information and solutions are at hand!"
+
+  home:
+    side-buttons:
+      settings: Settings
+      log-out: Log out
+      add-notes: Add notes
+      explore: Explore
+      my-notes: My notes
 settings:
   account:
     header: "My Account"
@@ -65,6 +73,7 @@ settings:
       changes-label: "Submit"
     change-password-label: "Change password"
     show-token-label: "Show token"
+    hide-token-label: Hide token
     browse-image-label: "Browse"
     copy-token-label: "Copy Token"
   user-profile:
@@ -83,6 +92,9 @@ settings:
   username-label: "USERNAME"
   api-token-header: "API Token"
   token-label: "TOKEN"
+  token:
+    token-hidden: "[hidden]"
+    copied: Copied to clipboard!
   expiration-datetime-label: "EXPIRATION DATETIME:"
   upload-profile-image-label: "Upload profile image:"
   account_removal:

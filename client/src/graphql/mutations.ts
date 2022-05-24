@@ -11,12 +11,10 @@ mutation($username: String!, $email: String!, $password: String!) {
       }
       ... on RegisterUserSuccess {
           account {
-            user {
-              username
-              profileColor
-              isSuperuser
-              profilePictureFilename
-            }
+            username
+            profileColor
+            isSuperuser
+            profilePictureFilename
             email
           }
       }
@@ -37,12 +35,10 @@ mutation($password: String!, $newPassword: String, $newEmail: String) {
       __typename
       ... on EditAccountSuccess {
           account {
-              user {
-                username
-                profileColor
-                isSuperuser
-                profilePictureFilename
-              }
+              username
+              profileColor
+              isSuperuser
+              profilePictureFilename
               email
           }
       }
@@ -69,11 +65,9 @@ mutation($newUsername: String, $newProfileColor: String, $newProfilePicture: Upl
       __typename
       ... on EditAccountSuccess {
           account {
-              user {
-                  username
-                  profileColor
-                  profilePictureFilename
-              }
+              username
+              profileColor
+              profilePictureFilename
           }
       }
       ... on UserAlreadyExists {
@@ -92,3 +86,18 @@ mutation($newUsername: String, $newProfileColor: String, $newProfilePicture: Upl
   }
 }
 `
+
+export const DELETE_USER_MUTATION = gql`
+mutation($password: String!) {
+  deleteUser(password: $password) {
+      __typename
+      ... on RequestValueError {
+          details
+      }
+      ... on DeleteUserSuccess {
+          account {
+              username
+          }
+      }
+  }
+}`

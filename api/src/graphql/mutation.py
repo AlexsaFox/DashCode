@@ -40,11 +40,21 @@ from src.graphql.definitions.responses.register_user import (
     RegisterUserSuccess,
     UserAlreadyExists,
 )
+from src.graphql.definitions.responses.remove_note import (
+    RemoveNoteResponse,
+    RemoveNoteSuccess,
+)
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
 from src.graphql.permissions.require_password import requires_password
 from src.locale.dependencies import Translator
-from src.utils.note import NoteNotFoundError, NoteOwnerError, create_note, edit_note
+from src.utils.note import (
+    NoteNotFoundError,
+    NoteOwnerError,
+    create_note,
+    edit_note,
+    remove_note,
+)
 
 
 @strawberry.type
@@ -149,15 +159,19 @@ class Mutation:
         info: Info,
         title: str,
         content: str,
+        tags: list[str] | None = None,
         link: str = "",
         is_private: bool = True,
     ) -> CreateNoteResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
         t: Translator = info.context['translator']
+
+        tags = tags if tags is not None else []
+
         try:
             note: NoteModel = await session.run_sync(
-                create_note, title, content, link, is_private, user
+                create_note, title, content, tags, link, is_private, user
             )
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
@@ -171,15 +185,17 @@ class Mutation:
         note_id: str,
         title: str | None = None,
         content: str | None = None,
+        tags: list[str] | None = None,
         link: str | None = None,
         is_private: bool | None = None,
     ) -> EditNoteResponse:
         session: AsyncSession = info.context['session']
         user: UserModel = info.context['user']
         t: Translator = info.context['translator']
+
         try:
             note: NoteModel = await session.run_sync(
-                edit_note, title, content, link, is_private, user, note_id
+                edit_note, title, content, tags, link, is_private, user, note_id
             )
         except ModelFieldValidationError as err:
             return ValidationError.from_exception(err, t)
@@ -190,3 +206,17 @@ class Mutation:
             return RequestValueError(t('notes.errors.bad_note_owner'))
 
         return EditNoteSuccess(Note.from_instance(note))
+
+    @strawberry.mutation(permission_classes=[IsAuthenticated])
+    async def remove_note(self, info: Info, id: str) -> RemoveNoteResponse:
+        session: AsyncSession = info.context['session']
+        user: UserModel = info.context['user']
+        t: Translator = info.context['translator']
+        try:
+            note: NoteModel = await session.run_sync(remove_note, id, user)
+        except NoteNotFoundError:
+            return RequestValueError(t('notes.errors.note_not_found'))
+
+        except NoteOwnerError:
+            return RequestValueError(t('notes.errors.bad_note_owner'))
+        return RemoveNoteSuccess(Note.from_instance(note))

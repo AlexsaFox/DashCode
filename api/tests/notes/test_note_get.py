@@ -21,6 +21,7 @@ async def test_note_receiving(
                 "content": note.content,
                 "link": note.link,
                 "isPrivate": note.is_private,
+                "tags": [tag.content for tag in note.tags],
             }
         }
     }
@@ -50,9 +51,7 @@ async def test_note_receiving_invalid_owner(
     )
     assert data is not None
     assert data == {
-        "getNote": {
-            "details": "You haven't got permission to see note with provided id"
-        }
+        "getNote": {"details": "You haven't got access to the note with provided id"}
     }
 
 

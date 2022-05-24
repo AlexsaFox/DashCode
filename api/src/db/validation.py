@@ -13,6 +13,8 @@ COLOR_REGEXP = re.compile(r'#[a-fA-F0-9]{6}')
 
 LINK_REGEXP = re.compile(r'^(?:.{0}|https?:\/\/[^\/]*\.[^\/]{1,6}(?:\/.*)?)$')
 
+TAG_REGEXP = re.compile(r'[a-z0-9\-]{1,30}')
+
 
 class ModelFieldValidationError(ExpectedError):
     def __init__(self, model: object, fields: list[str]):

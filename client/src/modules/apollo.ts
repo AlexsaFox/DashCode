@@ -5,6 +5,7 @@ import {
 import { createUploadLink } from 'apollo-upload-client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
+import { i18n } from './i18n'
 import config from '~/constants/config'
 import useErrorsStore from '~/store/useErrors'
 
@@ -30,9 +31,27 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const localeLink = setContext((_, { headers }) => {
+  const locale = i18n.global.locale.value
+  return {
+    headers: {
+      ...headers,
+      'accept-language': locale,
+    },
+  }
+})
+
 const apolloClient = new ApolloClient({
-  link: authLink.concat(graphQLErrorLink.concat(uploadLink)),
+  link: localeLink.concat(authLink.concat(graphQLErrorLink.concat(uploadLink))),
   cache: new InMemoryCache(),
+  defaultOptions: {
+    query: {
+      fetchPolicy: 'no-cache',
+    },
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+    },
+  },
 })
 
 export default apolloClient

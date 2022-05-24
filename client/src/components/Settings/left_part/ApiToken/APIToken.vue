@@ -1,5 +1,21 @@
 <script setup lang="ts">
 const { t } = useI18n()
+
+const token = ref(localStorage.getItem('token') ?? '')
+const showToken = ref(false)
+const showCopySuccess = ref(false)
+
+function copyToken() {
+  timeoutShowCopySuccess()
+}
+
+async function timeoutShowCopySuccess() {
+  showCopySuccess.value = true
+  await navigator.clipboard.writeText(token.value)
+  setTimeout(() => {
+    showCopySuccess.value = false
+  }, 1500)
+}
 </script>
 
 <template>
@@ -9,15 +25,21 @@ const { t } = useI18n()
     <div class="API_base">
       <div class="left">
         <h3>{{ t("settings.token-label") }}</h3>
-        <textarea id="API_token" class="token" readonly>user.api_token</textarea>
+        <textarea v-if="showToken" id="API_token" v-model="token" class="token shown" readonly />
+        <div v-else class="token hidden">
+          <p>{{ t('settings.token.token-hidden') }}</p>
+        </div>
       </div>
       <div class="right">
-        <button type="submit" class="button_token">
-          {{ t("settings.button.show-token-label") }}
+        <button type="submit" class="button_token" @click="showToken = !showToken">
+          <span v-if="showToken">{{ t("settings.button.hide-token-label") }}</span>
+          <span v-else>{{ t("settings.button.show-token-label") }}</span>
         </button>
-        <button type="button" class="button_token" onclick="copyToken(event)">
-          {{ t("settings.button.copy-token-label") }}
-        </button>
+        <div class="copy-token">
+          <button type="button" :class="'button_token' + (showCopySuccess ? ' copied-success' : '')" @click="copyToken">
+            {{ showCopySuccess ? t("settings.token.copied") : t("settings.button.copy-token-label") }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -84,7 +106,6 @@ const { t } = useI18n()
       border: 0px;
       display: block;
       background-color: #303D67;
-      color: white;
       border-radius: 10px;
       font-family: 'ClearSans-Medium';
       font-size: 20px;
@@ -92,6 +113,17 @@ const { t } = useI18n()
       resize: none;
       width: 100%;
       height: 175px;
+
+      &.shown {
+        color: white;
+      }
+      &.hidden {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff88;
+        font-size: 32px
+      }
 
       &:focus {
         outline: none;
@@ -114,7 +146,7 @@ const { t } = useI18n()
       font-weight: 200;
     }
 
-    .button_token {
+    @mixin side-blob {
       margin: 4% 0% 0%;
       background-color: #465586;
       width: 100%;
@@ -125,15 +157,22 @@ const { t } = useI18n()
       padding: 1%;
       border-radius: 10px;
       border: 0;
-      transition: 0.5s;
+    }
+
+    .button_token {
+      @include side-blob;
+      transition: 0.3s;
 
       &:hover {
         background-color: #303D67;
         cursor: pointer;
-        transition: 0.5s;
+        transition: 0.3s;
+      }
+
+      &.copied-success {
+        background-color: rgb(96, 179, 69);
       }
     }
-
   }
 
 }
