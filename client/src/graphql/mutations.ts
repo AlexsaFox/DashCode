@@ -86,3 +86,18 @@ mutation($newUsername: String, $newProfileColor: String, $newProfilePicture: Upl
   }
 }
 `
+
+export const DELETE_USER_MUTATION = gql`
+mutation($password: String!) {
+  deleteUser(password: $password) {
+      __typename
+      ... on RequestValueError {
+          details
+      }
+      ... on DeleteUserSuccess {
+          account {
+              username
+          }
+      }
+  }
+}`

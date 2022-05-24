@@ -1,9 +1,38 @@
 <script setup lang="ts">
+import { helpers, required } from '@vuelidate/validators'
+import { useVuelidate } from '@vuelidate/core'
+import checkFormErrors from '~/utils/checkFormErrors'
+import useAuthStore from '~/store/useAuth'
+
 const { t } = useI18n()
+const auth = useAuthStore()
+const router = useRouter()
 
 const emit = defineEmits<{
   (e: 'closePopup'): void
 }>()
+
+const passwordForm = reactive({
+  password: '',
+})
+const rules = {
+  password: {
+    required: helpers.withMessage(
+      t('settings.account.errors.password-required'),
+      required,
+    ),
+  },
+}
+
+const vuelidate = useVuelidate(rules, passwordForm)
+
+function onSubmit() {
+  checkFormErrors(
+    vuelidate,
+    () => { return auth.deleteAccount(passwordForm.password) },
+    () => { router.push('/') },
+  )
+}
 </script>
 
 <template>
@@ -20,9 +49,9 @@ const emit = defineEmits<{
         <div class="stroke">
           <div class="left">
             <h2>{{ t("settings.current-password-label") }}</h2>
-            <input type="password" class="input">
+            <input v-model="passwordForm.password" type="password" class="input">
           </div>
-          <button type="submit" class="send_button">
+          <button type="submit" class="send_button" @click="onSubmit">
             {{ t("settings.button.submit.changes-label") }}
           </button>
         </div>

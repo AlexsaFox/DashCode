@@ -4,7 +4,7 @@ import { nullIfEmpty, processCommonErrors } from './utils'
 import apolloClient from '~/modules/apollo'
 import config from '~/constants/config'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
-import { EDIT_USER_AUTH_MUTATION, EDIT_USER_MUTATION, REGISTER_USER_MUTATION } from '~/graphql/mutations'
+import { DELETE_USER_MUTATION, EDIT_USER_AUTH_MUTATION, EDIT_USER_MUTATION, REGISTER_USER_MUTATION } from '~/graphql/mutations'
 import { i18n } from '~/modules/i18n'
 
 const useAuthStore = defineStore('auth', {
@@ -129,6 +129,21 @@ const useAuthStore = defineStore('auth', {
       })
       localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn))
       localStorage.setItem('user', JSON.stringify(this.user))
+    },
+
+    async deleteAccount(password: string) {
+      const { deleteUser } = (await apolloClient.mutate({
+        mutation: DELETE_USER_MUTATION,
+        variables: {
+          password,
+        },
+      })).data
+
+      if (deleteUser.__typename !== 'DeleteUserSuccess')
+        processCommonErrors(deleteUser)
+
+      else
+        await this.logout()
     },
 
     async logout() {
