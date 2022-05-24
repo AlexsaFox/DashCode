@@ -9,6 +9,7 @@ import { i18n } from '~/modules/i18n'
 
 const useAuthStore = defineStore('auth', {
   state: () => ({
+    locale: localStorage.getItem('locale') ?? 'en',
     loggedIn: localStorage.getItem('loggedIn') ?? false,
     user: (user => user ? JSON.parse(user) : null)(localStorage.getItem('user')),
   }),
@@ -122,10 +123,10 @@ const useAuthStore = defineStore('auth', {
         query: WHOAMI_QUERY,
       })
 
-      this.$state = {
+      this.$patch({
         loggedIn: true,
         user: data.whoami,
-      }
+      })
       localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn))
       localStorage.setItem('user', JSON.stringify(this.user))
     },
@@ -133,6 +134,14 @@ const useAuthStore = defineStore('auth', {
     async logout() {
       localStorage.removeItem('user')
       localStorage.removeItem('loggedIn')
+      localStorage.removeItem('token')
+      this.$reset()
+    },
+
+    changeLocale(value: string) {
+      i18n.global.locale.value = value
+      localStorage.setItem('locale', value)
+      this.$patch({ locale: value })
     },
   },
 })

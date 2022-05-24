@@ -2,6 +2,7 @@
 import useAuthStore from '~/store/useAuth'
 
 const auth = useAuthStore()
+const { t } = useI18n()
 
 const showUserMenu = ref(false)
 const showNotesMenu = ref(false)
@@ -16,26 +17,26 @@ const showNotesMenu = ref(false)
       </header>
       <nav v-if="showUserMenu">
         <router-link to="/settings">
-          Settings
+          {{ t('index.home.side-buttons.settings') }}
         </router-link>
         <button class="logout" @click="auth.logout().then(() => { $router.go(0) })">
-          Log out
+          {{ t('index.home.side-buttons.log-out') }}
         </button>
       </nav>
     </section>
     <div class="display_with_button">
       <a><button class="standard_button">
-        <div class="i-carbon:add" />Add notes
+        <div class="i-carbon:add" />{{ t('index.home.side-buttons.add-notes') }}
       </button></a>
       <a><button class="standard_button">
-        <div class="i-carbon:arrow-right" />Social media
+        <div class="i-carbon:arrow-right" />{{ t('index.home.side-buttons.explore') }}
       </button></a>
       <!-- Not yet!! -->
       <!-- <a><button class="standard_button">
         <div class="i-carbon:user-avatar-filled-alt" /> Subscriptions
       </button></a> -->
       <a><button class="standard_button">
-        <div class="i-carbon:folder" />My notes
+        <div class="i-carbon:folder" />{{ t('index.home.side-buttons.my-notes') }}
       </button></a>
     </div>
   </div>
