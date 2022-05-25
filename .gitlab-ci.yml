@@ -36,10 +36,7 @@ test-job:
 deploy-job:
   stage: deploy
   script:
-    - export DASHCODE_API_PREFIX=${DASHCODE_API_PREFIX}
-    - export DASHCODE_DOMAIN=${DASHCODE_DOMAIN}
-    - export DASHCODE_PORT=${DASHCODE_PORT}
-    - export DASHCODE_PROTOCOL=${DASHCODE_PROTOCOL}
+    - export DASHCODE_API_HOST=${DASHCODE_API_HOST}
     - docker-compose stop 
     - docker-compose rm -f
     - docker-compose build --parallel
