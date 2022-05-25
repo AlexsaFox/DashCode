@@ -2,6 +2,7 @@
 import useAuthStore from '~/store/useAuth'
 
 const auth = useAuthStore()
+const router = useRouter()
 const { t } = useI18n()
 
 const showUserMenu = ref(false)
@@ -25,9 +26,9 @@ const showNotesMenu = ref(false)
       </nav>
     </section>
     <div class="display_with_button">
-      <a><button class="standard_button">
+      <button class="standard_button" @click="router.push('/note/create')">
         <div class="i-carbon:add" />{{ t('index.home.side-buttons.add-notes') }}
-      </button></a>
+      </button>
       <a><button class="standard_button">
         <div class="i-carbon:arrow-right" />{{ t('index.home.side-buttons.explore') }}
       </button></a>

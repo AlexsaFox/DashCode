@@ -101,3 +101,25 @@ mutation($password: String!) {
       }
   }
 }`
+
+export const CREATE_NOTE_MUTATION = gql`
+mutation($title: String!, $content: String!, $tags: [String!], $link: String, $isPrivate: Boolean) {
+  createNote(title: $title, content: $content, tags: $tags, link: $link, isPrivate: $isPrivate) {
+      ... on CreateNoteSuccess {
+          note {
+              id
+              title
+              content
+              isPrivate
+              tags
+          }
+      }
+      ... on ValidationError {
+          fields {
+              field
+              details
+          }
+      }
+  }
+}
+`

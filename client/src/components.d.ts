@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     DeleteAccountPopup: typeof import('./components/Settings/left_part/MyAccount/DeleteAccountPopup.vue')['default']
     EditAvatarPopup: typeof import('./components/Settings/left_part/UserProfile/EditAvatarPopup.vue')['default']
     EditInformation: typeof import('./components/Settings/left_part/MyAccount/EditInformation.vue')['default']
+    EditNote: typeof import('./components/Note/EditNote.vue')['default']
     ErrorIndicator: typeof import('./components/ErrorIndicator.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     Header: typeof import('./components/Header/Header.vue')['default']

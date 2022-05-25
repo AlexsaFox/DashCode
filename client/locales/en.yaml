@@ -112,7 +112,15 @@ settings:
     german-label: "German"
     spanish-label: "Spanish"
     russian-label: "Russian"
-  
+
+note:
+  attributes:
+    title: Title
+    link: Link
+    privacy:
+      public: Public
+      private: Private
+
 note-show:
   edit-button: "Edit"
   delete-button: "Delete"
@@ -121,13 +129,22 @@ note-show:
   warning-label: "Do you want to delete this note?"
   yes-button: "Yes"
   no-button: "No"
+
 note-edit:
+  add-tag:
+    placeholder: New tag
+    add: Add
+  content:
+    placeholder: Enter something...
+  errors: "" 
+
+  preview-markdown: Preview markdown
+  unpreview-markdown: Close markdown preview
   save-button: "Save"
   warning-label: "Do you want to save your changes?"
   unsave-button: "Do not save"
   cancel-button: "Cancel"
-note_create:
-  create-button: "Create"
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Back to profile"

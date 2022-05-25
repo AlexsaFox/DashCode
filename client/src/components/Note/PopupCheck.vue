@@ -1,26 +1,39 @@
 <script setup lang="ts">
+import noteEditActions from '~/constants/types/noteEditActions'
 const { t } = useI18n()
+
+const emit = defineEmits<{
+  (e: 'action', action: noteEditActions): void
+}>()
+
+function cancel() { emit('action', noteEditActions.cancel) }
+function discard() { emit('action', noteEditActions.discard) }
+function save() { emit('action', noteEditActions.save) }
 </script>
+
 <template>
-  <div id="popup_check" class="overlay">
+  <div class="overlay">
     <div class="popup_check">
       <div class="header_for_pop_up">
-        <a class="close" href="#">&times;</a>
+        <a class="close" @click="cancel">&times;</a>
       </div>
       <div class="content">
         <span>{{ t("note-edit.warning-label") }}</span>
         <div class="buttons_for_check">
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" :value="t('note-edit.unsave-button')"></a>
+            <button @click="save">
+              {{ t('note-edit.save-button') }}
+            </button>
           </div>
           <div class="each_button_for_popup_check">
-            <a href="#"><input type="button" :value="t('note-edit.save-button')"></a>
+            <button @click="discard">
+              {{ t('note-edit.unsave-button') }}
+            </button>
           </div>
           <div class="each_button_for_popup_check">
-            <a href="#popup_watch"><input
-              type="button"
-              :value="t('note-edit.cancel-button')"
-            ></a>
+            <button @click="cancel">
+              {{ t('note-edit.cancel-button') }}
+            </button>
           </div>
         </div>
       </div>
@@ -29,73 +42,76 @@ const { t } = useI18n()
 </template>
 <style scoped lang="scss">
 .overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-    height: 100%;
-    z-index: 10;
-    overflow-y: auto;
-}
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-    overflow:none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  height: 100%;
+  z-index: 10;
+  overflow-y: auto;
 }
 
 .popup_check {
-    margin: 70px auto;
-    background: #5B6B98;
-    border-radius: 10px;
-    width: 30%;
-    position: relative;
-    padding-top: 20px;
+  margin: 70px auto;
+  background: #5B6B98;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 700px;
+  position: relative;
+  padding-top: 20px;
 }
+
 .popup_check .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    transition: all 200ms;
-    font-size: 240%;
-    font-weight: bold;
-    text-decoration: none;
-    color: #F1F7ED;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: all 200ms;
+  font-size: 240%;
+  font-weight: bold;
+  text-decoration: none;
+  color: #F1F7ED;
 }
-.popup_check .content{
-    font-family:'ClearSans-Light';
-    text-align: center;
-    color:white;
-    font-size: 120%;
+
+.popup_check .content {
+  font-family: 'ClearSans-Light';
+  text-align: center;
+  color: white;
+  font-size: 120%;
 
 }
-.popup_check .buttons_for_check input{
-    font-size: 80%;
-    font-family:'ClearSans-Regular';
+
+.popup_check .buttons_for_check {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  button {
+    font-size: 16px;
+    font-family: 'ClearSans-Regular';
     background-color: #86faf8;
-    color:#223153;
+    color: #223153;
     border-radius: 5px;
     border: none;
-    margin: 5% 2% 0px;
-    padding: 0px 15%;
+    padding: 10px 32px;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
       opacity: 0.8;
     }
+  }
 }
 
-.popup_check .buttons_for_check{
-    margin:5% 0px;
-    padding-bottom: 2%;
-}
-.each_button_for_popup_check{
-    display: inline-block;
-    width: 20%;
-
+.popup_check .buttons_for_check {
+  margin: 5% 0px;
+  padding-bottom: 2%;
 }
 
+.each_button_for_popup_check {
+  display: inline-block;
+}
 </style>
