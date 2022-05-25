@@ -218,9 +218,9 @@ function onSubmit() {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #9e6dee;
+    background-color: var(--user-color);
     border-radius: 5px;
-    color: #223153;
+    color: var(--user-contrasting-color);
     // float: right;
     font-size: 18px;
     height: auto;

@@ -86,3 +86,40 @@ mutation($newUsername: String, $newProfileColor: String, $newProfilePicture: Upl
   }
 }
 `
+
+export const DELETE_USER_MUTATION = gql`
+mutation($password: String!) {
+  deleteUser(password: $password) {
+      __typename
+      ... on RequestValueError {
+          details
+      }
+      ... on DeleteUserSuccess {
+          account {
+              username
+          }
+      }
+  }
+}`
+
+export const CREATE_NOTE_MUTATION = gql`
+mutation($title: String!, $content: String!, $tags: [String!], $link: String, $isPrivate: Boolean) {
+  createNote(title: $title, content: $content, tags: $tags, link: $link, isPrivate: $isPrivate) {
+      ... on CreateNoteSuccess {
+          note {
+              id
+              title
+              content
+              isPrivate
+              tags
+          }
+      }
+      ... on ValidationError {
+          fields {
+              field
+              details
+          }
+      }
+  }
+}
+`

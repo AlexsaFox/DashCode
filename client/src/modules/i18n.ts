@@ -16,7 +16,7 @@ const messages = Object.fromEntries(
 
 export const i18n = createI18n({
   legacy: false,
-  locale: 'en',
+  locale: localStorage.getItem('locale') ?? 'en',
   messages,
 })
 

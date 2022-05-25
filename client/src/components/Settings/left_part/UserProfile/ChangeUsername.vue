@@ -14,7 +14,10 @@ const usernameForm = reactive({
 
 const rules = {
   username: {
-    required: helpers.withMessage(t('settings.profile.errors.username-required'), required),
+    required: helpers.withMessage(
+      t('settings.profile.errors.username-required'),
+      required,
+    ),
   },
 }
 

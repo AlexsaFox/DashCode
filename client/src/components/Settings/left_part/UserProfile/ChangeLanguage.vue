@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
+
 const { t } = useI18n()
+
+const auth = useAuthStore()
+const chosenLocale = ref(auth.locale)
+
+function changeLocale() {
+  auth.changeLocale(chosenLocale.value)
+}
 </script>
 
 <template>
@@ -7,24 +16,24 @@ const { t } = useI18n()
     <h3>{{ t('settings.user-profile.header.change-language') }}</h3>
     <h4>{{ t("settings.change-language-label") }}</h4>
     <div class="bottom_line">
-      <select class="dropdown">
-        <option class="lang" value="english">
+      <select v-model="chosenLocale" class="dropdown">
+        <option class="lang" value="en">
           {{ t("settings.languages.english-label") }}
         </option>
-        <option class="lang" value="french">
+        <option class="lang" value="fr">
           {{ t("settings.languages.french-label") }}
         </option>
-        <option class="lang" value="german">
+        <option class="lang" value="de">
           {{ t("settings.languages.german-label") }}
         </option>
-        <option class="lang" value="spanish">
+        <option class="lang" value="es">
           {{ t("settings.languages.spanish-label") }}
         </option>
-        <option class="lang" value="russian">
+        <option class="lang" value="ru">
           {{ t("settings.languages.russian-label") }}
         </option>
       </select>
-      <button class="edit">
+      <button class="edit" @click="changeLocale()">
         {{ t("settings.button.submit.color-label") }}
       </button>
     </div>

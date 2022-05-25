@@ -190,10 +190,11 @@ function onSubmit() {
 .change_password {
   border: 0px;
   border-radius: 5px;
-  background-color: #9e6dee;
+  background-color: var(--user-color);
   font-family: "ClearSans-Light";
   font-size: 18px;
   padding: 1% 3%;
   margin: 1% 0% 2%;
+  color: var(--user-contrasting-color);
 }
 </style>
