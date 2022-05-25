@@ -23,6 +23,11 @@ test-job:
   stage: test
   script:
     - ./ci/test_job.sh
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+
   tags: 
     - main
   variables:

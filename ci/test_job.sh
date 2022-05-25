@@ -6,4 +6,4 @@ rm -rf .pytest_cache
 source venv/bin/activate
 pip uninstall psycopg2 -y
 pip install psycopg2
-pytest -vvv -c pyproject.toml
+pytest -c pyproject.toml --junitxml=report.xml
