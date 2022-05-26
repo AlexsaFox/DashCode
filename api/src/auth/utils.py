@@ -48,6 +48,7 @@ def generate_jwt(config: Configuration, user: User) -> str:
         'iss': config.app.title,
         'sub': str(user.id),
         'username': user.username,
+        'proof': user.jwt_proof,
         'exp': datetime.utcnow() + timedelta(hours=config.jwt.expire_hours),
     }
     header = {'alg': config.jwt.algorithm}
@@ -60,6 +61,12 @@ def decode_jwt(config: Configuration, token: str) -> JWTClaims:
     claims = jwt.decode(token, config.secret_key)
     claims.validate_exp(now, 0)
     return claims
+
+
+def regenerate_token(session: Session, user: User):
+    session.add(user)
+    user.regenerate_jwt_proof()
+    session.commit()
 
 
 def create_user(

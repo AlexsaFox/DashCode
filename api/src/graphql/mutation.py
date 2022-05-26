@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio.session import AsyncSession
 from strawberry.file_uploads import Upload
 from strawberry.types import Info
 
-from src.auth.utils import ObjectExistsError, create_user, delete_user
+from src.auth.utils import ObjectExistsError, create_user, delete_user, regenerate_token
 from src.config import Configuration
 from src.db.models import Note as NoteModel
 from src.db.models import User as UserModel
@@ -35,6 +35,7 @@ from src.graphql.definitions.responses.edit_note import (
     EditNoteResponse,
     EditNoteSuccess,
 )
+from src.graphql.definitions.responses.get_token import Token
 from src.graphql.definitions.responses.register_user import (
     RegisterUserResponse,
     RegisterUserSuccess,
@@ -43,6 +44,10 @@ from src.graphql.definitions.responses.register_user import (
 from src.graphql.definitions.responses.remove_note import (
     RemoveNoteResponse,
     RemoveNoteSuccess,
+)
+from src.graphql.definitions.responses.reset_token import (
+    ResetTokenResponse,
+    ResetTokenSuccess,
 )
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
@@ -143,6 +148,16 @@ class Mutation:
             return RequestValueError(
                 t('validation.errors.user.upload_file.bad_mime_type')
             )
+
+    @strawberry.mutation(permission_classes=[IsAuthenticated])
+    @requires_password
+    async def reset_token(self, info: Info, password: str) -> ResetTokenResponse:
+        session: AsyncSession = info.context['session']
+        user: UserModel = info.context['user']
+
+        await session.run_sync(regenerate_token, user)
+        new_token = Token.from_user(user, info)
+        return ResetTokenSuccess(token=new_token)
 
     @strawberry.mutation(permission_classes=[IsAuthenticated])
     @requires_password

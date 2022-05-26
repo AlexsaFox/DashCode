@@ -1,4 +1,4 @@
-from base64 import urlsafe_b64encode
+from base64 import b64encode, urlsafe_b64encode
 from datetime import datetime
 from secrets import token_bytes
 
@@ -57,6 +57,9 @@ class User(Base, ValidationMixin, AppConfigurationMixin):
     email: str = Column(String(120), unique=True, nullable=False)
     password_hash: str = Column(String(100), nullable=False)
     profile_color: str = Column(String(7), nullable=False, default='#ffffff')
+    jwt_proof: str = Column(
+        String(12), nullable=False, default=lambda: b64encode(token_bytes(9)).decode()
+    )
     _profile_picture_filename: str | None = Column(
         'profile_picture_filename', String(40), nullable=True, default=None
     )
@@ -91,6 +94,9 @@ class User(Base, ValidationMixin, AppConfigurationMixin):
 
     def reset_profile_picture(self):
         self.profile_picture_filename = None
+
+    def regenerate_jwt_proof(self):
+        self.jwt_proof = b64encode(token_bytes(9)).decode()
 
 
 note_tag_association_table = Table(
