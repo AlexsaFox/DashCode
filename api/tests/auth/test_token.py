@@ -15,15 +15,19 @@ async def token_is_valid(
     database_session: AsyncSession,
     config: Configuration,
 ):
-    assert token_data['tokenType'] == 'bearer'
+    try:
+        assert token_data['tokenType'] == 'bearer'
 
-    user_from_token = await get_user_or_none(
-        database_session, config, token_data['accessToken']
-    )
-    assert user_from_token is not None
+        user_from_token = await get_user_or_none(
+            database_session, config, token_data['accessToken']
+        )
+        assert user_from_token is not None
 
-    user_from_token = cast(User, user_from_token)
-    assert user_from_token.username == user.username
+        user_from_token = cast(User, user_from_token)
+        assert user_from_token.username == user.username
+        return True
+    except Exception:
+        return False
 
 
 async def test_token_by_username(
@@ -37,7 +41,7 @@ async def test_token_by_username(
     )
     assert data is not None
     assert data['token']['__typename'] == 'Token'
-    await token_is_valid(data['token'], user, database_session, test_config)
+    assert await token_is_valid(data['token'], user, database_session, test_config)
 
 
 async def test_token_by_email(
@@ -51,7 +55,7 @@ async def test_token_by_email(
     )
     assert data is not None
     assert data['token']['__typename'] == 'Token'
-    await token_is_valid(data['token'], user, database_session, test_config)
+    assert await token_is_valid(data['token'], user, database_session, test_config)
 
 
 async def test_login_with_bad_credentials(graphql_client: GraphQLClient, user: User):

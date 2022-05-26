@@ -34,11 +34,15 @@ async def get_user_or_none(
         return None
 
     user_id = int(jwt_claims['sub'])
+    user_proof = jwt_claims.get('proof')
     query = await session.execute(select(User).filter_by(id=user_id))
     row: Row | None = query.one_or_none()
     if row is None:
         return None
     user: User = row[0]
+
+    if user.jwt_proof != user_proof:
+        return None
 
     return user
 
