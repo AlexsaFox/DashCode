@@ -76,6 +76,7 @@ settings:
     hide-token-label: Hide token
     browse-image-label: "Browse"
     copy-token-label: "Copy Token"
+    reset-token-label: Reset token
   user-profile:
     header:
       label: "User Profile"
@@ -95,6 +96,9 @@ settings:
   token:
     token-hidden: "[hidden]"
     copied: Copied to clipboard!
+    reset-warning: >-
+      Are you sure that you want to reset your API token? That would make all
+      existing tokens invalid.
   expiration-datetime-label: "EXPIRATION DATETIME:"
   upload-profile-image-label: "Upload profile image:"
   account_removal:

@@ -34,6 +34,7 @@ declare module '@vue/runtime-core' {
     PopupCheck: typeof import('./components/Note/PopupCheck.vue')['default']
     PopupCheckDel: typeof import('./components/Note/PopupCheckDel.vue')['default']
     ProfileBlock: typeof import('./components/UserProfile/ProfileBlock.vue')['default']
+    ResetTokenPopup: typeof import('./components/Settings/left_part/ApiToken/ResetTokenPopup.vue')['default']
     Right_part: typeof import('./components/Settings/Right_part.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

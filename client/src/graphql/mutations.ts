@@ -123,3 +123,19 @@ mutation($title: String!, $content: String!, $tags: [String!], $link: String, $i
   }
 }
 `
+
+export const RESET_TOKEN_MUTATION = gql`
+mutation($password: String!) {
+  resetToken(password: $password) {
+      __typename
+      ... on RequestValueError {
+          details
+      }
+      ... on ResetTokenSuccess {
+          token {
+              accessToken
+          }
+      }
+  }
+}
+`

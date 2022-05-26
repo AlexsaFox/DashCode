@@ -1,9 +1,10 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const token = ref(localStorage.getItem('token') ?? '')
+const token = ref('')
 const showToken = ref(false)
 const showCopySuccess = ref(false)
+const showResetTokenPopup = ref(false)
 
 function copyToken() {
   timeoutShowCopySuccess()
@@ -16,9 +17,17 @@ async function timeoutShowCopySuccess() {
     showCopySuccess.value = false
   }, 1500)
 }
+
+function renewToken() {
+  token.value = localStorage.getItem('token') ?? ''
+  showResetTokenPopup.value = false
+}
+renewToken()
 </script>
 
 <template>
+  <ResetTokenPopup v-if="showResetTokenPopup" @close-popup="renewToken" />
+
   <div id="APItoken" class="tabcontent">
     <h1>{{ t("settings.api-token-header") }}</h1>
     <hr>
@@ -35,11 +44,12 @@ async function timeoutShowCopySuccess() {
           <span v-if="showToken">{{ t("settings.button.hide-token-label") }}</span>
           <span v-else>{{ t("settings.button.show-token-label") }}</span>
         </button>
-        <div class="copy-token">
-          <button type="button" :class="'button_token' + (showCopySuccess ? ' copied-success' : '')" @click="copyToken">
-            {{ showCopySuccess ? t("settings.token.copied") : t("settings.button.copy-token-label") }}
-          </button>
-        </div>
+        <button type="button" :class="'button_token' + (showCopySuccess ? ' copied-success' : '')" @click="copyToken">
+          {{ showCopySuccess ? t("settings.token.copied") : t("settings.button.copy-token-label") }}
+        </button>
+        <button type="button" class="button_token" @click="showResetTokenPopup = true">
+          {{ t("settings.button.reset-token-label") }}
+        </button>
       </div>
     </div>
   </div>
@@ -112,7 +122,7 @@ async function timeoutShowCopySuccess() {
       padding: 3%;
       resize: none;
       width: 100%;
-      height: 175px;
+      height: 200px;
 
       &.shown {
         color: white;
