@@ -40,7 +40,12 @@ services:
       - API_cache__dsan=redis://redis:6379
       - API_debug=false
       - API_secret_key=ababa
+      - API_base_superuser__username=admin
+      - API_base_superuser__email=admin@admin.com
+      - API_base_superuser__password=password
     restart: unless-stopped
+    volumes:
+      - ./uploads:/app/uploads
     networks:
       - app-network
     depends_on:
