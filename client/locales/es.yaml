@@ -21,6 +21,19 @@ sign-up:
   submit-button: "Registro"
   have-account: "¿Ya tiene inicio de sesión?"
   have-account-link: "Iniciar sesión"
+  labels: 
+    username: ID de usuario
+    email: EMAIL
+    password: Contraseña
+    confirm-password: Confirmar Contraseña
+  errors:
+    user-exists: El usuario con {field} "{value}" ya existe
+    username-required: Identificación de usuario requerida
+    email-required: Se requiere la dirección de correo electrónico del usuario
+    email-invalid: La dirección de correo electrónico no es válida, ingrese una dirección válida
+    password-required: Se requiere contraseña
+    password-too-short: Su contraseña debe contener al menos 8 caracteres
+    passwords-do-not-match: La contraseña no coincide con la información de la cuenta, ingrese la contraseña correcta
 
 index: 
   title-1: "Un repositorio único de conocimiento."
@@ -29,6 +42,14 @@ index:
   text-2: "Organice sus notas o vea las públicas. Con ellos, puede resolver sus problemas lo más rápido posible."
   title-3: "No más preguntas en Internet: \"¿Cómo resolver este problema?\" otra vez."
   text-3: "¡Con DashCode, su información y soluciones están siempre al alcance de su mano!"
+
+  home: 
+    side-buttons:
+      settings: Ajustes
+      log-out: Cerrar sesión
+      add-notes: Agregar notas
+      explore: Explorar
+      my-notes: Mis notas
 settings:
   account: 
     header: "Mi cuenta"
@@ -44,44 +65,72 @@ settings:
   new-password-label: "NUEVA CONTRASEÑA"
   confirm-password-label: "CONFIRMAR CONTRASEÑA"
   current-password-label: "CONTRASEÑA ACTUAL"
-  button-edit-label: "Сambiar la configuración"
-  button-edit-avatar-label: "Cambiar avatar"
-  button-change-password-label: "Cambiar foto de perfil"
-  button-submit-changes-label: "Confirmar"
-  user-profile-header: "Perfil del usuario"
-  user-profile-header-preview: "PREESTRENO"
-  user-profile-header-change-profile-color: "CAMBIAR COLOR DE PERFIL"
-  change-color-label: "En el formato '#rrggbb' (con #)."
+  button: 
+    edit:
+      label: Editar
+      avatar-label: "Editar Avatar"
+    submit:
+      color-label: Aplicar
+      changes-label: "Enviar"
+    change-password-label: "Cambia la contraseña"
+    show-token-label: "Mostrar token"
+    hide-token-label: Ocultar token
+    browse-image-label: "Navegar"
+    copy-token-label: "Copiar token"
+  user-profile:
+    header:
+      label: "Perfil del usuario"
+      preview: "PREESTRENO"
+      change-profile-color: "CAMBIAR COLOR DE PERFIL"
+      change-language: "CAMBIAR IDIOMA DEL PERFIL"
+  profile:
+    errors:
+      username-required: El nombre de usuario no puede estar vacío
+      profile-color-required: Debes especificar el color del perfil.
+      profile-color-bad-format: "El color del perfil debe tener el formato #rrggbb"
+  change-color-label: Este color se utilizará en su interfaz
+  change-language-label: Este idioma se utilizará en su interfaz
   username-label: "NOMBRE DE USUARIO"
-  api-token-header: "FICHAS API"
-  token-label: "FICHAS"
-  button-copy-token-label: "Сopiar token"
-  expiration-datetime-label: "FECHA DE CADUCIDAD:"
-  button-generate-new-token-label: "Generar una ficha"
-  upload-profile-image-label: "Subir foto de perfil:"
-  button-browse-image-label: "Aplicar"
-  have-account: Ya tienes una cuenta?
-  have-account-link: Iniciar sesión
-  submit-button: Confirmar
-  
-labels:
-    username: ID de usuario
-    email: Dirección de correo electrónico
-    password: Contraseña
-    confirm-password: Confirmar Contraseña
-errors:
-    user-exists: El usuario con {field} "{value}" ya existe
-    username-required: Identificación de usuario requerida
-    email-required: Se requiere la dirección de correo electrónico del usuario
-    email-invalid: La dirección de correo electrónico no es válida, ingrese una dirección válida
-    password-required: Se requiere contraseña
-    passwords-do-not-match: La contraseña no coincide con la información de la cuenta, ingrese la contraseña correcta
-    note_show:
+  api-token-header: "API Tokens"
+  token-label: "TOKEN"
+  token:
+    token-hidden: "[oculto]"
+    copied: Copiado al portapapeles!
+  expiration-datetime-label: "FECHA DE VENCIMIENTO HORA:"
+  upload-profile-image-label: "Subir imagen de perfil:"
+  account_removal:
+    header: "ELIMINACIÓN DE CUENTA"
+    text: "Deshabilitar su cuenta significa que puede recuperarla en cualquier momento después de esta acción"
+    button-label: "Borrar cuenta" 
+    warning:
+      text: "¿Estás seguro de que quieres eliminar tu cuenta?"
+      header: "¡Advertencia!"
+      button-label: "Sí"
+  languages:
+    english-label: "Inglés"
+    french-label: "Francés"
+    german-label: "Alemán"
+    spanish-label: "Español"
+    russian-label: "Ruso"
 
-edit-button: "Editar"
-author-of-note: "Usuario"
-date-of-creation-label: "Fue creado"
-note_edit:
-  save-button: "Guardar"
+note-show:
+  edit-button: "Editar"
+  delete-button: "Borrar"
+  author-of-note: "Usuario"
+  date-of-creation-label: "Fue creado"
+  warning-label: "¿Quieres borrar esta nota?"
+  yes-button: "Sí"
+  no-button: "No"
+note-edit:
+  save-button: "Ahorrar"
+  warning-label: "¿Quieres guardar tus cambios?"
+  unsave-button: "No guarde"
+  cancel-button: "Cancelar"
 note_create:
   create-button: "Crear"
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Volver al perfil"
+    button-back-to-social-media: "Volver a las redes sociales"
+  profile-block:
+    amount_of_notes-label: "notas públicas"

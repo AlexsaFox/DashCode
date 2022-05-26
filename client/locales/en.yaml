@@ -14,7 +14,7 @@ login-sign-up:
     DashCode is a web app for the writing and reading useful tips and helpful
     solutions for programmers and also for other people. With DashCode you can
     organize your knowledge.
-
+    
     From just making notes to social media where you can find answers for all
     you questions.
 sign-up:
@@ -34,11 +34,12 @@ sign-up:
     password-required: Password is required
     password-too-short: Your password must contain at least 8 characters
     passwords-do-not-match: Password and confirm password fields do not match
+
 index:
   title-1: "Unique knowledge repository."
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
   title-2: "Without wasting time."
-  text-2: "Organize yours notes or go through public ones. With them you can solve your problems as fast as possible."
+  text-2: "Organize your notes or go through public ones. With them you can solve your problems as fast as possible."
   title-3: "Never ask internet “How can I solve this problem?” again."
   text-3: "In DashCode, your information and solutions are at hand!"
 
@@ -106,8 +107,7 @@ settings:
   upload-profile-image-label: "Upload profile image:"
   account_removal:
     header: "ACCOUNT REMOVAL"
-    text: "Disabling your account means you can recover it at any time after
-          this action."
+    text: "Disabling your account means you can recover it at any time after this action."
     button-label: "Delete Account" 
     warning:
       text: "Are you sure you want to delete your account?"
