@@ -22,7 +22,7 @@ sign-up:
   have-account: "Уже есть логин?"
   have-account-link: "Вход"
   labels:
-    username: Идентификатор пользователя
+    username: Имя пользователя
     email: Адрес электронной почты
     password: Пароль
     confirm-password: Подтвердить пароль
@@ -31,7 +31,7 @@ sign-up:
     username-required: Требуется идентификатор
     email-required: Требуется адрес электронной почты
     email-invalid: Адрес электронной почты некорректен, введите корректный адрес
-    password-too-short: Your password must contain at least 8 character !!!!!!!
+    password-too-short: Пароль должен содержать более восьми символов
     password-required: Требуется пароль
     passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
 index:
@@ -41,6 +41,14 @@ index:
   text-2: "Систематизируйте свои заметки или смотрите общедоступные. С ними вы можете решить проблему максимально быстро"
   title-3: "Больше не нужно спрашивать в Интернете: «Как я могу решить эту проблему?» снова"
   text-3: "В DashCode ваша информация и решения всегда под рукой!"
+
+  home:
+    side-buttons:
+      settings: Настройки
+      log-out: Выйти
+      add-notes: Добавить заметку
+      explore: Исследовать
+      my-notes: Мои заметки
 settings:
   account:
     header: "Мой аккаунт"
@@ -64,42 +72,51 @@ settings:
       color-label: Применить
       changes-label: "Изменить"
     change-password-label: "Изменить пароль"
-    show-token-label: "Show token !!!!!!!!!!"
+    show-token-label: "Показать токен"
+    hide-token-label: Спрятать токен
     browse-image-label: "Browse"
-    copy-token-label: "Copy Token"
+    copy-token-label: "Скопировать токен"
+    reset-token-label: Сбросить токен
   user-profile:
     header:
       label: "Профиль пользователя"
       preview: "Предпросмотр"
       change-profile-color: "Изменить цвет профиля"
-      change-language: "CHANGE PROFILE LANGUAGE!!!!!!!!!"
+      change-language: "ИЗМЕНИТЬ ЯЗЫК ПРОФИЛЯ"
   profile:
     errors:
-      username-required: Username can't be null!!!!!!!!!!!
-      profile-color-required: You need to specify profile color
-      profile-color-bad-format: "Profile color must be in format of #rrggbb"
-  change-color-label: Этот цвет будет исползован в интерфейсе
-  change-language-label: This language will be used in your interface!!!!!!
+      username-required: Имя пользователя не может быть нулевым
+      profile-color-required: Вам необходимо указать цвет профиля
+      profile-color-bad-format: "Цвет профиля должен быть в формате #rrggbb"
+  change-color-label: Этот цвет будет использован в интерфейсе
+  change-language-label: Этот язык будет использоваться в вашем интерфейсе
   username-label: "ИМЯ ПОЛЬЗОВАТЕЛЯ"
   api-token-header: "API токен"
-  token-label: "ТОКЕН"
+  token-label: "ТОКЕН"  
+  token:
+    token-hidden: "[спрятан]"
+    copied: Скопировано в буфер обмена!
+    reset-warning: >-
+      Вы уверены, что хотите сбросить токен API?
+      Это сделает бы все существующие токены недействительными.
   expiration-datetime-label: "ДАТА ИСТЕЧЕНИЯ:"
   upload-profile-image-label: "Загрузить изображение профиля:"
   account_removal:
     header: "УДАЛЕНИЕ АККАУНТА"
     text: «Отключение вашей учетной записи означает, что вы можете восстановить ее в любое время после
-           это действие».
+           этого действие».
     button-label: "Удалить" 
     warning:
       text: «Вы уверены, что хотите удалить свой аккаунт?»
       header: "Предупреждение!"
       button-label: "Да"
   languages:
-    english-label: "English!!!!!!!!!!"
-    french-label: "French"
-    german-label: "German"
-    spanish-label: "Spanish"
-    russian-label: "Russian"
+    english-label: "Английский"
+    french-label: "Французский"
+    german-label: "Немецкий"
+    spanish-label: "Испанский"
+    russian-label: "Русский"
+
 note-show:
   edit-button: "Править"
   delete-button: "Удалить"

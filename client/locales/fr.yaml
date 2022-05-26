@@ -19,70 +19,106 @@ login-sign-up:
      toutes vos questions.
 sign-up:
   submit-button: "S'inscrire"
-  have-account: "Vous avez déjà une connexion ?"
+  have-account: "Vous avez déjà une connexion ?"
   have-account-link: "S'identifier"
+  labels:
+    username: Identifiant d'utilisateur
+    email: Adresse e-mail
+    password: Mot de passe
+    confirm-password: Confirmez le mot de passe
+  errors:
+    user-exists: L'utilisateur avec {field} "{value}" existe déjà
+    username-required: Pièce d'identité requise
+    email-required: Adresse mail (requis)
+    email-invalid: L'adresse e-mail n'est pas valide, veuillez entrer une adresse valide
+    password-required: Mot de passe requis
+    password-too-short: Votre mot de passe doit contenir au moins 8 caractères
+    passwords-do-not-match: Le mot de passe ne correspond pas aux informations du compte, veuillez entrer le mot de passe correct
 
 index:
-  title-1: "Un référentiel unique de connaissances."
-  text-1: "C'est plus qu'un bloc-notes ou un réseau social. Écrivez et enregistrez ce dont vous avez vraiment besoin et partagez-le avec le monde !"
-  title-2: "Ne perdez pas de temps."
-  text-2: "Organisez vos notes ou affichez les notes publiques. Avec eux, vous pouvez résoudre vos problèmes le plus rapidement possible."
-  title-3: 'Plus besoin de demander sur Internet : "Comment résoudre ce problème ?" de nouveau.'
-  text-3: "Avec DashCode, vos informations et solutions sont toujours à portée de main !"
+  title-1: "Un référentiel unique de connaissances"
+  text-1: " C'est plus qu'un bloc-notes ou un réseau social. Écrivez, enregistrez ce dont vous avez vraiment besoin et partagez-le avec le monde entier ! "
+  title-2: "Sans perdre de temps."
+  text-2: "Organisez vos notes ou parcourez les notes publiques. Avec eux, vous pouvez résoudre vos problèmes le plus rapidement possible."
+  title-3: "Ne demandez jamais à Internet \"Comment puis-je résoudre ce problème?\" encore."
+  text-3: "Dans DashCode, vos informations et solutions sont à portée de main !"
+
+  home:
+    side-buttons:
+      settings: Réglages
+      log-out: Se déconnecter
+      add-notes: Ajouter une note
+      explore: Explorer
+      my-notes: Mes notes
 settings:
   account:
     header: "Mon compte"
     header-base-settings: "RÉGLAGES DE BASE"
     errors:
-      email-invalid: "Saisissez une adresse e-mail valide"
+      email-invalid: "Entrez une adresse e-mail valide"
       passwords-do-not-match: "Les champs Mot de passe et Confirmation du mot de passe ne correspondent pas"
       password-too-short: "Votre nouveau mot de passe doit contenir au moins 8 caractères"
-      password-required: "Vous devez fournir votre mot de passe actuel pour des raisons de sécurité"
+      password-required: "Vous devez spécifier votre mot de passe actuel pour des raisons de sécurité"
   button-right-part-header: "Paramètres utilisateur"
-  button-right-part-back: "Arrière"
+  button-right-part-back: "Retour"
   email-label: "E-MAIL"
   new-password-label: "NOUVEAU MOT DE PASSE"
   confirm-password-label: "CONFIRMEZ LE MOT DE PASSE"
   current-password-label: "MOT DE PASSE ACTUEL"
-  button-edit-label: "Changer"
-  button-edit-avatar-label: "Modifier la photo de profil"
-  button-change-password-label: "Changer le mot de passe"
-  button-submit-changes-label: "Confirmer"
-  user-profile-header: "Profil de l'utilisateur"
-  user-profile-header-preview: "APERÇU"
-  user-profile-header-change-profile-color: "CHANGER LA COULEUR DU PROFIL"
-  change-color-label: "Au format '#rrggbb' (avec #)."
+  button:
+    edit:
+      label: Éditer
+      avatar-label: "Modifier Avatar"
+    submit:
+      color-label: Appliquer
+      changes-label: "Soumettre"
+    change-password-label: "Changer le mot de passe"
+    show-token-label: "Afficher le jeton"
+    hide-token-label: Masquer le jeton
+    browse-image-label: "Parcourir"
+    copy-token-label: "Copier le jeton"
+  user-profile:
+    header:
+      label: "Profil de l'utilisateur"
+      preview: "APERÇU"
+      change-profile-color: "CHANGER LA COULEUR DU PROFIL"
+      change-language: "CHANGER LA LANGUE DU PROFIL"
+  profile:
+    errors:
+      username-required: Le nom d'utilisateur ne peut pas être vide
+      profile-color-required: Vous devez spécifier la couleur du profil
+      profile-color-bad-format: "La couleur du profil doit être au format #rrggbb"
+  change-color-label: Cette couleur sera utilisée dans votre interface
+  change-language-label: Cette langue sera utilisée dans votre interface
   username-label: "NOM D'UTILISATEUR"
-  api-token-header: "API TOKEN"
-  token-label: "JETON"
-  button-copy-token-label: "Copier le jeton"
-  expiration-datetime-label: "DATE D'EXPIRATION:"
-  button-generate-new-token-label: "Générer un jeton"
-  upload-profile-image-label: "Importer une photo de profil :"
-  button-browse-image-label: "Appliquer"
-  have-account: Vous avez déjà un compte?
-  have-account-link: Entrer
-  submit-button: Confirmer
-
-labels:
-  username: Identifiant d'utilisateur
-  email: Adresse e-mail
-  password: Mot de passe
-  confirm-password: Confirmez le mot de passe
-errors:
-  user-exists: L'utilisateur avec {field} "{value}" existe déjà
-  username-required: Pièce d'identité requise
-  email-required: Adresse mail (requis)
-  email-invalid: L'adresse e-mail n'est pas valide, veuillez entrer une adresse valide
-  password-required: Mot de passe requis
-  passwords-do-not-match: Le mot de passe ne correspond pas aux informations du compte, veuillez entrer le mot de passe correct
-
+  api-token-header: "API Token"
+  token-label: "TOKEN"
+  token:
+    token-hidden: "[caché]"
+    copied: Copié dans le presse-papier!
+  expiration-datetime-label: "DATEHEURE EXPIRATION:"
+  upload-profile-image-label: "Télécharger l'image de profil :"
+  account_removal:
+    header: "SUPPRESSION DE COMPTE"
+    text: "La désactivation de votre compte signifie que vous pouvez le récupérer à tout moment après cette action."
+    button-label: "Supprimer le compte"
+    warning:
+      text: "Êtes-vous sûr de vouloir supprimer votre compte ?"
+      header: "Avertissement!"
+      button-label: "Qui"
+  languages:
+    english-label: "Anglais"
+    french-label: "Français"
+    german-label: "Allemand"
+    spanish-label: "Espagnol"
+    russian-label: "Russe"
+  
 note-show:
   edit-button: "Modifier"
   delete-button: "Supprimer"
   author-of-note: "Utilisateur"
   date-of-creation-label: "A été créé"
-  warning-label: « Voulez-vous supprimer cette note ?»
+  warning-label: "Voulez-vous supprimer cette note ?"
   yes-button: "Oui"
   no-button: "Non"
 note-edit:
