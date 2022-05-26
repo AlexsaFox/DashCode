@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useVuelidate from '@vuelidate/core'
+import { useVuelidate } from '@vuelidate/core'
 import useErrors from '~/store/useErrors'
 import checkFormErrors from '~/utils/checkFormErrors'
 import { createNote } from '~/utils/notes'

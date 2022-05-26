@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { onBeforeRouteLeave } from 'vue-router'
 import noteEditActions from '~/constants/types/noteEditActions'
+import useErrors from '~/store/useErrors'
 import { getTagColor } from '~/utils/colors'
 import renderMarkdown from '~/utils/renderMarkdown'
 
+const errors = useErrors()
 const router = useRouter()
 const { t } = useI18n()
 
@@ -55,21 +58,43 @@ function sanitizeNewTagInput() {
       || (letterCode >= 48 && letterCode <= 57) // 0-9
       || (letterCode === 45)) // - (dash symbol)
       sanitized += newTag.value[i]
-    else if (letterCode >= 65 && letterCode <= 90)
+    else if (letterCode >= 65 && letterCode <= 90) // A-Z => a-z
       sanitized += newTag.value[i].toLowerCase()
+    else if (letterCode === 32 || letterCode === 95) // ' ', '_' => '-'
+      sanitized += '-'
   }
   newTag.value = sanitized
 }
 
 const markdownShown = ref(false)
 const markdownHTML = ref('')
+const contentTextarea = ref<null | HTMLTextAreaElement>(null)
 function handleTabPress() {
-  note.value.content += '    '
+  if (contentTextarea.value !== null) {
+    const cursorPos = contentTextarea.value.selectionStart
+    const before = note.value.content.substring(0, cursorPos)
+    const after = note.value.content.substring(cursorPos)
+    note.value.content = `${before}    ${after}`
+    nextTick(() => {
+      if (contentTextarea.value !== null)
+        contentTextarea.value.setSelectionRange(cursorPos + 4, cursorPos + 4)
+    })
+  }
 }
 function handleBackspacePress(event: KeyboardEvent) {
-  if (note.value.content.endsWith('    ')) {
-    note.value.content = note.value.content.substring(0, note.value.content.length - 4)
-    event.preventDefault()
+  if (contentTextarea.value !== null) {
+    const cursorPos = contentTextarea.value.selectionStart
+    const before = note.value.content.substring(0, cursorPos - 4)
+    const previousFour = note.value.content.substring(cursorPos - 4, cursorPos)
+    const after = note.value.content.substring(cursorPos)
+    if (previousFour === '    ') {
+      note.value.content = `${before}${after}`
+      event.preventDefault()
+      nextTick(() => {
+        if (contentTextarea.value !== null)
+          contentTextarea.value.setSelectionRange(cursorPos - 4, cursorPos - 4)
+      })
+    }
   }
 }
 function changeShowMarkdown() {
@@ -79,18 +104,25 @@ function changeShowMarkdown() {
 }
 
 const showConfirmPopup = ref(false)
+let nextRoute = null as null | string
 function handleExitAction(action: noteEditActions) {
   showConfirmPopup.value = false
 
-  if (action === noteEditActions.discard)
-    router.push('/')
+  if (action === noteEditActions.discard) {
+    if (nextRoute !== null)
+      router.push(nextRoute)
+  }
 
-  else if (action === noteEditActions.save)
+  else if (action === noteEditActions.save) {
     saveNote()
+    if (nextRoute !== null && errors.errors.length === 1)
+      router.push(nextRoute)
+  }
+
+  else if (action === noteEditActions.cancel) { nextRoute = null }
 }
 
 function saveNote() {
-  console.log(privacySelectorValue.value)
   saveAction(
     note.value.title,
     privacySelectorValue.value === 'private',
@@ -100,6 +132,14 @@ function saveNote() {
   )
 }
 
+onBeforeRouteLeave((to) => {
+  if (nextRoute !== null)
+    return true
+
+  showConfirmPopup.value = true
+  nextRoute = to.path
+  return false
+})
 </script>
 
 <template>
@@ -108,7 +148,7 @@ function saveNote() {
   <div class="crutch">
     <section class="main-container">
       <section class="close-bar">
-        <button @click="showConfirmPopup = true">
+        <button @click="router.push('/')">
           <div class="i-carbon:close" />
         </button>
       </section>
@@ -128,6 +168,7 @@ function saveNote() {
       <section class="content-bar">
         <textarea
           v-if="!markdownShown"
+          ref="contentTextarea"
           v-model="note.content"
           :placeholder="t('note-edit.content.placeholder')"
           @keydown.tab.prevent="handleTabPress"
@@ -224,7 +265,8 @@ function saveNote() {
     }
 
     select {
-      background-color: #303D67;
+      color: var(--user-contrasting-color);
+      background-color: var(--user-color);
       border-radius: 10px;
       width: 14%;
       padding: 4px 0px;
@@ -233,8 +275,9 @@ function saveNote() {
       font-size: 16px;
 
       option {
+        color: var(--user-contrasting-color);
+        background-color: var(--user-color);
         margin: 5px 0;
-        background-color: #303D67;
         border: none;
       }
 
@@ -283,14 +326,16 @@ function saveNote() {
       justify-content: right;
 
       button {
-        background-color: #303D67;
+        color: var(--user-contrasting-color);
+        background-color: var(--user-color);
         padding: 10px 32px;
         border-radius: 10px;
         text-align: right;
         font-size: 16px;
+        transition-duration: 0.2s;
 
         &:hover {
-          background-color: #2B3B5F;
+          opacity: 0.8;
         }
       }
     }
@@ -340,12 +385,13 @@ function saveNote() {
         }
 
         button {
-          background-color: #465586;
+          color: var(--user-contrasting-color);
+          background-color: var(--user-color);
           padding: 2px 8px;
           transition-duration: 0.2s;
 
           &:hover {
-            background-color: #303D67;
+            opacity: 0.8;
           }
         }
       }
@@ -372,14 +418,15 @@ function saveNote() {
     }
 
     button {
+      color: var(--user-contrasting-color);
+      background-color: var(--user-color);
       padding: 10px 64px;
       border-radius: 10px;
-      background-color: #303D67;
       font-size: 16px;
       transition-duration: 0.2s;
 
       &:hover {
-        background-color: #2B3B5F;
+        opacity: 0.8;
       }
     }
   }
