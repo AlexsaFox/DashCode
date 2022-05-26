@@ -5,7 +5,6 @@
 import { storeToRefs } from 'pinia'
 import { getContrastingColor } from './utils/colors'
 import useAuthStore from './store/useAuth'
-import { i18n } from './modules/i18n'
 
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
@@ -13,15 +12,13 @@ useHead({
   meta: [{ name: 'description', content: '' }],
 })
 
-const { loggedIn, user, locale } = storeToRefs(useAuthStore())
+const { loggedIn, user } = storeToRefs(useAuthStore())
 const userProfileColor = computed(() => {
   return loggedIn.value ? user.value.profileColor : '#9e6dee'
 })
 const userProfileContrastingColor = computed(() => {
   return getContrastingColor(userProfileColor.value)
 })
-
-i18n.global.locale.value = locale.value
 </script>
 
 <template>

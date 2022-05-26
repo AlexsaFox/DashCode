@@ -56,18 +56,21 @@ services:
     build:
       context: client
       args:
-        - API_HOST=http://localhost/api
+        - API_HOST=${DASHCODE_API_HOST}
     container_name: dashcode_nginx_client
-    ports:
-      - 80:80
+    expose:
+      - 80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     restart: unless-stopped
     networks:
       - app-network
+      - proxy_net
     depends_on:
       - api
 
 
 networks:
   app-network:
+  proxy_net:
+    external: true
