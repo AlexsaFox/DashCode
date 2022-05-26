@@ -272,7 +272,7 @@ onBeforeRouteLeave((to) => {
       padding: 4px 0px;
       text-align: center;
       color: white;
-      font-size: 16px;
+      font-size: 18px;
 
       option {
         color: var(--user-contrasting-color);
@@ -331,7 +331,7 @@ onBeforeRouteLeave((to) => {
         padding: 10px 32px;
         border-radius: 10px;
         text-align: right;
-        font-size: 16px;
+        font-size: 18px;
         transition-duration: 0.2s;
 
         &:hover {
@@ -422,7 +422,7 @@ onBeforeRouteLeave((to) => {
       background-color: var(--user-color);
       padding: 10px 64px;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 18px;
       transition-duration: 0.2s;
 
       &:hover {
