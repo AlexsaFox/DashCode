@@ -1,31 +1,32 @@
 @mixin markdown-config {
-    --prism-foreground: #d4cfbf;
-    --prism-background: #151515;
-    --prism-comment: #758575;
-    --prism-string: #d48372;
-    --prism-literal: #429988;
-    --prism-keyword: #4d9375;
-    --prism-boolean: #1c6b48;
-    --prism-number: #6394bf;
-    --prism-variable: #c2b36e;
-    --prism-function: #a1b567;
-    --prism-deleted: #a14f55;
-    --prism-class: #54b1bf;
-    --prism-builtin: #e0a569;
-    --prism-property: #dd8e6e;
-    --prism-namespace: #db889a;
-    --prism-punctuation: #858585;
-    --prism-decorator: #bd8f8f;
-    --prism-regex: #ab5e3f;
-    --prism-json-property: #6b8b9e;
-    --prism-line-number: #888888;
-    --prism-line-number-gutter: #eeeeee;
-    --prism-line-highlight-background: #444444;
-    --prism-selection-background: #444444;
-
+    --prism-foreground: #eeffff;
+    --prism-background: #4c5977;
+    --prism-comment: #6686cc;
+    --prism-string: #00d9ff;
+    --prism-literal: #795bff;
+    --prism-keyword: #91ffd5;
+    --prism-boolean: #9488ff;
+    --prism-number: #ffed4f;
+    --prism-variable: #795bff;
+    --prism-constant: #00fff2;
+    --prism-selector: #c182fc;
+    --prism-function: #82aaff;
+    --prism-deleted: #ba53ff;
+    --prism-class: #bd6ab7;
+    --prism-builtin: #f8a8ff;
+    --prism-property: #98d4fc;
+    --prism-namespace: #816bff;
+    --prism-punctuation: #C792EA;
+    --prism-decorator: #49d5ff;
+    --prism-regex: #89DDFF;
+    --prism-interpolation: #ffc88a;
+    --prism-json-property: #f07178;
+    --prism-line-number: #C792EA;
+    --prism-line-number-gutter: #e88db8;
+    --prism-line-highlight-background: #d753ff;
+    --prism-selection-background: #756cf7;
     $font-size: 16px;
     font-size: 16px;
-
     h6 { font-size: $font-size + 1*4px; }
     h5 { font-size: $font-size + 2*4px; }
     h4 { font-size: $font-size + 3*4px; }
