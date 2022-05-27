@@ -20,7 +20,7 @@ const showNotesMenu = ref(false)
         <router-link to="/settings">
           {{ t('index.home.side-buttons.settings') }}
         </router-link>
-        <button class="logout" @click="auth.logout().then(() => { $router.go(0) })">
+        <button class="logout" @click="auth.logout()">
           {{ t('index.home.side-buttons.log-out') }}
         </button>
       </nav>

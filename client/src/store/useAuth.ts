@@ -164,6 +164,8 @@ const useAuthStore = defineStore('auth', {
       localStorage.removeItem('loggedIn')
       localStorage.removeItem('token')
       this.$reset()
+
+      this.router.push('/')
     },
 
     changeLocale(value: string) {

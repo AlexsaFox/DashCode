@@ -26,3 +26,8 @@ function saveNote(title: string, isPrivate: boolean, content: string, tags: stri
   <edit-note :save-action="saveNote" />
   <NavButtons />
 </template>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>
