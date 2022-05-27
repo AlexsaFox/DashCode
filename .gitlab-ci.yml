@@ -41,10 +41,6 @@ test-job:
 deploy-job:
   stage: deploy
   script:
-    - export $DASHCODE_SECRET_KEY=$(DASHCODE_SECRET_KEY)
-    - export $DASHCODE_DB=${DASHCODE_DB}
-    - export $DASHCODE_DB_USER=${DASHCODE_DB_USER}
-    - export $DASHCODE_DB_PASSWORD=${DASHCODE_DB_PASSWORD}
     - docker-compose build --parallel
     - docker-compose stop
     - docker-compose rm -f
