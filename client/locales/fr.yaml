@@ -80,7 +80,7 @@ settings:
     hide-token-label: Masquer le jeton
     browse-image-label: "Parcourir"
     copy-token-label: "Copier le jeton"
-    reset-token-label: Reset token 
+    reset-token-label: Réinitialiser le jeton
     
   user-profile:
     header:
@@ -96,8 +96,8 @@ settings:
   change-color-label: Cette couleur sera utilisée dans votre interface
   change-language-label: Cette langue sera utilisée dans votre interface
   username-label: "NOM D'UTILISATEUR"
-  api-token-header: "API Token"
-  token-label: "TOKEN"
+  api-token-header: "Jetons d'API"
+  token-label: "JETONS"
   token:
     token-hidden: "[caché]"
     copied: Copié dans le presse-papier!
