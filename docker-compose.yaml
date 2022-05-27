@@ -15,9 +15,9 @@ services:
   postgres:
     image: postgres
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=backend
+      - POSTGRES_USER=${DASHCODE_DB_USER}
+      - POSTGRES_PASSWORD=${DASHCODE_DB_PASSWORD}
+      - POSTGRES_DB=${DASHCODE_DB}
     expose:
       - 5432
     volumes:
@@ -36,13 +36,13 @@ services:
       - API_server__host=0.0.0.0
       - API_server__port=8000
       - API_cors__origins=['http://nginx_client']
-      - API_database__dsn=postgresql+asyncpg://user:password@postgres:5432/backend
+      - API_database__dsn=postgresql+asyncpg://${DASHCODE_DB_USER}:${DASHCODE_DB_PASSWORD}@postgres:5432/${DASHCODE_DB}
       - API_cache__dsan=redis://redis:6379
       - API_debug=false
-      - API_secret_key=ababa
-      - API_base_superuser__username=admin
-      - API_base_superuser__email=admin@admin.com
-      - API_base_superuser__password=password
+      - API_base_superuser__username=${DASHCODE_ADMIN_USERNAME}
+      - API_base_superuser__email=${DASHCODE_ADMIN_EMAIL}
+      - API_base_superuser__password=${DASHCODE_ADMIN_PASSWORD}
+      - API_secret_key=${DASHCODE_SECRET_KEY}
     restart: unless-stopped
     volumes:
       - ./uploads:/app/uploads
