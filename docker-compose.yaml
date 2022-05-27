@@ -15,9 +15,9 @@ services:
   postgres:
     image: postgres
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=backend
+      - POSTGRES_USER=$(DASHCODE_DB_USER)
+      - POSTGRES_PASSWORD=$(DASHCODE_DB_PASSWORD)
+      - POSTGRES_DB=$(DASHCODE_DB)
     expose:
       - 5432
     volumes:
@@ -39,7 +39,7 @@ services:
       - API_database__dsn=postgresql+asyncpg://user:password@postgres:5432/backend
       - API_cache__dsan=redis://redis:6379
       - API_debug=false
-      - API_secret_key=ababa
+      - API_secret_key=$(DASHCODE_SECRET_KEY)
     restart: unless-stopped
     networks:
       - app-network
