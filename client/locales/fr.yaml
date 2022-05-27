@@ -60,6 +60,9 @@ settings:
       password-too-short: "Votre nouveau mot de passe doit contenir au moins 8 caractères"
       password-required: "Vous devez spécifier votre mot de passe actuel pour des raisons de sécurité"
   button-right-part-header: "Paramètres utilisateur"
+  button-right-part-account: "Compte" 
+  button-right-part-profile: "Profil"
+  button-right-part-token: "API jeton" 
   button-right-part-back: "Retour"
   email-label: "E-MAIL"
   new-password-label: "NOUVEAU MOT DE PASSE"
@@ -77,6 +80,8 @@ settings:
     hide-token-label: Masquer le jeton
     browse-image-label: "Parcourir"
     copy-token-label: "Copier le jeton"
+    reset-token-label: Reset token 
+    
   user-profile:
     header:
       label: "Profil de l'utilisateur"
@@ -96,6 +101,10 @@ settings:
   token:
     token-hidden: "[caché]"
     copied: Copié dans le presse-papier!
+    
+    reset-warning: >-  
+      Voulez-vous vraiment réinitialiser votre jeton d'API ? 
+      Cela rendrait tous les jetons existants invalides.
   expiration-datetime-label: "DATEHEURE EXPIRATION:"
   upload-profile-image-label: "Télécharger l'image de profil :"
   account_removal:
@@ -113,21 +122,38 @@ settings:
     spanish-label: "Espagnol"
     russian-label: "Russe"
   
+note: 
+  attributes:
+    title: Entête
+    link: Lien
+    privacy:
+      public: Public
+      private: Privé
+
 note-show:
-  edit-button: "Modifier"
-  delete-button: "Supprimer"
+  edit-button: "Éditer"
+  delete-button: "Effacer"
   author-of-note: "Utilisateur"
   date-of-creation-label: "A été créé"
-  warning-label: "Voulez-vous supprimer cette note ?"
-  yes-button: "Oui"
+  warning-label: "Voulez-vous supprimer cette note ?"
+  yes-button: "Qui"
   no-button: "Non"
+
 note-edit:
-  save-button: "Sauver"
+  add-tag:
+    placeholder: Nouvelle étiquette
+    add: Ajouter
+  content:
+    placeholder: Entrez quelque chose...
+  errors: "" 
+
+  preview-markdown: Aperçu du balisage
+  unpreview-markdown: Arrêtez de naviguer
+  save-button: "Enregistrer"
   warning-label: "Voulez-vous enregistrer vos modifications?"
   unsave-button: "Ne pas enregistrer"
-  cancel-button: "Annuler"
-note_create:
-  create-button: "Créer"
+  cancel-button: "Annuler" 
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Retour au profil"

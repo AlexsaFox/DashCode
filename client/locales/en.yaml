@@ -40,7 +40,7 @@ index:
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
   title-2: "Without wasting time."
   text-2: "Organize your notes or go through public ones. With them you can solve your problems as fast as possible."
-  title-3: "Never ask internet “How can I solve this problem?” again."
+  title-3: "Never ask internet \"How can I solve this problem?\" again."
   text-3: "In DashCode, your information and solutions are at hand!"
 
   home:
@@ -60,9 +60,9 @@ settings:
       password-too-short: "Your new password must contain at least 8 characters"
       password-required: "You have to specify your current password for security reasons"
   button-right-part-header: "User Settings"
-  button-right-part-account: "Account"
+  button-right-part-account: "Account" 
   button-right-part-profile: "Profile"
-  button-right-part-token: "API token"
+  button-right-part-token: "API token" 
   button-right-part-back: "Back"
   email-label: "EMAIL"
   new-password-label: "NEW PASSWORD"
@@ -76,11 +76,12 @@ settings:
       color-label: Apply
       changes-label: "Submit"
     change-password-label: "Change password"
-    show-token-label: "Show token"
+    show-token-label: "Show token" 
     hide-token-label: Hide token
     browse-image-label: "Browse"
     copy-token-label: "Copy Token"
-    reset-token-label: Reset token
+    reset-token-label: Reset token 
+    
   user-profile:
     header:
       label: "User Profile"
@@ -100,7 +101,8 @@ settings:
   token:
     token-hidden: "[hidden]"
     copied: Copied to clipboard!
-    reset-warning: >-
+    
+    reset-warning: >-  
       Are you sure that you want to reset your API token? That would make all
       existing tokens invalid.
   expiration-datetime-label: "EXPIRATION DATETIME:"
@@ -120,7 +122,7 @@ settings:
     spanish-label: "Spanish"
     russian-label: "Russian"
 
-note:
+note: 
   attributes:
     title: Title
     link: Link
@@ -150,7 +152,7 @@ note-edit:
   save-button: "Save"
   warning-label: "Do you want to save your changes?"
   unsave-button: "Do not save"
-  cancel-button: "Cancel"
+  cancel-button: "Cancel" 
 
 user-profile:
   buttons-back:
