@@ -1,4 +1,5 @@
 import { createPinia } from 'pinia'
+import type { Router } from 'vue-router'
 import { type UserModule } from '~/types'
 
 // Setup Pinia
@@ -14,4 +15,14 @@ export const install: UserModule = ({ isClient, initialState, app }) => {
 
   else
     initialState.pinia = pinia.state.value
+
+  pinia.use(({ store }) => {
+    store.router = markRaw(useRouter())
+  })
+}
+
+declare module 'pinia' {
+  export interface PiniaCustomProperties {
+    router: Router
+  }
 }

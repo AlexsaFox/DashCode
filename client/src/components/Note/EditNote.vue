@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeRouteLeave } from 'vue-router'
 import noteEditActions from '~/constants/types/noteEditActions'
+import useAuthStore from '~/store/useAuth'
 import useErrors from '~/store/useErrors'
 import { getTagColor } from '~/utils/colors'
 import renderMarkdown from '~/utils/renderMarkdown'
@@ -133,6 +134,9 @@ function saveNote() {
 }
 
 onBeforeRouteLeave((to) => {
+  if (!useAuthStore().loggedIn)
+    return true
+
   if (nextRoute !== null)
     return true
 
@@ -271,7 +275,6 @@ onBeforeRouteLeave((to) => {
       width: 14%;
       padding: 4px 0px;
       text-align: center;
-      color: white;
       font-size: 18px;
 
       option {
