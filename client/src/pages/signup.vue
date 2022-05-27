@@ -90,5 +90,6 @@ function onSubmit() {
 
 <route lang="yaml">
 meta:
+  requiresAuth: false
   layout: login-signup
 </route>

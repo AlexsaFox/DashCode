@@ -26,3 +26,8 @@ main {
   }
 }
 </style>
+
+<route lang="yaml">
+meta:
+  requiresAuth: false
+</route>

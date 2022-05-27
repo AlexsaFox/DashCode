@@ -8,6 +8,7 @@
   <Notes />
   <OneButtonBack />
 </template>
+
 <style>
 .block_for_header {
   display: inline-block;
@@ -31,3 +32,8 @@
     margin-bottom: 2%;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>

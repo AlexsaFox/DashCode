@@ -43,3 +43,8 @@ settingsPage.changePage(Pages.MyAccountPage)
     top: 1%;
 }
 </style>
+
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>
