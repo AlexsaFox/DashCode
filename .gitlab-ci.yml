@@ -42,9 +42,9 @@ deploy-job:
   stage: deploy
   script:
     - export DASHCODE_API_HOST=${DASHCODE_API_HOST}
-    - docker-compose stop 
-    - docker-compose rm -f
     - docker-compose build --parallel
+    - docker-compose stop
+    - docker-compose rm -f
     - docker-compose up -d
   tags:
     - main
