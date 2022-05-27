@@ -49,9 +49,9 @@ deploy-job:
     - main
   variables:
     GIT_CLEAN_FLAGS: none
-  # rules:
-  #   - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  #     when: always
-  #   - if: $CI_COMMIT_BRANCH == "dev"
-  #     when: always
-  #   - when: never
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: always
+    - if: $CI_COMMIT_BRANCH == "dev"
+      when: always
+    - when: never
