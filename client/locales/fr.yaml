@@ -1,4 +1,17 @@
-not-found: Pas trouvé
+not-found: 
+  header: Es-tu perdu?
+  details: >-
+    Nous ne parvenons pas à trouver la page que vous recherchez.
+    Peut-être qu'il a été supprimé ou que vous n'avez pas les autorisations pour y accéder ?
+  buttons:
+    go-home: Retour à la page d'accueil
+    go-back: Revenir à la page précédente
+    
+  click-here:
+    details: >-
+      Vous devriez être automatiquement redirigé vers la page suivante. Si cela ne se produit pas,
+    link: suivez ce lien
+
 login:
   no-account: Toujours pas inscrit?
   no-account-link: Enregistrez un compte maintenant
@@ -138,6 +151,29 @@ note-show:
   warning-label: "Voulez-vous supprimer cette note ?"
   yes-button: "Qui"
   no-button: "Non"
+  
+  no-link: Pas de lien
+  created-by: Qui a créé
+  created-at: Une fois créé
+  date: 
+    months:
+      january: Jan
+      february: Fév
+      march: Mar
+      april: Avr
+      may: Mai
+      june: Juin
+      july: Juil
+      august: Août
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Déc
+  delete-warning:
+    header: Avertissement!
+    details: Vous ne pouvez pas récupérer votre note après l'avoir supprimée. Es-tu sur de vouloir continuer?
+    continue: Je comprends, continuez
+    cancel: Ne supprimez pas
 
 note-edit:
   add-tag:
@@ -145,8 +181,21 @@ note-edit:
     add: Ajouter
   content:
     placeholder: Entrez quelque chose...
-  errors: "" 
-
+  errors: 
+    title:
+      required: La note doit avoir un titre
+      maxlength: Le titre de la note ne peut pas dépasser 65 caractères
+    content:
+      required: La note doit avoir un contenu
+    link:
+      url: Le lien doit être valide
+    tags:
+      tag-length: Les balises ne peuvent pas dépasser 30 caractères
+      tag-charset: Les balises ne peuvent contenir que des lettres latines minuscules, des chiffres ou des tirets.
+      
+    privacy: 
+      required: Vous devez spécifier les paramètres de confidentialité
+  
   preview-markdown: Aperçu du balisage
   unpreview-markdown: Arrêtez de naviguer
   save-button: "Enregistrer"
@@ -159,4 +208,12 @@ user-profile:
     button-back-to-profile: "Retour au profil"
     button-back-to-social-media: "Retour aux réseaux sociaux"
   profile-block:
-    amount_of_notes-label: "notes publiques"
+    amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
+
+explore:
+  header:
+    header: Notes publiques
+    sort-by: Spectacle
+    from-newest: le plus récent en premier
+    from-oldest: plus vieux d'abord
+    

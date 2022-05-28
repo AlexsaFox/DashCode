@@ -202,11 +202,11 @@ onBeforeRouteLeave((to) => {
           </li>
           <li class="add-tag">
             <input
-              v-model="newTag" maxlength="30" placeholder="new tag" :size="newTag.length + 1"
+              v-model="newTag" maxlength="30" :placeholder="t('note-edit.add-tag.placeholder')" :size="newTag.length + 1"
               @input="sanitizeNewTagInput"
             >
             <button @click="addTag">
-              Add
+              {{ t('note-edit.add-tag.add') }}
             </button>
           </li>
         </ul>

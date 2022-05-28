@@ -1,4 +1,18 @@
-not-found: Nicht gefunden
+not-found: 
+  header: Bist du verloren?
+  details: >-
+    Wir können die Seite, die Sie suchen, nicht finden. 
+    Vielleicht wurde es gelöscht oder Sie haben keine Berechtigung, darauf zuzugreifen?
+  buttons:
+    go-home: Zurück zur Startseite
+    go-back: Gehen Sie zurück zur vorherigen Seite
+    
+  click-here:
+    details: >-
+      Sie sollten automatisch auf die nächste Seite weitergeleitet werden. Wenn das 
+      nicht passiert,
+    link: folge diesem Link
+
 login:
   no-account: Noch nicht registriert?
   no-account-link: Jetzt registrieren
@@ -93,8 +107,10 @@ settings:
       username-required: Der Benutzername darf nicht leer sein
       profile-color-required: Sie müssen eine Profilfarbe angeben
       profile-color-bad-format: "Profilfarbe muss das Format #rrggbb haben"
-  change-color-label: Diese Farbe wird in der Benutzeroberfläche verwendet
-  change-language-label: Diese Sprache wird in Ihrer Benutzeroberfläche verwendet
+  change-color-label: Diese Farbe wird in der 
+                      Benutzeroberfläche verwendet
+  change-language-label: Diese Sprache wird in Ihrer 
+                         Benutzeroberfläche verwendet
   username-label: "BENUTZERNAME"
   api-token-header: "API-Token"
   token-label: "TOKEN"
@@ -138,6 +154,29 @@ note-show:
   warning-label: "Möchten Sie diese Notiz löschen?"
   yes-button: "Ja"
   no-button: "Nein"
+  
+  no-link: Keine Verbindung
+  created-by: Wer kreierte
+  created-at: Wenn erstellt
+  date: 
+    months:
+      january: Jan
+      february: Feb
+      march: März
+      april: Apr
+      may: Mai
+      june: Jun
+      july: Jul
+      august: Aug
+      september: Sep
+      october: Okt
+      november: Nov
+      december: Dez
+  delete-warning:
+    header: Warning!
+    details: You can't recover your note after deleting it. Are you sure you want to continue?
+    continue: I understand, continue
+    cancel: Don't delete
 
 note-edit:
   add-tag:
@@ -145,8 +184,21 @@ note-edit:
     add: Hinzufügen
   content:
     placeholder: Schreibe etwas...
-  errors: "" 
-
+  errors: 
+    title:
+      required: Hinweis muss einen Titel haben
+      maxlength: Der Notiztitel darf nicht länger als 65 Zeichen sein.
+    content:
+      required: Hinweis muss einen Inhalt haben
+    link:
+      url: Link muss gültig sein
+    tags:
+      tag-length: Tags dürfen nicht länger als 30 Zeichen sein
+      tag-charset: Tags dürfen nur lateinische Kleinbuchstaben, Ziffern oder Bindestriche enthalten
+      
+    privacy: 
+      required: Sie müssen Datenschutzeinstellungen festlegen
+   
   preview-markdown: Markup-Vorschau
   unpreview-markdown: Stoppen Sie das Surfen
   save-button: "Speichern"
@@ -159,4 +211,12 @@ user-profile:
     button-back-to-profile: "Zurück zum Profil"
     button-back-to-social-media: "Zurück zu den sozialen Medien"
   profile-block:
-    amount_of_notes-label: "öffentliche Notizen"
+    amount_of_notes-label: "keine öffentlichen Notizen | 1 öffentliche Notiz | {count} öffentliche Notizen"
+
+explore:
+  header:
+    header: öffentliche Notizen
+    sort-by: Zeigen
+    from-newest: neuere zuerst
+    from-oldest: älter zuerst
+    
