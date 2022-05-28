@@ -17,8 +17,13 @@ if (!user)
   <section class="user-profile">
     <section class="user-data">
       <UserProfilePicture :filename="user.profilePictureFilename ?? null" />
-      <h2>{{ user.username }}</h2>
-      <p>{{ t('user-profile.profile-block.amount_of_notes-label', user.notes.length) }}</p>
+      <h2>
+        {{ user.username }}
+        <div v-if="user.isSuperuser" :title="t('user-profile.profile-block.is-admin')" class="is-admin i-carbon:police" />
+      </h2>
+      <p>
+        {{ t('user-profile.profile-block.amount_of_notes-label', user.notes.length) }}
+      </p>
     </section>
 
     <section class="user-notes">
@@ -57,8 +62,15 @@ if (!user)
     }
 
     h2 {
+      display: flex;
+      align-items: center;
       font-family: 'ClearSans-Bold';
       font-size: 36px;
+
+      .is-admin {
+        margin-left: 10px;
+        font-size: 30px;
+      }
     }
 
     p {

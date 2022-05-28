@@ -73,6 +73,7 @@ query($username: String!) {
           user {
               username
               profilePictureFilename
+              isSuperuser
 
               notes {
                 id

@@ -60,6 +60,7 @@ index:
   home:
     side-buttons:
       settings: Settings
+      public-profile: Public profile
       log-out: Log out
       add-notes: New note
       go-home: Go home
@@ -211,6 +212,7 @@ user-profile:
     button-back-to-profile: "Back to profile"
     button-back-to-social-media: "Back to social media"
   profile-block:
+    is-admin: This user is an administrator
     amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
 
 explore:

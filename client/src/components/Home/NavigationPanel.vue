@@ -15,6 +15,9 @@ const showUserMenu = ref(false)
         <h3>{{ auth.user.username }}</h3>
       </header>
       <nav v-if="showUserMenu">
+        <router-link :to="`/user/${auth.user.username}`">
+          {{ t('index.home.side-buttons.public-profile') }}
+        </router-link>
         <router-link to="/settings">
           {{ t('index.home.side-buttons.settings') }}
         </router-link>
