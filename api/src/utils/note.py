@@ -125,8 +125,6 @@ def get_public_notes(
             raise NoteNotFoundError
         start_from_id = start_from.row_id + order_coef
 
-    print(start_from_id)
-
     notes = (
         session.query(Note)
         .order_by(order_coef * Note.row_id)
