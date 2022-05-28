@@ -84,6 +84,7 @@ settings:
   current-password-label: "AKTUELLES PASSWORT"
   button:
     edit:
+      user-profile: Benutzerprofil bearbeiten
       label: Ändern
       avatar-label: "Avatar ändern"
     submit:
@@ -156,8 +157,8 @@ note-show:
   no-button: "Nein"
   
   no-link: Keine Verbindung
-  created-by: Wer kreierte
-  created-at: Wenn erstellt
+  created-by: Erstellt von
+  created-at: um
   date: 
     months:
       january: Jan

@@ -84,6 +84,7 @@ settings:
   current-password-label: "CONTRASEÑA ACTUAL"
   button: 
     edit:
+      user-profile: Editar perfil de usuario
       label: Editar
       avatar-label: "Editar Avatar"
     submit:
@@ -154,8 +155,8 @@ note-show:
   no-button: "Pero"
   
   no-link: No hay enlace
-  created-by: Quien lo creo
-  created-at: Cuando se crea
+  created-by: Creado por
+  created-at: a las
   date: 
     months:
       january: Ene

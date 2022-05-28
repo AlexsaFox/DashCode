@@ -83,6 +83,7 @@ settings:
   current-password-label: "MOT DE PASSE ACTUEL"
   button:
     edit:
+      user-profile: Modifier le profil utilisateur
       label: Éditer
       avatar-label: "Modifier Avatar"
     submit:
@@ -153,8 +154,8 @@ note-show:
   no-button: "Non"
   
   no-link: Pas de lien
-  created-by: Qui a créé
-  created-at: Une fois créé
+  created-by: Créée par
+  created-at: à
   date: 
     months:
       january: Jan

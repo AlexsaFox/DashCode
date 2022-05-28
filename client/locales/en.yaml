@@ -84,6 +84,7 @@ settings:
   current-password-label: "CURRENT PASSWORD"
   button:
     edit:
+      user-profile: Edit User Profile
       label: Edit
       avatar-label: "Edit avatar"
     submit:

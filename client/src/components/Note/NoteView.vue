@@ -55,8 +55,16 @@ async function fetchNoteData() {
   isPrivate.value = note.isPrivate
   user.value = note.user
 
-  const datetimeRegexp = /(\d*)\-(\d*)\-(\d*)T(\d*)\:(\d*)\:(\d*)\.(\d*)/g
-  const [, year, monthIdx, day, hour, min, sec, _] = datetimeRegexp.exec(note.creationDate) as RegExpExecArray
+  const timezoneOffset = (new Date()).getTimezoneOffset()
+  const timestamp = Date.parse(note.creationDate)
+  const timezoneTimestamp = timestamp - timezoneOffset * 60_000
+  const localtime = new Date(timezoneTimestamp)
+  const year = localtime.getFullYear()
+  const monthIdx = localtime.getMonth()
+  const day = localtime.getDate()
+  const hour = localtime.getHours()
+  const min = localtime.getMinutes()
+  const sec = localtime.getSeconds()
   const monthMapping = [
     t('note-show.date.months.january'),
     t('note-show.date.months.february'),
@@ -71,7 +79,7 @@ async function fetchNoteData() {
     t('note-show.date.months.november'),
     t('note-show.date.months.december'),
   ]
-  const month = monthMapping[parseInt(monthIdx)]
+  const month = monthMapping[monthIdx - 1]
   date.value = `${hour}:${min}:${sec}, ${day} ${month} ${year}`
 }
 

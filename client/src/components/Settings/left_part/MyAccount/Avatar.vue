@@ -4,6 +4,7 @@ import useSettingsPageStore from '~/store/useSettingsPage'
 import Pages from '~/constants/types/pages'
 
 const auth = useAuthStore()
+const { t } = useI18n()
 const settingsPage = useSettingsPageStore()
 const showEditAvatarPopup = ref(false)
 </script>
@@ -27,7 +28,7 @@ const showEditAvatarPopup = ref(false)
       class="edit_profile"
       @click="settingsPage.changePage(Pages.UserProfilePage)"
     >
-      Edit User Profile
+      {{ t('settings.button.edit.user-profile') }}
     </button>
   </div>
 </template>
