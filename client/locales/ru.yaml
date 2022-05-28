@@ -1,4 +1,17 @@
-not-found: Не найден
+not-found: 
+  header: Вы заблудились?
+  details: >-
+    Мы не можем найти страницу, которую вы ищете.
+    Возможно, она была удалена или у вас нет прав доступа к ней?
+  buttons:
+    go-home: Вернуться на главную страницу
+    go-back: Вернуться на предыдущую страницу
+    
+  click-here:
+    details: >-
+      Вы должны быть автоматически перенаправлены на следующую страницу. Если этого не произойдет,
+    link: перейдите по этой ссылке
+ 
 login:
   no-account: Всё ещё не зарегистрированы?
   no-account-link: Зарегистрироваться сейчас
@@ -138,6 +151,29 @@ note-show:
   warning-label: "Хотите удалить заметку?"
   yes-button: "Да"
   no-button: "Нет"
+  
+  no-link: Нет ссылки
+  created-by: Кем создана
+  created-at: Когда создана
+  date: 
+    months:
+      january: Янв
+      february: Фев
+      march: Мар
+      april: Апр
+      may: Май
+      june: Июн
+      july: Июл
+      august: Авг
+      september: Сент
+      october: Окт
+      november: Ноя
+      december: Дек
+  delete-warning:
+    header: Предупреждение!
+    details: Вы не можете восстановить заметку после ее удаления. Вы уверены что хотите продолжить?
+    continue: Принимаю, продолжить
+    cancel: Не удалять
 
 note-edit:
   add-tag:
@@ -145,8 +181,21 @@ note-edit:
     add: Добавить
   content:
     placeholder: Введите что-нибудь...
-  errors: "" 
+  errors: 
+    title:
+      required: Заметка должна иметь заголовок
+      maxlength: Название заметки не может быть длиннее 65 символов.
+    content:
+      required: Заметка должна иметь содержание
+    link:
+      url: Ссылка должна быть действительной
+    tags:
+      tag-length: Теги не могут быть длиннее 30 символов
+      tag-charset: Теги могут содержать только строчные латинские буквы, цифры или тире.
 
+    privacy:
+      required: Вы должны указать настройки конфиденциальности
+      
   preview-markdown: Предварительный просмотр разметки
   unpreview-markdown: Прекратить просмотр
   save-button: "Сохранить"
@@ -159,4 +208,11 @@ user-profile:
     button-back-to-profile: "Назад к профилю"
     button-back-to-social-media: "Назад к социальным сетям"
   profile-block:
-    amount_of_notes-label: "публичные заметки"
+    amount_of_notes-label: "нет публичных заметок | 1 публичная заметка | {count} общедоступных заметок"
+    
+explore:
+  header:
+    header: Общедоступные заметки
+    sort-by: Показать
+    from-newest: сначала новые
+    from-oldest: сначала старые

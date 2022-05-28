@@ -1,4 +1,18 @@
-not-found: extraviado
+not-found: 
+  header: ¿Estás perdido?
+  details: >-
+    No podemos encontrar la página que está buscando.
+    ¿Quizás se eliminó o no tiene permisos para acceder a él?
+  buttons:
+    go-home: Regresar a la página principal
+    go-back: Volver a la página anterior
+    
+  click-here:
+    details: >-
+      Debería ser redirigido a la página siguiente automáticamente.
+      Si eso no sucede,
+    link: siga este enlace
+
 login:
   no-account: ¿Aún no estás registrado?
   no-account-link: Regístrate ahora
@@ -138,6 +152,29 @@ note-show:
   warning-label: "¿Quieres eliminar esta nota?"
   yes-button: "Sí"
   no-button: "Pero"
+  
+  no-link: No hay enlace
+  created-by: Quien lo creo
+  created-at: Cuando se crea
+  date: 
+    months:
+      january: Ene
+      february: Feb
+      march: Mar
+      april: Abr
+      may: Mayo
+      june: Jun
+      july: Jul
+      august: Ago
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Dic
+  delete-warning:
+    header: ¡Advertencia!
+    details: No puedes recuperar tu nota después de eliminarla. Estás seguro de que quieres continuar?
+    continue: Entiendo, continua
+    cancel: No borrar
 
 note-edit:
   add-tag:
@@ -145,8 +182,21 @@ note-edit:
     add: Agregar
   content:
     placeholder: Introduce algo...
-  errors: "" 
+  errors: 
+    title:
+      required: La nota debe tener un título.
+      maxlength: El título de la nota no puede tener más de 65 caracteres.
+    content:
+      required: La nota debe tener un contenido
+    link:
+      url: El enlace debe ser válido
+    tags:
+      tag-length: Las etiquetas no pueden tener más de 30 caracteres.
+      tag-charset: Las etiquetas pueden contener solo letras latinas en minúsculas, dígitos o guiones
 
+    privacy:
+      required: Tienes que especificar la configuración de privacidad.
+      
   preview-markdown: Vista previa de marcado
   unpreview-markdown: Dejar de navegar
   save-button: "Ahorrar"
@@ -159,4 +209,11 @@ user-profile:
     button-back-to-profile: "Volver al perfil"
     button-back-to-social-media: "Volver a las redes sociales"
   profile-block:
-    amount_of_notes-label: "notas públicas"
+    amount_of_notes-label: "sin notas públicas | 1 nota pública | {contar} notas públicas"
+    
+explore:
+  header:
+    header: Notas publicas
+    sort-by: Espectáculo
+    from-newest: mas nuevo primero
+    from-oldest: mas viejo primero
