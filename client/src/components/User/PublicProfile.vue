@@ -29,7 +29,7 @@ if (!user)
 
 <style scoped lang="scss">
 .user-profile {
-  border: 0.1px solid transparent;
+  border: 1px solid transparent;
 
   .user-data {
     width: 70%;

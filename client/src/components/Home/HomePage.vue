@@ -19,7 +19,7 @@ const notes = await fetchUserNotes()
     <NavigationButton @on-press="router.push('/note/create')">
       <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
     </NavigationButton>
-    <NavigationButton @on-press="router.push('/')">
+    <NavigationButton @on-press="router.push('/explore')">
       <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
     </NavigationButton>
   </NavigationPanel>
@@ -29,7 +29,7 @@ const notes = await fetchUserNotes()
 @import '/src/assets/scss/markdown-config.scss';
 
 .crunch {
-  border: 0.1px solid transparent;
+  border: 1px solid transparent;
 }
 
 .note-container {

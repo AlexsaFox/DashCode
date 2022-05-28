@@ -96,7 +96,7 @@ onMounted(() => {
   <div class="crutch">
     <section class="main-container">
       <section class="close-bar">
-        <button @click="router.push('/')">
+        <button @click="router.back()">
           <div class="i-carbon:close" />
         </button>
       </section>
@@ -129,7 +129,7 @@ onMounted(() => {
 
       <section class="link-bar">
         <p v-if="link.length > 0" class="link">
-          <a @click="router.push(link)">{{ link }}</a>
+          <a :href="link">{{ link }}</a>
         </p>
         <p v-else class="link non-active">
           {{ t('note-show.no-link') }}

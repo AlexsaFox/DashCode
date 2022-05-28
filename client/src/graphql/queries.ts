@@ -15,6 +15,7 @@ query($username: String, $email: String, $password: String!) {
   }
 }
 `
+
 export const WHOAMI_QUERY = gql`
 query {
   whoami {
@@ -74,6 +75,32 @@ query($username: String!) {
               profilePictureFilename
 
               notes {
+                id
+                title
+                content
+                link
+                isPrivate
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`
+
+export const GET_PUBLIC_NOTES = gql`
+query ($first: Int, $after: String, $newestFirst: Boolean) {
+  getPublicNotes(first: $first, after: $after, newestFirst: $newestFirst) {
+      __typename
+      ... on NoteConnection {
+          pageInfo {
+              hasNextPage
+              endCursor
+          }
+          edges {
+              node {
                 id
                 title
                 content

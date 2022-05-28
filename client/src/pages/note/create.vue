@@ -66,7 +66,7 @@ function saveNote(title: string, isPrivate: boolean, content: string, tags: stri
   <edit-note :save-action="saveNote" />
   <NavigationPanel>
     <NavigationButton
-      @on-press="router.push('/')"
+      @on-press="router.push('/explore')"
     >
       <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
     </NavigationButton>

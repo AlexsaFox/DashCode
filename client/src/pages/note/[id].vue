@@ -107,7 +107,7 @@ function saveEdited(title: string, isPrivate: boolean, content: string, tags: st
       <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
     </NavigationButton>
     <NavigationButton
-      @on-press="router.push('/')"
+      @on-press="router.push('/explore')"
     >
       <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
     </NavigationButton>

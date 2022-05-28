@@ -1,5 +1,5 @@
 import { CREATE_NOTE_MUTATION, DELETE_NOTE_MUTATION, EDIT_NOTE_MUTATION } from '~/graphql/mutations'
-import { GET_NOTE_FULL, WHOAMI_NOTES_QUERY } from '~/graphql/queries'
+import { GET_NOTE_FULL, GET_PUBLIC_NOTES, WHOAMI_NOTES_QUERY } from '~/graphql/queries'
 import apolloClient from '~/modules/apollo'
 import { processCommonErrors } from '~/store/utils'
 
@@ -69,4 +69,21 @@ export async function fetchUserNotes() {
     query: WHOAMI_NOTES_QUERY,
   })).data.whoami
   return notes ?? []
+}
+
+export async function getPublicNotes(newestFirst: boolean, first: number, after: string | null) {
+  const { getPublicNotes } = (await apolloClient.query({
+    query: GET_PUBLIC_NOTES,
+    variables: {
+      newestFirst,
+      first,
+      after,
+    },
+  })).data
+
+  if (getPublicNotes.__typename !== 'NoteConnection') {
+    processCommonErrors(getPublicNotes)
+    return null
+  }
+  return getPublicNotes
 }

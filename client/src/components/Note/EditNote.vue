@@ -154,7 +154,7 @@ onBeforeRouteLeave((to) => {
   <div class="crutch">
     <section class="main-container">
       <section class="close-bar">
-        <button @click="router.push('/')">
+        <button @click="router.back()">
           <div class="i-carbon:close" />
         </button>
       </section>

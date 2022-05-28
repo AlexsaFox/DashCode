@@ -208,3 +208,9 @@ user-profile:
   profile-block:
     amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
 
+explore:
+  header:
+    header: Public notes
+    sort-by: Show
+    from-newest: newer first
+    from-oldest: older first
