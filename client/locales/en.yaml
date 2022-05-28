@@ -219,3 +219,7 @@ explore:
     sort-by: Show
     from-newest: newer first
     from-oldest: older first
+
+administrate:
+  header:
+    header: All notes

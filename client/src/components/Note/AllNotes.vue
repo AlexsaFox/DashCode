@@ -56,7 +56,7 @@ await loadNotes()
   <header>
     <div class="container">
       <h3>
-        {{ t('explore.header.header') }}
+        {{ t('administrate.header.header') }}
       </h3>
       <div class="sort-selector">
         <p>{{ t('explore.header.sort-by') }}</p>

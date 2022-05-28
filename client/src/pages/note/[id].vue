@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, maxLength, required, url } from '@vuelidate/validators'
+import useAuthStore from '~/store/useAuth'
 import checkFormErrors from '~/utils/checkFormErrors'
 import { editNote } from '~/utils/notes'
 

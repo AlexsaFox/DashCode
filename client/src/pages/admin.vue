@@ -21,6 +21,11 @@ const router = useRouter()
         <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
       </NavigationButton>
       <NavigationButton
+        @on-press="router.push('/explore')"
+      >
+        <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
+      </NavigationButton>
+      <NavigationButton
         @on-press="router.push('/')"
       >
         <div class="i-carbon:home" /> {{ t('index.home.side-buttons.go-home') }}
