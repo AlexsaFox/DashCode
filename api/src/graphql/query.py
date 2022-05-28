@@ -18,8 +18,15 @@ from src.graphql.definitions.responses.get_token import GetTokenResponse, Token
 from src.graphql.definitions.responses.get_user import GetUserResponse, GetUserSuccess
 from src.graphql.definitions.user import Account
 from src.graphql.permissions.auth import IsAuthenticated
+from src.graphql.permissions.is_superuser import IsSuperuser
 from src.locale.dependencies import Translator
-from src.utils.note import NoteNotFoundError, NoteOwnerError, get_note, get_public_notes
+from src.utils.note import (
+    NoteNotFoundError,
+    NoteOwnerError,
+    get_all_notes,
+    get_note,
+    get_public_notes,
+)
 from src.utils.user import UserNotFoundError, get_user
 
 
@@ -95,6 +102,40 @@ class Query:
         try:
             notes = await session.run_sync(
                 get_public_notes, after, first + 1, newest_first
+            )
+        except NoteNotFoundError:
+            return RequestValueError(t('notes.errors.note_not_found'))
+
+        has_next_page = len(notes) == first + 1
+        edges = [
+            Note.from_instance(note).to_edge()
+            for note in (notes[:-1] if has_next_page else notes)
+        ]
+
+        return Connection(
+            page_info=Page(
+                has_next_page=has_next_page,
+                start_cursor=edges[0].cursor if len(edges) > 0 else None,
+                end_cursor=edges[-1].cursor if len(edges) > 0 else None,
+            ),
+            edges=edges,
+        )
+
+    @strawberry.field(permission_classes=[IsAuthenticated, IsSuperuser])
+    async def get_all_notes(
+        self,
+        info: Info,
+        first: int = 10,
+        after: Cursor | None = None,
+        newest_first: bool = True,
+    ) -> GetPublicNotesResponse:
+        session: AsyncSession = info.context['session']
+        t: Translator = info.context['translator']
+
+        notes: list[NoteModel]
+        try:
+            notes = await session.run_sync(
+                get_all_notes, after, first + 1, newest_first
             )
         except NoteNotFoundError:
             return RequestValueError(t('notes.errors.note_not_found'))

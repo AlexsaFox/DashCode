@@ -1,4 +1,4 @@
-from typing import cast
+from typing import Any, cast
 
 from sqlalchemy import and_
 from sqlalchemy.orm.session import Session
@@ -48,7 +48,7 @@ def edit_note(
 
     if note is None:
         raise NoteNotFoundError
-    if note.user != user:
+    if note.user != user and not user.is_superuser:
         raise NoteOwnerError
 
     if tags is not None:
@@ -71,6 +71,7 @@ def edit_note(
         if len(tag.notes) == 0:
             session.delete(tag)
     session.commit()
+    session.refresh(note.user)
 
     return cast(Note, note)
 
@@ -89,10 +90,11 @@ def remove_note(session: Session, id: str, user: User) -> Note:
     note: Note | None = session.query(Note).filter(Note.id == id).first()
     if note is None:
         raise NoteNotFoundError
-    if note.user != user:
+    if note.user != user and not user.is_superuser:
         raise NoteOwnerError
 
     session.add(note)
+    session.refresh(note.user)
     session.delete(note)
 
     for tag in note.tags:
@@ -103,8 +105,12 @@ def remove_note(session: Session, id: str, user: User) -> Note:
     return cast(Note, note)
 
 
-def get_public_notes(
-    session: Session, from_id: str | None, amount: int, newest_first: bool
+def get_notes_from(
+    session: Session,
+    from_id: str | None,
+    amount: int,
+    newest_first: bool,
+    criterions: list[Any],
 ) -> list[Note]:
     order_coef = -1 if newest_first else 1
 
@@ -117,9 +123,7 @@ def get_public_notes(
         start_from_id = first_note.row_id
     else:
         start_from: Note | None = (
-            session.query(Note)
-            .where(and_(Note.is_private == False, Note.id == from_id))
-            .first()
+            session.query(Note).where(and_(Note.id == from_id, *criterions)).first()
         )
         if start_from is None:
             raise NoteNotFoundError
@@ -128,12 +132,7 @@ def get_public_notes(
     notes = (
         session.query(Note)
         .order_by(order_coef * Note.row_id)
-        .where(
-            and_(
-                Note.is_private == False,
-                order_coef * (Note.row_id - start_from_id) >= 0,
-            )
-        )
+        .where(and_(order_coef * (Note.row_id - start_from_id) >= 0, *criterions))
         .limit(amount)
         .all()
     )
@@ -143,6 +142,20 @@ def get_public_notes(
         session.refresh(note.user)
 
     return notes
+
+
+def get_public_notes(
+    session: Session, from_id: str | None, amount: int, newest_first: bool
+) -> list[Note]:
+    return get_notes_from(
+        session, from_id, amount, newest_first, [Note.is_private == False]
+    )
+
+
+def get_all_notes(
+    session: Session, from_id: str | None, amount: int, newest_first: bool
+) -> list[Note]:
+    return get_notes_from(session, from_id, amount, newest_first, [])
 
 
 class NoteNotFoundError(ExpectedError):
