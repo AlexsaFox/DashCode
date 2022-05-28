@@ -60,6 +60,7 @@ index:
   home: 
     side-buttons:
       settings: Ajustes
+      public-profile: Perfil público
       log-out: Cerrar sesión
       add-notes: Agregar notas
       go-home: Ir a la página de inicio
@@ -211,6 +212,7 @@ user-profile:
     button-back-to-profile: "Volver al perfil"
     button-back-to-social-media: "Volver a las redes sociales"
   profile-block:
+    is-admin: Este usuario es administrador
     amount_of_notes-label: "sin notas públicas | 1 nota pública | {contar} notas públicas"
     
 explore:
@@ -219,3 +221,7 @@ explore:
     sort-by: Espectáculo
     from-newest: mas nuevo primero
     from-oldest: mas viejo primero
+    
+administrate:
+  header:
+    header: Todas las notas

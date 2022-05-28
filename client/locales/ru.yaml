@@ -60,6 +60,7 @@ index:
     side-buttons:
       settings: Настройки
       log-out: Выйти
+      public-profile: Общедоступный профиль
       add-notes: Добавить заметку
       go-home: На домашнюю страницу
       explore: Исследовать
@@ -211,10 +212,16 @@ user-profile:
     button-back-to-social-media: "Назад к социальным сетям"
   profile-block:
     amount_of_notes-label: "нет публичных заметок | 1 публичная заметка | {count} публичных заметок"
-    
+    is-admin: Этот пользователь является администратором
+
 explore:
   header:
     header: Общедоступные заметки
     sort-by: Показать
     from-newest: сначала новые
     from-oldest: сначала старые
+
+
+administrate:
+  header:
+    header: Все заметки
