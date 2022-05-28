@@ -14,7 +14,7 @@ login-sign-up:
     DashCode is a web app for the writing and reading useful tips and helpful
     solutions for programmers and also for other people. With DashCode you can
     organize your knowledge.
-    
+
     From just making notes to social media where you can find answers for all
     you questions.
 sign-up:
@@ -40,7 +40,7 @@ index:
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
   title-2: "Without wasting time."
   text-2: "Organize your notes or go through public ones. With them you can solve your problems as fast as possible."
-  title-3: "Never ask internet “How can I solve this problem?” again."
+  title-3: 'Never ask internet "How can I solve this problem?" again.'
   text-3: "In DashCode, your information and solutions are at hand!"
 
   home:
@@ -81,6 +81,7 @@ settings:
     browse-image-label: "Browse"
     copy-token-label: "Copy Token"
     reset-token-label: Reset token
+
   user-profile:
     header:
       label: "User Profile"
@@ -100,6 +101,7 @@ settings:
   token:
     token-hidden: "[hidden]"
     copied: Copied to clipboard!
+
     reset-warning: >-
       Are you sure that you want to reset your API token? That would make all
       existing tokens invalid.
@@ -108,7 +110,7 @@ settings:
   account_removal:
     header: "ACCOUNT REMOVAL"
     text: "Disabling your account means you can recover it at any time after this action."
-    button-label: "Delete Account" 
+    button-label: "Delete Account"
     warning:
       text: "Are you sure you want to delete your account?"
       header: "Warning!"
@@ -183,7 +185,7 @@ note-edit:
   warning-label: "Do you want to save your changes?"
   unsave-button: "Do not save"
   cancel-button: "Cancel"
-  
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Back to profile"

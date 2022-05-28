@@ -34,6 +34,7 @@ sign-up:
     password-too-short: Пароль должен содержать более восьми символов
     password-required: Требуется пароль
     passwords-do-not-match: Пароль не соответствует данным аккаунта, введите корректный пароль
+
 index:
   title-1: "Уникальное хранилище данных"
   text-1: "Это больше чем просто блокнот или социальная сеть. Записывайте и сохраняйте то, что вам нужно и делитесь этим с другими пользователями"
@@ -59,6 +60,9 @@ settings:
       password-too-short: "Ваш новый пароль должен содержать не менее 8 символов"
       password-required: "Вы должны указать свой текущий пароль из соображений безопасности"
   button-right-part-header: "Настройки пользователя"
+  button-right-part-account: "Аккаунт" 
+  button-right-part-profile: "Профиль"
+  button-right-part-token: "API токен"
   button-right-part-back: "Назад"
   email-label: "EMAIL"
   new-password-label: "НОВЫЙ ПАРОЛЬ"
@@ -77,6 +81,7 @@ settings:
     browse-image-label: "Browse"
     copy-token-label: "Скопировать токен"
     reset-token-label: Сбросить токен
+    
   user-profile:
     header:
       label: "Профиль пользователя"
@@ -96,6 +101,7 @@ settings:
   token:
     token-hidden: "[спрятан]"
     copied: Скопировано в буфер обмена!
+
     reset-warning: >-
       Вы уверены, что хотите сбросить токен API?
       Это сделает бы все существующие токены недействительными.
@@ -103,8 +109,7 @@ settings:
   upload-profile-image-label: "Загрузить изображение профиля:"
   account_removal:
     header: "УДАЛЕНИЕ АККАУНТА"
-    text: «Отключение вашей учетной записи означает, что вы можете восстановить ее в любое время после
-           этого действие».
+    text: «Отключение вашей учетной записи означает, что вы можете восстановить ее в любое время после этого действие».
     button-label: "Удалить" 
     warning:
       text: «Вы уверены, что хотите удалить свой аккаунт?»
@@ -117,21 +122,38 @@ settings:
     spanish-label: "Испанский"
     russian-label: "Русский"
 
+note: 
+  attributes:
+    title: Заголовок
+    link: Ссылка
+    privacy:
+      public: Общедоступная
+      private: Частная
+
 note-show:
-  edit-button: "Править"
+  edit-button: "Изменить"
   delete-button: "Удалить"
   author-of-note: "Пользователь"
-  date-of-creation-label: "Уже создан"
+  date-of-creation-label: "Была создана"
   warning-label: "Хотите удалить заметку?"
   yes-button: "Да"
   no-button: "Нет"
+
 note-edit:
+  add-tag:
+    placeholder: Новый тег
+    add: Добавить
+  content:
+    placeholder: Введите что-нибудь...
+  errors: "" 
+
+  preview-markdown: Предварительный просмотр разметки
+  unpreview-markdown: Прекратить просмотр
   save-button: "Сохранить"
   warning-label: "Хотите сохранить изменения?"
   unsave-button: "Не сохранять"
   cancel-button: "Отменить"
-note_create:
-  create-button: "Создать"
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Назад к профилю"

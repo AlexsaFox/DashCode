@@ -60,6 +60,9 @@ settings:
       password-too-short: "Su nueva contraseña debe contener al menos 8 caracteres"
       password-required: "Tienes que especificar tu contraseña actual por razones de seguridad"
   button-right-part-header: "Сonfiguración de parte del usuario"
+  button-right-part-account: "Cuenta"
+  button-right-part-profile: "Perfil"
+  button-right-part-token: "API token"
   button-right-part-back: "Volver"
   email-label: "EMAIL"
   new-password-label: "NUEVA CONTRASEÑA"
@@ -73,10 +76,12 @@ settings:
       color-label: Aplicar
       changes-label: "Enviar"
     change-password-label: "Cambia la contraseña"
-    show-token-label: "Mostrar token"
+    show-token-label: "Mostrar token" 
     hide-token-label: Ocultar token
     browse-image-label: "Navegar"
     copy-token-label: "Copiar token"
+    reset-token-label: Restablecer token
+    
   user-profile:
     header:
       label: "Perfil del usuario"
@@ -96,6 +101,10 @@ settings:
   token:
     token-hidden: "[oculto]"
     copied: Copiado al portapapeles!
+    
+    reset-warning: >-  
+      ¿Está seguro de que desea restablecer su token de API?
+      Eso haría que todos los tokens existentes fueran inválidos.
   expiration-datetime-label: "FECHA DE VENCIMIENTO HORA:"
   upload-profile-image-label: "Subir imagen de perfil:"
   account_removal:
@@ -113,21 +122,38 @@ settings:
     spanish-label: "Español"
     russian-label: "Ruso"
 
+note: 
+  attributes:
+    title: Título
+    link: Enlace
+    privacy:
+      public: Público
+      private: Privado
+
 note-show:
   edit-button: "Editar"
   delete-button: "Borrar"
   author-of-note: "Usuario"
   date-of-creation-label: "Fue creado"
-  warning-label: "¿Quieres borrar esta nota?"
+  warning-label: "¿Quieres eliminar esta nota?"
   yes-button: "Sí"
-  no-button: "No"
+  no-button: "Pero"
+
 note-edit:
+  add-tag:
+    placeholder: Nueva etiqueta
+    add: Agregar
+  content:
+    placeholder: Introduce algo...
+  errors: "" 
+
+  preview-markdown: Vista previa de marcado
+  unpreview-markdown: Dejar de navegar
   save-button: "Ahorrar"
   warning-label: "¿Quieres guardar tus cambios?"
   unsave-button: "No guarde"
-  cancel-button: "Cancelar"
-note_create:
-  create-button: "Crear"
+  cancel-button: "Cancelar" 
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Volver al perfil"
