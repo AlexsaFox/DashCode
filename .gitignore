@@ -1,19 +1,13 @@
 # VSCode workspace configuration
 .vscode
 
-# Python virtual environment
-venv/*
+# Developmet database data
+.postgres-data
+.redis-data
 
-# Python cache files
-__pycache__
+# Cache files
+.pytest_cache
+.mypy_cache
 
-# Development database
-*.sqlite
-
-# python-dotenv environment variables
+# Environment
 .env
-
-# Everything in folder with user profile pictures,
-# except default profile picture
-src/web/uploads/*
-!src/web/uploads/default.jpeg

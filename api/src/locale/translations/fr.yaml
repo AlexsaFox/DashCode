@@ -1,0 +1,39 @@
+fr:
+  auth:
+    errors:
+      bad_credentials: Impossible de trouver l'utilisateur avec les informations d'identification fournies
+      no_login: Vous devez fournir un nom d'utilisateur ou une adresse e-mail
+      no_auth: Autorisation requise
+      require_password:
+        wrong_password: Mauvais mot de passe
+      not_superuser: Seuls les administrateurs sont autorisés à accéder à cette ressource
+  notes:
+    errors:
+      note_not_found: Impossible de trouver la note à l'aide de l'identifiant
+      bad_note_owner: Vous n'êtes pas autorisé à afficher la note avec l'identifiant donné
+  users: 
+    errors:
+      user_not_found: Impossible de trouver un utilisateur avec le nom d'utilisateur fourni
+
+  validation:
+    errors:
+      user:
+        username: >-
+          Nom d'utilisateur invalide. 
+          Le nom d'utilisateur ne doit contenir que des lettres latines, des chiffres, des traits de soulignement, des tirets,
+          des points et être inférieur à 80 caractères
+        email: >-
+         Email invalide. L'adresse e-mail doit être valide et ne peut pas dépasser 120 caractères
+        password: Le mot de passe doit contenir au moins 8 caractères
+        profile_color: "La couleur du profil doit être au format #rrggbb"
+        upload_file:
+          too_large: La taille du fichier téléchargé ne peut pas dépasser 16 Mo.
+          bad_extension: Seules les images sont autorisées
+          bad_mime_type: Fichier au format téléchargeable image/*
+      note: 
+        title: Titre invalide. Le titre ne peut pas être vide et doit contenir moins de 65 caractères.
+        content: Contenu invalide. Le contenu ne peut pas être vide.
+        link: URL invalide. Le lien doit être valide
+        tags: >-
+          Le tag ne doit contenir que des caractères alphanumériques minuscules ou des tirets et être inférieur 
+          à 30 caractères

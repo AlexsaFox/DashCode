@@ -1,0 +1,228 @@
+not-found: 
+  header: ¿Estás perdido?
+  details: >-
+    No podemos encontrar la página que está buscando.
+    ¿Quizás se eliminó o no tiene permisos para acceder a él?
+  buttons:
+    go-home: Regresar a la página principal
+    go-back: Volver a la página anterior
+    
+  click-here:
+    details: >-
+      Debería ser redirigido a la página siguiente automáticamente.
+      Si eso no sucede,
+    link: siga este enlace
+
+login:
+  no-account: ¿Aún no estás registrado?
+  no-account-link: Regístrate ahora
+  submit-button: Registrarse
+  labels:
+    username: Tu nombre o dirección de correo electrónico
+    password: Contraseña
+  errors:
+    username-required: ID o correo electrónico requerido
+    password-required: Se requiere contraseña
+login-sign-up:
+  text: >-
+    Dashcode - es una aplicación web para escribir y leer consejos útiles y útiles
+     soluciones especialmente para programadores. Con Dashcode puedes
+     estructurar su conocimiento.
+
+     Desde simples notas hasta una red social donde encontrar respuestas a
+     todas tus preguntas
+sign-up:
+  submit-button: "Registro"
+  have-account: "¿Ya tiene inicio de sesión?"
+  have-account-link: "Iniciar sesión"
+  labels: 
+    username: ID de usuario
+    email: EMAIL
+    password: Contraseña
+    confirm-password: Confirmar Contraseña
+  errors:
+    user-exists: El usuario con {field} "{value}" ya existe
+    username-required: Identificación de usuario requerida
+    email-required: Se requiere la dirección de correo electrónico del usuario
+    email-invalid: La dirección de correo electrónico no es válida, ingrese una dirección válida
+    password-required: Se requiere contraseña
+    password-too-short: Su contraseña debe contener al menos 8 caracteres
+    passwords-do-not-match: La contraseña no coincide con la información de la cuenta, ingrese la contraseña correcta
+
+index: 
+  title-1: "Un repositorio único de conocimiento."
+  text-1: "Es más que un bloc de notas o una red social. ¡Escribe y guarda lo que realmente necesitas y comparte con todo el mundo!"
+  title-2: "No pierdas tu tiempo."
+  text-2: "Organice sus notas o vea las públicas. Con ellos, puede resolver sus problemas lo más rápido posible."
+  title-3: "No más preguntas en Internet: \"¿Cómo resolver este problema?\" otra vez."
+  text-3: "¡Con DashCode, su información y soluciones están siempre al alcance de su mano!"
+
+  home: 
+    side-buttons:
+      admin: Administrar
+      settings: Ajustes
+      public-profile: Perfil público
+      log-out: Cerrar sesión
+      add-notes: Agregar notas
+      go-home: Ir a la página de inicio
+      explore: Explorar
+      my-notes: Mis notas
+settings:
+  account: 
+    header: "Mi cuenta"
+    header-base-settings: "AJUSTES BÁSICOS"
+    errors:
+      email-invalid: "Introduzca una dirección de correo electrónico válida"
+      passwords-do-not-match: "Los campos de contraseña y confirmación de contraseña no coinciden"
+      password-too-short: "Su nueva contraseña debe contener al menos 8 caracteres"
+      password-required: "Tienes que especificar tu contraseña actual por razones de seguridad"
+  button-right-part-header: "Сonfiguración de parte del usuario"
+  button-right-part-account: "Cuenta"
+  button-right-part-profile: "Perfil"
+  button-right-part-token: "API token"
+  button-right-part-back: "Volver"
+  email-label: "EMAIL"
+  new-password-label: "NUEVA CONTRASEÑA"
+  confirm-password-label: "CONFIRMAR CONTRASEÑA"
+  current-password-label: "CONTRASEÑA ACTUAL"
+  button: 
+    edit:
+      user-profile: Editar perfil de usuario
+      label: Editar
+      avatar-label: "Editar Avatar"
+    submit:
+      color-label: Aplicar
+      changes-label: "Enviar"
+    change-password-label: "Cambia la contraseña"
+    show-token-label: "Mostrar token" 
+    hide-token-label: Ocultar token
+    browse-image-label: "Navegar"
+    copy-token-label: "Copiar token"
+    reset-token-label: Restablecer token
+    
+  user-profile:
+    header:
+      label: "Perfil del usuario"
+      preview: "PREESTRENO"
+      change-profile-color: "CAMBIAR COLOR DE PERFIL"
+      change-language: "CAMBIAR IDIOMA DEL PERFIL"
+  profile:
+    errors:
+      username-required: El nombre de usuario no puede estar vacío
+      profile-color-required: Debes especificar el color del perfil.
+      profile-color-bad-format: "El color del perfil debe tener el formato #rrggbb"
+  change-color-label: Este color se utilizará en su interfaz
+  change-language-label: Este idioma se utilizará en su interfaz
+  username-label: "NOMBRE DE USUARIO"
+  api-token-header: "API Tokens"
+  token-label: "TOKEN"
+  token:
+    token-hidden: "[oculto]"
+    copied: Copiado al portapapeles!
+    
+    reset-warning: >-  
+      ¿Está seguro de que desea restablecer su token de API?
+      Eso haría que todos los tokens existentes fueran inválidos.
+  expiration-datetime-label: "FECHA DE VENCIMIENTO HORA:"
+  upload-profile-image-label: "Subir imagen de perfil:"
+  account_removal:
+    header: "ELIMINACIÓN DE CUENTA"
+    text: "Deshabilitar su cuenta significa que puede recuperarla en cualquier momento después de esta acción"
+    button-label: "Borrar cuenta" 
+    warning:
+      text: "¿Estás seguro de que quieres eliminar tu cuenta?"
+      header: "¡Advertencia!"
+      button-label: "Sí"
+  languages:
+    english-label: "Inglés"
+    french-label: "Francés"
+    german-label: "Alemán"
+    spanish-label: "Español"
+    russian-label: "Ruso"
+
+note: 
+  attributes:
+    title: Título
+    link: Enlace
+    privacy:
+      public: Público
+      private: Privado
+
+note-show:
+  edit-button: "Editar"
+  delete-button: "Borrar"
+  author-of-note: "Usuario"
+  date-of-creation-label: "Fue creado"
+  warning-label: "¿Quieres eliminar esta nota?"
+  yes-button: "Sí"
+  no-button: "Pero"
+  
+  no-link: No hay enlace
+  created-by: Creado por
+  created-at: a las
+  date: 
+    months:
+      january: Ene
+      february: Feb
+      march: Mar
+      april: Abr
+      may: Mayo
+      june: Jun
+      july: Jul
+      august: Ago
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Dic
+  delete-warning:
+    header: ¡Advertencia!
+    details: No puedes recuperar tu nota después de eliminarla. Estás seguro de que quieres continuar?
+    continue: Entiendo, continua
+    cancel: No borrar
+
+note-edit:
+  add-tag:
+    placeholder: Nueva etiqueta
+    add: Agregar
+  content:
+    placeholder: Introduce algo...
+  errors: 
+    title:
+      required: La nota debe tener un título.
+      maxlength: El título de la nota no puede tener más de 65 caracteres.
+    content:
+      required: La nota debe tener un contenido
+    link:
+      url: El enlace debe ser válido
+    tags:
+      tag-length: Las etiquetas no pueden tener más de 30 caracteres.
+      tag-charset: Las etiquetas pueden contener solo letras latinas en minúsculas, dígitos o guiones
+
+    privacy:
+      required: Tienes que especificar la configuración de privacidad.
+      
+  preview-markdown: Vista previa de marcado
+  unpreview-markdown: Dejar de navegar
+  save-button: "Ahorrar"
+  warning-label: "¿Quieres guardar tus cambios?"
+  unsave-button: "No guarde"
+  cancel-button: "Cancelar" 
+
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Volver al perfil"
+    button-back-to-social-media: "Volver a las redes sociales"
+  profile-block:
+    is-admin: Este usuario es administrador
+    amount_of_notes-label: "sin notas públicas | 1 nota pública | {contar} notas públicas"
+    
+explore:
+  header:
+    header: Notas publicas
+    sort-by: Espectáculo
+    from-newest: mas nuevo primero
+    from-oldest: mas viejo primero
+    
+administrate:
+  header:
+    header: Todas las notas

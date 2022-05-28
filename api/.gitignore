@@ -1,0 +1,23 @@
+# Virtual environment
+venv
+.venv
+
+# Python cache files
+__pycache__
+
+# Environment configuration
+.env
+
+# Ignore dynaconf secret files
+.secrets.*
+
+# Developmet database data
+.postgres-data
+.redis-data
+
+# Cache files
+.pytest_cache
+.mypy_cache
+
+# User uploads
+uploads

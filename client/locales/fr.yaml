@@ -1,0 +1,228 @@
+not-found: 
+  header: Es-tu perdu?
+  details: >-
+    Nous ne parvenons pas à trouver la page que vous recherchez.
+    Peut-être qu'il a été supprimé ou que vous n'avez pas les autorisations pour y accéder ?
+  buttons:
+    go-home: Retour à la page d'accueil
+    go-back: Revenir à la page précédente
+    
+  click-here:
+    details: >-
+      Vous devriez être automatiquement redirigé vers la page suivante. Si cela ne se produit pas,
+    link: suivez ce lien
+
+login:
+  no-account: Toujours pas inscrit?
+  no-account-link: Enregistrez un compte maintenant
+  submit-button: Connexion
+  labels:
+    username: Votre nom d'utilisateur ou votre adresse e-mail
+    password: Mot de passe
+  errors:
+    username-required: Pièce d'identité ou email requis
+    password-required: Mot de passe requis
+login-sign-up:
+  text: >-
+    Dashcode - est une application web pour écrire et lire des conseils utiles et utiles
+     solutions spécialement pour les programmeurs. Avec Dashcode, vous pouvez
+     structurez vos connaissances.
+
+     De simples notes à un réseau social où vous pouvez trouver des réponses à
+     toutes vos questions.
+sign-up:
+  submit-button: "S'inscrire"
+  have-account: "Vous avez déjà une connexion ?"
+  have-account-link: "S'identifier"
+  labels:
+    username: Identifiant d'utilisateur
+    email: Adresse e-mail
+    password: Mot de passe
+    confirm-password: Confirmez le mot de passe
+  errors:
+    user-exists: L'utilisateur avec {field} "{value}" existe déjà
+    username-required: Pièce d'identité requise
+    email-required: Adresse mail (requis)
+    email-invalid: L'adresse e-mail n'est pas valide, veuillez entrer une adresse valide
+    password-required: Mot de passe requis
+    password-too-short: Votre mot de passe doit contenir au moins 8 caractères
+    passwords-do-not-match: Le mot de passe ne correspond pas aux informations du compte, veuillez entrer le mot de passe correct
+
+index:
+  title-1: "Un référentiel unique de connaissances"
+  text-1: " C'est plus qu'un bloc-notes ou un réseau social. Écrivez, enregistrez ce dont vous avez vraiment besoin et partagez-le avec le monde entier ! "
+  title-2: "Sans perdre de temps."
+  text-2: "Organisez vos notes ou parcourez les notes publiques. Avec eux, vous pouvez résoudre vos problèmes le plus rapidement possible."
+  title-3: "Ne demandez jamais à Internet \"Comment puis-je résoudre ce problème?\" encore."
+  text-3: "Dans DashCode, vos informations et solutions sont à portée de main !"
+
+  home:
+    side-buttons:
+      admin: Administrer
+      settings: Réglages
+      log-out: Se déconnecter
+      public-profile: Profil public
+      add-notes: Ajouter une note
+      go-home: Aller à la page d'accueil
+      explore: Explorer
+      my-notes: Mes notes
+settings:
+  account:
+    header: "Mon compte"
+    header-base-settings: "RÉGLAGES DE BASE"
+    errors:
+      email-invalid: "Entrez une adresse e-mail valide"
+      passwords-do-not-match: "Les champs Mot de passe et Confirmation du mot de passe ne correspondent pas"
+      password-too-short: "Votre nouveau mot de passe doit contenir au moins 8 caractères"
+      password-required: "Vous devez spécifier votre mot de passe actuel pour des raisons de sécurité"
+  button-right-part-header: "Paramètres utilisateur"
+  button-right-part-account: "Compte" 
+  button-right-part-profile: "Profil"
+  button-right-part-token: "API jeton" 
+  button-right-part-back: "Retour"
+  email-label: "E-MAIL"
+  new-password-label: "NOUVEAU MOT DE PASSE"
+  confirm-password-label: "CONFIRMEZ LE MOT DE PASSE"
+  current-password-label: "MOT DE PASSE ACTUEL"
+  button:
+    edit:
+      user-profile: Modifier le profil utilisateur
+      label: Éditer
+      avatar-label: "Modifier Avatar"
+    submit:
+      color-label: Appliquer
+      changes-label: "Soumettre"
+    change-password-label: "Changer le mot de passe"
+    show-token-label: "Afficher le jeton"
+    hide-token-label: Masquer le jeton
+    browse-image-label: "Parcourir"
+    copy-token-label: "Copier le jeton"
+    reset-token-label: Réinitialiser le jeton
+    
+  user-profile:
+    header:
+      label: "Profil de l'utilisateur"
+      preview: "APERÇU"
+      change-profile-color: "CHANGER LA COULEUR DU PROFIL"
+      change-language: "CHANGER LA LANGUE DU PROFIL"
+  profile:
+    errors:
+      username-required: Le nom d'utilisateur ne peut pas être vide
+      profile-color-required: Vous devez spécifier la couleur du profil
+      profile-color-bad-format: "La couleur du profil doit être au format #rrggbb"
+  change-color-label: Cette couleur sera utilisée dans votre interface
+  change-language-label: Cette langue sera utilisée dans votre interface
+  username-label: "NOM D'UTILISATEUR"
+  api-token-header: "Jetons d'API"
+  token-label: "JETONS"
+  token:
+    token-hidden: "[caché]"
+    copied: Copié dans le presse-papier!
+    
+    reset-warning: >-  
+      Voulez-vous vraiment réinitialiser votre jeton d'API ? 
+      Cela rendrait tous les jetons existants invalides.
+  expiration-datetime-label: "DATEHEURE EXPIRATION:"
+  upload-profile-image-label: "Télécharger l'image de profil :"
+  account_removal:
+    header: "SUPPRESSION DE COMPTE"
+    text: "La désactivation de votre compte signifie que vous pouvez le récupérer à tout moment après cette action."
+    button-label: "Supprimer le compte"
+    warning:
+      text: "Êtes-vous sûr de vouloir supprimer votre compte ?"
+      header: "Avertissement!"
+      button-label: "Qui"
+  languages:
+    english-label: "Anglais"
+    french-label: "Français"
+    german-label: "Allemand"
+    spanish-label: "Espagnol"
+    russian-label: "Russe"
+  
+note: 
+  attributes:
+    title: Entête
+    link: Lien
+    privacy:
+      public: Public
+      private: Privé
+
+note-show:
+  edit-button: "Éditer"
+  delete-button: "Effacer"
+  author-of-note: "Utilisateur"
+  date-of-creation-label: "A été créé"
+  warning-label: "Voulez-vous supprimer cette note ?"
+  yes-button: "Qui"
+  no-button: "Non"
+  
+  no-link: Pas de lien
+  created-by: Créée par
+  created-at: à
+  date: 
+    months:
+      january: Jan
+      february: Fév
+      march: Mar
+      april: Avr
+      may: Mai
+      june: Juin
+      july: Juil
+      august: Août
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Déc
+  delete-warning:
+    header: Avertissement!
+    details: Vous ne pouvez pas récupérer votre note après l'avoir supprimée. Es-tu sur de vouloir continuer?
+    continue: Je comprends, continuez
+    cancel: Ne supprimez pas
+
+note-edit:
+  add-tag:
+    placeholder: Nouvelle étiquette
+    add: Ajouter
+  content:
+    placeholder: Entrez quelque chose...
+  errors: 
+    title:
+      required: La note doit avoir un titre
+      maxlength: Le titre de la note ne peut pas dépasser 65 caractères
+    content:
+      required: La note doit avoir un contenu
+    link:
+      url: Le lien doit être valide
+    tags:
+      tag-length: Les balises ne peuvent pas dépasser 30 caractères
+      tag-charset: Les balises ne peuvent contenir que des lettres latines minuscules, des chiffres ou des tirets.
+      
+    privacy: 
+      required: Vous devez spécifier les paramètres de confidentialité
+  
+  preview-markdown: Aperçu du balisage
+  unpreview-markdown: Arrêtez de naviguer
+  save-button: "Enregistrer"
+  warning-label: "Voulez-vous enregistrer vos modifications?"
+  unsave-button: "Ne pas enregistrer"
+  cancel-button: "Annuler" 
+
+user-profile:
+  buttons-back:
+    button-back-to-profile: "Retour au profil"
+    button-back-to-social-media: "Retour aux réseaux sociaux"
+  profile-block:
+    amount_of_notes-label: "aucune note publique | 1 note publique | {count} notes publiques"
+    is-admin: Cet utilisateur est un administrateur
+
+explore:
+  header:
+    header: Notes publiques
+    sort-by: Spectacle
+    from-newest: le plus récent en premier
+    from-oldest: plus vieux d'abord
+    
+
+administrate:
+  header:
+    header: Toutes les notes

@@ -1,0 +1,21 @@
+# VSCode config folder
+.vscode
+
+# Python cache
+__pycache__
+
+# Files and folders for development containers
+dev-compose.yaml
+.postgres-data
+
+# Tests
+.pytest_cache
+tests
+
+# Virtual environment, used for development
+venv
+
+# Git files
+.gitignore
+README.md
+.pre-commit-config.yaml

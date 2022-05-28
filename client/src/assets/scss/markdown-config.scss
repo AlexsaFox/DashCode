@@ -1,0 +1,57 @@
+@mixin markdown-config {
+    --prism-foreground: #eeffff;
+    --prism-background: #46577e;
+    --prism-comment: #6686cc;
+    --prism-string: #00d9ff;
+    --prism-literal: #795bff;
+    --prism-keyword: #91ffd5;
+    --prism-boolean: #9488ff;
+    --prism-number: #ffed4f;
+    --prism-variable: #795bff;
+    --prism-constant: #00fff2;
+    --prism-selector: #c182fc;
+    --prism-function: #82aaff;
+    --prism-deleted: #ba53ff;
+    --prism-class: #bd6ab7;
+    --prism-builtin: #f8a8ff;
+    --prism-property: #98d4fc;
+    --prism-namespace: #816bff;
+    --prism-punctuation: #C792EA;
+    --prism-decorator: #49d5ff;
+    --prism-regex: #89DDFF;
+    --prism-interpolation: #ffc88a;
+    --prism-json-property: #f07178;
+    --prism-line-number: #C792EA;
+    --prism-line-number-gutter: #e88db8;
+    --prism-line-highlight-background: #d753ff;
+    --prism-selection-background: #756cf7;
+    
+    $font-size: 16px;
+    font-size: 16px;
+
+    h6 { font-size: $font-size + 1*4px; }
+    h5 { font-size: $font-size + 2*4px; }
+    h4 { font-size: $font-size + 3*4px; }
+    h3 { font-size: $font-size + 4*4px; }
+    h2 { font-size: $font-size + 5*4px; }
+    h1 { font-size: $font-size + 6*4px; }
+
+    ul {
+        list-style: disc;
+        li { margin-left: 30px; }
+    }
+    ol {
+        list-style: decimal;
+        li { margin-left: 30px; }
+    }
+
+    a {
+        text-decoration: underline solid;
+        transition-duration: 0.2s;
+        
+        &:hover {
+            color: var(--user-color);
+            text-decoration: underline wavy;
+        }
+    }
+}
