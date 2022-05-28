@@ -37,6 +37,17 @@ const showEditAvatarPopup = ref(false)
   }
 }
 
+.profile {
+  img {
+    transition-duration: 0.2s;
+  }
+  &:hover {
+    img {
+      opacity: 0.7;
+    }
+  }
+}
+
 .edit {
   border-radius: 5px;
   background-color: #223153;
@@ -45,6 +56,10 @@ const showEditAvatarPopup = ref(false)
   color: white;
   font-family: 'ClearSans-Light';
   font-size: 20px;
+
+  &:hover {
+    background-color: #303d67;
+  }
 }
 
 .edit_profile {

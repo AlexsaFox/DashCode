@@ -85,6 +85,11 @@ function onSubmit() {
       font-family: 'ClearSans-Light';
       font-size: 20px;
       width: 20%;
+      transition-duration: 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
 
     .change_profile_color {
