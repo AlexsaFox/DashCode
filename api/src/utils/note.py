@@ -77,11 +77,11 @@ def edit_note(
 
 def get_note(session: Session, id: str, user: User) -> Note:
     note = session.query(Note).filter(Note.id == id).first()
-
     if note is None:
         raise NoteNotFoundError
-    if note.user != user:
+    if note.is_private and note.user != user:
         raise NoteOwnerError
+    session.refresh(note.user)
     return cast(Note, note)
 
 
@@ -124,8 +124,6 @@ def get_public_notes(
         if start_from is None:
             raise NoteNotFoundError
         start_from_id = start_from.row_id + order_coef
-
-    print(start_from_id)
 
     notes = (
         session.query(Note)
