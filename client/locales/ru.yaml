@@ -83,6 +83,7 @@ settings:
   current-password-label: "ТЕКУЩИЙ ПАРОЛЬ"
   button:
     edit:
+      user-profile: Изменить профиль пользователя
       avatar-label: "Изменить аватар"
       label: Изменить
     submit:
@@ -153,8 +154,8 @@ note-show:
   no-button: "Нет"
   
   no-link: Нет ссылки
-  created-by: Кем создана
-  created-at: Когда создана
+  created-by: Создана
+  created-at: в
   date: 
     months:
       january: Янв
