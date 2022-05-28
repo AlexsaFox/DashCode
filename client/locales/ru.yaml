@@ -61,6 +61,7 @@ index:
       settings: Настройки
       log-out: Выйти
       add-notes: Добавить заметку
+      go-home: На домашнюю страницу
       explore: Исследовать
       my-notes: Мои заметки
 settings:
@@ -209,7 +210,7 @@ user-profile:
     button-back-to-profile: "Назад к профилю"
     button-back-to-social-media: "Назад к социальным сетям"
   profile-block:
-    amount_of_notes-label: "нет публичных заметок | 1 публичная заметка | {count} общедоступных заметок"
+    amount_of_notes-label: "нет публичных заметок | 1 публичная заметка | {count} публичных заметок"
     
 explore:
   header:
