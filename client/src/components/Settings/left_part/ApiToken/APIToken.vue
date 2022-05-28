@@ -26,7 +26,9 @@ renewToken()
 </script>
 
 <template>
-  <ResetTokenPopup v-if="showResetTokenPopup" @close-popup="renewToken" />
+  <Transition name="modal">
+    <ResetTokenPopup v-if="showResetTokenPopup" @close-popup="renewToken" />
+  </Transition>
 
   <div id="APItoken" class="tabcontent">
     <h1>{{ t("settings.api-token-header") }}</h1>
@@ -56,6 +58,8 @@ renewToken()
 </template>
 
 <style scoped lang="scss">
+@import '/src/components/Modal/modal-transition.scss';
+
 .profile h2 {
   font-family: "ClearSans-Bold";
   color: white;

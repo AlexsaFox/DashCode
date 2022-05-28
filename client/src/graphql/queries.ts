@@ -15,6 +15,7 @@ query($username: String, $email: String, $password: String!) {
   }
 }
 `
+
 export const WHOAMI_QUERY = gql`
 query {
   whoami {
@@ -23,6 +24,94 @@ query {
       isSuperuser
       profileColor
       profilePictureFilename
+  }
+}
+`
+
+export const WHOAMI_NOTES_QUERY = gql`
+query {
+  whoami {
+    notes {
+      id
+      title
+      content
+      link
+      isPrivate
+    }
+  }
+}
+`
+
+export const GET_NOTE_FULL = gql`
+query($id: String!) {
+  getNote(id: $id) {
+      ... on GetNoteSuccess {
+          note {
+              title
+              content
+              link
+              isPrivate
+              creationDate
+              tags
+              user {
+                  username
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`
+
+export const GET_USER_QUERY = gql`
+query($username: String!) {
+  getUser(username: $username) {
+      __typename
+      ... on GetUserSuccess {
+          user {
+              username
+              profilePictureFilename
+
+              notes {
+                id
+                title
+                content
+                link
+                isPrivate
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`
+
+export const GET_PUBLIC_NOTES = gql`
+query ($first: Int, $after: String, $newestFirst: Boolean) {
+  getPublicNotes(first: $first, after: $after, newestFirst: $newestFirst) {
+      __typename
+      ... on NoteConnection {
+          pageInfo {
+              hasNextPage
+              endCursor
+          }
+          edges {
+              node {
+                id
+                title
+                content
+                link
+                isPrivate
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
   }
 }
 `

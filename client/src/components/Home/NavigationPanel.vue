@@ -2,11 +2,9 @@
 import useAuthStore from '~/store/useAuth'
 
 const auth = useAuthStore()
-const router = useRouter()
 const { t } = useI18n()
 
 const showUserMenu = ref(false)
-const showNotesMenu = ref(false)
 </script>
 
 <template>
@@ -20,46 +18,13 @@ const showNotesMenu = ref(false)
         <router-link to="/settings">
           {{ t('index.home.side-buttons.settings') }}
         </router-link>
-        <button class="logout" @click="auth.logout().then(() => { $router.go(0) })">
+        <button class="logout" @click="auth.logout()">
           {{ t('index.home.side-buttons.log-out') }}
         </button>
       </nav>
     </section>
     <div class="display_with_button">
-      <button class="standard_button" @click="router.push('/note/create')">
-        <div class="i-carbon:add" />{{ t('index.home.side-buttons.add-notes') }}
-      </button>
-      <a><button class="standard_button">
-        <div class="i-carbon:arrow-right" />{{ t('index.home.side-buttons.explore') }}
-      </button></a>
-      <!-- Not yet!! -->
-      <!-- <a><button class="standard_button">
-        <div class="i-carbon:user-avatar-filled-alt" /> Subscriptions
-      </button></a> -->
-      <a><button class="standard_button">
-        <div class="i-carbon:folder" />{{ t('index.home.side-buttons.my-notes') }}
-      </button></a>
-    </div>
-  </div>
-  <div v-if="showNotesMenu">
-    <div class="my_notes_popup">
-      <div class="header_for_pop_up_acc">
-        All your notes:
-        <a class="close" href="#">&times;</a>
-      </div>
-      <div class="content">
-        <ul
-          style=" list-style-type: none;
-                max-height: 350px;
-                overflow-y: auto"
-        >
-          <!-- {% for note in notes %} -->
-          <li style="height: 30px;line-height: 30px;">
-            <a href="note.id">note.title</a>
-          </li>
-          <!-- {% endfor %} -->
-        </ul>
-      </div>
+      <slot />
     </div>
   </div>
 </template>
@@ -154,10 +119,6 @@ const showNotesMenu = ref(false)
 
 .display_with_button div {
   color: #F1F7ED;
-}
-
-.display_with_button button {
-  width: 100%;
 }
 
 .b_my_notes:focus {

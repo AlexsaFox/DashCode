@@ -5,14 +5,21 @@ import Pages from '~/constants/types/pages'
 
 const auth = useAuthStore()
 const settingsPage = useSettingsPageStore()
+const showEditAvatarPopup = ref(false)
 </script>
 
 <template>
   <div class="stroke">
     <div class="profile">
-      <div class="avatar_s">
-        <user-profile-picture />
-      </div>
+      <button @click="showEditAvatarPopup = !showEditAvatarPopup">
+        <div class="avatar_s">
+          <user-profile-picture />
+        </div>
+      </button>
+
+      <Transition name="modal">
+        <EditAvatarPopup v-if="showEditAvatarPopup" @close-popup="showEditAvatarPopup = false" />
+      </Transition>
       <h2>{{ auth.user.username }}</h2>
     </div>
     <button
@@ -26,6 +33,8 @@ const settingsPage = useSettingsPageStore()
 </template>
 
 <style scoped lang="scss">
+@import '/src/components/Modal/modal-transition.scss';
+
 .stroke {
   display: flex;
   align-items: center;
@@ -38,6 +47,15 @@ const settingsPage = useSettingsPageStore()
     align-items: center;
     justify-content: flex-start;
     width: 30%;
+
+    img {
+      transition-duration: 0.2s;
+    }
+    &:hover {
+      img {
+        opacity: 0.7;
+      }
+    }
 
     h2{
       font-family: 'ClearSans-Regular';
@@ -73,6 +91,7 @@ const settingsPage = useSettingsPageStore()
     min-width: 120px;
     border-radius: 100%;
 
+    background-color: #303d67;
     border: 10px solid #303d67;
 
     img {

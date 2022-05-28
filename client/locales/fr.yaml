@@ -1,4 +1,17 @@
-not-found: Pas trouvé
+not-found: 
+  header: Es-tu perdu?
+  details: >-
+    Nous ne parvenons pas à trouver la page que vous recherchez.
+    Peut-être qu'il a été supprimé ou que vous n'avez pas les autorisations pour y accéder ?
+  buttons:
+    go-home: Retour à la page d'accueil
+    go-back: Revenir à la page précédente
+    
+  click-here:
+    details: >-
+      Vous devriez être automatiquement redirigé vers la page suivante. Si cela ne se produit pas,
+    link: suivez ce lien
+
 login:
   no-account: Toujours pas inscrit?
   no-account-link: Enregistrez un compte maintenant
@@ -60,6 +73,9 @@ settings:
       password-too-short: "Votre nouveau mot de passe doit contenir au moins 8 caractères"
       password-required: "Vous devez spécifier votre mot de passe actuel pour des raisons de sécurité"
   button-right-part-header: "Paramètres utilisateur"
+  button-right-part-account: "Compte" 
+  button-right-part-profile: "Profil"
+  button-right-part-token: "API jeton" 
   button-right-part-back: "Retour"
   email-label: "E-MAIL"
   new-password-label: "NOUVEAU MOT DE PASSE"
@@ -77,6 +93,8 @@ settings:
     hide-token-label: Masquer le jeton
     browse-image-label: "Parcourir"
     copy-token-label: "Copier le jeton"
+    reset-token-label: Réinitialiser le jeton
+    
   user-profile:
     header:
       label: "Profil de l'utilisateur"
@@ -91,11 +109,15 @@ settings:
   change-color-label: Cette couleur sera utilisée dans votre interface
   change-language-label: Cette langue sera utilisée dans votre interface
   username-label: "NOM D'UTILISATEUR"
-  api-token-header: "API Token"
-  token-label: "TOKEN"
+  api-token-header: "Jetons d'API"
+  token-label: "JETONS"
   token:
     token-hidden: "[caché]"
     copied: Copié dans le presse-papier!
+    
+    reset-warning: >-  
+      Voulez-vous vraiment réinitialiser votre jeton d'API ? 
+      Cela rendrait tous les jetons existants invalides.
   expiration-datetime-label: "DATEHEURE EXPIRATION:"
   upload-profile-image-label: "Télécharger l'image de profil :"
   account_removal:
@@ -113,24 +135,85 @@ settings:
     spanish-label: "Espagnol"
     russian-label: "Russe"
   
+note: 
+  attributes:
+    title: Entête
+    link: Lien
+    privacy:
+      public: Public
+      private: Privé
+
 note-show:
-  edit-button: "Modifier"
-  delete-button: "Supprimer"
+  edit-button: "Éditer"
+  delete-button: "Effacer"
   author-of-note: "Utilisateur"
   date-of-creation-label: "A été créé"
-  warning-label: "Voulez-vous supprimer cette note ?"
-  yes-button: "Oui"
+  warning-label: "Voulez-vous supprimer cette note ?"
+  yes-button: "Qui"
   no-button: "Non"
+  
+  no-link: Pas de lien
+  created-by: Qui a créé
+  created-at: Une fois créé
+  date: 
+    months:
+      january: Jan
+      february: Fév
+      march: Mar
+      april: Avr
+      may: Mai
+      june: Juin
+      july: Juil
+      august: Août
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Déc
+  delete-warning:
+    header: Avertissement!
+    details: Vous ne pouvez pas récupérer votre note après l'avoir supprimée. Es-tu sur de vouloir continuer?
+    continue: Je comprends, continuez
+    cancel: Ne supprimez pas
+
 note-edit:
-  save-button: "Sauver"
+  add-tag:
+    placeholder: Nouvelle étiquette
+    add: Ajouter
+  content:
+    placeholder: Entrez quelque chose...
+  errors: 
+    title:
+      required: La note doit avoir un titre
+      maxlength: Le titre de la note ne peut pas dépasser 65 caractères
+    content:
+      required: La note doit avoir un contenu
+    link:
+      url: Le lien doit être valide
+    tags:
+      tag-length: Les balises ne peuvent pas dépasser 30 caractères
+      tag-charset: Les balises ne peuvent contenir que des lettres latines minuscules, des chiffres ou des tirets.
+      
+    privacy: 
+      required: Vous devez spécifier les paramètres de confidentialité
+  
+  preview-markdown: Aperçu du balisage
+  unpreview-markdown: Arrêtez de naviguer
+  save-button: "Enregistrer"
   warning-label: "Voulez-vous enregistrer vos modifications?"
   unsave-button: "Ne pas enregistrer"
-  cancel-button: "Annuler"
-note_create:
-  create-button: "Créer"
+  cancel-button: "Annuler" 
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Retour au profil"
     button-back-to-social-media: "Retour aux réseaux sociaux"
   profile-block:
-    amount_of_notes-label: "notes publiques"
+    amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
+
+explore:
+  header:
+    header: Notes publiques
+    sort-by: Spectacle
+    from-newest: le plus récent en premier
+    from-oldest: plus vieux d'abord
+    

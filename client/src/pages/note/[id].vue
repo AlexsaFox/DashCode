@@ -1,13 +1,32 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, maxLength, required, url } from '@vuelidate/validators'
-import useErrorStore from '~/store/useErrors'
 import checkFormErrors from '~/utils/checkFormErrors'
-import { createNote } from '~/utils/notes'
+import { editNote } from '~/utils/notes'
 
 const { t } = useI18n()
-const errors = useErrorStore()
 const router = useRouter()
+
+const { id } = defineProps<{
+  id: string
+}>()
+
+const noteEditorOpened = ref(false)
+const note = reactive({
+  title: '',
+  content: '',
+  link: '',
+  tags: [] as string[],
+  isPrivate: true,
+})
+function openNoteEditor(title: string, content: string, link: string, tags: string[], isPrivate: boolean) {
+  noteEditorOpened.value = !noteEditorOpened.value
+  note.title = title
+  note.content = content
+  note.link = link
+  note.tags = tags
+  note.isPrivate = isPrivate
+}
 
 const rules = reactive({
   title: {
@@ -48,23 +67,45 @@ const rules = reactive({
   },
 })
 
-function saveNote(title: string, isPrivate: boolean, content: string, tags: string[], link?: string) {
+function loadingFailed() {
+  router.replace('/not-found')
+}
+
+function saveEdited(title: string, isPrivate: boolean, content: string, tags: string[], link?: string) {
   const vuelidate = useVuelidate(rules, { title, isPrivate, content, tags, link })
   checkFormErrors(
     vuelidate,
-    async() => {
-      await createNote(title, isPrivate, content, tags, link).then((id) => {
-        if (errors.errors.length === 0 && id !== null)
-          router.push(`/note/${id}`)
-      })
-    },
+    async() => { await editNote(id, title, content, tags, link ?? '', isPrivate) },
+    () => { noteEditorOpened.value = false },
   )
 }
 </script>
 
 <template>
-  <edit-note :save-action="saveNote" />
+  <EditNote
+    v-if="noteEditorOpened"
+    :title="note.title"
+    :content="note.content"
+    :link="note.link"
+    :tags="note.tags"
+    :is-private="note.isPrivate"
+    :save-action="saveEdited"
+  />
+  <Suspense v-else>
+    <template #default>
+      <NoteView :id="id" :editor-opened="noteEditorOpened" @loading-failed="loadingFailed" @edit-note="openNoteEditor" />
+    </template>
+    <template #fallback>
+      <LoadingData />
+    </template>
+  </Suspense>
+
   <NavigationPanel>
+    <NavigationButton
+      @on-press="router.push('/note/create')"
+    >
+      <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
+    </NavigationButton>
     <NavigationButton
       @on-press="router.push('/explore')"
     >

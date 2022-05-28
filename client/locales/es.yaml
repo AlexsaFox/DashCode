@@ -1,4 +1,18 @@
-not-found: extraviado
+not-found: 
+  header: ¿Estás perdido?
+  details: >-
+    No podemos encontrar la página que está buscando.
+    ¿Quizás se eliminó o no tiene permisos para acceder a él?
+  buttons:
+    go-home: Regresar a la página principal
+    go-back: Volver a la página anterior
+    
+  click-here:
+    details: >-
+      Debería ser redirigido a la página siguiente automáticamente.
+      Si eso no sucede,
+    link: siga este enlace
+
 login:
   no-account: ¿Aún no estás registrado?
   no-account-link: Regístrate ahora
@@ -60,6 +74,9 @@ settings:
       password-too-short: "Su nueva contraseña debe contener al menos 8 caracteres"
       password-required: "Tienes que especificar tu contraseña actual por razones de seguridad"
   button-right-part-header: "Сonfiguración de parte del usuario"
+  button-right-part-account: "Cuenta"
+  button-right-part-profile: "Perfil"
+  button-right-part-token: "API token"
   button-right-part-back: "Volver"
   email-label: "EMAIL"
   new-password-label: "NUEVA CONTRASEÑA"
@@ -73,10 +90,12 @@ settings:
       color-label: Aplicar
       changes-label: "Enviar"
     change-password-label: "Cambia la contraseña"
-    show-token-label: "Mostrar token"
+    show-token-label: "Mostrar token" 
     hide-token-label: Ocultar token
     browse-image-label: "Navegar"
     copy-token-label: "Copiar token"
+    reset-token-label: Restablecer token
+    
   user-profile:
     header:
       label: "Perfil del usuario"
@@ -96,6 +115,10 @@ settings:
   token:
     token-hidden: "[oculto]"
     copied: Copiado al portapapeles!
+    
+    reset-warning: >-  
+      ¿Está seguro de que desea restablecer su token de API?
+      Eso haría que todos los tokens existentes fueran inválidos.
   expiration-datetime-label: "FECHA DE VENCIMIENTO HORA:"
   upload-profile-image-label: "Subir imagen de perfil:"
   account_removal:
@@ -113,24 +136,84 @@ settings:
     spanish-label: "Español"
     russian-label: "Ruso"
 
+note: 
+  attributes:
+    title: Título
+    link: Enlace
+    privacy:
+      public: Público
+      private: Privado
+
 note-show:
   edit-button: "Editar"
   delete-button: "Borrar"
   author-of-note: "Usuario"
   date-of-creation-label: "Fue creado"
-  warning-label: "¿Quieres borrar esta nota?"
+  warning-label: "¿Quieres eliminar esta nota?"
   yes-button: "Sí"
-  no-button: "No"
+  no-button: "Pero"
+  
+  no-link: No hay enlace
+  created-by: Quien lo creo
+  created-at: Cuando se crea
+  date: 
+    months:
+      january: Ene
+      february: Feb
+      march: Mar
+      april: Abr
+      may: Mayo
+      june: Jun
+      july: Jul
+      august: Ago
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Dic
+  delete-warning:
+    header: ¡Advertencia!
+    details: No puedes recuperar tu nota después de eliminarla. Estás seguro de que quieres continuar?
+    continue: Entiendo, continua
+    cancel: No borrar
+
 note-edit:
+  add-tag:
+    placeholder: Nueva etiqueta
+    add: Agregar
+  content:
+    placeholder: Introduce algo...
+  errors: 
+    title:
+      required: La nota debe tener un título.
+      maxlength: El título de la nota no puede tener más de 65 caracteres.
+    content:
+      required: La nota debe tener un contenido
+    link:
+      url: El enlace debe ser válido
+    tags:
+      tag-length: Las etiquetas no pueden tener más de 30 caracteres.
+      tag-charset: Las etiquetas pueden contener solo letras latinas en minúsculas, dígitos o guiones
+
+    privacy:
+      required: Tienes que especificar la configuración de privacidad.
+      
+  preview-markdown: Vista previa de marcado
+  unpreview-markdown: Dejar de navegar
   save-button: "Ahorrar"
   warning-label: "¿Quieres guardar tus cambios?"
   unsave-button: "No guarde"
-  cancel-button: "Cancelar"
-note_create:
-  create-button: "Crear"
+  cancel-button: "Cancelar" 
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Volver al perfil"
     button-back-to-social-media: "Volver a las redes sociales"
   profile-block:
-    amount_of_notes-label: "notas públicas"
+    amount_of_notes-label: "sin notas públicas | 1 nota pública | {contar} notas públicas"
+    
+explore:
+  header:
+    header: Notas publicas
+    sort-by: Espectáculo
+    from-newest: mas nuevo primero
+    from-oldest: mas viejo primero

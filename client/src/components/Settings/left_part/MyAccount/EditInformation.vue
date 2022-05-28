@@ -87,13 +87,13 @@ function onSubmit() {
       </div>
     </div>
     <button
-      v-if="!showPasswordField" id="button_change_password" type="button" class="change_password"
+      v-if="!showPasswordField" type="button" class="change_password"
       @click="showPasswordField = true"
     >
       {{ t("settings.button.change-password-label") }}
     </button>
 
-    <button v-if="showPasswordField || enabledEmailField" id="edit_account_settings" class="edit account" @click="onSubmit()">
+    <button v-if="showPasswordField || enabledEmailField" class="edit account" @click="onSubmit()">
       {{ t("settings.button.submit.changes-label") }}
     </button>
   </div>
@@ -139,6 +139,11 @@ function onSubmit() {
     color: white;
     font-family: "ClearSans-Light";
     font-size: 20px;
+    transition-duration: 0.2s;
+
+    &:hover {
+      background-color: #303d67;
+    }
   }
 
   .edit.account {
@@ -175,10 +180,9 @@ function onSubmit() {
     }
 
     &:-webkit-autofill {
+      box-shadow: inset 0 0 0 50px #223153;
       -webkit-box-shadow: inset 0 0 0 50px #223153;
-      /* цвет вашего фона */
       -webkit-text-fill-color: white;
-      /* цвет текста */
     }
   }
   .input.email{
@@ -196,5 +200,10 @@ function onSubmit() {
   padding: 1% 3%;
   margin: 1% 0% 2%;
   color: var(--user-contrasting-color);
+  transition-duration: 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 </style>

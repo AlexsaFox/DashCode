@@ -19,6 +19,19 @@ const userProfileColor = computed(() => {
 const userProfileContrastingColor = computed(() => {
   return getContrastingColor(userProfileColor.value)
 })
+
+const router = useRouter()
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!loggedIn)
+      next({ path: '/login' })
+  }
+
+  next()
+})
+
+if (router.currentRoute.value.meta.requiresAuth && !loggedIn.value)
+  router.push('/login')
 </script>
 
 <template>
@@ -26,6 +39,10 @@ const userProfileContrastingColor = computed(() => {
 </template>
 
 <style lang="scss">
+:root {
+  color: white;
+}
+
 ::-webkit-scrollbar {
   width: 20px;
 }

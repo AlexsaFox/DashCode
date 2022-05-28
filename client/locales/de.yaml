@@ -1,4 +1,18 @@
-not-found: Nicht gefunden
+not-found: 
+  header: Bist du verloren?
+  details: >-
+    Wir können die Seite, die Sie suchen, nicht finden. 
+    Vielleicht wurde es gelöscht oder Sie haben keine Berechtigung, darauf zuzugreifen?
+  buttons:
+    go-home: Zurück zur Startseite
+    go-back: Gehen Sie zurück zur vorherigen Seite
+    
+  click-here:
+    details: >-
+      Sie sollten automatisch auf die nächste Seite weitergeleitet werden. Wenn das 
+      nicht passiert,
+    link: folge diesem Link
+
 login:
   no-account: Noch nicht registriert?
   no-account-link: Jetzt registrieren
@@ -11,7 +25,8 @@ login:
     password-required: Passwort erforderlich
 login-sign-up:
   text: >-
-    Dashcode ist eine Webanwendung zum Schreiben und Lesen nützlicher Tipps und hilfreicher Lösungen speziell für Programmierer.
+    Dashcode ist eine Webanwendung zum Schreiben und Lesen nützlicher
+    Tipps und hilfreicher Lösungen speziell für Programmierer.
     Mit Dashcode können Sie Ihr Wissen strukturieren.
 
     Von einfachen Notizen bis hin zu einem sozialen Netzwerk,
@@ -33,6 +48,7 @@ sign-up:
     password-too-short: Das Passwort muss länger als acht Zeichen sein
     password-required: Passwort erforderlich
     passwords-do-not-match: Das Passwort stimmt nicht mit den Kontoinformationen überein, bitte geben Sie das richtige Passwort ein
+
 index:
   title-1: "Einzigartiger Datenspeicher"
   text-1: "Dies ist mehr als nur ein Notizblock oder ein soziales Netzwerk. Notieren und speichern Sie, was Sie brauchen, und teilen Sie es mit anderen Benutzern."
@@ -58,6 +74,9 @@ settings:
       password-too-short: "Ihr neues Passwort muss mindestens 8 Zeichen lang sein"
       password-required: "Sie müssen aus Sicherheitsgründen Ihr aktuelles Passwort angeben"
   button-right-part-header: "Benutzereinstellungen"
+  button-right-part-account: "Konto" 
+  button-right-part-profile: "Profil"
+  button-right-part-token: "API token" 
   button-right-part-back: "Zurück"
   email-label: "EMAIL"
   new-password-label: "NEUES PASSWORT"
@@ -75,6 +94,8 @@ settings:
     hide-token-label: Token ausblenden
     browse-image-label: "Durchsuche"
     copy-token-label: "Token kopieren"
+    reset-token-label: Token zurücksetzen 
+    
   user-profile:
     header:
       label: "Benutzerprofil"
@@ -86,20 +107,25 @@ settings:
       username-required: Der Benutzername darf nicht leer sein
       profile-color-required: Sie müssen eine Profilfarbe angeben
       profile-color-bad-format: "Profilfarbe muss das Format #rrggbb haben"
-  change-color-label: Diese Farbe wird in der Benutzeroberfläche verwendet
-  change-language-label: Diese Sprache wird in Ihrer Benutzeroberfläche verwendet
+  change-color-label: Diese Farbe wird in der 
+                      Benutzeroberfläche verwendet
+  change-language-label: Diese Sprache wird in Ihrer 
+                         Benutzeroberfläche verwendet
   username-label: "BENUTZERNAME"
   api-token-header: "API-Token"
   token-label: "TOKEN"
   token:
     token-hidden: "[versteckt]"
     copied: In die Zwischenablage kopiert!
+    
+    reset-warning: >-  
+      Möchten Sie Ihr API-Token wirklich zurücksetzen? 
+      Das würde alle vorhandenen Tokens ungültig machen.
   expiration-datetime-label: "HALTBARKEITSDATUM:"
   upload-profile-image-label: "Profilbild hochladen:"
   account_removal:
     header: "KONTO LÖSCHEN"
-    text: "Das Deaktivieren Ihres Kontos bedeutet, dass Sie es nach dieser Aktion jederzeit 
-          wiederherstellen können."
+    text: "Das Deaktivieren Ihres Kontos bedeutet, dass Sie es nach dieser Aktion jederzeit wiederherstellen können."
     button-label: "Löschen" 
     warning:
       text: "Sind Sie sicher, dass Sie Ihr Konto löschen möchten?"
@@ -112,24 +138,85 @@ settings:
     spanish-label: "Spanisch"
     russian-label: "Russisch"
     
+note: 
+  attributes:
+    title: Titel
+    link: Verknüpfung
+    privacy:
+      public: Öffentlichkeit
+      private: Privatgelände
+
 note-show:
   edit-button: "Bearbeiten"
   delete-button: "Löschen"
   author-of-note: "Benutzer"
-  date-of-creation-label: "Bereits erstellt"
-  warning-label: "Möchten Sie die Notiz löschen?"
+  date-of-creation-label: "Wurde erstellt"
+  warning-label: "Möchten Sie diese Notiz löschen?"
   yes-button: "Ja"
   no-button: "Nein"
+  
+  no-link: Keine Verbindung
+  created-by: Wer kreierte
+  created-at: Wenn erstellt
+  date: 
+    months:
+      january: Jan
+      february: Feb
+      march: März
+      april: Apr
+      may: Mai
+      june: Jun
+      july: Jul
+      august: Aug
+      september: Sep
+      october: Okt
+      november: Nov
+      december: Dez
+  delete-warning:
+    header: Warning!
+    details: You can't recover your note after deleting it. Are you sure you want to continue?
+    continue: I understand, continue
+    cancel: Don't delete
+
 note-edit:
+  add-tag:
+    placeholder: Neues Etikett
+    add: Hinzufügen
+  content:
+    placeholder: Schreibe etwas...
+  errors: 
+    title:
+      required: Hinweis muss einen Titel haben
+      maxlength: Der Notiztitel darf nicht länger als 65 Zeichen sein.
+    content:
+      required: Hinweis muss einen Inhalt haben
+    link:
+      url: Link muss gültig sein
+    tags:
+      tag-length: Tags dürfen nicht länger als 30 Zeichen sein
+      tag-charset: Tags dürfen nur lateinische Kleinbuchstaben, Ziffern oder Bindestriche enthalten
+      
+    privacy: 
+      required: Sie müssen Datenschutzeinstellungen festlegen
+   
+  preview-markdown: Markup-Vorschau
+  unpreview-markdown: Stoppen Sie das Surfen
   save-button: "Speichern"
-  warning-label: "Möchten Sie Ihre Änderungen speichern?"
+  warning-label: "Möchtest du deine Änderungen speichern?"
   unsave-button: "Rette nicht"
-  cancel-button: "Absagen"
-note_create:
-  create-button: "Erstellen"
+  cancel-button: "Absagen" 
+
 user-profile:
   buttons-back:
     button-back-to-profile: "Zurück zum Profil"
     button-back-to-social-media: "Zurück zu den sozialen Medien"
   profile-block:
-    amount_of_notes-label: "öffentliche Notizen"
+    amount_of_notes-label: "keine öffentlichen Notizen | 1 öffentliche Notiz | {count} öffentliche Notizen"
+
+explore:
+  header:
+    header: öffentliche Notizen
+    sort-by: Zeigen
+    from-newest: neuere zuerst
+    from-oldest: älter zuerst
+    

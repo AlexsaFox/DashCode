@@ -1,4 +1,18 @@
-not-found: Not found
+not-found: 
+  header: Are you lost?
+  details: >-
+    We're unable to find the page that you're looking for. Perhaps, it was deleted
+    or you don't have permissions to access it?
+  buttons:
+    go-home: Return to home
+    go-back: Go back to previous page 
+    
+  click-here:
+    details: >-
+      You should be redirected to the next page automatically. If that doesn't
+      happen,
+    link: follow this link
+
 login:
   no-account: Don't have an account yet?
   no-account-link: Register now
@@ -14,7 +28,7 @@ login-sign-up:
     DashCode is a web app for the writing and reading useful tips and helpful
     solutions for programmers and also for other people. With DashCode you can
     organize your knowledge.
-    
+
     From just making notes to social media where you can find answers for all
     you questions.
 sign-up:
@@ -40,16 +54,16 @@ index:
   text-1: "This is more than a notepad or social network. Write, save what you really need and share it with the whole world!"
   title-2: "Without wasting time."
   text-2: "Organize your notes or go through public ones. With them you can solve your problems as fast as possible."
-  title-3: "Never ask internet “How can I solve this problem?” again."
+  title-3: 'Never ask internet "How can I solve this problem?" again.'
   text-3: "In DashCode, your information and solutions are at hand!"
 
   home:
     side-buttons:
       settings: Settings
       log-out: Log out
-      add-notes: Add notes
+      add-notes: New note
+      go-home: Go home
       explore: Explore
-      my-notes: My notes
 settings:
   account:
     header: "My Account"
@@ -81,6 +95,7 @@ settings:
     browse-image-label: "Browse"
     copy-token-label: "Copy Token"
     reset-token-label: Reset token
+
   user-profile:
     header:
       label: "User Profile"
@@ -100,6 +115,7 @@ settings:
   token:
     token-hidden: "[hidden]"
     copied: Copied to clipboard!
+
     reset-warning: >-
       Are you sure that you want to reset your API token? That would make all
       existing tokens invalid.
@@ -108,7 +124,7 @@ settings:
   account_removal:
     header: "ACCOUNT REMOVAL"
     text: "Disabling your account means you can recover it at any time after this action."
-    button-label: "Delete Account" 
+    button-label: "Delete Account"
     warning:
       text: "Are you sure you want to delete your account?"
       header: "Warning!"
@@ -136,6 +152,29 @@ note-show:
   warning-label: "Do you want to delete this note?"
   yes-button: "Yes"
   no-button: "No"
+  
+  no-link: No link
+  created-by: By
+  created-at: at
+  date: 
+    months:
+      january: Jan
+      february: Feb
+      march: Mar
+      april: Apr
+      may: May
+      june: Jun
+      july: Jul
+      august: Aug
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Dec
+  delete-warning:
+    header: Warning!
+    details: You can't recover your note after deleting it. Are you sure you want to continue?
+    continue: I understand, continue
+    cancel: Don't delete
 
 note-edit:
   add-tag:
@@ -143,8 +182,21 @@ note-edit:
     add: Add
   content:
     placeholder: Enter something...
-  errors: "" 
-
+  errors: 
+    title:
+      required: Note must have a title
+      maxlength: Note title can't be longer than 65 characters
+    content:
+      required: Note must have a content
+    link:
+      url: Link must be a valid url
+    tags:
+      tag-length: Tags can't be longer than 30 characters
+      tag-charset: Tags may contain only lowercase latin letters, digits or dashes
+      
+    privacy: 
+      required: You have to specify privacy settings
+  
   preview-markdown: Preview markdown
   unpreview-markdown: Close markdown preview
   save-button: "Save"
@@ -157,4 +209,11 @@ user-profile:
     button-back-to-profile: "Back to profile"
     button-back-to-social-media: "Back to social media"
   profile-block:
-    amount_of_notes-label: "public notes"
+    amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
+
+explore:
+  header:
+    header: Public notes
+    sort-by: Show
+    from-newest: newer first
+    from-oldest: older first

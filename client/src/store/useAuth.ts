@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import useErrorsStore from './useErrors'
 import { nullIfEmpty, processCommonErrors } from './utils'
 import apolloClient from '~/modules/apollo'
-import config from '~/constants/config'
 import { GET_TOKEN_QUERY, WHOAMI_QUERY } from '~/graphql/queries'
 import { DELETE_USER_MUTATION, EDIT_USER_AUTH_MUTATION, EDIT_USER_MUTATION, REGISTER_USER_MUTATION, RESET_TOKEN_MUTATION } from '~/graphql/mutations'
 import { i18n } from '~/modules/i18n'
@@ -13,13 +12,6 @@ const useAuthStore = defineStore('auth', {
     loggedIn: localStorage.getItem('loggedIn') ?? false,
     user: (user => user ? JSON.parse(user) : null)(localStorage.getItem('user')),
   }),
-
-  getters: {
-    profilePicture(state) {
-      const filename = state.user.profilePictureFilename
-      return filename === null ? null : `${config.api_host}/uploads/${filename}`
-    },
-  },
 
   actions: {
     async register(username: string, email: string, password: string) {
@@ -164,6 +156,8 @@ const useAuthStore = defineStore('auth', {
       localStorage.removeItem('loggedIn')
       localStorage.removeItem('token')
       this.$reset()
+
+      this.router.push('/')
     },
 
     changeLocale(value: string) {
