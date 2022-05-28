@@ -81,7 +81,7 @@ const showUserMenu = ref(false)
   }
 
   nav {
-    $button-count: 2;
+    $button-count: 3;
     $button-height: 50px;
 
     z-index: -1;
