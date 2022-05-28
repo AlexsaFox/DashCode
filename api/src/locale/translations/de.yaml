@@ -6,10 +6,15 @@ de:
       no_auth: Erlaubnis benötigt
       require_password:
         wrong_password: Falsches Passwort
+      not_superuser: Nur Administratoren dürfen auf diese Ressource zugreifen
   notes:
     errors:
       note_not_found: Es konnte keine Notiz mit der angegebenen ID gefunden werden
       bad_note_owner: Sie sind nicht berechtigt, die Notiz mit der angegebenen ID anzuzeigen
+  users: 
+    errors:
+      user_not_found: Ein Benutzer mit dem angegebenen Benutzernamen kann nicht gefunden werden
+
   validation:
     errors:
       user:
@@ -29,3 +34,6 @@ de:
         title: Ungültiger Titel. Der Titel darf nicht leer sein und muss weniger als 65 Zeichen lang sein.
         content: Ungültiger Inhalt. Inhalt darf nicht leer sein.
         link: Ungültige URL. Link muss gültig sein
+        tags: >-
+          Das Tag darf nur alphanumerische Kleinbuchstaben oder Bindestriche enthalten und darf nicht länger 
+          als 30 Zeichen sein
