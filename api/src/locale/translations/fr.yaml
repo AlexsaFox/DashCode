@@ -6,10 +6,15 @@ fr:
       no_auth: Autorisation requise
       require_password:
         wrong_password: Mauvais mot de passe
+      not_superuser: Seuls les administrateurs sont autorisés à accéder à cette ressource
   notes:
     errors:
       note_not_found: Impossible de trouver la note à l'aide de l'identifiant
       bad_note_owner: Vous n'êtes pas autorisé à afficher la note avec l'identifiant donné
+  users: 
+    errors:
+      user_not_found: Impossible de trouver un utilisateur avec le nom d'utilisateur fourni
+
   validation:
     errors:
       user:
@@ -29,3 +34,6 @@ fr:
         title: Titre invalide. Le titre ne peut pas être vide et doit contenir moins de 65 caractères.
         content: Contenu invalide. Le contenu ne peut pas être vide.
         link: URL invalide. Le lien doit être valide
+        tags: >-
+          Le tag ne doit contenir que des caractères alphanumériques minuscules ou des tirets et être inférieur 
+          à 30 caractères
