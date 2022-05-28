@@ -26,3 +26,26 @@ query {
   }
 }
 `
+
+export const GET_NOTE_FULL = gql`
+query($id: String!) {
+  getNote(id: $id) {
+      ... on GetNoteSuccess {
+          note {
+              title
+              content
+              link
+              isPrivate
+              creationDate
+              tags
+              user {
+                  username
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`

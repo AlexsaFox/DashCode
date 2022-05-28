@@ -136,6 +136,28 @@ note-show:
   warning-label: "Do you want to delete this note?"
   yes-button: "Yes"
   no-button: "No"
+  no-link: No link
+  created-by: By
+  created-at: at
+  date:
+    months:
+      january: Jan
+      february: Feb
+      march: Mar
+      april: Apr
+      may: May
+      june: Jun
+      july: Jul
+      august: Aug
+      september: Sep
+      october: Oct
+      november: Nov
+      december: Dec
+  delete-warning:
+    header: Warning!
+    details: You can't recover your note after deleting it. Are you sure you want to continue?
+    continue: I understand, continue
+    cancel: Don't delete
 
 note-edit:
   add-tag:
@@ -143,7 +165,17 @@ note-edit:
     add: Add
   content:
     placeholder: Enter something...
-  errors: "" 
+  errors:
+    title:
+      required: Note must have a title
+      maxlength: Note title can't be longer than 65 characters
+    content:
+      required: Note must have a content
+    link:
+      url: Link must be a valid url
+    tags:
+      tag-length: Tags can't be longer than 30 characters
+      tag-charset: Tags may contain only lowercase latin letters, digits or dashes
 
   preview-markdown: Preview markdown
   unpreview-markdown: Close markdown preview
@@ -151,7 +183,7 @@ note-edit:
   warning-label: "Do you want to save your changes?"
   unsave-button: "Do not save"
   cancel-button: "Cancel"
-
+  
 user-profile:
   buttons-back:
     button-back-to-profile: "Back to profile"

@@ -123,7 +123,9 @@ function handleExitAction(action: noteEditActions) {
   else if (action === noteEditActions.cancel) { nextRoute = null }
 }
 
+let savingNote = false
 function saveNote() {
+  savingNote = true
   saveAction(
     note.value.title,
     privacySelectorValue.value === 'private',
@@ -134,7 +136,7 @@ function saveNote() {
 }
 
 onBeforeRouteLeave((to) => {
-  if (!useAuthStore().loggedIn)
+  if (!useAuthStore().loggedIn || savingNote)
     return true
 
   if (nextRoute !== null)
@@ -188,7 +190,12 @@ onBeforeRouteLeave((to) => {
 
       <section class="tag-bar">
         <ul>
-          <li v-for="tag in note.tags" :key="tag" :style="`background-color: ${getTagColor(tag)};`" @click="removeTag(tag)">
+          <li
+            v-for="tag in note.tags"
+            :key="tag"
+            class="clickable"
+            :style="`background-color: ${getTagColor(tag)};`" @click="removeTag(tag)"
+          >
             {{ tag }}
           </li>
           <li class="add-tag">
@@ -214,224 +221,5 @@ onBeforeRouteLeave((to) => {
 </template>
 
 <style lang="scss">
-@import '/src/assets/scss/markdown-config.scss';
-
-.crutch {
-  border: 0.1px solid transparent;
-}
-
-.main-container {
-  padding-top: 8px;
-  background-color: #617299;
-  width: 70%;
-  margin-top: 70px;
-  margin-left: 5%;
-  border-radius: 10px;
-
-  .close-bar {
-    display: flex;
-    justify-content: flex-end;
-    margin: 0 10px;
-    width: calc(100% - 20px);
-
-    button {
-      font-size: 230%;
-      cursor: pointer;
-      color: #F1F7ED;
-      transition-duration: 0.2s;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
-
-  .title-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 1%;
-    padding: 8px 20px 20px 20px;
-    font-family: 'ClearSans-Light';
-    font-size: 20px;
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.1);
-      font-size: 20px;
-      color: white;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    select {
-      color: var(--user-contrasting-color);
-      background-color: var(--user-color);
-      border-radius: 10px;
-      width: 14%;
-      padding: 4px 0px;
-      text-align: center;
-      font-size: 18px;
-
-      option {
-        color: var(--user-contrasting-color);
-        background-color: var(--user-color);
-        margin: 5px 0;
-        border: none;
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-
-  .content-bar {
-    font-size: 0;
-
-    @mixin content-container {
-      font-family: 'ClearSans-Regular';
-      border-radius: 10px;
-      padding: 10px;
-      resize: none;
-      width: calc(100% - 40px);
-      margin: 0 20px;
-      font-size: 16px;
-      min-height: 20em;
-      resize: vertical;
-    }
-
-    textarea {
-      @include content-container;
-      background-color: rgba(255, 255, 255, 0.1);
-
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .markdown {
-      @include content-container;
-      @include markdown-config;
-    }
-
-    .button-container {
-      margin: 10px 20px;
-      display: flex;
-      justify-content: right;
-
-      button {
-        color: var(--user-contrasting-color);
-        background-color: var(--user-color);
-        padding: 10px 32px;
-        border-radius: 10px;
-        text-align: right;
-        font-size: 18px;
-        transition-duration: 0.2s;
-
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-    }
-  }
-
-  .tag-bar {
-    padding: 10px 20px;
-
-    ul {
-      display: flex;
-      justify-content: baseline;
-      flex-wrap: wrap;
-      padding: 10px;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.1);
-      font-family: 'ClearSans-Regular';
-
-      li {
-        margin: 3px 6px;
-        padding: 2px 10px;
-        border-radius: 10px;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      li.add-tag {
-        margin: 3px 6px;
-        padding: 0;
-        overflow: hidden;
-
-        input {
-          height: 100%;
-          padding: 2px 10px;
-          min-width: 100px;
-          background-color: rgba(255, 255, 255, 0.1);
-          color: white;
-
-          &::placeholder {
-            color: #ffffff80;
-          }
-
-          &:focus {
-            outline: none;
-          }
-        }
-
-        button {
-          color: var(--user-contrasting-color);
-          background-color: var(--user-color);
-          padding: 2px 8px;
-          transition-duration: 0.2s;
-
-          &:hover {
-            opacity: 0.8;
-          }
-        }
-      }
-    }
-  }
-
-  .link-bar {
-    display: flex;
-    justify-content: space-between;
-    gap: 1%;
-    margin-top: 10px;
-    padding: 0 20px 20px 20px;
-
-    input {
-      width: 100%;
-      border-radius: 10px;
-      background-color: #465586;
-      padding: 10px;
-      font-size: 16px;
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    button {
-      color: var(--user-contrasting-color);
-      background-color: var(--user-color);
-      padding: 10px 64px;
-      border-radius: 10px;
-      font-size: 18px;
-      transition-duration: 0.2s;
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
-  }
-}
+@import './note-preview.scss';
 </style>

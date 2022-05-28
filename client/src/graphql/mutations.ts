@@ -102,10 +102,44 @@ mutation($password: String!) {
   }
 }`
 
+export const RESET_TOKEN_MUTATION = gql`
+mutation($password: String!) {
+  resetToken(password: $password) {
+      __typename
+      ... on RequestValueError {
+          details
+      }
+      ... on ResetTokenSuccess {
+          token {
+              accessToken
+          }
+      }
+  }
+}
+`
+
 export const CREATE_NOTE_MUTATION = gql`
 mutation($title: String!, $content: String!, $tags: [String!], $link: String, $isPrivate: Boolean) {
   createNote(title: $title, content: $content, tags: $tags, link: $link, isPrivate: $isPrivate) {
       ... on CreateNoteSuccess {
+          note {
+              id
+          }
+      }
+      ... on ValidationError {
+          fields {
+              field
+              details
+          }
+      }
+  }
+}
+`
+
+export const EDIT_NOTE_MUTATION = gql`
+mutation($noteId: String! $title: String, $content: String, $tags: [String!], $link: String, $isPrivate: Boolean, ) {
+  editNote(noteId: $noteId, title: $title, content: $content, tags: $tags, link: $link, isPrivate: $isPrivate) {
+      ... on EditNoteSuccess {
           note {
               id
               title
@@ -120,21 +154,24 @@ mutation($title: String!, $content: String!, $tags: [String!], $link: String, $i
               details
           }
       }
+      ... on RequestValueError {
+          details
+      }
   }
 }
 `
 
-export const RESET_TOKEN_MUTATION = gql`
-mutation($password: String!) {
-  resetToken(password: $password) {
+export const DELETE_NOTE_MUTATION = gql`
+mutation($id: String!){
+  removeNote(id: $id){
       __typename
-      ... on RequestValueError {
-          details
-      }
-      ... on ResetTokenSuccess {
-          token {
-              accessToken
+      ... on RemoveNoteSuccess {
+          note {
+              id
           }
+      }
+      ... on RequestValueError{
+          details
       }
   }
 }
