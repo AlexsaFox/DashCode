@@ -7,7 +7,14 @@ const auth = useAuthStore()
 <template>
   <ErrorIndicator />
   <main :class="auth.loggedIn ? '' : 'picture-bg'">
-    <HomePage v-if="auth.loggedIn" />
+    <Suspense v-if="auth.loggedIn">
+      <template #default>
+        <HomePage />
+      </template>
+      <template #fallback>
+        <h1>Loading...</h1>
+      </template>
+    </Suspense>
     <LandingPage v-else />
   </main>
 </template>

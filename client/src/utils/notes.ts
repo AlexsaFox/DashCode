@@ -1,5 +1,5 @@
 import { CREATE_NOTE_MUTATION, DELETE_NOTE_MUTATION, EDIT_NOTE_MUTATION } from '~/graphql/mutations'
-import { GET_NOTE_FULL } from '~/graphql/queries'
+import { GET_NOTE_FULL, WHOAMI_NOTES_QUERY } from '~/graphql/queries'
 import apolloClient from '~/modules/apollo'
 import { processCommonErrors } from '~/store/utils'
 
@@ -59,4 +59,11 @@ export async function deleteNote(id: string) {
 
   if (removeNote.__typename !== 'RemoveNoteSuccess')
     processCommonErrors(removeNote)
+}
+
+export async function fetchUserNotes() {
+  const { notes } = (await apolloClient.query({
+    query: WHOAMI_NOTES_QUERY,
+  })).data.whoami
+  return notes ?? []
 }

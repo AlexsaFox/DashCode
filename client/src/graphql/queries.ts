@@ -27,6 +27,20 @@ query {
 }
 `
 
+export const WHOAMI_NOTES_QUERY = gql`
+query {
+  whoami {
+    notes {
+      id
+      title
+      content
+      link
+      isPrivate
+    }
+  }
+}
+`
+
 export const GET_NOTE_FULL = gql`
 query($id: String!) {
   getNote(id: $id) {

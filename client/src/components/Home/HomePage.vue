@@ -1,95 +1,41 @@
 <script setup lang="ts">
+import { fetchUserNotes } from '~/utils/notes'
+
 const { t } = useI18n()
 const router = useRouter()
+
+const notes = await fetchUserNotes()
+function getDomain(link: string) {
+  if (link === '')
+    return t('note-show.no-link')
+
+  const domainRegexp = /\:\/\/(.*?)(\/|$)/g
+  const matches = domainRegexp.exec(link)
+  if (matches === null || matches.length < 2)
+    // Fallback, this shouldn't happen
+    return link
+
+  return matches[1]
+}
 </script>
 
 <template>
-  <div class="space_for_notes">
-    <div class="main_body_for_note">
-      <button>
-        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
+  <div class="crunch">
+    <section class="note-container">
+      <div v-for="note in notes" :key="note" class="note-base" @click="router.push(`/note/${note.id}`)">
+        <h3>{{ note.title }}</h3>
+        <div class="note-content">
+          <p>{{ note.content }}</p>
+          <div class="note-link">
+            <p :class="(note.link === '' ? ' non-active' : '')">
+              {{ getDomain(note.link) }}
+            </p>
           </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
-          <div class="note">
-            <span>note.context</span>
-          </div>
-          <div class="link">
-            <span>note.link</span>
-          </div>
-        </a>
-      </button>
-    </div>
-    <div class="main_body_for_note">
-      <button>
-        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
-          <div class="note">
-            <span>note.context</span>
-          </div>
-          <div class="link">
-            <span>note.link</span>
-          </div>
-        </a>
-      </button>
-    </div>
-    <div class="main_body_for_note">
-      <button>
-        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
-          <div class="note">
-            <span>note.context</span>
-          </div>
-          <div class="link">
-            <span>note.link</span>
-          </div>
-        </a>
-      </button>
-    </div>
-    <div class="main_body_for_note">
-      <button>
-        <a class="button_for_pop_up" href="{{url_for('webapp.note.notes_show_handler', note_id=id)}}">
-          <div class="block_for_header">
-            <div class="title_for_main_note"><span>note.title</span></div>
-            <div class="public_private">
-              <span>
-                <div class="i-carbon:unlocked" />
-              </span>
-            </div>
-          </div>
-          <!-- <div class="public_private"><span><i class='bx bx-lock-open-alt'></i></span></div> -->
-          <div class="note">
-            <span>note.context</span>
-          </div>
-          <div class="link">
-            <span>note.link</span>
-          </div>
-        </a>
-      </button>
-    </div>
+        </div>
+      </div>
+    </section>
   </div>
+
   <NavigationPanel>
     <NavigationButton
       @on-press="router.push('/note/create')"
@@ -105,96 +51,82 @@ const router = useRouter()
 </template>
 
 <style scoped lang="scss">
-.space_for_notes {
-  display: inline-block;
+.crunch {
+  border: 0.1px solid transparent;
+}
+
+.note-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   width: 70%;
+  margin-left: 5%;
   margin-top: 70px;
-  margin-left: 10%;
+  user-select: none;
 
-  button {
-    border: none;
-    text-decoration: none;
-    width: 100%;
-    text-align: left;
-    font-size: 100%;
-  }
+  .note-base {
+    $note-size: 300px;
+    $note-padding: 10px;
 
-  .main_body_for_note {
-    display: inline-block;
+    position: relative;
     background-color: #223153;
-    width: 200px;
-    height: 223px;
-    margin-right: 1.5%;
-    margin-left: 1.5%;
-    margin-bottom: 3%;
-    border-radius: 15px;
-    font-size: 120%;
-    padding: 0px 0.5%;
-    transition: 0.6s;
-    &:hover{
-       transform: translateY(-10px);
-    }
-    .block_for_header{
-      display: flex;
-      justify-content: space-between;
-      margin: 5px;
-    }
-    span{
-      font-family: 'ClearSans-Regular';
-      color: white;
-      text-decoration: none;
-      font-size: 85%;
-      border: none;
-      width: inherit;
-      height: inherit;
-    }
-  }
+    padding: $note-padding;
+    margin: 15px;
+    border-radius: 10px;
+    height: $note-size;
+    width: $note-size;
 
-  .title_for_main_note {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height: 28px;
-    display: inline-block;
-  }
-
-  .note {
-    font-family: 'ClearSans-Light';
-    background-color: #5B6B98;
-    border-radius: 8px 8px 0px 0px;
-    padding: 2%;
-    height: 140px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    span{
-      font-family: 'ClearSans-Light';
-      color: white;
-      font-size: 80%;
-      padding: 3%;
+    h3 {
+      font-size: 22px;
+      padding-left: 3px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-  }
 
-  .link {
-    height: 35px;
-    font-family: 'ClearSans-Light';
-    background-color: #465586;
-    border-radius: 0px 0px 8px 8px;
-    padding: 2%;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    span{
-      font-size: 70%;
-      padding: 3%;
-      font-family: 'ClearSans-Light';
-      color: white;
-      text-align: center;
+    transition-duration: 0.5s;
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-8px);
+      transition-duration: 0.2s;
     }
-  }
 
-  .public_private {
-    margin-top: 5px;
-    div {
-      color: white;
+    .note-content {
+      position: absolute;
+      bottom: $note-padding;
+      left: $note-padding;
+      width: $note-size - 2*$note-padding;
+      height: 240px;
+      background-color: #5B6B98;
+      border-radius: 10px;
+      padding: 10px;
+      overflow: hidden;
+
+      p {
+        font-size: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .note-link {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background-color: #465586;
+
+        p {
+          font-size: 16px;
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          &.non-active {
+            opacity: 0.3;
+          }
+        }
+      }
     }
   }
 }
