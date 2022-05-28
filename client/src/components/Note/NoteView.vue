@@ -36,8 +36,8 @@ const user = ref({ username: '' })
 const markdown = computed(() => {
   return renderMarkdown(content.value)
 })
-const isOwner = computed(() => {
-  return user.value.username === auth.user.username
+const hasAccess = computed(() => {
+  return user.value.username === auth.user.username || auth.user.isSuperuser
 })
 
 async function fetchNoteData() {
@@ -142,10 +142,10 @@ await fetchNoteData()
         <p v-else class="link non-active">
           {{ t('note-show.no-link') }}
         </p>
-        <button v-if="isOwner" @click="editNote">
+        <button v-if="hasAccess" @click="editNote">
           {{ t('note-show.edit-button') }}
         </button>
-        <button v-if="isOwner" @click="showDeleteWarning = true">
+        <button v-if="hasAccess" @click="showDeleteWarning = true">
           {{ t('note-show.delete-button') }}
         </button>
       </section>

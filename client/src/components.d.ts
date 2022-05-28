@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AccountPreview: typeof import('./components/Settings/left_part/MyAccount/AccountPreview.vue')['default']
     AccountRemoval: typeof import('./components/Settings/left_part/MyAccount/AccountRemoval.vue')['default']
+    AllNotes: typeof import('./components/Note/AllNotes.vue')['default']
     APIToken: typeof import('./components/Settings/left_part/ApiToken/APIToken.vue')['default']
     Avatar: typeof import('./components/Settings/left_part/MyAccount/Avatar.vue')['default']
     ChangeColor: typeof import('./components/Settings/left_part/UserProfile/ChangeColor.vue')['default']

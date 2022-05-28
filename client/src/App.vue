@@ -26,6 +26,10 @@ router.beforeEach((to, from, next) => {
     if (!loggedIn)
       next({ path: '/login' })
   }
+  if (to.matched.some(record => record.meta.requiresSuperuser)) {
+    if (!user.value.isSuperuser)
+      next({ path: '/not-found' })
+  }
 
   next()
 })

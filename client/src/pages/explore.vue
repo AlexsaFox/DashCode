@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import useAuthStore from '~/store/useAuth'
+
 const { t } = useI18n()
 const router = useRouter()
+const auth = useAuthStore()
 </script>
 
 <template>
@@ -24,6 +27,12 @@ const router = useRouter()
         @on-press="router.push('/')"
       >
         <div class="i-carbon:home" /> {{ t('index.home.side-buttons.go-home') }}
+      </NavigationButton>
+      <NavigationButton
+        v-if="auth.user.isSuperuser"
+        @on-press="router.push('/admin')"
+      >
+        <div class="i-carbon:police" /> {{ t('index.home.side-buttons.admin') }}
       </NavigationButton>
     </NavigationPanel>
   </div>

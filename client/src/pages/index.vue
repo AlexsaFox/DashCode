@@ -26,6 +26,12 @@ const { t } = useI18n()
         <NavigationButton @on-press="router.push('/explore')">
           <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
         </NavigationButton>
+        <NavigationButton
+          v-if="auth.user.isSuperuser"
+          @on-press="router.push('/admin')"
+        >
+          <div class="i-carbon:police" /> {{ t('index.home.side-buttons.admin') }}
+        </NavigationButton>
       </NavigationPanel>
     </div>
     <LandingPage v-else />

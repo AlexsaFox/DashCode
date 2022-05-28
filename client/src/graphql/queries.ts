@@ -115,3 +115,29 @@ query ($first: Int, $after: String, $newestFirst: Boolean) {
   }
 }
 `
+
+export const GET_ALL_NOTES = gql`
+query ($first: Int, $after: String, $newestFirst: Boolean) {
+  getAllNotes(first: $first, after: $after, newestFirst: $newestFirst) {
+      __typename
+      ... on NoteConnection {
+          pageInfo {
+              hasNextPage
+              endCursor
+          }
+          edges {
+              node {
+                id
+                title
+                content
+                link
+                isPrivate
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`

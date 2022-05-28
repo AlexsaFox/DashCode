@@ -63,6 +63,7 @@ index:
       log-out: Log out
       add-notes: New note
       go-home: Go home
+      admin: Administrate
       explore: Explore
 settings:
   account:

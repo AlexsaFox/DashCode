@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, maxLength, required, url } from '@vuelidate/validators'
+import useAuthStore from '~/store/useAuth'
 import useErrorStore from '~/store/useErrors'
 import checkFormErrors from '~/utils/checkFormErrors'
 import { createNote } from '~/utils/notes'
@@ -8,6 +9,7 @@ import { createNote } from '~/utils/notes'
 const { t } = useI18n()
 const errors = useErrorStore()
 const router = useRouter()
+const auth = useAuthStore()
 
 const rules = reactive({
   title: {
@@ -74,6 +76,12 @@ function saveNote(title: string, isPrivate: boolean, content: string, tags: stri
       @on-press="router.push('/')"
     >
       <div class="i-carbon:home" /> {{ t('index.home.side-buttons.go-home') }}
+    </NavigationButton>
+    <NavigationButton
+      v-if="auth.user.isSuperuser"
+      @on-press="router.push('/admin')"
+    >
+      <div class="i-carbon:police" /> {{ t('index.home.side-buttons.admin') }}
     </NavigationButton>
   </NavigationPanel>
 </template>

@@ -6,6 +6,7 @@ import { editNote } from '~/utils/notes'
 
 const { t } = useI18n()
 const router = useRouter()
+const auth = useAuthStore()
 
 const { id } = defineProps<{
   id: string
@@ -67,10 +68,6 @@ const rules = reactive({
   },
 })
 
-function loadingFailed() {
-  router.replace('/not-found')
-}
-
 function saveEdited(title: string, isPrivate: boolean, content: string, tags: string[], link?: string) {
   const vuelidate = useVuelidate(rules, { title, isPrivate, content, tags, link })
   checkFormErrors(
@@ -93,7 +90,7 @@ function saveEdited(title: string, isPrivate: boolean, content: string, tags: st
   />
   <Suspense v-else>
     <template #default>
-      <NoteView :id="id" :editor-opened="noteEditorOpened" @loading-failed="loadingFailed" @edit-note="openNoteEditor" />
+      <NoteView :id="id" :editor-opened="noteEditorOpened" @loading-failed="router.replace('/not-found')" @edit-note="openNoteEditor" />
     </template>
     <template #fallback>
       <LoadingData />
@@ -115,6 +112,12 @@ function saveEdited(title: string, isPrivate: boolean, content: string, tags: st
       @on-press="router.push('/')"
     >
       <div class="i-carbon:home" /> {{ t('index.home.side-buttons.go-home') }}
+    </NavigationButton>
+    <NavigationButton
+      v-if="auth.user.isSuperuser"
+      @on-press="router.push('/admin')"
+    >
+      <div class="i-carbon:police" /> {{ t('index.home.side-buttons.admin') }}
     </NavigationButton>
   </NavigationPanel>
 </template>
