@@ -12,7 +12,10 @@ const showEditAvatarPopup = ref(false)
             <user-profile-picture />
           </div>
         </button>
-        <EditAvatarPopup v-if="showEditAvatarPopup" @close-popup="showEditAvatarPopup = false" />
+
+        <Transition name="modal">
+          <EditAvatarPopup v-if="showEditAvatarPopup" @close-popup="showEditAvatarPopup = false" />
+        </Transition>
       </div>
     </div>
     <ChangeUsername />
@@ -20,6 +23,8 @@ const showEditAvatarPopup = ref(false)
 </template>
 
 <style scoped lang="scss">
+@import '/src/components/Modal/modal-transition.scss';
+
 .user_stroke {
   display: flex;
   flex-direction: column;

@@ -149,7 +149,9 @@ onBeforeRouteLeave((to) => {
 </script>
 
 <template>
-  <PopupCheck v-if="showConfirmPopup" @action="(action) => handleExitAction(action)" />
+  <Transition name="modal">
+    <PopupCheck v-if="showConfirmPopup" @action="(action) => handleExitAction(action)" />
+  </Transition>
 
   <div class="crutch">
     <section class="main-container">
@@ -221,5 +223,6 @@ onBeforeRouteLeave((to) => {
 </template>
 
 <style scoped lang="scss">
+@import '/src/components/Modal/modal-transition.scss';
 @import './note-preview.scss';
 </style>
