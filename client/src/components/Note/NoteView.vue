@@ -52,7 +52,7 @@ async function fetchNoteData() {
   content.value = note.content
   link.value = note.link
   tags.value = note.tags
-  isPrivate.value = note.isPrivate
+  isPrivate.value = note.isPrivates
   user.value = note.user
 
   const timezoneOffset = (new Date()).getTimezoneOffset()
