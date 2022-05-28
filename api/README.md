@@ -21,19 +21,8 @@ alembic upgrade head
 python run.py
 ```
 
-### Production
-1. Create file `./config/.secrets.yaml`, where you overwrite some variables from
-`./config/default.yaml`. You **MUST** update at least this:
-* secret_key
-* base_superuser
-
-
 ## Working with database
 ### Alembic 
-* Initialize alembic (it is already initialized, you probably don't need this)
-```bash
-alembic init -t async migrations
-```
 * Create new revision (migration)
 ```bash
 alembic revision --autogenerate -m "<your message here>"
@@ -45,12 +34,9 @@ alembic upgrade <revision>      # Specify revision
 ```
 
 ### Connect to PostgreSQL database inside docker container
-* Default username is "user", default database name is "backend"
 ```bash
 docker-compose -f dev-compose.yaml exec -it postgres psql -h localhost -U <username> -d <database>
 ```
-
-
 ## Testing
 ### Run tests
 * Run all tests; show detailed output
