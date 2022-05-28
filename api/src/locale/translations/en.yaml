@@ -6,6 +6,7 @@ en:
       no_auth: Authentication required
       require_password:
         wrong_password: Wrong password
+      not_superuser: Only admins are allowed to access this resource
   notes:
     errors:
       note_not_found: Unable to find a note with provided id
