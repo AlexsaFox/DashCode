@@ -1,4 +1,16 @@
-not-found: Not found
+not-found:
+  header: Are you lost?
+  details: >-
+    We're unable to find the page that you're looking for. Perhaps, it was deleted
+    or you don't have permissions to access it?
+  buttons:
+    go-home: Return to home
+  click-here:
+    details: >-
+      You should be redirected to the next page automatically. If that doesn't
+      happen,
+    link: follow this link
+
 login:
   no-account: Don't have an account yet?
   no-account-link: Register now
@@ -178,6 +190,8 @@ note-edit:
     tags:
       tag-length: Tags can't be longer than 30 characters
       tag-charset: Tags may contain only lowercase latin letters, digits or dashes
+    privacy:
+      required: You have to specify privacy settings
 
   preview-markdown: Preview markdown
   unpreview-markdown: Close markdown preview

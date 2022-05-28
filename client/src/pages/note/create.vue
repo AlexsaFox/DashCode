@@ -44,7 +44,7 @@ const rules = reactive({
     ),
   },
   isPrivate: {
-    required: helpers.withMessage(t(''), required),
+    required: helpers.withMessage(t('note-edit.errors.privacy.required'), required),
   },
 })
 

@@ -5,6 +5,7 @@ import checkFormErrors from '~/utils/checkFormErrors'
 import { editNote } from '~/utils/notes'
 
 const { t } = useI18n()
+const router = useRouter()
 
 const { id } = defineProps<{
   id: string
@@ -25,7 +26,6 @@ function openNoteEditor(title: string, content: string, link: string, tags: stri
   note.link = link
   note.tags = tags
   note.isPrivate = isPrivate
-  console.log(`From parent: ${noteEditorOpened.value}`)
 }
 
 const rules = reactive({
@@ -63,9 +63,13 @@ const rules = reactive({
     ),
   },
   isPrivate: {
-    required: helpers.withMessage(t(''), required),
+    required: helpers.withMessage(t('note-edit.errors.privacy.required'), required),
   },
 })
+
+function loadingFailed() {
+  router.push('/not-found')
+}
 
 function saveEdited(title: string, isPrivate: boolean, content: string, tags: string[], link?: string) {
   const vuelidate = useVuelidate(rules, { title, isPrivate, content, tags, link })
@@ -89,7 +93,7 @@ function saveEdited(title: string, isPrivate: boolean, content: string, tags: st
   />
   <Suspense v-else>
     <template #default>
-      <NoteView :id="id" :editor-opened="noteEditorOpened" @loading-failed="() => {}" @edit-note="openNoteEditor" />
+      <NoteView :id="id" :editor-opened="noteEditorOpened" @loading-failed="loadingFailed" @edit-note="openNoteEditor" />
     </template>
     <template #fallback>
       <h1>Loading</h1>

@@ -43,7 +43,9 @@ const isOwner = computed(() => {
 async function fetchNoteData() {
   const response = await getNoteFull(id)
 
-  if (response.__typename === 'RequestValueError') { emit('loadingFailed', response.details) }
+  if (response.__typename === 'RequestValueError') {
+    emit('loadingFailed', response.details)
+  }
 
   else if (response.__typename === 'GetNoteSuccess') {
     const note = response.note
@@ -153,6 +155,6 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import './note-preview.scss';
 </style>

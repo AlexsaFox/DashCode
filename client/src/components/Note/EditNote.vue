@@ -220,6 +220,6 @@ onBeforeRouteLeave((to) => {
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import './note-preview.scss';
 </style>

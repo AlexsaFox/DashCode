@@ -25,7 +25,6 @@ declare module '@vue/runtime-core' {
     HeaderButton: typeof import('./components/Header/HeaderButton.vue')['default']
     HomePage: typeof import('./components/Home/HomePage.vue')['default']
     LandingPage: typeof import('./components/Home/LandingPage.vue')['default']
-    Loading: typeof import('./components/Loading.vue')['default']
     LoginSignupForm: typeof import('./components/LoginSignup/LoginSignupForm.vue')['default']
     LoginSignupFormInput: typeof import('./components/LoginSignup/LoginSignupFormInput.vue')['default']
     LoginSignupText: typeof import('./components/LoginSignup/LoginSignupText.vue')['default']
