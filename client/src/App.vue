@@ -39,6 +39,10 @@ if (router.currentRoute.value.meta.requiresAuth && !loggedIn.value)
 </template>
 
 <style lang="scss">
+:root {
+  color: white;
+}
+
 ::-webkit-scrollbar {
   width: 20px;
 }

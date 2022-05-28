@@ -81,6 +81,11 @@ function changeLocale() {
       font-family: 'ClearSans-Light';
       font-size: 20px;
       width: 20%;
+      transition-duration: 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
 
     .dropdown {
@@ -88,6 +93,10 @@ function changeLocale() {
       padding: 2% 4%;
       border-radius: 10px;
       font-size: 20px;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 

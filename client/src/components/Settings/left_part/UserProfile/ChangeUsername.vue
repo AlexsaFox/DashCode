@@ -72,6 +72,11 @@ function onSubmit() {
   color: white;
   font-family: 'ClearSans-Light';
   font-size: 20px;
+  transition-duration: 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .edit.name {
@@ -123,10 +128,9 @@ function onSubmit() {
   }
 
   & :-webkit-autofill {
+    box-shadow: inset 0 0 0 50px #223153;
     -webkit-box-shadow: inset 0 0 0 50px #223153;
-    /* цвет вашего фона */
     -webkit-text-fill-color: white;
-    /* цвет текста */
   }
 }
 </style>

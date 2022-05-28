@@ -15,12 +15,17 @@ const showDeleteAccountPopup = ref(false)
       <button class="delete_account" @click="showDeleteAccountPopup = true">
         {{ t("settings.account_removal.button-label") }}
       </button>
-      <DeleteAccountPopup v-if="showDeleteAccountPopup" @close-popup="showDeleteAccountPopup = false"/>
+
+      <Transition name="modal">
+        <DeleteAccountPopup v-if="showDeleteAccountPopup" @close-popup="showDeleteAccountPopup = false" />
+      </Transition>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+@import '/src/components/Modal/modal-transition.scss';
+
 .account_removal {
   display: flex;
   gap: 15%;
@@ -43,7 +48,7 @@ const showDeleteAccountPopup = ref(false)
 
   .delete_account {
     border-radius: 5px;
-    background-color: #fa3b3b;
+    background-color: #ff4f4f;
     color: white;
     padding: 1% 2%;
     font-family: "ClearSans-Regular";
@@ -51,11 +56,10 @@ const showDeleteAccountPopup = ref(false)
     font-weight: 200;
     width: 20%;
     height: 7vh;
-    transition: 0.5s;
+    transition: 0.2s;
 
     &:hover{
-      background-color: #e33030;
-      transition: 0.5s;
+      opacity: 0.8;
     }
   }
 }

@@ -29,7 +29,6 @@ const { t } = useI18n()
 }
 
 .tabcontent {
-  // display: none;
   background-color: #223153;
   border-radius: 15px;
   padding: 3%;

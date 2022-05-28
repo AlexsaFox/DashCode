@@ -85,13 +85,13 @@ function editNote() {
   emit('editNote', title.value, content.value, link.value, tags.value, isPrivate.value)
 }
 
-onMounted(() => {
-  fetchNoteData()
-})
+await fetchNoteData()
 </script>
 
 <template>
-  <DeleteWarning v-if="showDeleteWarning" @close-popup="showDeleteWarning = false" @delete-note="deleteThisNote" />
+  <Transition name="modal">
+    <DeleteWarning v-if="showDeleteWarning" @close-popup="showDeleteWarning = false" @delete-note="deleteThisNote" />
+  </Transition>
 
   <div class="crutch">
     <section class="main-container">
@@ -154,5 +154,6 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+@import '/src/components/Modal/modal-transition.scss';
 @import './note-preview.scss';
 </style>

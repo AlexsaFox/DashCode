@@ -34,7 +34,6 @@ async function loadNotes() {
     cursor = connection.pageInfo.endCursor
     hasNextPage = connection.pageInfo.hasNextPage
 
-    console.log(loadedNotes.value.length)
     loadInProcess = false
   }
 }
@@ -50,9 +49,7 @@ window.onscroll = () => {
     loadNotes()
 }
 
-onMounted(() => {
-  loadNotes()
-})
+await loadNotes()
 </script>
 
 <template>

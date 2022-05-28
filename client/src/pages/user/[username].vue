@@ -15,7 +15,7 @@ const { username } = defineProps<{ username: string }>()
       />
     </template>
     <template #fallback>
-      <h1>Loading</h1>
+      <LoadingData />
     </template>
   </Suspense>
 
