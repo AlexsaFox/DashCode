@@ -16,22 +16,18 @@ import 'prismjs/components/prism-typescript.min.js'
 import 'prismjs/components/prism-toml.min.js'
 import 'prismjs/components/prism-systemd.min.js'
 import 'prismjs/components/prism-scss.min.js'
-import 'prismjs/components/prism-vim.min.js'
 import 'prismjs/components/prism-regex.min.js'
-import 'prismjs/components/prism-vim.min.js'
 import 'prismjs/components/prism-graphql.min.js'
 import 'prismjs/components/prism-go.min.js'
 import 'prismjs/components/prism-java.min.js'
 import 'prismjs/components/prism-lua.min.js'
-
-
-
-
+import 'prismjs/components/prism-docker.min.js'
 
 function renderMarkdown(markdown: string) {
   const md = MarkdownIt()
   md.use(markdownItPrism, {
-    defaultLanguage: 'javascript',
+    defaultLanguageForUnknown: 'javascript',
+    defaultLanguageForUnspecified: 'javascript',
   })
   return md.render(markdown)
 }
