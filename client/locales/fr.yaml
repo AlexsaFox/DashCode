@@ -58,8 +58,10 @@ index:
 
   home:
     side-buttons:
+      admin: Administrer
       settings: Réglages
       log-out: Se déconnecter
+      public-profile: Profil public
       add-notes: Ajouter une note
       go-home: Aller à la page d'accueil
       explore: Explorer
@@ -210,7 +212,8 @@ user-profile:
     button-back-to-profile: "Retour au profil"
     button-back-to-social-media: "Retour aux réseaux sociaux"
   profile-block:
-    amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
+    amount_of_notes-label: "aucune note publique | 1 note publique | {count} notes publiques"
+    is-admin: Cet utilisateur est un administrateur
 
 explore:
   header:
@@ -219,3 +222,7 @@ explore:
     from-newest: le plus récent en premier
     from-oldest: plus vieux d'abord
     
+
+administrate:
+  header:
+    header: Toutes les notes

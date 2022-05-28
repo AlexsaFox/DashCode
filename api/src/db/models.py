@@ -67,6 +67,7 @@ class User(Base, ValidationMixin, AppConfigurationMixin):
         'Note',
         backref='user',
         lazy='selectin',
+        order_by='desc(Note.creation_date)',
         cascade="save-update, merge, delete, delete-orphan",
     )
 

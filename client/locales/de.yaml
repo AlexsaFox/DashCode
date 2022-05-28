@@ -59,7 +59,9 @@ index:
 
   home:
     side-buttons:
+      admin: Administrieren
       settings: Einstellungen
+      public-profile: Öffentliches Profil
       log-out: Ausloggen
       add-notes: Notizen hinzufügen
       go-home: Gehen Sie zur Startseite
@@ -214,6 +216,7 @@ user-profile:
     button-back-to-social-media: "Zurück zu den sozialen Medien"
   profile-block:
     amount_of_notes-label: "keine öffentlichen Notizen | 1 öffentliche Notiz | {count} öffentliche Notizen"
+    is-admin: Dieser Benutzer ist ein Administrator
 
 explore:
   header:
@@ -221,4 +224,8 @@ explore:
     sort-by: Zeigen
     from-newest: neuere zuerst
     from-oldest: älter zuerst
+
+administrate:
+  header:
+    header: Alle Notizen
     

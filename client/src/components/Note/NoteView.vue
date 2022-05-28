@@ -79,8 +79,8 @@ async function fetchNoteData() {
     t('note-show.date.months.november'),
     t('note-show.date.months.december'),
   ]
-  const month = monthMapping[monthIdx - 1]
-  date.value = `${hour}:${min}:${sec}, ${day} ${month} ${year}`
+  const month = monthMapping[monthIdx]
+  date.value = `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}, ${day} ${month} ${year}`
 }
 
 const showDeleteWarning = ref(false)
@@ -153,7 +153,7 @@ await fetchNoteData()
       <section class="user-bar">
         <p>
           {{ t('note-show.created-by') }} <a @click="router.push(`/user/${user.username}`)">{{ user.username }}</a> {{
-            t('note-show.created-at')
+              t('note-show.created-at')
           }} {{ date }}
         </p>
       </section>
