@@ -58,6 +58,7 @@ index:
 
   home:
     side-buttons:
+      admin: Администрировать
       settings: Настройки
       log-out: Выйти
       public-profile: Общедоступный профиль
