@@ -27,6 +27,7 @@ declare module '@vue/runtime-core' {
     LoginSignupFormInput: typeof import('./components/LoginSignup/LoginSignupFormInput.vue')['default']
     LoginSignupText: typeof import('./components/LoginSignup/LoginSignupText.vue')['default']
     MiniNote: typeof import('./components/Note/MiniNote.vue')['default']
+    Modal: typeof import('./components/Modal/Modal.vue')['default']
     MyAccount: typeof import('./components/Settings/left_part/MyAccount/MyAccount.vue')['default']
     NavigationButton: typeof import('./components/Home/NavigationButton.vue')['default']
     NavigationPanel: typeof import('./components/Home/NavigationPanel.vue')['default']
