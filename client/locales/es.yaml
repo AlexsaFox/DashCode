@@ -59,6 +59,7 @@ index:
 
   home: 
     side-buttons:
+      admin: Administrar
       settings: Ajustes
       public-profile: Perfil público
       log-out: Cerrar sesión

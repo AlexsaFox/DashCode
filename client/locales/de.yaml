@@ -59,6 +59,7 @@ index:
 
   home:
     side-buttons:
+      admin: Administrieren
       settings: Einstellungen
       public-profile: Öffentliches Profil
       log-out: Ausloggen
