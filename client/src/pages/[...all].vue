@@ -2,7 +2,7 @@
 const { t } = useI18n()
 const router = useRouter()
 
-router.push('/not-found')
+router.replace('/not-found')
 </script>
 
 <template>

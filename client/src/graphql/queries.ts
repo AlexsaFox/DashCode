@@ -63,3 +63,28 @@ query($id: String!) {
   }
 }
 `
+
+export const GET_USER_QUERY = gql`
+query($username: String!) {
+  getUser(username: $username) {
+      __typename
+      ... on GetUserSuccess {
+          user {
+              username
+              profilePictureFilename
+
+              notes {
+                id
+                title
+                content
+                link
+                isPrivate
+              }
+          }
+      }
+      ... on RequestValueError {
+          details
+      }
+  }
+}
+`

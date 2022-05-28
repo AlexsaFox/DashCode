@@ -21,7 +21,7 @@ watch(() => editorOpened, () => {
 })
 
 const emit = defineEmits<{
-  (e: 'loadingFailed', error: string): void
+  (e: 'loadingFailed'): void
   (e: 'editNote', title: string, content: string, link: string, tags: string[], isPrivate: boolean): void
 }>()
 
@@ -41,40 +41,38 @@ const isOwner = computed(() => {
 })
 
 async function fetchNoteData() {
-  const response = await getNoteFull(id)
+  const note = await getNoteFull(id)
 
-  if (response.__typename === 'RequestValueError') {
-    emit('loadingFailed', response.details)
+  if (note === null) {
+    emit('loadingFailed')
+    return
   }
 
-  else if (response.__typename === 'GetNoteSuccess') {
-    const note = response.note
-    title.value = note.title
-    content.value = note.content
-    link.value = note.link
-    tags.value = note.tags
-    isPrivate.value = note.isPrivate
-    user.value = note.user
+  title.value = note.title
+  content.value = note.content
+  link.value = note.link
+  tags.value = note.tags
+  isPrivate.value = note.isPrivate
+  user.value = note.user
 
-    const datetimeRegexp = /(\d*)\-(\d*)\-(\d*)T(\d*)\:(\d*)\:(\d*)\.(\d*)/g
-    const [, year, monthIdx, day, hour, min, sec, _] = datetimeRegexp.exec(note.creationDate) as RegExpExecArray
-    const monthMapping = [
-      t('note-show.date.months.january'),
-      t('note-show.date.months.february'),
-      t('note-show.date.months.march'),
-      t('note-show.date.months.april'),
-      t('note-show.date.months.may'),
-      t('note-show.date.months.june'),
-      t('note-show.date.months.july'),
-      t('note-show.date.months.august'),
-      t('note-show.date.months.september'),
-      t('note-show.date.months.october'),
-      t('note-show.date.months.november'),
-      t('note-show.date.months.december'),
-    ]
-    const month = monthMapping[parseInt(monthIdx)]
-    date.value = `${hour}:${min}:${sec}, ${day} ${month} ${year}`
-  }
+  const datetimeRegexp = /(\d*)\-(\d*)\-(\d*)T(\d*)\:(\d*)\:(\d*)\.(\d*)/g
+  const [, year, monthIdx, day, hour, min, sec, _] = datetimeRegexp.exec(note.creationDate) as RegExpExecArray
+  const monthMapping = [
+    t('note-show.date.months.january'),
+    t('note-show.date.months.february'),
+    t('note-show.date.months.march'),
+    t('note-show.date.months.april'),
+    t('note-show.date.months.may'),
+    t('note-show.date.months.june'),
+    t('note-show.date.months.july'),
+    t('note-show.date.months.august'),
+    t('note-show.date.months.september'),
+    t('note-show.date.months.october'),
+    t('note-show.date.months.november'),
+    t('note-show.date.months.december'),
+  ]
+  const month = monthMapping[parseInt(monthIdx)]
+  date.value = `${hour}:${min}:${sec}, ${day} ${month} ${year}`
 }
 
 const showDeleteWarning = ref(false)
@@ -131,7 +129,7 @@ onMounted(() => {
 
       <section class="link-bar">
         <p v-if="link.length > 0" class="link">
-          <a :href="link">{{ link }}</a>
+          <a @click="router.push(link)">{{ link }}</a>
         </p>
         <p v-else class="link non-active">
           {{ t('note-show.no-link') }}
@@ -146,7 +144,7 @@ onMounted(() => {
 
       <section class="user-bar">
         <p>
-          {{ t('note-show.created-by') }} <a :href="`/user/${user.username}`">{{ user.username }}</a> {{
+          {{ t('note-show.created-by') }} <a @click="router.push(`/user/${user.username}`)">{{ user.username }}</a> {{
             t('note-show.created-at')
           }} {{ date }}
         </p>

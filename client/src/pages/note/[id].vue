@@ -68,7 +68,7 @@ const rules = reactive({
 })
 
 function loadingFailed() {
-  router.push('/not-found')
+  router.replace('/not-found')
 }
 
 function saveEdited(title: string, isPrivate: boolean, content: string, tags: string[], link?: string) {

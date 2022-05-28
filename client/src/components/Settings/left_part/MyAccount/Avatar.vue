@@ -73,6 +73,7 @@ const settingsPage = useSettingsPageStore()
     min-width: 120px;
     border-radius: 100%;
 
+    background-color: #303d67;
     border: 10px solid #303d67;
 
     img {

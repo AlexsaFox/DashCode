@@ -5,6 +5,7 @@ not-found:
     or you don't have permissions to access it?
   buttons:
     go-home: Return to home
+    go-back: Go back to previous page
   click-here:
     details: >-
       You should be redirected to the next page automatically. If that doesn't
@@ -205,4 +206,5 @@ user-profile:
     button-back-to-profile: "Back to profile"
     button-back-to-social-media: "Back to social media"
   profile-block:
-    amount_of_notes-label: "public notes"
+    amount_of_notes-label: "no public notes | 1 public note | {count} public notes"
+

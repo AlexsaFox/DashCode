@@ -215,6 +215,7 @@
       a {
         transition-duration: 0.2s;
         &:hover {
+          cursor: pointer;
           color: var(--user-color);
           text-decoration: underline;
         }
@@ -253,6 +254,7 @@
         transition-duration: 0.2s;
         
         &:hover {
+          cursor: pointer;
           color: var(--user-color);
           text-decoration: underline wavy;
         }

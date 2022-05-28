@@ -29,7 +29,10 @@ export async function getNoteFull(id: string) {
       id,
     },
   })).data
-  return getNote
+  if (getNote.__typename !== 'GetNoteSuccess')
+    return null
+
+  return getNote.note
 }
 
 export async function editNote(id: string, title: string, content: string, tags: string[], link: string, isPrivate: boolean) {

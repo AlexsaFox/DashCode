@@ -9,6 +9,9 @@ const router = useRouter()
       <h1>{{ t('not-found.header') }}</h1>
       <p>{{ t('not-found.details') }}</p>
       <div class="button-container">
+        <button @click="router.back()">
+          {{ t('not-found.buttons.go-back') }}
+        </button>
         <button @click="router.push('/')">
           {{ t('not-found.buttons.go-home') }}
         </button>
