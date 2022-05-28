@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const { t } = useI18n()
+const router = useRouter()
+</script>
+
 <template>
   <div class="space_for_notes">
     <div class="main_body_for_note">
@@ -85,7 +90,18 @@
       </button>
     </div>
   </div>
-  <NavButtons />
+  <NavigationPanel>
+    <NavigationButton
+      @on-press="router.push('/note/create')"
+    >
+      <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
+    </NavigationButton>
+    <NavigationButton
+      @on-press="router.push('/')"
+    >
+      <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
+    </NavigationButton>
+  </NavigationPanel>
 </template>
 
 <style scoped lang="scss">

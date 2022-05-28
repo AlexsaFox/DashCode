@@ -64,7 +64,18 @@ function saveNote(title: string, isPrivate: boolean, content: string, tags: stri
 
 <template>
   <edit-note :save-action="saveNote" />
-  <NavButtons />
+  <NavigationPanel>
+    <NavigationButton
+      @on-press="router.push('/')"
+    >
+      <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
+    </NavigationButton>
+    <NavigationButton
+      @on-press="router.push('/')"
+    >
+      <div class="i-carbon:home" /> {{ t('index.home.side-buttons.go-home') }}
+    </NavigationButton>
+  </NavigationPanel>
 </template>
 
 <route lang="yaml">

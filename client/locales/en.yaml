@@ -59,9 +59,9 @@ index:
     side-buttons:
       settings: Settings
       log-out: Log out
-      add-notes: Add note
+      add-notes: New note
+      go-home: Go home
       explore: Explore
-      my-notes: My notes
 settings:
   account:
     header: "My Account"
