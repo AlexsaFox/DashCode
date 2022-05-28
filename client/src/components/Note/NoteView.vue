@@ -85,9 +85,7 @@ function editNote() {
   emit('editNote', title.value, content.value, link.value, tags.value, isPrivate.value)
 }
 
-onMounted(() => {
-  fetchNoteData()
-})
+await fetchNoteData()
 </script>
 
 <template>

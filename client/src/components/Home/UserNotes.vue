@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import { fetchUserNotes } from '~/utils/notes'
-
-const { t } = useI18n()
-const router = useRouter()
-
 const notes = await fetchUserNotes()
-
 </script>
 
 <template>
@@ -14,15 +9,6 @@ const notes = await fetchUserNotes()
       <MiniNote v-for="note in notes" :key="note" :note="note" />
     </section>
   </div>
-
-  <NavigationPanel>
-    <NavigationButton @on-press="router.push('/note/create')">
-      <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
-    </NavigationButton>
-    <NavigationButton @on-press="router.push('/explore')">
-      <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
-    </NavigationButton>
-  </NavigationPanel>
 </template>
 
 <style scoped lang="scss">

@@ -2,19 +2,32 @@
 import useAuthStore from '~/store/useAuth'
 
 const auth = useAuthStore()
+const router = useRouter()
+const { t } = useI18n()
 </script>
 
 <template>
   <ErrorIndicator />
   <main :class="auth.loggedIn ? '' : 'picture-bg'">
-    <Suspense v-if="auth.loggedIn">
-      <template #default>
-        <HomePage />
-      </template>
-      <template #fallback>
-        <h1>Loading...</h1>
-      </template>
-    </Suspense>
+    <div v-if="auth.loggedIn">
+      <Suspense v-if="auth.loggedIn">
+        <template #default>
+          <UserNotes />
+        </template>
+        <template #fallback>
+          <LoadingData />
+        </template>
+      </Suspense>
+
+      <NavigationPanel>
+        <NavigationButton @on-press="router.push('/note/create')">
+          <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
+        </NavigationButton>
+        <NavigationButton @on-press="router.push('/explore')">
+          <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
+        </NavigationButton>
+      </NavigationPanel>
+    </div>
     <LandingPage v-else />
   </main>
 </template>

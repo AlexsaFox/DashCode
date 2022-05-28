@@ -49,9 +49,7 @@ window.onscroll = () => {
     loadNotes()
 }
 
-onMounted(() => {
-  loadNotes()
-})
+await loadNotes()
 </script>
 
 <template>

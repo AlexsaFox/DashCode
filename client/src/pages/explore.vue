@@ -10,7 +10,7 @@ const router = useRouter()
         <PublicNotes />
       </template>
       <template #fallback>
-        <h1>loading...</h1>
+        <LoadingData />
       </template>
     </Suspense>
 

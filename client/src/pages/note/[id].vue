@@ -96,7 +96,7 @@ function saveEdited(title: string, isPrivate: boolean, content: string, tags: st
       <NoteView :id="id" :editor-opened="noteEditorOpened" @loading-failed="loadingFailed" @edit-note="openNoteEditor" />
     </template>
     <template #fallback>
-      <h1>Loading</h1>
+      <LoadingData />
     </template>
   </Suspense>
 
