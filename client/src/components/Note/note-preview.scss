@@ -110,7 +110,7 @@
       }
     }
 
-    .markdown {
+    &::v-deep(.markdown) {
       @include content-container;
       @include markdown-config;
     }

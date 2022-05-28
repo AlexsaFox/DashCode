@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { fetchUserNotes } from '~/utils/notes'
+import renderMarkdown from '~/utils/renderMarkdown'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -24,8 +25,11 @@ function getDomain(link: string) {
     <section class="note-container">
       <div v-for="note in notes" :key="note" class="note-base" @click="router.push(`/note/${note.id}`)">
         <h3>{{ note.title }}</h3>
+        <div class="privacy">
+          <div v-if="note.isPrivate" class="i-carbon:unlocked" />
+        </div>
         <div class="note-content">
-          <p>{{ note.content }}</p>
+          <p v-html="renderMarkdown(note.content)" />
           <div class="note-link">
             <p :class="(note.link === '' ? ' non-active' : '')">
               {{ getDomain(note.link) }}
@@ -37,20 +41,18 @@ function getDomain(link: string) {
   </div>
 
   <NavigationPanel>
-    <NavigationButton
-      @on-press="router.push('/note/create')"
-    >
+    <NavigationButton @on-press="router.push('/note/create')">
       <div class="i-carbon:add" /> {{ t('index.home.side-buttons.add-notes') }}
     </NavigationButton>
-    <NavigationButton
-      @on-press="router.push('/')"
-    >
+    <NavigationButton @on-press="router.push('/')">
       <div class="i-carbon:arrow-right" /> {{ t('index.home.side-buttons.explore') }}
     </NavigationButton>
   </NavigationPanel>
 </template>
 
 <style scoped lang="scss">
+@import '/src/assets/scss/markdown-config.scss';
+
 .crunch {
   border: 0.1px solid transparent;
 }
@@ -78,13 +80,22 @@ function getDomain(link: string) {
     width: $note-size;
 
     h3 {
+      width: 85%;
       font-size: 22px;
       padding-left: 3px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
+    .privacy {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 22px;
+    }
+
     transition-duration: 0.5s;
+
     &:hover {
       cursor: pointer;
       transform: translateY(-8px);
@@ -102,7 +113,15 @@ function getDomain(link: string) {
       padding: 10px;
       overflow: hidden;
 
-      p {
+      &::v-deep(p) {
+        @include markdown-config;
+
+        &::v-deep(pre) {
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+          padding: 8px 8px;
+        }
+
         font-size: 16px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -115,8 +134,9 @@ function getDomain(link: string) {
         width: 100%;
         padding: 10px;
         background-color: #465586;
+        border-top: 10px solid #5B6B98;
 
-        p {
+        &>p {
           font-size: 16px;
           text-align: center;
           overflow: hidden;

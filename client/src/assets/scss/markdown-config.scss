@@ -1,6 +1,6 @@
 @mixin markdown-config {
     --prism-foreground: #eeffff;
-    --prism-background: #4c5977;
+    --prism-background: #46577e;
     --prism-comment: #6686cc;
     --prism-string: #00d9ff;
     --prism-literal: #795bff;
@@ -25,8 +25,10 @@
     --prism-line-number-gutter: #e88db8;
     --prism-line-highlight-background: #d753ff;
     --prism-selection-background: #756cf7;
+    
     $font-size: 16px;
     font-size: 16px;
+
     h6 { font-size: $font-size + 1*4px; }
     h5 { font-size: $font-size + 2*4px; }
     h4 { font-size: $font-size + 3*4px; }
