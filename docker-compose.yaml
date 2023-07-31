@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   redis:
-    image: redis
+    image: redis:6.0.20-alpine
     expose:
       - 6379
     volumes:
@@ -13,7 +13,7 @@ services:
       - app-network
 
   postgres:
-    image: postgres
+    image: postgres:15.3-alpine3.18
     environment:
       - POSTGRES_USER=${DASHCODE_DB_USER}
       - POSTGRES_PASSWORD=${DASHCODE_DB_PASSWORD}
@@ -58,8 +58,8 @@ services:
       args:
         - API_HOST=${DASHCODE_API_HOST}
     container_name: dashcode_nginx_client
-    expose:
-      - 80
+    ports:
+      - 80:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     restart: unless-stopped
@@ -69,8 +69,6 @@ services:
     depends_on:
       - api
 
-
 networks:
   app-network:
   proxy_net:
-    external: true

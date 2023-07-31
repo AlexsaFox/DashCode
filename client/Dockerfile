@@ -1,4 +1,4 @@
-FROM node:latest as builder
+FROM node:20-alpine as builder
 
 ARG API_HOST
 ENV VITE_API_HOST $API_HOST
@@ -13,6 +13,6 @@ COPY . .
 RUN pnpm build
 
 
-FROM nginx
+FROM nginx:1.25.1-alpine-slim
 WORKDIR /app
 COPY --from=builder /app/dist .
