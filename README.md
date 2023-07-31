@@ -23,41 +23,10 @@ Final Project for MSHP Promprog course 2022
 Перед запуском, нужно:
  - Установить `Docker` и `Docker-Compose` на Вашу OC.
  - Cкопировать+Вставить файл `.env.example` как `.env`.
- - Изменить `docker-compose.yaml` для тестирования
- ### Было:
-```yaml
-nginx_client:
-  ...
-  expose:
-    - 80
-  ...
-  networks:
-    - app-network
-    - proxy_net
-  ...
-
-networks:
-app-network:
-proxy_net:
-  external: true
-```
-### Стало:
-```yaml
-nginx_client:
-  ...
-  ports:
-    - "80:80"
-  ...
-  networks:
-    - app-network
-  ...
-
-networks:
-app-network:
-```
+ - ~~Изменить `docker-compose.yaml` для тестирования~~
   - После этого в Вашем терминале написать:
   ```bash
-  docker-compose up -d
+  docker compose up --build -d
   ```
 
 
